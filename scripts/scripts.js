@@ -22,10 +22,10 @@ const LIBS = '/libs';
 const CONFIG = {
   // codeRoot: '',
   // contentRoot: '',
-  // imsClientId: 'college',
-  // imsScope: 'AdobeID,openid,gnav',
-  // geoRouting: 'off',
-  // fallbackRouting: 'off',
+  imsClientId: 'firefly-milo',
+  imsScope: 'AdobeID,openid,gnav',
+  geoRouting: 'off',
+  fallbackRouting: 'off',
   decorateArea,
   locales: {
     '': { ietf: 'en-US', tk: 'hah7vzn.css' },
