@@ -1,6 +1,8 @@
 import { getLibs } from '../../scripts/utils.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
+const SUPERHERO_CONTENT = 'content.json';
+const SUPERHERO_BASE_URL = 'https://clio-assets.adobe.com/clio-playground/super-hero-prod-v3/v0/';
 
 let index = 0;
 let isAdding = true;
@@ -54,22 +56,33 @@ function animate(block) {
   typeAnimation(input, nextText, block);
 }
 
-export default function decorate(block) {
-  const rows = block.querySelectorAll(':scope > div');
+export default async function decorate(block) {
+  const link = block.querySelector('a') || (SUPERHERO_BASE_URL + SUPERHERO_CONTENT);
   block.innerHTML = '';
-  const imageContainer = createTag('div', { class: 'image-container' });
-  rows.forEach((row, i) => {
-    const cols = [...row.children];
-    const image = cols[0].querySelector('a').href;
-    const altText = cols[1].textContent;
-    const img = createTag('img', { src: image, alt: altText });
-    if (i === 0) {
-      img.setAttribute('eager', true);
-      img.classList.add('active');
-    }
-    imageContainer.append(img);
-  });
-  block.append(imageContainer);
+  const resp = await fetch(link.href);
+  if (!resp.ok) {
+    return;
+  }
+  const respJson = await resp.json();
+  if (respJson && respJson.items && respJson.items.length > 0) {
+    const images = respJson.items;
+    const imageContainer = createTag('div', { class: 'image-container' });
+    images.forEach((image, i) => {
+      if (image.image.url && image.prompt.defaultMessage && image.docId) {
+        const img = createTag('img', {
+          src: SUPERHERO_BASE_URL + image.image.url,
+          alt: image.prompt.defaultMessage,
+          id: image.docId,
+        });
+        if (i === 0) {
+          img.setAttribute('eager', true);
+          img.classList.add('active');
+        }
+        imageContainer.append(img);
+      }
+    });
+    block.append(imageContainer);
+  }
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
