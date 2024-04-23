@@ -6,3 +6,30 @@
  * 
  *
  */
+
+ :root {
+  --navbar-height: 56px;
+  --fill-color: rgb(255, 255, 255);
+  --spectrum-global-dimension-size-200: 16px;
+  --spectrum-global-dimension-size-750: 60px;
+  --spectrum-global-dimension-size-800: 64px;
+  --spectrum-global-color-gray-800: rgb(34, 34, 34);
+  --spectrum-global-dimension-size-150: 12px;
+  --spectrum-global-dimension-size-200: 16px;
+  --spectrum-font-size-300: 18px;
+
+  /* Button */
+  --spectrum-button-background-color-default: rgba(2, 101, 220);
+  --spectrum-button-background-color-hover: rgba(0, 84, 182);
+  --spectrum-button-border-color-default: transparent;
+  --spectrum-button-content-color-default: rgb(255, 255, 255);
+  --spectrum-button-animation-duration: 130ms;
+  --spectrum-button-border-radius: 20px;
+  --spectrum-button-border-width: 2px;
+  --spectrum-button-font-size: 16px;
+  --spectrum-bold-font-weight: 700;
+  --spectrum-button-padding-label-to-icon: 9px;  
+  --spectrum-button-height: 40px;
+  --spectrum-button-min-width: calc(40px * 2.25);
+  --spectrum-button-edge-to-text: 18px;
+}
