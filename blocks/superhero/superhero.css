@@ -45,6 +45,7 @@
 
 .superhero .generate-form {
   display: flex;
+  flex-direction: column;
   gap: 15px;
   align-items: center;
   justify-content: center;
@@ -74,7 +75,7 @@
 }
 
 .superhero .content-container button {
-  width: 150px;
+  width: 100%;
   background-color: var(--spectrum-button-background-color-default);
   border-color: var(--spectrum-button-border-color-default);
   color: var(--spectrum-button-content-color-default);
@@ -112,5 +113,10 @@
 @media (width >= 900px) {
   .superhero .generate-form {
     width: 85%;
+    flex-direction: row;
+  }
+
+  .superhero .content-container button {
+    width: 150px;
   }
 }
