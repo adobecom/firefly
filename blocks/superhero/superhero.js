@@ -3,9 +3,16 @@ import { getLibs } from '../../scripts/utils.js';
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const SUPERHERO_CONTENT = 'content.json';
 const SUPERHERO_BASE_URL = 'https://clio-assets.adobe.com/clio-playground/super-hero-prod-v3/v0/';
-
+const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
 let index = 0;
 let isAdding = true;
+
+function textToImage(block) {
+  const activeImage = block.querySelector('img.active');
+  const docId = activeImage.id;
+  const targetUrl = TEXT_TO_IMAGE_BASE_URL + docId;
+  window.open(targetUrl, '_blank');
+}
 
 function typeAnimation(input, text, block) {
   const timeoutid = setTimeout(() => {
@@ -95,6 +102,9 @@ export default async function decorate(block) {
   generateButton.textContent = 'Generate';
   form.append(input, generateButton);
   contentContainer.append(form);
+  generateButton.addEventListener('click', () => {
+    textToImage(block);
+  });
   setTimeout(() => {
     animate(block);
   }, 2000);
