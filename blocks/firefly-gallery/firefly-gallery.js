@@ -46,11 +46,14 @@ export default async function decorate(block) {
         author.append(authorImg);
         author.append(authorName);
         const cardPrompt = createTag('div', { class: 'prompt' });
+        cardPrompt.innerHTML = prompt;
         const viewLink = createTag('a', {
           href: communityUrl,
           class: 'viewLink button',
         });
+        viewLink.textContent = 'View';
         const likeButton = createTag('button', { class: 'like button' });
+        likeButton.textContent = 'Like';
         const cardFooter = createTag('div', { class: 'card-footer' });
         cardFooter.append(likeButton);
         cardFooter.append(viewLink);
