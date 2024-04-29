@@ -1,9 +1,13 @@
+/* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
-const SUPERHERO_CONTENT = 'content.json';
-const SUPERHERO_BASE_URL = 'https://clio-assets.adobe.com/clio-playground/super-hero-prod-v3/v0/';
+const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
 const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
+const DEFAULT_FORMAT = 'jpg';
+const DEFAULT_DIMENSION = 'width';
+const DEFAULT_SIZE = '2000';
+const API_KEY = 'clio-playground-web';
 let index = 0;
 let isAdding = true;
 
@@ -64,32 +68,30 @@ function animate(block) {
 }
 
 export default async function decorate(block) {
-  const link = block.querySelector('a') || (SUPERHERO_BASE_URL + SUPERHERO_CONTENT);
+  const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
-  const resp = await fetch(link.href);
-  if (!resp.ok) {
-    return;
-  }
-  const respJson = await resp.json();
-  if (respJson && respJson.items && respJson.items.length > 0) {
-    const images = respJson.items;
-    const imageContainer = createTag('div', { class: 'image-container' });
-    images.forEach((image, i) => {
-      if (image.image.url && image.prompt.defaultMessage && image.docId) {
-        const img = createTag('img', {
-          src: SUPERHERO_BASE_URL + image.image.url,
-          alt: image.prompt.defaultMessage,
-          id: image.docId,
-        });
-        if (i === 0) {
-          img.setAttribute('eager', true);
-          img.classList.add('active');
-        }
-        imageContainer.append(img);
+  const imageContainer = createTag('div', { class: 'image-container' });
+  assetIds.forEach(async (assetId, i) => {
+    const imageId = assetId.textContent.trim();
+    if (!imageId || imageId === '') return;
+    const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
+    if (resp.ok) {
+      const imageDetails = await resp.json();
+      const imageHref = imageDetails._embedded.artwork._links.rendition.href;
+      const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
+      const img = createTag('img', {
+        src: imageUrl,
+        alt: imageDetails.title,
+        id: imageId,
+      });
+      if (i === 0) {
+        img.setAttribute('eager', true);
+        img.classList.add('active');
       }
-    });
-    block.append(imageContainer);
-  }
+      imageContainer.append(img);
+    }
+  });
+  block.append(imageContainer);
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -107,5 +109,5 @@ export default async function decorate(block) {
   });
   setTimeout(() => {
     animate(block);
-  }, 2000);
+  }, 3000);
 }
