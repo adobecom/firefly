@@ -13,9 +13,16 @@ const SHORT_GALLERY_SIZE = '20';
 export default async function decorate(block) {
   const link = block.querySelector('a') || GALLERY_URL + SHORT_GALLERY_SIZE;
   block.innerHTML = '';
-  let resp = await fetch(link.href);
+  const accessToken = window.adobeIMS.getAccessToken();
+  const headers = new Headers({
+    'X-Api-Key': 'alfred-community-hubs',
+    // 'X-Api-Key': 'clio-playground-web',
+    Authorization: `Bearer ${accessToken.token}`,
+  });
+  const resp = await fetch(link.href, headers);
   if (!resp.ok) {
-    resp = await fetch('/blocks/firefly-gallery/assets-sample.json');
+    console.error('Failed to fetch images', resp.status, resp.statusText);
+    // resp = await fetch('/blocks/firefly-gallery/assets-sample.json');
   }
   const respJson = await resp.json();
   if (respJson && respJson._embedded.assets && respJson._embedded.assets.length > 0) {
