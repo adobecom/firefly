@@ -8,7 +8,6 @@ export default async function decorate(block) {
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
 
   if (footerPath) {
-    // const footer = await fetchFooter(footerPath);
     const resp = await fetch(`${footerPath}.plain.html`);
 
     if (resp.ok) {
