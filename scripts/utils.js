@@ -44,15 +44,13 @@ export function decorateArea(area = document) {
   };
 
   (async function loadLCPImage() {
-    const marquee = document.querySelector('.marquee');
-    if (!marquee) {
+    const superhero = document.querySelector('.superhero');
+    if (!superhero) {
       eagerLoad(document, 'img');
       return;
     }
 
     // First image of first row
-    eagerLoad(marquee, 'div:first-child img');
-    // Last image of last column of last row
-    eagerLoad(marquee, 'div:last-child > div:last-child img');
+    eagerLoad(superhero, 'img');
   }());
 }
