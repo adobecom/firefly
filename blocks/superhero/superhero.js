@@ -56,15 +56,19 @@ function typeAnimation(input, text, block) {
   });
 }
 
-function animate(block) {
+function animate(block, first = false) {
   const active = block.querySelector('img.active');
   const input = block.querySelector('.generate-input');
-  const next = active.nextElementSibling || block.querySelector('img');
-  const nextText = next.alt;
-  active.classList.remove('active');
-  next.classList.add('active');
-  input.textContent = '';
-  typeAnimation(input, nextText, block);
+  if (first) {
+    typeAnimation(input, active.alt, block);
+  } else {
+    const next = active.nextElementSibling || block.querySelector('img');
+    const nextText = next.alt;
+    active.classList.remove('active');
+    next.classList.add('active');
+    input.textContent = '';
+    typeAnimation(input, nextText, block);
+  }
 }
 
 export default async function decorate(block) {
@@ -79,9 +83,11 @@ export default async function decorate(block) {
       const imageDetails = await resp.json();
       const imageHref = imageDetails._embedded.artwork._links.rendition.href;
       const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
+      const userLocale = window.adobeIMS.adobeIdData.locale.replace('_', '-') || navigator.language;
+      const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
       const img = createTag('img', {
         src: imageUrl,
-        alt: imageDetails.title,
+        alt: prompt,
         id: imageId,
       });
       if (i === 0) {
@@ -108,6 +114,6 @@ export default async function decorate(block) {
     textToImage(block);
   });
   setTimeout(() => {
-    animate(block);
-  }, 3000);
+    animate(block, true);
+  }, 2000);
 }
