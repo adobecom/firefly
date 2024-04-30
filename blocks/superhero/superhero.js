@@ -91,7 +91,8 @@ export default async function decorate(block) {
         id: imageId,
       });
       if (i === 0) {
-        img.setAttribute('eager', true);
+        img.loading = 'eager';
+        img.fetchpriority = 'high';
         img.classList.add('active');
       }
       imageContainer.append(img);
