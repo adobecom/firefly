@@ -80,25 +80,19 @@ export default async function decorate(block) {
     if (!imageId || imageId === '') return;
     const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
     if (resp.ok) {
-      let img;
       const imageDetails = await resp.json();
       const imageHref = imageDetails._embedded.artwork._links.rendition.href;
       const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
       const userLocale = window.adobeIMS.adobeIdData.locale.replace('_', '-') || navigator.language;
       const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
+      const img = createTag('img', {
+        src: imageUrl,
+        alt: prompt,
+        id: imageId,
+      });
       if (i === 0) {
-        img = new Image(); // preloading first image
-        img.src = imageUrl;
-        img.alt = prompt;
-        img.id = imageId;
         img.setAttribute('eager', true);
         img.classList.add('active');
-      } else {
-        img = createTag('img', {
-          src: imageUrl,
-          alt: prompt,
-          id: imageId,
-        });
       }
       imageContainer.append(img);
     }
