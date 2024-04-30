@@ -83,7 +83,7 @@ export default async function decorate(block) {
       const imageDetails = await resp.json();
       const imageHref = imageDetails._embedded.artwork._links.rendition.href;
       const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
-      const userLocale = window.adobeIMS.adobeIdData.locale.replace('_', '-') || navigator.language;
+      const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language;
       const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
       const img = createTag('img', {
         src: imageUrl,
