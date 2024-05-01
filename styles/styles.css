@@ -74,6 +74,11 @@
     margin-right: 9px;
   }
 
+  .feds-navItem a.feds-cta[href*="discord"] {
+    display: none;
+  }
+
+
   .feds-profile > .feds-signIn{
     font-size:14px;
     font-weight: 700;
@@ -154,7 +159,9 @@
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > picture {
     grid-row: 1; 
     grid-column: 1; 
-    margin-right:8px
+    margin-right:8px;
+    justify-self: center;
+    align-self: center; 
   }
   
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > ul {
@@ -164,6 +171,18 @@
     color: rgba(109,109,109);
     font-weight: 500;
     font-size: 12px;
+  }
+
+  @media (width >= 600px) {
+    .feds-nav-wrapper {
+      justify-content: center;
+    }
+    
+    .feds-navItem a.feds-cta[href*="discord"] {
+      display: inline-block;
+      padding: 5px;
+    }
+  
   }
 
 }
