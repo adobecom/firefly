@@ -1,3 +1,5 @@
+/* stylelint-disable color-function-notation */
+/* stylelint-disable selector-class-pattern */
 /* 
  * Put project specific base styles here.
  *
@@ -15,7 +17,6 @@
   --spectrum-global-dimension-size-800: 64px;
   --spectrum-global-color-gray-800: rgb(34, 34, 34);
   --spectrum-global-dimension-size-150: 12px;
-  --spectrum-global-dimension-size-200: 16px;
   --spectrum-font-size-300: 18px;
 
   /* Button */
@@ -32,4 +33,156 @@
   --spectrum-button-height: 40px;
   --spectrum-button-min-width: calc(40px * 2.25);
   --spectrum-button-edge-to-text: 18px;
+
+  /* Navigation CSS Updates */
+  .feds-topnav-wrapper {
+    justify-content: space-between;
+  }
+
+  .feds-brand-image{
+    width: inherit;
+  }
+
+  .feds-navItem{
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.8px;
+    text-decoration: none;
+    vertical-align: top;
+  }
+
+  .feds-navLink:hover{
+    color: inherit;
+  }
+
+  .feds-navItem .feds-cta{
+    font-size:14px;
+    font-weight: 700;
+    line-height: 18.2px;
+    color: inherit;
+    background-color: inherit;
+    border-color: rgba(213, 213, 213);
+  }
+
+  .feds-navItem a.feds-cta[href*="discord"]::before {
+    content:'';
+    width: 18px;
+    height: 14px;
+    background: url('../../icons/discord.svg') left no-repeat;
+    display: inline-block;
+    margin-right: 9px;
+  }
+
+  .feds-navItem a.feds-cta[href*="discord"] {
+    display: none;
+  }
+
+
+  .feds-profile > .feds-signIn{
+    font-size:14px;
+    font-weight: 700;
+    line-height: 18.2px;
+    color: inherit;
+    background-color: inherit;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 16px;
+    border-color: rgba(213, 213, 213);
+    display: flex;
+    height: 32px;
+    min-width: 72px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    transition-property: color, border-color, background-color;
+    transition-duration: 130ms;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+
+  .feds-profile::before{
+    content:'';
+    width: 18px;
+    height: 24px;
+    border-right: solid 1px rgba(177, 177, 177);
+    display: inline-block;
+    margin-right: 9px;
+  }
+
+  .feds-profile > .feds-signIn:hover,
+  .feds-navItem .feds-cta:hover{
+    background-color:rgba(177, 177, 177);
+    color: inherit;
+  }
+
+
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] {
+    font-size: 0;
+  }
+
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"]::before {
+    content:'';
+    width: 18px;
+    height: 18px;
+    background: url('../../icons/feedback.svg') left no-repeat;
+    display: inline-block;
+    margin-right: 9px;
+  }
+
+  .feds-navItem > button.feds-navLink.feds-navLink--hoverCaret[daa-ll*="Feedback"]::after {
+    content:unset;
+  }
+
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"]+ .feds-popup{
+    width: 225px;
+    padding:6px 12px 9px;
+  }
+
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto; 
+    
+  }
+  
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > a {
+    grid-row: 1; 
+    grid-column: 2;
+    font-weight: 400;
+    font-size: 14px;
+    padding: inherit;
+  }
+  
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > picture {
+    grid-row: 1; 
+    grid-column: 1; 
+    margin-right:8px;
+    justify-self: center;
+    align-self: center; 
+  }
+  
+  .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > ul {
+    grid-row: 2;
+    grid-column: 2; 
+    font-style: italic;
+    color: rgba(109,109,109);
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  @media (width >= 600px) {
+    .feds-nav-wrapper {
+      justify-content: center;
+    }
+    
+    .feds-navItem a.feds-cta[href*="discord"] {
+      display: inline-block;
+      padding: 5px;
+    }
+  
+  }
+
 }
