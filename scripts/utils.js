@@ -36,6 +36,7 @@ export const [setLibs, getLibs] = (() => {
  * Note: This file should have no self-invoking functions.
  * ------------------------------------------------------------
  */
+const DEFAULT_SIZE = '2000';
 
 export function decorateArea(area = document) {
   const eagerLoad = (parent, selector) => {
@@ -44,19 +45,46 @@ export function decorateArea(area = document) {
   };
 
   (async function loadLCPImage() {
-    const marquee = document.querySelector('.marquee');
-    if (!marquee) {
-      eagerLoad(document, 'img');
+    const superhero = area.querySelector('.superhero');
+    if (!superhero) {
+      eagerLoad(area, 'img');
       return;
     }
-  
+
     // First image of first row
-    eagerLoad(marquee, 'div:first-child img');
-    // Last image of last column of last row
-    eagerLoad(marquee, 'div:last-child > div:last-child img');
+    eagerLoad(superhero, 'img');
   }());
 }
 
-export async function useMiloSample() {
-  const { createTag } = await import(`${getLibs()}/utils/utils.js`);
+export function createOptimizedFireflyPicture(
+  src,
+  alt = '',
+  active = false,
+  eager = false,
+  fetchpriority = '',
+  breakpoints = [
+    { media: '(min-width: 1200px)', width: '2000' },
+    { media: '(min-width: 900px)', width: '1200' },
+    { media: '(min-width: 600px)', width: '900' },
+    { media: '(min-width: 450px)', width: '600' },
+    { width: '450' },
+  ],
+) {
+  const picture = document.createElement('picture');
+  // different widths
+  breakpoints.forEach((br) => {
+    const source = document.createElement('source');
+    if (br.media) source.setAttribute('media', br.media);
+    source.setAttribute('srcset', `${src.replace('{size}', br.width)}`);
+    picture.appendChild(source);
+  });
+  // fallback
+  const img = document.createElement('img');
+  img.setAttribute('loading', eager ? 'eager' : 'lazy');
+  img.setAttribute('fetchpriority', fetchpriority);
+  img.setAttribute('class', active ? 'active' : '');
+  img.setAttribute('alt', alt);
+  picture.appendChild(img);
+  img.setAttribute('src', `${src.replace('{size}', DEFAULT_SIZE)}`);
+  return picture;
 }

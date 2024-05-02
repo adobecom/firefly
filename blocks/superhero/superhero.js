@@ -1,9 +1,12 @@
-import { getLibs } from '../../scripts/utils.js';
+/* eslint-disable no-underscore-dangle */
+import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 
-const { createTag } = await import(`${getLibs()}/utils/utils.js`);
-const SUPERHERO_CONTENT = 'content.json';
-const SUPERHERO_BASE_URL = 'https://clio-assets.adobe.com/clio-playground/super-hero-prod-v3/v0/';
+const { createTag, loadIms } = await import(`${getLibs()}/utils/utils.js`);
+const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
 const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
+const DEFAULT_FORMAT = 'jpg';
+const DEFAULT_DIMENSION = 'width';
+const API_KEY = 'clio-playground-web';
 let index = 0;
 let isAdding = true;
 
@@ -52,44 +55,43 @@ function typeAnimation(input, text, block) {
   });
 }
 
-function animate(block) {
+function animate(block, first = false) {
   const active = block.querySelector('img.active');
   const input = block.querySelector('.generate-input');
-  const next = active.nextElementSibling || block.querySelector('img');
-  const nextText = next.alt;
-  active.classList.remove('active');
-  next.classList.add('active');
-  input.textContent = '';
-  typeAnimation(input, nextText, block);
+  if (first) {
+    typeAnimation(input, active.alt, block);
+  } else {
+    const nextSibling = active.parentElement.nextElementSibling;
+    const next = nextSibling?.querySelector('img') || block.querySelector('img');
+    const nextText = next.alt;
+    active.classList.remove('active');
+    next.classList.add('active');
+    input.textContent = '';
+    typeAnimation(input, nextText, block);
+  }
 }
 
 export default async function decorate(block) {
-  const link = block.querySelector('a') || (SUPERHERO_BASE_URL + SUPERHERO_CONTENT);
+  const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
-  const resp = await fetch(link.href);
-  if (!resp.ok) {
-    return;
-  }
-  const respJson = await resp.json();
-  if (respJson && respJson.items && respJson.items.length > 0) {
-    const images = respJson.items;
-    const imageContainer = createTag('div', { class: 'image-container' });
-    images.forEach((image, i) => {
-      if (image.image.url && image.prompt.defaultMessage && image.docId) {
-        const img = createTag('img', {
-          src: SUPERHERO_BASE_URL + image.image.url,
-          alt: image.prompt.defaultMessage,
-          id: image.docId,
-        });
-        if (i === 0) {
-          img.setAttribute('eager', true);
-          img.classList.add('active');
-        }
-        imageContainer.append(img);
-      }
-    });
-    block.append(imageContainer);
-  }
+  const imageContainer = createTag('div', { class: 'image-container' });
+  // if user is not signed in, load IMS
+  if (!window.adobeIMS?.isSignedInUser()) loadIms();
+  assetIds.forEach(async (assetId, i) => {
+    const imageId = assetId.textContent.trim();
+    if (!imageId || imageId === '') return;
+    const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
+    if (resp.ok) {
+      const imageDetails = await resp.json();
+      const imageHref = imageDetails._embedded.artwork._links.rendition.href;
+      const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
+      const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language;
+      const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
+      const picture = createOptimizedFireflyPicture(imageUrl, prompt, i === 0, i === 0, i === 0 ? 'high' : '');
+      imageContainer.append(picture);
+    }
+  });
+  block.append(imageContainer);
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -106,6 +108,6 @@ export default async function decorate(block) {
     textToImage(block);
   });
   setTimeout(() => {
-    animate(block);
+    animate(block, true);
   }, 2000);
 }
