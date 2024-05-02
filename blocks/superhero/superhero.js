@@ -61,7 +61,8 @@ function animate(block, first = false) {
   if (first) {
     typeAnimation(input, active.alt, block);
   } else {
-    const next = active.parentElement.nextElementSibling.querySelector('img') || block.querySelector('img');
+    const nextSibling = active.parentElement.nextElementSibling;
+    const next = nextSibling?.querySelector('img') || block.querySelector('img');
     const nextText = next.alt;
     active.classList.remove('active');
     next.classList.add('active');
