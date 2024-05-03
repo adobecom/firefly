@@ -57,11 +57,12 @@ const miloLibs = setLibs(LIBS);
 }());
 
 async function loadPage() {
+  // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
   await loadArea();
-  setTimeout(() => { loadMartech(); }, 3000);
+  // setTimeout(() => { loadMartech(); }, 3000);
 }
 
 loadPage();
