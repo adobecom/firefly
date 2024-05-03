@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 /* stylelint-disable color-function-notation */
 .firefly-footer {
   align-self: center;
@@ -46,9 +47,11 @@
 .firefly-footer .footer-links > div > div:nth-child(2) ul a{
   text-decoration: none;
   text-align: center;
-
 }
 
+.firefly-footer .footer-banner{
+  display: none;
+}
 
 @media (width >= 600px) {
   .firefly-footer > div:first-of-type p{
@@ -70,4 +73,61 @@
   .firefly-footer .footer-links > div > div:last-of-type {
     margin-left: auto;
   }
+
+  .firefly-footer .footer-banner{
+    pointer-events: all;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    transition: height 0.3s ease;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    height: 50px;
+  }
+  
+  .firefly-footer .footer-banner .footer-banner-cta{
+      width: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      gap: 0px 5px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+      margin-top: 16px;
+  }
+
+  .firefly-footer .footer-banner .footer-banner-close{
+    width: 24px;
+    height: 24px;
+    background: url('../../img/firefly/close.svg') left no-repeat;
+    display: inline-block;
+    color: white;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.firefly-footer .footer-banner .footer-banner-cta a:any-link{
+    font-size: 14px;
+    color: rgba(255,255,255);
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .firefly-footer .footer-banner .footer-banner-image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+  }
+  
 }
