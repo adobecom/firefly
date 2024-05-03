@@ -108,7 +108,7 @@
     background: url('../../img/firefly/close.svg') left no-repeat;
     display: inline-block;
     color: white;
-    position: absolute; /* Added */
+    position: absolute;
     right: 10px;
     cursor: pointer;
     z-index: 1;
