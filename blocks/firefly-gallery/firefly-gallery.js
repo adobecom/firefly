@@ -9,10 +9,12 @@ const DEFAULT_FORMAT = 'jpg';
 const DEFAULT_DIMENSION = 'width';
 const DEFAULT_SIZE = '350';
 const SHORT_GALLERY_SIZE = '20';
-// const FULL_GALLERY_SIZE = '48';
+const FULL_GALLERY_SIZE = '48';
 
 export default async function decorate(block) {
-  const link = block.querySelector('a')?.href || `${GALLERY_URL}${SHORT_GALLERY_SIZE}'&cursor='}`;
+  let size = SHORT_GALLERY_SIZE;
+  if (window.location.pathname.includes('/community')) size = FULL_GALLERY_SIZE;
+  const link = block.querySelector('a')?.href || `${GALLERY_URL}${size}`;
   block.innerHTML = '';
   const requestId = (Math.random() + 1).toString(36).substring(5);
   // const accessToken = window.adobeIMS?.getAccessToken();
@@ -33,6 +35,11 @@ export default async function decorate(block) {
   if (respJson && respJson._embedded.assets && respJson._embedded.assets.length > 0) {
     const images = respJson._embedded.assets;
     const cardContainer = createTag('div', { class: 'card-container' });
+    if (size === SHORT_GALLERY_SIZE) {
+      cardContainer.classList.add('short');
+    } else {
+      cardContainer.classList.add('full');
+    }
     images.forEach((image) => {
       const rendition = image._links.rendition.href;
       const authorName = image._embedded.owner.display_name;
