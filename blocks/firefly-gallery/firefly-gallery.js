@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 /* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
 
@@ -11,15 +12,19 @@ const SHORT_GALLERY_SIZE = '20';
 // const FULL_GALLERY_SIZE = '48';
 
 export default async function decorate(block) {
-  const link = block.querySelector('a') || GALLERY_URL + SHORT_GALLERY_SIZE;
+  const link = block.querySelector('a')?.href || `${GALLERY_URL}${SHORT_GALLERY_SIZE}'&cursor='}`;
   block.innerHTML = '';
-  const accessToken = window.adobeIMS.getAccessToken();
+  const requestId = (Math.random() + 1).toString(36).substring(5);
+  // const accessToken = window.adobeIMS?.getAccessToken();
   const headers = new Headers({
     'X-Api-Key': 'alfred-community-hubs',
-    // 'X-Api-Key': 'clio-playground-web',
-    Authorization: `Bearer ${accessToken.token}`,
+    'x-request-id': requestId,
+    'community_id': 'ff_community',
   });
-  const resp = await fetch(link.href, headers);
+  const resp = await fetch(link, {
+    headers,
+    mode: 'cors',
+  });
   if (!resp.ok) {
     console.error('Failed to fetch images', resp.status, resp.statusText);
     // resp = await fetch('/blocks/firefly-gallery/assets-sample.json');
