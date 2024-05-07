@@ -1,28 +1,19 @@
 .firefly-gallery {
-  width: calc(4 * 360px);
   margin: 0 auto;
   padding: 10px;
 }
 
 .card-container {
-  display: flex;
   position: relative;
-  overflow: hidden;
-  flex-flow: column wrap;
-  width: calc(4 * 360px); /* 4 cards per row */
-  gap: 5px 10px;
-}
-
-.card-container.short {
-  max-height: calc(5 * 360px); /* 4 col * 5 rows atleast for 20 images */
-}
-
-.card-container.long {
-  max-height: calc(12 * 360px); /* 4 col * 12 rows atleast for 48 images at a time */
+  column-count: 1;
+  column-gap: 10px;
+  row-gap: 10px;
+  max-width: 95%;
 }
 
 .card {
   position: relative;
+  display: inline-flex;
 }
 
 .card .card-details {
@@ -45,14 +36,20 @@
   padding: 10px;
 }
 
-@media (width >= 600px) {
+@media (width >= 450px) {
+  .card-container {
+    column-count: 2;
+  }
+}
 
+@media (width >= 600px) {
+  .card-container {
+    column-count: 3;
+  }
 }
 
 @media (width >= 900px) {
-
-}
-
-@media (width >= 1200px) {
-
+  .card-container {
+    column-count: 4;
+  }
 }

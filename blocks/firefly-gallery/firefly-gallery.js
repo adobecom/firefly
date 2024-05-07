@@ -28,6 +28,7 @@ export default async function decorate(block) {
     mode: 'cors',
   });
   if (!resp.ok) {
+    // eslint-disable-next-line no-console
     console.error('Failed to fetch images', resp.status, resp.statusText);
     // resp = await fetch('/blocks/firefly-gallery/assets-sample.json');
   }
