@@ -6,6 +6,9 @@
   display: grid;
   justify-content: center;
   align-items: center;
+  margin: unset;
+  max-width: unset;
+  min-width: 100vw;
 }
 
 .superhero .content-container {
