@@ -34,14 +34,36 @@
   bottom: 0;
   right: 0;
   /* stylelint-disable-next-line color-function-notation */
-  background-color: rgba(0, 0, 0, 61%);
+  background: rgba(0, 0, 0, 64.7%);
   color: white;
   padding: 10px;
+  animation-play-state: running;
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 .card .card-details .author img {
   vertical-align: middle;
   padding-right: 10px;
+}
+
+.card .card-details .prompt {
+  overflow: hidden;
+  line-clamp: 2;
+  color: #FFF;
+  font-family: adobe-clean, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.card .card-details .card-footer {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* 
