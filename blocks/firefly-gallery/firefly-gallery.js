@@ -12,6 +12,7 @@ const SHORT_GALLERY_SIZE = '20';
 const FULL_GALLERY_SIZE = '48';
 const GRID_GAP = 10;
 const GRID_ROW_HEIGHT = 10;
+let totalImages = 0;
 let cursor;
 let GETTING_IMAGES = false;
 
@@ -43,6 +44,9 @@ async function getImages(link, next = '') {
     return [];
   }
   const respJson = await resp.json();
+  if ((totalImages === 0) && respJson && respJson.total) {
+    totalImages = respJson.total;
+  }
   if (respJson && respJson._links && respJson._links.next) {
     const nextLink = new URL(respJson._links.next.href);
     cursor = nextLink.searchParams.get('cursor');
@@ -132,14 +136,20 @@ export default async function decorate(block) {
           if (GETTING_IMAGES) return;
           GETTING_IMAGES = true;
           observer.unobserve(intersectionContainer);
-          const nextImages = await getImages(link, cursor);
-          if (nextImages.length === 0) {
+          const containerEl = block.querySelector('.card-container');
+          if (containerEl.children.length < totalImages) {
+            // fetch more images if there are more images to fetch
+            const nextImages = await getImages(link, cursor);
+            if (nextImages.length === 0) {
+              observer.unobserve(intersectionContainer);
+              return;
+            }
+            await addCards(cardContainer, nextImages);
+            const newIntersectionContainer = block.querySelector('.card-container .card:last-child');
+            observer.observe(newIntersectionContainer);
+          } else {
             observer.unobserve(intersectionContainer);
-            return;
           }
-          await addCards(cardContainer, nextImages);
-          const newIntersectionContainer = block.querySelector('.card-container .card:last-child');
-          observer.observe(newIntersectionContainer);
         }
       }, { threshold: 1 });
       observer.observe(intersectionContainer);
