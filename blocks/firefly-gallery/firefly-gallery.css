@@ -39,6 +39,11 @@
   padding: 10px;
 }
 
+.card .card-details .author img {
+  vertical-align: middle;
+  padding-right: 10px;
+}
+
 /* 
 @media (width >= 450px) {
   .card-container {
