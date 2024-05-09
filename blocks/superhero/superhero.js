@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 
-const { createTag, loadIms } = await import(`${getLibs()}/utils/utils.js`);
+const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
 const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
 const DEFAULT_FORMAT = 'jpg';
@@ -75,8 +75,6 @@ export default async function decorate(block) {
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
-  // if user is not signed in, load IMS
-  if (!window.adobeIMS?.isSignedInUser()) loadIms();
   assetIds.forEach(async (assetId, i) => {
     const imageId = assetId.textContent.trim();
     if (!imageId || imageId === '') return;
@@ -85,9 +83,9 @@ export default async function decorate(block) {
       const imageDetails = await resp.json();
       const imageHref = imageDetails._embedded.artwork._links.rendition.href;
       const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-      const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language;
+      const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
       const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
-      const picture = createOptimizedFireflyPicture(imageUrl, prompt, i === 0, i === 0, i === 0 ? 'high' : '');
+      const picture = createOptimizedFireflyPicture(imageUrl, prompt, i === 0, i === 0, 'high');
       imageContainer.append(picture);
     }
   });
