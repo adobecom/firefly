@@ -10,8 +10,22 @@ const DEFAULT_DIMENSION = 'width';
 const DEFAULT_SIZE = '350';
 const SHORT_GALLERY_SIZE = '20';
 const FULL_GALLERY_SIZE = '48';
+const GRID_GAP = 10;
+const GRID_ROW_HEIGHT = 10;
 let cursor;
 let GETTING_IMAGES = false;
+
+function resizeGridItem(item) {
+  const rowSpan = Math.ceil((item.querySelector('img').height + GRID_GAP) / (GRID_ROW_HEIGHT + GRID_GAP));
+  item.style.gridRowEnd = `span ${rowSpan}`;
+}
+
+function resizeAllGridItems(block) {
+  const cards = block.querySelectorAll('.card');
+  for (let i = 0; i < cards.length; i += 1) {
+    resizeGridItem(cards[i]);
+  }
+}
 
 async function getImages(link, next = '') {
   let endpoint = link;
@@ -42,6 +56,10 @@ async function getImages(link, next = '') {
 async function addCards(cardContainer, images) {
   await images.forEach((image) => {
     const rendition = image._links.rendition.href;
+    const maxWidth = image._links.rendition.max_width;
+    const maxHeight = image._links.rendition.max_height;
+    const aspectRatio = (maxWidth / maxHeight).toFixed(2);
+    const height = (DEFAULT_SIZE / aspectRatio).toFixed(2);
     const authorName = image._embedded.owner.display_name;
     const authorImage = image._embedded.owner._links.images[0].href;
     const imageUrn = image.urn;
@@ -53,9 +71,13 @@ async function addCards(cardContainer, images) {
         src: imageUrl,
         alt: prompt,
         id: imageUrn,
+        width: DEFAULT_SIZE,
+        height,
       });
       const card = createTag('div', { class: 'card' });
       card.append(img);
+      const rowSpan = Math.ceil((height + GRID_GAP) / (GRID_ROW_HEIGHT + GRID_GAP));
+      card.style.gridRowEnd = `span ${rowSpan}`;
       const cardDetails = createTag('div', { class: 'card-details' });
       const author = createTag('div', { class: 'author' });
       const authorImg = createTag('img', {
@@ -99,6 +121,8 @@ export default async function decorate(block) {
   const cardContainer = createTag('div', { class: 'card-container' });
   await addCards(cardContainer, images);
   block.append(cardContainer);
+  resizeAllGridItems(block);
+  window.addEventListener('resize', resizeAllGridItems(block));
   if (IS_INFINITE_SCROLL) {
     // if last card is visible, fetch more images
     setTimeout(() => {
