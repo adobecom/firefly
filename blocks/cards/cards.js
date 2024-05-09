@@ -28,12 +28,4 @@ export default function decorate(block) {
       });
     }
   });
-
-/*   // Make all links in cards, right aligned
-  block.querySelectorAll('.cards .cards-card-body p').forEach((paragraph) => {
-    if (paragraph.querySelector('a')) {
-      paragraph.style.display = 'flex';
-      paragraph.style.justifyContent = 'end';
-    }
-  }); */
 }
