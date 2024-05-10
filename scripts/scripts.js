@@ -35,7 +35,7 @@ const CONFIG = {
 };
 
 // Decorate the page with site specific needs.
-decorateArea();
+// decorateArea();
 
 /*
  * ------------------------------------------------------------
