@@ -10,6 +10,22 @@
     text-align: center;
   }
 
+  .section.overlay > div:nth-last-of-type(2) .overlay-link {
+    border-radius: 18px;
+    padding: 7px 14px;
+    transition: box-shadow 130ms ease-in-out;
+    background-color: rgb(63 63 63);
+  }
+
+  .section.overlay > div:nth-last-of-type(2) .overlay-link a {
+    text-decoration: none;
+    color: rgb(235 235 235);
+    font-family: adobe-clean, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
   .firefly-gallery {
     margin: 0 auto;
     padding: 10px;

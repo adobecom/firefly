@@ -128,6 +128,14 @@ export default async function decorate(block) {
   block.append(cardContainer);
   resizeAllGridItems(block);
   window.addEventListener('resize', resizeAllGridItems(block));
+  const overlayButton = createTag('button', { class: 'overlay-link' });
+  const overlayLink = document.querySelector('.section.overlay > div:nth-last-of-type(2) a');
+  if (overlayLink) {
+    // add button around the link
+    const newLink = overlayLink.cloneNode(true);
+    overlayButton.append(newLink);
+    overlayLink.replaceWith(overlayButton);
+  }
   if (IS_INFINITE_SCROLL) {
     // if last card is visible, fetch more images
     setTimeout(() => {
