@@ -71,24 +71,30 @@ function animate(block, first = false) {
   }
 }
 
+async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
+  const imageId = assetId.textContent.trim();
+  if (!imageId || imageId === '') return null;
+  const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
+  if (resp.ok) {
+    const imageDetails = await resp.json();
+    const imageHref = imageDetails._embedded.artwork._links.rendition.href;
+    const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
+    const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
+    const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
+    const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
+    return picture;
+  }
+  return null;
+}
+
 export default async function decorate(block) {
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
-  assetIds.forEach(async (assetId, i) => {
-    const imageId = assetId.textContent.trim();
-    if (!imageId || imageId === '') return;
-    const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
-    if (resp.ok) {
-      const imageDetails = await resp.json();
-      const imageHref = imageDetails._embedded.artwork._links.rendition.href;
-      const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-      const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
-      const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
-      const picture = createOptimizedFireflyPicture(imageUrl, prompt, i === 0, i === 0, 'high');
-      imageContainer.append(picture);
-    }
-  });
+  // Get the first image in quickly and then process the rest
+  const firstAssetId = assetIds[0];
+  const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
+  if (firstPicture !== null) imageContainer.append(firstPicture);
   block.append(imageContainer);
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
@@ -104,6 +110,13 @@ export default async function decorate(block) {
   contentContainer.append(form);
   generateButton.addEventListener('click', () => {
     textToImage(block);
+  });
+  // Get the rest of the images
+  assetIds.forEach(async (assetId, i) => {
+    if (i !== 0) {
+      const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
+      if (picture !== null) imageContainer.append(picture);
+    }
   });
   setTimeout(() => {
     animate(block, true);
