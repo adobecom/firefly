@@ -17,6 +17,21 @@ function textToImage(block) {
   window.open(targetUrl, '_blank');
 }
 
+function updateAuthor(author, authorName, authorImage) {
+  if (author && author.children.length === 0) {
+    const authorImageTag = createTag('img', { src: authorImage, alt: authorName });
+    const authorNameTag = createTag('span');
+    authorNameTag.textContent = authorName;
+    author.append(authorImageTag, authorNameTag);
+  } else {
+    const authorImageTag = author.querySelector('img');
+    const authorNameTag = author.querySelector('span');
+    authorImageTag.src = authorImage;
+    authorImageTag.alt = authorName;
+    authorNameTag.textContent = authorName;
+  }
+}
+
 function typeAnimation(input, text, block) {
   const timeoutid = setTimeout(() => {
     input.innerText = text.slice(0, index);
@@ -58,6 +73,13 @@ function typeAnimation(input, text, block) {
 function animate(block, first = false) {
   const active = block.querySelector('img.active');
   const input = block.querySelector('.generate-input');
+  const activePicture = active.parentElement;
+  // Add Author information
+  const { authorName, authorImage } = activePicture.dataset;
+  if (authorName && authorImage) {
+    const author = block.querySelector('.author');
+    updateAuthor(author, authorName, authorImage);
+  }
   if (first) {
     typeAnimation(input, active.alt, block);
   } else {
@@ -82,6 +104,10 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
+    const authorName = imageDetails._embedded.owner.display_name;
+    const authorImage = (imageDetails._embedded.owner._links.images)[0].href;
+    if (authorName) picture.dataset.authorName = authorName;
+    if (authorImage) picture.dataset.authorImage = authorImage;
     return picture;
   }
   return null;
@@ -108,6 +134,8 @@ export default async function decorate(block) {
   generateButton.textContent = 'Generate';
   form.append(input, generateButton);
   contentContainer.append(form);
+  const author = createTag('div', { class: 'author' });
+  block.append(author);
   generateButton.addEventListener('click', () => {
     textToImage(block);
   });
