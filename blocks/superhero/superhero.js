@@ -120,5 +120,5 @@ export default async function decorate(block) {
   });
   setTimeout(() => {
     animate(block, true);
-  }, 2000);
+  }, 3000);
 }
