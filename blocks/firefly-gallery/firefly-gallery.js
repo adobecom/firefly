@@ -97,11 +97,12 @@ async function addCards(cardContainer, images) {
         class: 'viewLink button',
       });
       viewLink.textContent = 'View';
-      const likeButton = createTag('button', { class: 'like button' });
-      likeButton.textContent = 'Like';
+      const favorite = createTag('button', { class: 'favorite' });
+      const viewButton = createTag('button', { class: 'view' });
+      viewButton.append(viewLink);
       const cardFooter = createTag('div', { class: 'card-footer' });
-      cardFooter.append(likeButton);
-      cardFooter.append(viewLink);
+      cardFooter.append(favorite);
+      cardFooter.append(viewButton);
       cardDetails.append(author);
       cardDetails.append(cardPrompt);
       cardDetails.append(cardFooter);
@@ -115,7 +116,7 @@ async function addCards(cardContainer, images) {
 export default async function decorate(block) {
   let size = SHORT_GALLERY_SIZE;
   let IS_INFINITE_SCROLL = false;
-  if (window.location.pathname.includes('/community') || window.location.pathname.includes('/gallery')) {
+  if (block.classList.contains('full')) {
     IS_INFINITE_SCROLL = true;
     size = FULL_GALLERY_SIZE;
   }
