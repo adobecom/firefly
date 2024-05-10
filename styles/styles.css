@@ -35,6 +35,9 @@
   --spectrum-button-min-width: calc(40px * 2.25);
   --spectrum-button-edge-to-text: 18px;
 
+  /* Colors */
+  --spectrum-global-color-gray-50: rgb(29 29 29);
+
   /* Navigation CSS Updates */
   .feds-topnav-wrapper {
     justify-content: space-between;
