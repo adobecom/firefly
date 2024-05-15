@@ -4,6 +4,7 @@ import { getLibs } from '../../scripts/utils.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const GALLERY_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets?sort=updated_desc&include_pending_assets=false&size=';
+const FAVOURITE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/$/likes';
 const COMMUNITY_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
 const DEFAULT_FORMAT = 'jpg';
 const DEFAULT_DIMENSION = 'width';
@@ -108,6 +109,27 @@ async function addCards(cardContainer, images) {
       cardDetails.append(cardFooter);
       card.append(cardDetails);
       cardContainer.append(card);
+
+      favorite.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const accessToken = window.adobeIMS.getAccessToken();
+        const imageId = image.urn.split(':').pop();
+        const url = FAVOURITE_URL.replace('$', imageId);
+        const headers = new Headers({
+          'X-Api-Key': 'alfred-community-hubs',
+          'community_id': 'ff_community',
+          'Authorization': `Bearer ${accessToken.token}`,
+          "content-type": 'application/json'
+        });
+        const resp = await fetch(url, {
+          method: 'PUT',
+          headers,
+          mode: 'cors',
+        });
+        if (resp.ok) {
+          favorite.classList.add('liked');
+        }
+      });
     }
   });
   GETTING_IMAGES = false;

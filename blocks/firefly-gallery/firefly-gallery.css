@@ -131,6 +131,7 @@
     border-radius: 4px;
     width: 24px;
     height: 24px;
+    cursor: pointer;
   }
 
   .card .card-details .card-footer .favorite::after {
