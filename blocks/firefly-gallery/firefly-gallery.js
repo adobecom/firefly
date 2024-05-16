@@ -72,9 +72,9 @@ async function addCards(cardContainer, images) {
     const imageUrl = rendition.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
     const communityUrl = COMMUNITY_URL + imageUrn;
     if (images.indexOf(image) < 5) {
-      heightOfContainer += parseInt(height);
+      heightOfContainer += parseInt(height, 10);
     }
-    
+
     if (imageUrl && prompt && authorName && authorImage && communityUrl) {
       const img = createTag('img', {
         src: imageUrl,
@@ -121,24 +121,24 @@ async function addCards(cardContainer, images) {
       favorite.addEventListener('click', async (e) => {
         e.preventDefault();
         if (window.adobeIMS.isSignedInUser()) {
-        const accessToken = window.adobeIMS.getAccessToken();
-        const imageId = image.urn.split(':').pop();
-        const url = FAVOURITE_URL.replace('$', imageId);
-        const headers = new Headers({
-          'X-Api-Key': 'alfred-community-hubs',
-          'community_id': 'ff_community',
-          'Authorization': `Bearer ${accessToken.token}`,
-          "content-type": 'application/json'
-        });
-        const resp = await fetch(url, {
-          method: 'PUT',
-          headers,
-          mode: 'cors',
-        });
-        if (resp.ok) {
-          favorite.classList.add('liked');
+          const accessToken = window.adobeIMS.getAccessToken();
+          const imageId = image.urn.split(':').pop();
+          const url = FAVOURITE_URL.replace('$', imageId);
+          const headers = new Headers({
+            'X-Api-Key': 'alfred-community-hubs',
+            'community_id': 'ff_community',
+            'Authorization': `Bearer ${accessToken.token}`,
+            'content-type': 'application/json',
+          });
+          const resp = await fetch(url, {
+            method: 'PUT',
+            headers,
+            mode: 'cors',
+          });
+          if (resp.ok) {
+            favorite.classList.add('liked');
+          }
         }
-      }
       });
     }
   });
@@ -148,7 +148,7 @@ async function addCards(cardContainer, images) {
 }
 
 export default async function decorate(block) {
-  let size = FULL_GALLERY_SIZE;
+  const size = FULL_GALLERY_SIZE;
   let IS_INFINITE_SCROLL = false;
   if (block.classList.contains('full')) {
     IS_INFINITE_SCROLL = true;
@@ -156,7 +156,7 @@ export default async function decorate(block) {
   const link = block.querySelector('a')?.href || `${GALLERY_URL}${size}`;
   block.innerHTML = '';
   const images = await getImages(link);
-  //shuffle images
+  // shuffle images
   images.sort(() => Math.random() - 0.5);
   const cardContainer = createTag('div', { class: 'card-container' });
   await addCards(cardContainer, images);

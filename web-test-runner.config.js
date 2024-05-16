@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { importMapsPlugin } from '@web/dev-server-import-maps';
 import { defaultReporter } from '@web/test-runner';
 
