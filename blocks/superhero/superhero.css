@@ -144,3 +144,10 @@
     width: 150px;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .superhero .generate-form {
+    background-color: var(--spectrum-global-color-gray-50);
+    color: var(--spectrum-button-content-color-default);
+  }
+}
