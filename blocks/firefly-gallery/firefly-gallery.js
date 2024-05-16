@@ -151,6 +151,8 @@ export default async function decorate(block) {
   const link = block.querySelector('a')?.href || `${GALLERY_URL}${size}`;
   block.innerHTML = '';
   const images = await getImages(link);
+  //shuffle images
+  images.sort(() => Math.random() - 0.5);
   const cardContainer = createTag('div', { class: 'card-container' });
   await addCards(cardContainer, images);
   block.append(cardContainer);
