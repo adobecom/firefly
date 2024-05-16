@@ -143,7 +143,6 @@ async function addCards(cardContainer, images) {
     }
   });
   // set height of container
-  console.log(heightOfContainer);
   cardContainer.style.height = `${heightOfContainer}px`;
   GETTING_IMAGES = false;
 }
