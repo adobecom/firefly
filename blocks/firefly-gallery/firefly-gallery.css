@@ -4,23 +4,31 @@
     min-width: 100%;
     height: 460px;
     bottom: 0;
-    background: linear-gradient(transparent, var(--spectrum-global-color-gray-50));
+    background: linear-gradient(transparent, var(--fill-color));
     color: white;
     align-content:flex-end;
     text-align: center;
   }
 
+  .section.overlay > div:nth-last-of-type(2) h3{
+    color: var(--color-black);
+    margin: 16px;
+    font-size: 22px;
+
+  }
+
   .section.overlay > div:nth-last-of-type(2) .overlay-link {
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 7px 14px;
     transition: box-shadow 130ms ease-in-out;
-    background-color: rgb(63 63 63);
-  }
+    background-color: rgb(230 230 230);
+    border: 2px solid rgba(0 0 0 / 0%);
+}
 
   .section.overlay > div:nth-last-of-type(2) .overlay-link a {
     text-decoration: none;
-    color: rgb(235 235 235);
-    font-family: adobe-clean, sans-serif;
+    color: rgb(34 34 34);
+    font-family: var(--body-font-family);
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -117,10 +125,6 @@
     font-size: 12px;
   }
 
-  .card .card-details .card-footer button.view:hover, .card .card-details .card-footer button.favorite:hover {
-    background-color: var(--color-gray-200);
-  }
-
   .card .card-details .card-footer button.view a {
     position: relative;
     text-decoration: none;
@@ -146,6 +150,10 @@
     background-color: var(--color-white);
   }
 
+  .card .card-details .card-footer button.view:hover, .card .card-details .card-footer button.favorite:hover {
+    background-color: var(--color-gray-200);
+  }
+
   .card .card-details .card-footer .favorite::after {
     position: absolute;
     display: inline-block;
@@ -153,8 +161,6 @@
     width: 16px;
     height: 16px;
     background: url('/icons/like.svg') center no-repeat;
-
-    /* margin-right: 9px; */
   }
 
   .card .card-details .card-footer .favorite.selected::after {
@@ -163,31 +169,4 @@
     height: 16px;
     background: url('/icons/liked.svg') center no-repeat;
     display: inline-block;
-
-    /* margin-right: 9px; */
   }
-
-  /* 
-@media (width >= 450px) {
-  .card-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (width >= 600px) {
-  .card-container {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media (width >= 900px) {
-  .card-container {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media (width >= 1200px) {
-  .card-container {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-} */
