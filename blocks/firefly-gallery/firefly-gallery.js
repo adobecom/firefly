@@ -9,7 +9,6 @@ const COMMUNITY_URL = 'https://firefly.adobe.com/community/view/texttoimage?id='
 const DEFAULT_FORMAT = 'jpg';
 const DEFAULT_DIMENSION = 'width';
 const DEFAULT_SIZE = '350';
-const SHORT_GALLERY_SIZE = '20';
 const FULL_GALLERY_SIZE = '48';
 const GRID_GAP = 10;
 const GRID_ROW_HEIGHT = 10;
@@ -59,6 +58,7 @@ async function getImages(link, next = '') {
 }
 
 async function addCards(cardContainer, images) {
+  let heightOfContainer = 0;
   await images.forEach((image) => {
     const rendition = image._links.rendition.href;
     const maxWidth = image._links.rendition.max_width;
@@ -71,6 +71,10 @@ async function addCards(cardContainer, images) {
     const prompt = image.title;
     const imageUrl = rendition.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
     const communityUrl = COMMUNITY_URL + imageUrn;
+    if (images.indexOf(image) < 5) {
+      heightOfContainer += parseInt(height);
+    }
+    
     if (imageUrl && prompt && authorName && authorImage && communityUrl) {
       const img = createTag('img', {
         src: imageUrl,
@@ -138,15 +142,17 @@ async function addCards(cardContainer, images) {
       });
     }
   });
+  // set height of container
+  console.log(heightOfContainer);
+  cardContainer.style.height = `${heightOfContainer}px`;
   GETTING_IMAGES = false;
 }
 
 export default async function decorate(block) {
-  let size = SHORT_GALLERY_SIZE;
+  let size = FULL_GALLERY_SIZE;
   let IS_INFINITE_SCROLL = false;
   if (block.classList.contains('full')) {
     IS_INFINITE_SCROLL = true;
-    size = FULL_GALLERY_SIZE;
   }
   const link = block.querySelector('a')?.href || `${GALLERY_URL}${size}`;
   block.innerHTML = '';
