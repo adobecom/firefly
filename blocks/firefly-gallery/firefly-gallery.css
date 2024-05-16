@@ -47,6 +47,7 @@
 
   .card {
     position: relative;
+    cursor: pointer;
   }
 
   .card>img {
@@ -111,15 +112,24 @@
     border-radius: 12px;
     width: 54px;
     height: 24px;
+    background-color: var(--color-white);
+    font-size: 12px;
+  }
+
+  .card .card-details .card-footer button.view:hover, .card .card-details .card-footer button.favorite:hover {
+    background-color: var(--color-gray-200);
   }
 
   .card .card-details .card-footer button.view a {
+    position: relative;
     text-decoration: none;
-    color: black;
-    font-family: adobe-clean, sans-serif;
-    font-size: 12px;
+    color: var(--text-color);
+    font-family: var(--body-font-family);
     font-style: normal;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .card .card-details .card-footer button.favorite {
@@ -132,6 +142,7 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
+    background-color: var(--color-white);
   }
 
   .card .card-details .card-footer .favorite::after {

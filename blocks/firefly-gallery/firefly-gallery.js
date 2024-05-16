@@ -110,8 +110,13 @@ async function addCards(cardContainer, images) {
       card.append(cardDetails);
       cardContainer.append(card);
 
+      card.addEventListener('click', () => {
+        window.open(communityUrl, '_self');
+      });
+
       favorite.addEventListener('click', async (e) => {
         e.preventDefault();
+        if (window.adobeIMS.isSignedInUser()) {
         const accessToken = window.adobeIMS.getAccessToken();
         const imageId = image.urn.split(':').pop();
         const url = FAVOURITE_URL.replace('$', imageId);
@@ -129,6 +134,7 @@ async function addCards(cardContainer, images) {
         if (resp.ok) {
           favorite.classList.add('liked');
         }
+      }
       });
     }
   });
