@@ -66,5 +66,23 @@ export default async function decorate(block) {
       block.innerHTML = tempDiv.innerHTML;
     }
   }
+
+  const firstPicture = block.querySelector('p picture');
+  if (firstPicture) {
+    if (firstPicture.parentElement.tagName === 'A') {
+      firstPicture.parentElement.parentElement.classList.add('light-mode');
+    } else {
+      firstPicture.parentElement.classList.add('light-mode');
+    }
+  }
+
+  const nextPicture = block.querySelector('p + p picture');
+  if (nextPicture) {
+    if (nextPicture.parentElement.tagName === 'A') {
+      nextPicture.parentElement.parentElement.classList.add('dark-mode');
+    } else {
+      nextPicture.parentElement.classList.add('dark-mode');
+    }
+  }
   decorateBanner(block.querySelector('.footer-banner'));
 }
