@@ -5,7 +5,7 @@ const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
 
 let curSlide = 0;
 let maxSlide = 0;
-let slideShow = 3;
+let slideShow = 4;
 
 function scrollToSlide(carouselWrapper, slideIndex) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');

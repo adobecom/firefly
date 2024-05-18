@@ -5,6 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  position: relative;
 }
 
 .cards-carousel .cards-carousel-slide-container {
@@ -12,56 +14,64 @@
   flex-wrap: nowrap;
   overflow: hidden;
   transition: height 0.2s linear;
-  width: calc(100% - 30px);
-  max-width: 935px;
-  margin:20px auto;
+  height: 100%;
+  width: 100%;
+  margin: 20px auto;
+  gap: 15px;
+  position: relative;
 }
 
-.cards-carousel .carousel-nav:hover {
-  background-color: rgba(255 255 255 80%);
-}
-
-.carousel-nav::before,
-.carousel-nav::after {
+.cards-carousel .carousel-nav {
+  display: flex;
   position: absolute;
   top: 50%;
   z-index: 4;
   height: 52px;
   width: 52px;
   color: rgb(109 109 109);
-  box-shadow: 0 1px 4px rgba(0 0 0 16.0784%);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 16.0784%);
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transform: translateY(-50%);
-}
-
-.cards-carousel .carousel-nav-prev,
-.cards-carousel .carousel-nav-next{
-  content:'';
-  width: 36px;
-  height: 36px;
-  display: inline-block;
-  margin-right: 9px;
+  border-radius: 50%;
+  padding: 5px;
+  border: 2px solid rgba(0, 0, 0, 0);
 }
 
 .cards-carousel .carousel-nav-prev {
   left: 0;
-  content:'';
+  content: '';
   background: url('../../icons/arrow-left.svg') left no-repeat;
-
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .cards-carousel .carousel-nav-next {
   right: 0;
   background: url('../../icons/arrow-right.svg') left no-repeat;
+  background-color: rgba(255, 255, 255, 1);
 }
 
+.cards-carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 1));
+}
 
-@media (min-width: 992px) {
-  .cards-carousel .cards-carousel-slide-container {
-      max-width: 984px;
-  }
+/* achieve similar effect on the left side of the carousel */
+.cards-carousel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  z-index: 1;
+  background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 1));
 }
 
 .cards-carousel .cards-carousel-slide.card-with-link:hover {
@@ -70,31 +80,33 @@
 }
 
 .cards-carousel .cards-carousel-slide {
-  display: inline-flex;
-  box-sizing: border-box;
+  display: flex;
   border: 1px solid var(--highlight-background-color);
   overflow: hidden;
   background-color: var(--background-color);
   transition: all 0.5s;
   flex-direction: column;
   min-width: 305px;
-  margin: 0 calc(16.7% - 152.5px);
+  margin-inline-start: 4px;
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.12), 0px 3px 8px 0px rgba(0, 0, 0, 0.04), 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   margin-bottom: 5px;
   margin-top: 5px;
+  cursor: pointer;
+  max-width: 460px;
+  width: 350px;
+  height: auto;
+  flex-shrink: 0;
+  position: relative;
+  outline: none;
 }
 
-@media (max-width: 992px) {
-  .cards-carousel .cards-carousel-slide {
-      margin: 0 calc(25% - 152.5px);
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .cards-carousel .cards-carousel-slide {
-      margin: 0 calc(50% - 152.5px);
-  }
+.cards-carousel .cards-carousel-slide img {
+  height: 224px;
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 361/242;
+  border-radius: 16px 16px 0 0;
 }
 
 .cards-carousel .cards-card-body {
