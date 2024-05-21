@@ -5,12 +5,11 @@ const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
 
 let curSlide = 0;
 let maxSlide = 0;
-let slideShow;
 
 function scrollToSlide(carouselWrapper, slideIndex) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
   const widthtoScroll = (carouselSlider.clientWidth > 767) ? 350 : 170;
-  const leftPos = widthtoScroll * 2 * slideIndex;
+  const leftPos = (widthtoScroll * 2 * slideIndex);
   carouselSlider.scrollTo({ left: leftPos, behavior: 'smooth' });
   const slides = carouselSlider.children;
   for (let i = 0; i < slides.length; i += 1) {
