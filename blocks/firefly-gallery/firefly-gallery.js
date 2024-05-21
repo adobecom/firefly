@@ -114,7 +114,10 @@ async function addCards(cardContainer, images) {
       card.append(cardDetails);
       cardContainer.append(card);
 
-      card.addEventListener('click', () => {
+      card.addEventListener('click', (e) => {
+        if (e.target.classList.contains('favorite') || e.target.classList.contains('view')) {
+          return;
+        }
         window.open(communityUrl, '_self');
       });
 

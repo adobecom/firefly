@@ -37,6 +37,8 @@
 
   /* Colors */
   --spectrum-global-color-gray-50: rgb(29 29 29);
+  --spectrum-gray-100: rgb(50, 50, 50);
+  --spectrum-gray-200: rgb(63, 63, 63);
 
   /* Navigation CSS Updates */
   .feds-topnav-wrapper {
@@ -196,6 +198,13 @@
       padding: 5px;
     }
   
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--spectrum-global-color-gray-50);
+      color: var(--spectrum-button-content-color-default);
+    }
   }
 
 }

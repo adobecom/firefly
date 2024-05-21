@@ -170,3 +170,23 @@
     background: url('/icons/liked.svg') center no-repeat;
     display: inline-block;
   }
+
+
+  @media (prefers-color-scheme: dark) {
+    .section.overlay > div:nth-last-of-type(2) {
+      background: linear-gradient(transparent, var(--spectrum-global-color-gray-50));
+    }
+
+    .section.overlay > div:nth-last-of-type(2) h3{
+      color: var(--fill-color);
+    }
+
+    .section.overlay > div:nth-last-of-type(2) .overlay-link {
+      background-color: rgb(63 63 63);
+    }
+
+    .section.overlay > div:nth-last-of-type(2) .overlay-link a {
+      color: rgb(235 235 235);
+    }
+  }
+  

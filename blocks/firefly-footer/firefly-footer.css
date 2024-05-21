@@ -7,16 +7,16 @@
   line-height: normal;
 }
 
-.firefly-footer > div{
-  border-top: solid 1px rgba(213,213,213);
+.firefly-footer>div {
+  border-top: solid 1px rgba(213, 213, 213);
 }
 
-.firefly-footer > div:nth-child(1){
+.firefly-footer>div:nth-child(1) {
   padding-top: 8px;
   padding-bottom: 8px;
 }
 
-.firefly-footer > div:first-of-type p{
+.firefly-footer>div:first-of-type p {
   text-decoration: none;
   color: inherit;
   font-style: italic;
@@ -28,37 +28,60 @@
   height: 16px;
 }
 
-.firefly-footer .footer-links ul{
+.firefly-footer .footer-links ul {
   list-style-type: none;
 }
 
-.firefly-footer .footer-links > div {
-  margin-top : 11px;
-  margin-bottom : 20px
+.firefly-footer .footer-links>div {
+  margin-top: 11px;
+  margin-bottom: 20px
 }
 
-.firefly-footer .footer-links > div > div:nth-child(2) ul{
+.firefly-footer .footer-links>div>div:nth-child(2) ul {
   display: flex;
   flex-flow: wrap;
   gap: 8px;
   padding: inherit;
 }
 
-.firefly-footer .footer-links > div > div:nth-child(2) ul a{
+.firefly-footer .footer-links>div>div:nth-child(2) ul a {
   text-decoration: none;
   text-align: center;
+  color: var(--color-black);
 }
 
-.firefly-footer .footer-banner{
+.firefly-footer .footer-banner {
   display: none;
 }
 
+.firefly-footer p.dark-mode {
+  display: none;
+}
+
+.firefly-footer p.light-mode {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .firefly-footer p.dark-mode {
+    display: block;
+  }
+
+  .firefly-footer p.light-mode {
+    display: none;
+  }
+
+  .firefly-footer .footer-links>div>div:nth-child(2) ul a {
+    color: var(--color-white);
+  }
+}
+
 @media (width >= 600px) {
-  .firefly-footer > div:first-of-type p{
+  .firefly-footer>div:first-of-type p {
     text-align: center;
   }
 
-  .firefly-footer .footer-links > div{
+  .firefly-footer .footer-links>div {
     display: flex;
     flex-flow: row;
     align-items: center;
@@ -66,15 +89,15 @@
     justify-content: space-between;
   }
 
-  .firefly-footer .footer-links > div > div:nth-child(2) ul{
+  .firefly-footer .footer-links>div>div:nth-child(2) ul {
     gap: 16px;
   }
 
-  .firefly-footer .footer-links > div > div:last-of-type {
+  .firefly-footer .footer-links>div>div:last-of-type {
     margin-left: auto;
   }
 
-  .firefly-footer .footer-banner{
+  .firefly-footer .footer-banner {
     pointer-events: all;
     position: fixed;
     bottom: 0;
@@ -87,22 +110,22 @@
     display: block;
     height: 50px;
   }
-  
-  .firefly-footer .footer-banner .footer-banner-cta{
-      width: 100%;
-      max-height: 100%;
-      display: flex;
-      flex-flow: row wrap;
-      gap: 0 5px;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 1;
-      position: relative;
-      margin-top: 16px;
+
+  .firefly-footer .footer-banner .footer-banner-cta {
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+    margin-top: 16px;
   }
 
-  .firefly-footer .footer-banner .footer-banner-close{
+  .firefly-footer .footer-banner .footer-banner-close {
     width: 24px;
     height: 24px;
     background: url('../../img/firefly/close.svg') left no-repeat;
@@ -112,22 +135,21 @@
     right: 10px;
     cursor: pointer;
     z-index: 1;
-}
+  }
 
-.firefly-footer .footer-banner .footer-banner-cta a:any-link{
+  .firefly-footer .footer-banner .footer-banner-cta a:any-link {
     font-size: 14px;
-    color: rgba(255,255,255);
+    color: rgba(255, 255, 255);
     font-weight: bold;
     cursor: pointer;
     text-decoration: underline;
   }
-  
-  .firefly-footer .footer-banner .footer-banner-image{
+
+  .firefly-footer .footer-banner .footer-banner-image {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     z-index: 0;
   }
-  
 }
