@@ -47,13 +47,21 @@
   fill: #f00;
 }
 
+.cards-carousel.hide-prev .carousel-nav-prev {
+  display: none;
+}
+
 .cards-carousel .carousel-nav-next {
   right: 0;
   background: url('../../icons/arrow-right.svg') left no-repeat;
   background-color: rgba(255, 255, 255, 1);
 }
 
-.cards-carousel::after {
+.cards-carousel.hide-next .carousel-nav-next {
+  display: none;
+}
+
+.cards-carousel:not(.hide-next)::after {
   content: "";
   position: absolute;
   top: 0;
@@ -63,8 +71,7 @@
   background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 1));
 }
 
-/* achieve similar effect on the left side of the carousel */
-.cards-carousel::before {
+.cards-carousel:not(.hide-prev)::before {
   content: "";
   position: absolute;
   top: 0;
@@ -87,7 +94,6 @@
   background-color: var(--background-color);
   transition: all 0.5s;
   flex-direction: column;
-  min-width: 305px;
   margin-inline-start: 4px;
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.12), 0px 3px 8px 0px rgba(0, 0, 0, 0.04), 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -95,7 +101,7 @@
   margin-top: 5px;
   cursor: pointer;
   max-width: 460px;
-  width: 350px;
+  width: 170px;
   height: auto;
   flex-shrink: 0;
   position: relative;
@@ -140,4 +146,11 @@
     background-color: var(--spectrum-gray-100);
     border-color: var(--spectrum-gray-200);
   }
+}
+
+@media screen and (min-width: 768px) {
+  .cards-carousel .cards-carousel-slide {
+    width: 350px;
+  }
+  
 }

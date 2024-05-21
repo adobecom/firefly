@@ -5,11 +5,12 @@ const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
 
 let curSlide = 0;
 let maxSlide = 0;
-let slideShow = 4;
+let slideShow;
 
 function scrollToSlide(carouselWrapper, slideIndex) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
-  const leftPos = (carouselSlider.clientWidth / slideShow) * slideIndex;
+  const widthtoScroll = (carouselSlider.clientWidth > 767) ? 350 : 170;
+  const leftPos = widthtoScroll * 2 * slideIndex;
   carouselSlider.scrollTo({ left: leftPos, behavior: 'smooth' });
   const slides = carouselSlider.children;
   for (let i = 0; i < slides.length; i += 1) {
@@ -25,10 +26,21 @@ function buildNav(dir) {
   const nav = document.createElement('div');
   nav.classList.add('carousel-nav', `carousel-nav-${dir}`);
   nav.addEventListener('click', () => {
-    let nextSlide = curSlide + (dir === 'prev' ? -1 : 1);
-    if (nextSlide < 0) nextSlide = maxSlide;
-    else if (nextSlide > maxSlide) nextSlide = 0;
-    scrollToSlide(nav.closest('.cards-carousel'), nextSlide);
+    const carousel = nav.closest('.cards-carousel');
+    // eslint-disable-next-line max-len
+    const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
+    const nextSlide = curSlide + (dir === 'prev' ? -1 : 1);
+    if (nextSlide <= 0) {
+      carousel.classList.add('hide-prev');
+      carousel.classList.remove('hide-next');
+    } else if ((nextSlide + slidesDisplayed) >= maxSlide) {
+      carousel.classList.add('hide-next');
+      carousel.classList.remove('hide-prev');
+    } else {
+      carousel.classList.remove('hide-prev');
+      carousel.classList.remove('hide-next');
+    }
+    scrollToSlide(carousel, nextSlide);
   });
   return nav;
 }
@@ -53,77 +65,14 @@ function buildSlide(slide, index) {
   return slide;
 }
 
-function makeCarouselDraggable(carousel) {
-  let isDown = false; let startX = 0; let startScroll = 0; let
-    prevScroll = 0;
-
-  const getDragXPosition = (e) => (e.type.startsWith('touch') ? e.touches[0].pageX : e.pageX);
-
-  const handleDragStart = (e) => {
-    isDown = true;
-    startX = getDragXPosition(e);
-    startScroll = carousel.scrollLeft;
-    prevScroll = startScroll;
-  };
-
-  const handleDragEnd = () => {
-    isDown = false;
-  };
-
-  const handleDragMove = (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = getDragXPosition(e);
-    const walk = x - startX;
-    carousel.scrollLeft = prevScroll - walk;
-  };
-
-  carousel.addEventListener('mousedown', handleDragStart);
-  carousel.addEventListener('touchstart', handleDragStart, { passive: true });
-  carousel.addEventListener('mouseleave', handleDragEnd);
-  carousel.addEventListener('mouseup', handleDragEnd);
-  carousel.addEventListener('touchend', handleDragEnd);
-  carousel.addEventListener('mousemove', handleDragMove);
-  carousel.addEventListener('touchmove', handleDragMove, { passive: true });
-}
-
-function calculateSlideShow(defaultVariant) {
-  const totalWidth = window.innerWidth;
-  if (totalWidth >= 992) slideShow = defaultVariant ? 1 : 3;
-  else if (totalWidth >= 767) slideShow = 2;
-  else slideShow = 1;
-}
-
-function responsiveHandler(slideLength, defaultVariant) {
-  calculateSlideShow(defaultVariant);
-  const mediaQueries = [
-    { min: 992, slides: defaultVariant ? 1 : 3 },
-    { min: 767, max: 992, slides: defaultVariant ? 1 : 2 },
-    { min: 640, max: 767, slides: defaultVariant ? 2 : 1 },
-    { max: 640, slides: 1 },
-  ];
-
-  mediaQueries.forEach((query) => {
-    const mql = window.matchMedia(`(min-width: ${query.min}px)${query.max ? ` and (max-width: ${query.max}px)` : ''}`);
-    const handleChange = () => {
-      if (mql.matches) {
-        slideShow = query.slides;
-      }
-    };
-    mql.addEventListener('change', handleChange);
-    handleChange();
-  });
-}
-
 export default function decorate(block) {
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
-  makeCarouselDraggable(carousel);
   const slides = [...block.children];
   maxSlide = slides.length - 1;
   slides.forEach((slide, index) => carousel.appendChild(buildSlide(slide, index)));
   block.append(carousel);
+  block.classList.add('hide-prev');
   block.prepend(buildNav('prev'));
   block.append(buildNav('next'));
-  responsiveHandler(slides.length, block.classList.contains('feature'));
 }
