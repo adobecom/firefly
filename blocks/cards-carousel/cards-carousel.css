@@ -26,8 +26,8 @@
   position: absolute;
   top: 50%;
   z-index: 4;
-  height: 52px;
-  width: 52px;
+  height: 36px;
+  width: 36px;
   color: rgb(109 109 109);
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 16.0784%);
   justify-content: center;
@@ -44,6 +44,7 @@
   content: '';
   background: url('../../icons/arrow-left.svg') left no-repeat;
   background-color: rgba(255, 255, 255, 1);
+  fill: #f00;
 }
 
 .cards-carousel .carousel-nav-next {
