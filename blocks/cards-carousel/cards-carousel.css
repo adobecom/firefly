@@ -138,7 +138,6 @@
 }
 
 .cards-carousel .cards-card-body h3 {
-  color: #002f6d;
   font-size: var(--body-font-size-xl);
   letter-spacing: var(--letter-spacing-3);
 }
