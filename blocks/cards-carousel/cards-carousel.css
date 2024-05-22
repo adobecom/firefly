@@ -80,11 +80,6 @@
   background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 1));
 }
 
-/* .cards-carousel .cards-carousel-slide.card-with-link:hover {
-  cursor: pointer;
-  transition: all 0.3s linear 0s;
-} */
-
 .cards-carousel .cards-carousel-slide {
   display: flex;
   border: 1px solid var(--highlight-background-color);
@@ -152,7 +147,7 @@
 
 .cards-carousel .card-link p{
   display: flex;
-  background-color: rgb(34, 34, 34);
+  background-color: var(--spectrum-global-color-gray-800);
   border-radius: 18px;
   border: 2px solid rgba(0, 0, 0, 0);
   padding: 0 14px;
@@ -164,7 +159,7 @@
 }
 
 .cards-carousel .card-link p:hover{
-  background-color: rgb(0, 0, 0);
+  background-color: black;
 }
 
 .cards-carousel .card-link p a{
@@ -180,19 +175,23 @@
 @media (prefers-color-scheme: dark) {
   .cards-carousel .cards-carousel-slide {
     background-color: var(--spectrum-gray-100);
-    border-color: var(--spectrum-gray-200);
+    border-color: var(--spectrum-gray-200)
+  }
+
+  .cards-carousel .cards-carousel-slide:hover{
+    border-color: rgb(112, 112, 112);
   }
 
   .cards-carousel:not(.hide-next)::after {
-    background-image: linear-gradient(to right, transparent, rgb(29 29 29));
+    background-image: linear-gradient(to right, transparent, var(--spectrum-global-color-gray-50));
   }
 
   .cards-carousel:not(.hide-prev)::before {
-    background-image: linear-gradient(to left, transparent, rgb(29 29 29));
+    background-image: linear-gradient(to left, transparent, var(--spectrum-global-color-gray-50));
   }
 
   .cards-carousel .carousel-nav-prev, .cards-carousel .carousel-nav-next {
-    background-color:rgb(63, 63, 63);
+    background-color:var(--spectrum-gray-200);
   }
 
   .cards-carousel .cards-carousel-slide h3 strong{
