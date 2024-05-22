@@ -34,7 +34,10 @@
   transform: translateY(-50%);
   border-radius: 50%;
   padding: 5px;
+  transition: border-color 130ms ease-in-out;
+  box-sizing: content-box;
   border: 2px solid rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.12), 0px 3px 8px 0px rgba(0, 0, 0, 0.04), 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
 }
 
 .cards-carousel .carousel-nav-prev {
@@ -42,7 +45,6 @@
   content: '';
   background: url('../../icons/arrow-left.svg') left no-repeat;
   background-color: rgba(255, 255, 255, 1);
-  fill: #f00;
 }
 
 .cards-carousel.hide-prev .carousel-nav-prev {
@@ -51,6 +53,7 @@
 
 .cards-carousel .carousel-nav-next {
   right: 0;
+  content: '';
   background: url('../../icons/arrow-right.svg') left no-repeat;
   background-color: rgba(255, 255, 255, 1);
 }
