@@ -82,10 +82,10 @@
   background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 1));
 }
 
-.cards-carousel .cards-carousel-slide.card-with-link:hover {
+/* .cards-carousel .cards-carousel-slide.card-with-link:hover {
   cursor: pointer;
   transition: all 0.3s linear 0s;
-}
+} */
 
 .cards-carousel .cards-carousel-slide {
   display: flex;
@@ -108,16 +108,31 @@
   outline: none;
 }
 
+.cards-carousel .cards-carousel-slide:hover{
+  border: 1px solid rgb(177, 177, 177);
+}
+
 .cards-carousel .cards-carousel-slide .hide {
   display: none;
 }
 
-.cards-carousel .cards-carousel-slide img {
+.cards-carousel .cards-carousel-slide img, .cards-carousel .cards-carousel-slide video {
   height: 224px;
   width: 100%;
   object-fit: cover;
   aspect-ratio: 361/242;
   border-radius: 16px 16px 0 0;
+}
+
+.cards-carousel .cards-carousel-slide h3 strong{
+  color: black;
+}
+
+.cards-carousel .cards-carousel-slide p{
+  color: black;
+  font-size: 12px;
+  min-height: 35px;
+  line-height: 1.3;
 }
 
 .cards-carousel .cards-card-body {
@@ -130,20 +145,40 @@
   letter-spacing: var(--letter-spacing-3);
 }
 
-.cards-carousel .cards-card-body .button {
+.cards-carousel .card-link {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 117px;
-  height: 40px;
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 1.5;
-  font-family: var(--ff-myradpro-semibold);
-  letter-spacing: 0.64px;
-  transition: all 0.3s linear 0s;
+  margin: auto;
+  padding-bottom: 12px;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
+.cards-carousel .card-link p{
+  display: flex;
+  background-color: rgb(34, 34, 34);
+  border-radius: 18px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  padding: 0 14px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  bottom: 0;
+}
+
+.cards-carousel .card-link p:hover{
+  background-color: rgb(0, 0, 0);
+}
+
+.cards-carousel .card-link p a{
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: wrap;
+}
 
 @media (prefers-color-scheme: dark) {
   .cards-carousel .cards-carousel-slide {
@@ -156,5 +191,14 @@
   .cards-carousel .cards-carousel-slide {
     width: 350px;
   }
-  
+
+  .cards-carousel .card-link {
+   flex-direction: row;
+   margin: -8px 16px 0;
+  }
+
+  .cards-carousel .card-link p{
+    border-radius: 16px;
+  }
+
 }

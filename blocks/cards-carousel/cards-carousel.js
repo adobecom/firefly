@@ -88,7 +88,12 @@ function buildSlide(slide, index) {
   slide.setAttribute('role', 'tabpanel');
   slide.setAttribute('aria-describedby', `${SLIDE_CONTROL_ID_PREFIX}${index}`);
   slide.setAttribute('tabindex', index === 0 ? '-1' : '-1');
-  const href = slide.querySelector('a')?.href;
+  const link = slide.querySelector('a');
+  const linkWrapper = document.createElement('div');
+  linkWrapper.classList.add('card-link');
+  linkWrapper.append(link.parentElement);
+  slide.append(linkWrapper);
+  const href = link?.href;
   if (href) {
     slide.classList.add('card-with-link');
     slide.addEventListener('click', () => {

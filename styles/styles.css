@@ -179,6 +179,10 @@
     font-size: 12px;
   }
 
+  *, *::before, *::after {
+    box-sizing: border-box;
+}
+
   @media (width >= 600px) {
     main > div > div {
       max-width: 1500px;
