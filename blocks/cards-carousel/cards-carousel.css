@@ -28,8 +28,6 @@
   z-index: 4;
   height: 36px;
   width: 36px;
-  color: rgb(109 109 109);
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 16.0784%);
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -117,7 +115,7 @@
 }
 
 .cards-carousel .cards-carousel-slide img, .cards-carousel .cards-carousel-slide video {
-  height: 224px;
+  height: 132px;
   width: 100%;
   object-fit: cover;
   aspect-ratio: 361/242;
@@ -185,6 +183,34 @@
     background-color: var(--spectrum-gray-100);
     border-color: var(--spectrum-gray-200);
   }
+
+  .cards-carousel:not(.hide-next)::after {
+    background-image: linear-gradient(to right, transparent, rgb(29 29 29));
+  }
+
+  .cards-carousel:not(.hide-prev)::before {
+    background-image: linear-gradient(to left, transparent, rgb(29 29 29));
+  }
+
+  .cards-carousel .carousel-nav-prev, .cards-carousel .carousel-nav-next {
+    background-color:rgb(63, 63, 63);
+  }
+
+  .cards-carousel .cards-carousel-slide h3 strong{
+    color: white;
+  }
+
+  .cards-carousel .cards-carousel-slide p{
+    color: white;
+  }
+
+  .cards-carousel .card-link p{
+    background-color: rgb(112, 112, 112);
+  }
+
+  .cards-carousel .card-link:hover p{
+    background-color: rgb(84, 84, 84);
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -200,5 +226,9 @@
   .cards-carousel .card-link p{
     border-radius: 16px;
   }
-
+  
+  .cards-carousel .cards-carousel-slide img, .cards-carousel .cards-carousel-slide video {
+    height: 224px;
+  }
+  
 }
