@@ -108,6 +108,10 @@
   outline: none;
 }
 
+.cards-carousel .cards-carousel-slide .hide {
+  display: none;
+}
+
 .cards-carousel .cards-carousel-slide img {
   height: 224px;
   width: 100%;

@@ -48,6 +48,40 @@ function buildSlide(slide, index) {
   [...slide.children].forEach((div) => {
     div.className = div.children.length === 1 && div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
   });
+  const firstDiv = slide.querySelector('div');
+  const video = firstDiv.querySelector('a');
+  if (video) {
+    const image = firstDiv.querySelector('img');
+    const videoLink = video.href;
+    const videoEl = document.createElement('video');
+    videoEl.src = videoLink;
+    videoEl.controls = false; // Hide video controls
+    videoEl.autoplay = false;
+    videoEl.muted = true;
+    videoEl.loop = true;
+    videoEl.playsinline = true;
+    videoEl.className = 'cards-card-video hide';
+    firstDiv.replaceWith(videoEl);
+    slide.prepend(image);
+
+    slide.addEventListener('mouseenter', () => {
+      videoEl.classList.remove('hide');
+      videoEl.play();
+      image.classList.add('hide');
+    });
+
+    slide.addEventListener('mouseleave', () => {
+      videoEl.pause();
+      videoEl.classList.add('hide');
+      image.classList.remove('hide');
+    });
+
+    slide.addEventListener('focusout', () => {
+      videoEl.pause();
+      videoEl.classList.add('hide');
+      image.classList.remove('hide');
+    });
+  }
   slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
   slide.setAttribute('data-slide-index', index);
   slide.classList.add('cards-carousel-slide');
