@@ -1,5 +1,7 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
+import { decorateIcons } from '../../scripts/utils.js';
+
 const SLIDE_ID_PREFIX = 'cards-carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
 
@@ -46,7 +48,7 @@ function buildNav(dir) {
 
 function buildSlide(slide, index) {
   [...slide.children].forEach((div) => {
-    div.className = div.children.length === 1 && div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
+    div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
   });
   const firstDiv = slide.querySelector('div');
   const video = firstDiv.querySelector('a');
@@ -93,6 +95,10 @@ function buildSlide(slide, index) {
   linkWrapper.classList.add('card-link');
   linkWrapper.append(link.parentElement);
   slide.append(linkWrapper);
+  const icon = slide.querySelector('.icon');
+  if (icon) {
+    icon.parentElement.replaceWith(icon);
+  }
   const href = link?.href;
   if (href) {
     slide.classList.add('card-with-link');
@@ -104,6 +110,7 @@ function buildSlide(slide, index) {
 }
 
 export default function decorate(block) {
+  decorateIcons(block);
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
   const slides = [...block.children];
