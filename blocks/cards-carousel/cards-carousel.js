@@ -149,17 +149,21 @@ function loadCarousel(block, featuresArray = []) {
 
 export default async function decorate(block) {
   decorateIcons(block);
-  loadIms()
-    .then(async () => {
-      if (window.adobeIMS.isSignedInUser()) {
-        const featuresArray = await getFeaturesArray();
-        loadCarousel(block, featuresArray);
-      } else {
+  if (window.featuresArray) {
+    loadCarousel(block, window.featuresArray);
+  } else {
+    loadIms()
+      .then(async () => {
+        if (window.adobeIMS.isSignedInUser()) {
+          await getFeaturesArray();
+          loadCarousel(block, window.featuresArray);
+        } else {
+          loadCarousel(block);
+        }
+      })
+      .catch((e) => {
+        console.log('Unable to load IMS:', e);
         loadCarousel(block);
-      }
-    })
-    .catch((e) => {
-      console.log('Unable to load IMS:', e);
-      loadCarousel(block);
-    });
+      });
+  }
 }

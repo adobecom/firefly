@@ -142,5 +142,5 @@ export async function getFeaturesArray() {
     const features = await resp.json();
     featuresArray = features.releases[0].features ? features.releases[0].features : [];
   }
-  return featuresArray;
+  window.featuresArray = featuresArray;
 }
