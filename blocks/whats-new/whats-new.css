@@ -1,0 +1,45 @@
+
+.whats-new {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.whats-new .nav {
+  display: none;
+}
+
+.whats-new .nav ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  height: 40px;
+  margin: 8px 0;
+}
+
+.whats-new .nav ul li {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .whats-new {
+    display: grid;
+    grid-template-areas: "nav content";
+    grid-template-columns: 1fr 2fr;
+  }
+  
+  .whats-new .nav {
+    display: flex;
+    flex-direction: column;
+    
+    /* height: calc(100vh - 40px); */
+  }
+
+  /* .whats-new .content {
+    height: min-content;
+    max-height: 623px;
+    overflow-y: auto;
+  } */
+}
