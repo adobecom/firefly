@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+const FEATURES_API = 'https://p13n.adobe.io/fg/api/v3/feature';
+
 /**
  * The decision engine for where to get Milo's libs from.
  */
@@ -118,4 +120,27 @@ export function decorateIcons(element, prefix = '') {
   icons.forEach((span) => {
     decorateIcon(span, prefix);
   });
+}
+
+/**
+ * Retrieves an array of features from the server.
+ * @returns {Promise<Array>} A promise that resolves to an array of features.
+ */
+export async function getFeaturesArray() {
+  let featuresArray = [];
+  const accessToken = window.adobeIMS.getAccessToken();
+  const url = `${FEATURES_API}?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
+  const headers = new Headers({
+    'X-Api-Key': 'clio-playground-web',
+    Authorization: `Bearer ${accessToken.token}`,
+  });
+  const resp = await fetch(url, {
+    method: 'GET',
+    headers,
+  });
+  if (resp.ok) {
+    const features = await resp.json();
+    featuresArray = features.releases[0].features ? features.releases[0].features : [];
+  }
+  window.featuresArray = featuresArray;
 }
