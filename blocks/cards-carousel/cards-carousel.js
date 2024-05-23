@@ -1,13 +1,12 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
-import { decorateIcons, getLibs } from '../../scripts/utils.js';
+import { decorateIcons, getLibs, getFeaturesArray } from '../../scripts/utils.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 const SLIDE_ID_PREFIX = 'cards-carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
-const FEATURES_API = 'https://p13n.adobe.io/fg/api/v3/feature';
 
 let curSlide = 0;
 let maxSlide = 0;
@@ -27,13 +26,15 @@ function scrollToSlide(carouselWrapper, slideIndex) {
   curSlide = slideIndex;
 }
 
-function buildNav(dir) {
+function buildNav(dir, carousel) {
+  // eslint-disable-next-line max-len
+  const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
+  if (slidesDisplayed <= maxSlide) {
+    return null;
+  }
   const nav = document.createElement('div');
   nav.classList.add('carousel-nav', `carousel-nav-${dir}`);
   nav.addEventListener('click', () => {
-    const carousel = nav.closest('.cards-carousel');
-    // eslint-disable-next-line max-len
-    const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
     const nextSlide = curSlide + (dir === 'prev' ? -1 : 1);
     if (nextSlide <= 0) {
       carousel.classList.add('hide-prev');
@@ -121,25 +122,6 @@ function buildSlide(slide, index, featuresArray) {
   return slide;
 }
 
-async function getFeaturesArray() {
-  let featuresArray = [];
-  const accessToken = window.adobeIMS.getAccessToken();
-  const url = `${FEATURES_API}?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
-  const headers = new Headers({
-    'X-Api-Key': 'clio-playground-web',
-    Authorization: `Bearer ${accessToken.token}`,
-  });
-  const resp = await fetch(url, {
-    method: 'GET',
-    headers,
-  });
-  if (resp.ok) {
-    const features = await resp.json();
-    featuresArray = features.releases[0].features ? features.releases[0].features : [];
-  }
-  return featuresArray;
-}
-
 function loadCarousel(block, featuresArray = []) {
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
@@ -155,8 +137,12 @@ function loadCarousel(block, featuresArray = []) {
   });
   block.append(carousel);
   block.classList.add('hide-prev');
-  block.prepend(buildNav('prev'));
-  block.append(buildNav('next'));
+  const prevButton = buildNav('prev', block);
+  const nextButton = buildNav('next', block);
+  if (prevButton && nextButton) {
+    block.prepend(buildNav('prev', block));
+    block.append(buildNav('next', block));
+  }
 }
 
 export default async function decorate(block) {
