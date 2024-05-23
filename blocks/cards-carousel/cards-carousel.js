@@ -30,7 +30,7 @@ function scrollToSlide(carouselWrapper, slideIndex) {
 function buildNav(dir, carousel) {
   // eslint-disable-next-line max-len
   const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
-  if (filteredSlides <= maxSlide) {
+  if (filteredSlides <= slidesDisplayed) {
     return null;
   }
   const nav = document.createElement('div');
