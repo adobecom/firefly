@@ -26,4 +26,19 @@ export default function decorate(block) {
   });
   nav.append(ul);
   block.prepend(nav);
+  // Replace the video links with videos
+  [...content.children].forEach((row) => {
+    const firstLink = row.querySelector('a');
+    if (firstLink.href && firstLink.href.endsWith('.mp4')) {
+      const video = createTag('video', {
+        src: firstLink.href,
+        controls: false,
+        autoplay: false,
+        muted: true,
+        loop: true,
+        playsinline: true,
+      });
+      firstLink.replaceWith(video);
+    }
+  });
 }
