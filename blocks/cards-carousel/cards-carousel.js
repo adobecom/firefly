@@ -1,12 +1,16 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
-import { decorateIcons } from '../../scripts/utils.js';
+
+import { decorateIcons, getLibs, getFeaturesArray } from '../../scripts/utils.js';
+
+const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 const SLIDE_ID_PREFIX = 'cards-carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
 
 let curSlide = 0;
 let maxSlide = 0;
+let filteredSlides = 0;
 
 function scrollToSlide(carouselWrapper, slideIndex) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
@@ -23,13 +27,15 @@ function scrollToSlide(carouselWrapper, slideIndex) {
   curSlide = slideIndex;
 }
 
-function buildNav(dir) {
+function buildNav(dir, carousel) {
+  // eslint-disable-next-line max-len
+  const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
+  if (filteredSlides <= slidesDisplayed) {
+    return null;
+  }
   const nav = document.createElement('div');
   nav.classList.add('carousel-nav', `carousel-nav-${dir}`);
   nav.addEventListener('click', () => {
-    const carousel = nav.closest('.cards-carousel');
-    // eslint-disable-next-line max-len
-    const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
     const nextSlide = curSlide + (dir === 'prev' ? -1 : 1);
     if (nextSlide <= 0) {
       carousel.classList.add('hide-prev');
@@ -46,11 +52,20 @@ function buildNav(dir) {
   return nav;
 }
 
-function buildSlide(slide, index) {
+function buildSlide(slide, index, featuresArray) {
   [...slide.children].forEach((div) => {
     div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
   });
   const firstDiv = slide.querySelector('div');
+  const p = firstDiv.querySelector('p:last-child');
+  if (p && p.innerText.toLowerCase().includes('featureflag')) {
+    const featureFlag = p.innerText.split(':')[1].trim();
+    firstDiv.removeChild(p);
+    if (!featuresArray.includes(featureFlag)) {
+      return null;
+    }
+  }
+  filteredSlides += 1;
   const video = firstDiv.querySelector('a');
   if (video) {
     const image = firstDiv.querySelector('img');
@@ -109,15 +124,46 @@ function buildSlide(slide, index) {
   return slide;
 }
 
-export default function decorate(block) {
-  decorateIcons(block);
+function loadCarousel(block, featuresArray = []) {
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
   const slides = [...block.children];
   maxSlide = slides.length - 1;
-  slides.forEach((slide, index) => carousel.appendChild(buildSlide(slide, index)));
+  slides.forEach((slide, index) => {
+    const builtSlide = buildSlide(slide, index, featuresArray);
+    if (builtSlide) {
+      carousel.appendChild(builtSlide);
+    } else {
+      slide.remove();
+    }
+  });
   block.append(carousel);
   block.classList.add('hide-prev');
-  block.prepend(buildNav('prev'));
-  block.append(buildNav('next'));
+  const prevButton = buildNav('prev', block);
+  const nextButton = buildNav('next', block);
+  if (prevButton && nextButton) {
+    block.prepend(buildNav('prev', block));
+    block.append(buildNav('next', block));
+  }
+}
+
+export default async function decorate(block) {
+  decorateIcons(block);
+  if (window.featuresArray) {
+    loadCarousel(block, window.featuresArray);
+  } else {
+    loadIms()
+      .then(async () => {
+        if (window.adobeIMS.isSignedInUser()) {
+          await getFeaturesArray();
+          loadCarousel(block, window.featuresArray);
+        } else {
+          loadCarousel(block);
+        }
+      })
+      .catch((e) => {
+        console.log('Unable to load IMS:', e);
+        loadCarousel(block);
+      });
+  }
 }
