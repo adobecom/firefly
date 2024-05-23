@@ -1,9 +1,13 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
-import { decorateIcons } from '../../scripts/utils.js';
+
+import { decorateIcons, getLibs } from '../../scripts/utils.js';
+
+const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 const SLIDE_ID_PREFIX = 'cards-carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
+const FEATURES_API = 'https://p13n.adobe.io/fg/api/v3/feature';
 
 let curSlide = 0;
 let maxSlide = 0;
@@ -46,11 +50,19 @@ function buildNav(dir) {
   return nav;
 }
 
-function buildSlide(slide, index) {
+function buildSlide(slide, index, featuresArray) {
   [...slide.children].forEach((div) => {
     div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
   });
   const firstDiv = slide.querySelector('div');
+  const p = firstDiv.querySelector('p:last-child');
+  if (p && p.innerText.toLowerCase().includes('featureflag')) {
+    const featureFlag = p.innerText.split(':')[1].trim();
+    firstDiv.removeChild(p);
+    if (!featuresArray.includes(featureFlag)) {
+      return null;
+    }
+  }
   const video = firstDiv.querySelector('a');
   if (video) {
     const image = firstDiv.querySelector('img');
@@ -109,15 +121,57 @@ function buildSlide(slide, index) {
   return slide;
 }
 
-export default function decorate(block) {
-  decorateIcons(block);
+async function getFeaturesArray() {
+  let featuresArray = [];
+  const accessToken = window.adobeIMS.getAccessToken();
+  const url = `${FEATURES_API}?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
+  const headers = new Headers({
+    'X-Api-Key': 'clio-playground-web',
+    Authorization: `Bearer ${accessToken.token}`,
+  });
+  const resp = await fetch(url, {
+    method: 'GET',
+    headers,
+  });
+  if (resp.ok) {
+    const features = await resp.json();
+    featuresArray = features.releases[0].features ? features.releases[0].features : [];
+  }
+  return featuresArray;
+}
+
+function loadCarousel(block, featuresArray = []) {
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
   const slides = [...block.children];
   maxSlide = slides.length - 1;
-  slides.forEach((slide, index) => carousel.appendChild(buildSlide(slide, index)));
+  slides.forEach((slide, index) => {
+    const builtSlide = buildSlide(slide, index, featuresArray);
+    if (builtSlide) {
+      carousel.appendChild(builtSlide);
+    } else {
+      slide.remove();
+    }
+  });
   block.append(carousel);
   block.classList.add('hide-prev');
   block.prepend(buildNav('prev'));
   block.append(buildNav('next'));
+}
+
+export default async function decorate(block) {
+  decorateIcons(block);
+  loadIms()
+    .then(async () => {
+      if (window.adobeIMS.isSignedInUser()) {
+        const featuresArray = await getFeaturesArray();
+        loadCarousel(block, featuresArray);
+      } else {
+        loadCarousel(block);
+      }
+    })
+    .catch((e) => {
+      console.log('Unable to load IMS:', e);
+      loadCarousel(block);
+    });
 }
