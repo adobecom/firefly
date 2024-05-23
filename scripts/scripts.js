@@ -11,6 +11,7 @@
  */
 
 import { setLibs, decorateArea } from './utils.js';
+import { openModal } from '../blocks/modal/modal.js';
 
 // Add project-wide style path here.
 const STYLES = '/styles/styles.css';
@@ -56,12 +57,25 @@ const miloLibs = setLibs(LIBS);
   });
 }());
 
+async function headerModal() {
+  const links = document.querySelectorAll('a[href*="/fragments/"]');
+  if (!links || (links.length === 0)) return;
+  links.forEach((link) => {
+    // eslint-disable-next-line no-unused-vars
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+      await openModal(link.href);
+    });
+  });
+}
+
 async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
   await loadArea();
+  await headerModal();
   setTimeout(() => { loadMartech(); }, 3000);
 }
 
