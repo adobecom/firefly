@@ -10,6 +10,7 @@ const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
 
 let curSlide = 0;
 let maxSlide = 0;
+let filteredSlides = 0;
 
 function scrollToSlide(carouselWrapper, slideIndex) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
@@ -29,7 +30,7 @@ function scrollToSlide(carouselWrapper, slideIndex) {
 function buildNav(dir, carousel) {
   // eslint-disable-next-line max-len
   const slidesDisplayed = Math.floor(carousel.clientWidth > 767 ? carousel.clientWidth / 350 : carousel.clientWidth / 170);
-  if (slidesDisplayed <= maxSlide) {
+  if (filteredSlides <= maxSlide) {
     return null;
   }
   const nav = document.createElement('div');
@@ -64,6 +65,7 @@ function buildSlide(slide, index, featuresArray) {
       return null;
     }
   }
+  filteredSlides += 1;
   const video = firstDiv.querySelector('a');
   if (video) {
     const image = firstDiv.querySelector('img');
