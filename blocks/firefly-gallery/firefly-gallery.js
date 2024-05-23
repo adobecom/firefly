@@ -129,7 +129,6 @@ async function addCards(cardContainer, images) {
           const url = FAVOURITE_URL.replace('$', imageId);
           const headers = new Headers({
             'X-Api-Key': 'alfred-community-hubs',
-            'community_id': 'ff_community',
             'Authorization': `Bearer ${accessToken.token}`,
             'content-type': 'application/json',
           });
