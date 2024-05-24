@@ -57,10 +57,10 @@ function buildSlide(slide, index, featuresArray) {
     div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
   });
   const firstDiv = slide.querySelector('div');
-  const p = firstDiv.querySelector('p:last-child');
-  if (p && p.innerText.toLowerCase().includes('featureflag')) {
-    const featureFlag = p.innerText.split(':')[1].trim();
-    firstDiv.removeChild(p);
+  const featureFlagEl = firstDiv.querySelector('code');
+  if (featureFlagEl) {
+    const featureFlag = featureFlagEl.innerText.trim();
+    firstDiv.removeChild(featureFlagEl.parentElement);
     if (!featuresArray.includes(featureFlag)) {
       return null;
     }
