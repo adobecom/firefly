@@ -40,6 +40,11 @@
   --spectrum-gray-100: rgb(50, 50, 50);
   --spectrum-gray-200: rgb(63, 63, 63);
 
+  /* Modal display */
+  .block.modal {
+    display: block;
+  }
+  
   /* Navigation CSS Updates */
   .feds-topnav-wrapper {
     justify-content: space-between;
