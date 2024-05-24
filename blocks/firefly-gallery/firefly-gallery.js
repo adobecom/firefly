@@ -145,27 +145,27 @@ async function addCards(cardContainer, images, accessToken = '') {
             favorite.classList.add('hide');
             favoriteSelected.classList.remove('hide');
           }
+        } else {
+          // TODO: Add IMS login
         }
       });
 
       favoriteSelected.addEventListener('click', async (e) => {
         e.preventDefault();
-        if (window.adobeIMS.isSignedInUser()) {
-          const imageId = image.urn.split(':').pop();
-          const url = FAVOURITE_URL.replace('$', imageId);
-          const headers = new Headers({
-            'X-Api-Key': 'alfred-community-hubs',
-            'Authorization': `Bearer ${accessToken}`,
-            'content-type': 'application/json',
-          });
-          const resp = await fetch(url, {
-            method: 'DELETE',
-            headers,
-          });
-          if (resp.ok) {
-            favoriteSelected.classList.add('hide');
-            favorite.classList.remove('hide');
-          }
+        const imageId = image.urn.split(':').pop();
+        const url = FAVOURITE_URL.replace('$', imageId);
+        const headers = new Headers({
+          'X-Api-Key': 'alfred-community-hubs',
+          'Authorization': `Bearer ${accessToken}`,
+          'content-type': 'application/json',
+        });
+        const resp = await fetch(url, {
+          method: 'DELETE',
+          headers,
+        });
+        if (resp.ok) {
+          favoriteSelected.classList.add('hide');
+          favorite.classList.remove('hide');
         }
       });
     }
