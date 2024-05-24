@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
 
-const { createTag, loadIms } = await import(`${getLibs()}/utils/utils.js`);
+const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const GALLERY_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets?sort=updated_desc&include_pending_assets=false&size=';
 const FAVOURITE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/$/likes';
 const COMMUNITY_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
@@ -229,16 +229,9 @@ async function loadImages(block, accessToken = '') {
 }
 
 export default async function decorate(block) {
-  loadIms()
-    .then(async () => {
-      if (window.adobeIMS.isSignedInUser()) {
-        await loadImages(block, window.adobeIMS.getAccessToken());
-      } else {
-        await loadImages(block);
-      }
-    })
-    .catch(async (e) => {
-      console.log('Unable to load IMS:', e);
-      await loadImages(block);
-    });
+  if (window.adobeIMS.isSignedInUser()) {
+    await loadImages(block, window.adobeIMS.getAccessToken());
+  } else {
+    await loadImages(block);
+  }
 }
