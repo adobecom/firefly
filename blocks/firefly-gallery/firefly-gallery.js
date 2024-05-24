@@ -230,7 +230,7 @@ async function loadImages(block, accessToken = '') {
 
 export default async function decorate(block) {
   if (window.adobeIMS.isSignedInUser()) {
-    await loadImages(block, window.adobeIMS.getAccessToken());
+    await loadImages(block, window.adobeIMS.getAccessToken()?.token);
   } else {
     await loadImages(block);
   }
