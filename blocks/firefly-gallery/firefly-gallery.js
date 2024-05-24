@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
 
-const { createTag } = await import(`${getLibs()}/utils/utils.js`);
+const { createTag, loadIms } = await import(`${getLibs()}/utils/utils.js`);
 const GALLERY_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets?sort=updated_desc&include_pending_assets=false&size=';
 const FAVOURITE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/$/likes';
 const COMMUNITY_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
@@ -28,13 +28,16 @@ function resizeAllGridItems(block) {
   }
 }
 
-async function getImages(link, next = '') {
+async function getImages(link, accessToken = '', next = '') {
   let endpoint = link;
   // const requestId = (Math.random() + 1).toString(36).substring(5);
   const headers = new Headers({
     'X-Api-Key': 'alfred-community-hubs',
     'community_id': 'ff_community',
   });
+  if (accessToken) {
+    headers.set('Authorization', `Bearer ${accessToken}`);
+  }
   if (cursor !== null && cursor !== '') endpoint += `&cursor=${encodeURIComponent(next)}`;
   const resp = await fetch(endpoint, {
     headers,
@@ -57,7 +60,7 @@ async function getImages(link, next = '') {
   return [];
 }
 
-async function addCards(cardContainer, images) {
+async function addCards(cardContainer, images, accessToken = '') {
   let heightOfContainer = 0;
   await images.forEach((image) => {
     const rendition = image._links.rendition.href;
@@ -71,6 +74,7 @@ async function addCards(cardContainer, images) {
     const prompt = image.title;
     const imageUrl = rendition.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
     const communityUrl = COMMUNITY_URL + imageUrn;
+    const liked = Boolean(image.liked);
     if (images.indexOf(image) < 5) {
       heightOfContainer += parseInt(height, 10);
     }
@@ -102,11 +106,13 @@ async function addCards(cardContainer, images) {
         class: 'viewLink button',
       });
       viewLink.textContent = 'View';
-      const favorite = createTag('button', { class: 'favorite' });
+      const favorite = createTag('button', { class: `favorite ${liked ? 'hide' : ''}` });
+      const favoriteSelected = createTag('button', { class: `favorite liked ${liked ? '' : 'hide'}` });
       const viewButton = createTag('button', { class: 'view' });
       viewButton.append(viewLink);
       const cardFooter = createTag('div', { class: 'card-footer' });
       cardFooter.append(favorite);
+      cardFooter.append(favoriteSelected);
       cardFooter.append(viewButton);
       cardDetails.append(author);
       cardDetails.append(cardPrompt);
@@ -124,32 +130,51 @@ async function addCards(cardContainer, images) {
       favorite.addEventListener('click', async (e) => {
         e.preventDefault();
         if (window.adobeIMS.isSignedInUser()) {
-          const accessToken = window.adobeIMS.getAccessToken();
           const imageId = image.urn.split(':').pop();
           const url = FAVOURITE_URL.replace('$', imageId);
           const headers = new Headers({
             'X-Api-Key': 'alfred-community-hubs',
-            'Authorization': `Bearer ${accessToken.token}`,
+            'Authorization': `Bearer ${accessToken}`,
             'content-type': 'application/json',
           });
           const resp = await fetch(url, {
             method: 'PUT',
             headers,
-            mode: 'cors',
           });
           if (resp.ok) {
-            favorite.classList.add('liked');
+            favorite.classList.add('hide');
+            favoriteSelected.classList.remove('hide');
+          }
+        }
+      });
+
+      favoriteSelected.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (window.adobeIMS.isSignedInUser()) {
+          const imageId = image.urn.split(':').pop();
+          const url = FAVOURITE_URL.replace('$', imageId);
+          const headers = new Headers({
+            'X-Api-Key': 'alfred-community-hubs',
+            'Authorization': `Bearer ${accessToken}`,
+            'content-type': 'application/json',
+          });
+          const resp = await fetch(url, {
+            method: 'DELETE',
+            headers,
+          });
+          if (resp.ok) {
+            favoriteSelected.classList.add('hide');
+            favorite.classList.remove('hide');
           }
         }
       });
     }
   });
-  // set height of container
   cardContainer.style.height = `${heightOfContainer}px`;
   GETTING_IMAGES = false;
 }
 
-export default async function decorate(block) {
+async function loadImages(block, accessToken = '') {
   const size = FULL_GALLERY_SIZE;
   let IS_INFINITE_SCROLL = false;
   if (block.classList.contains('full')) {
@@ -157,11 +182,11 @@ export default async function decorate(block) {
   }
   const link = block.querySelector('a')?.href || `${GALLERY_URL}${size}`;
   block.innerHTML = '';
-  const images = await getImages(link);
+  const images = await getImages(link, accessToken);
   // shuffle images
   images.sort(() => Math.random() - 0.5);
   const cardContainer = createTag('div', { class: 'card-container' });
-  await addCards(cardContainer, images);
+  await addCards(cardContainer, images, accessToken);
   block.append(cardContainer);
   resizeAllGridItems(block);
   window.addEventListener('resize', resizeAllGridItems(block));
@@ -201,4 +226,19 @@ export default async function decorate(block) {
       observer.observe(intersectionContainer);
     }, 2000);
   }
+}
+
+export default async function decorate(block) {
+  loadIms()
+    .then(async () => {
+      if (window.adobeIMS.isSignedInUser()) {
+        await loadImages(block, window.adobeIMS.getAccessToken());
+      } else {
+        await loadImages(block);
+      }
+    })
+    .catch(async (e) => {
+      console.log('Unable to load IMS:', e);
+      await loadImages(block);
+    });
 }

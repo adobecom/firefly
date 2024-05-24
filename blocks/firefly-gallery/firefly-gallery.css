@@ -154,6 +154,10 @@
     background-color: var(--color-gray-200);
   }
 
+  .card .card-details .card-footer .favorite.hide {
+    display: none;
+  }
+
   .card .card-details .card-footer .favorite::after {
     position: absolute;
     display: inline-block;
@@ -163,7 +167,7 @@
     background: url('/icons/like.svg') center no-repeat;
   }
 
-  .card .card-details .card-footer .favorite.selected::after {
+  .card .card-details .card-footer .favorite.liked::after {
     content: '';
     width: 16px;
     height: 16px;
