@@ -39,6 +39,7 @@
   --spectrum-global-color-gray-50: rgb(29 29 29);
   --spectrum-gray-100: rgb(50, 50, 50);
   --spectrum-gray-200: rgb(63, 63, 63);
+  --spectrum-gray-500: rgb(109, 109, 109);
 
 
   /* Modal display */
@@ -128,6 +129,22 @@
   .feds-navItem .feds-cta:hover{
     background-color:rgba(177, 177, 177);
     color: inherit;
+  }
+
+  .feds-navItem a[daa-ll*="What s New-7"] {
+    font-size: 0;
+  }
+
+  .feds-navItem a[daa-ll*="What s New-7"]::before {
+    content:'';
+    width: 18px;
+    height: 18px;
+    background: url('../../icons/whats-new.svg') left no-repeat;
+    display: inline-block;
+  }
+
+  .feds-navItem a[daa-ll*="What s New-7"]::after {
+    content:unset;
   }
 
 
