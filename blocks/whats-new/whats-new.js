@@ -30,15 +30,17 @@ export default function decorate(block) {
   [...content.children].forEach((row) => {
     const firstLink = row.querySelector('a');
     if (firstLink.href && firstLink.href.endsWith('.mp4')) {
-      const video = createTag('video', {
-        src: firstLink.href,
-        controls: false,
-        autoplay: true,
-        muted: true,
-        loop: true,
-        playsinline: true,
+      const videoEl = document.createElement('video');
+      videoEl.src = firstLink.href;
+      videoEl.controls = false;
+      videoEl.autoplay = true;
+      videoEl.muted = true;
+      videoEl.loop = true;
+      videoEl.playsinline = true;
+      firstLink.replaceWith(videoEl);
+      videoEl.addEventListener('loadedmetadata', () => {
+        videoEl.play();
       });
-      firstLink.replaceWith(video);
     }
   });
 }
