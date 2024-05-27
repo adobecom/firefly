@@ -33,7 +33,7 @@ export default function decorate(block) {
       const video = createTag('video', {
         src: firstLink.href,
         controls: false,
-        autoplay: false,
+        autoplay: true,
         muted: true,
         loop: true,
         playsinline: true,

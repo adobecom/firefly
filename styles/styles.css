@@ -40,6 +40,7 @@
   --spectrum-gray-100: rgb(50, 50, 50);
   --spectrum-gray-200: rgb(63, 63, 63);
 
+
   /* Modal display */
   .block.modal {
     display: block;
@@ -184,9 +185,31 @@
     font-size: 12px;
   }
 
+  p.button-container {
+    align-items: center;
+    display: flex;
+  }
+
+  p.button-container a{
+    justify-content: center;
+    border: 2px solid rgb(2, 101, 220);
+    border-radius: 16px ;
+    background-color: rgb(2, 101, 220);
+    color: white;
+    font-size: 14px;
+    padding: 0 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  p.button-container:hover a{
+    border: 2px solid rgb(0, 84, 182);
+    background-color: rgb(0, 84, 182);
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
-}
+  }
 
   @media (width >= 600px) {
     main > div > div {

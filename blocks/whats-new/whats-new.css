@@ -8,26 +8,61 @@
 
 .whats-new .nav {
   display: none;
+  width: max-content;
+}
+
+.whats-new .nav h3 {
+  font-size: 28px;
+  color: var(--spectrum-global-color-gray-800);
+  margin: 12px 0;
 }
 
 .whats-new .nav ul {
   display: flex;
   flex-direction: column;
   list-style: none;
-  height: 40px;
-  margin: 8px 0;
 }
 
 .whats-new .nav ul li {
+  top: 5px;
+  height: 40px;
+  margin: 8px 2px;
+}
+
+.whats-new .nav ul li a{
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 10px;
+  color: rgb(109, 109, 109);
 }
 
-.whats-new .content video {
+.whats-new .content {
+  margin: 0 12px;
+  padding: 0 3%;
+}
+
+.whats-new .content img, .whats-new .content video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 8px;
+}
+
+.whats-new .content h3{
+  margin: 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--spectrum-global-color-gray-800);
+}
+
+.whats-new .content p{
+  font-size: 16px;
+  font-weight: 400;
+  margin: 12px 0;
+}
+
+.whats-new .content p.button-container{
+  margin: 24px 0 64px;
 }
 
 @media screen and (min-width: 768px) {
@@ -35,6 +70,7 @@
     display: grid;
     grid-template-areas: "nav content";
     grid-template-columns: 1fr 2fr;
+    column-gap: 4%;
   }
   
   .whats-new .nav {
