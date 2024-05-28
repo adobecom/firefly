@@ -37,6 +37,7 @@ function buildNav(dir, carousel) {
   nav.classList.add('carousel-nav', `carousel-nav-${dir}`);
   nav.addEventListener('click', () => {
     const nextSlide = curSlide + (dir === 'prev' ? -1 : 1);
+    console.log(nextSlide + slidesDisplayed);
     if (nextSlide <= 0) {
       carousel.classList.add('hide-prev');
       carousel.classList.remove('hide-next');
@@ -139,12 +140,14 @@ function loadCarousel(block, featuresArray = []) {
   });
   block.append(carousel);
   block.classList.add('hide-prev');
-  const prevButton = buildNav('prev', block);
-  const nextButton = buildNav('next', block);
-  if (prevButton && nextButton) {
-    block.prepend(buildNav('prev', block));
-    block.append(buildNav('next', block));
-  }
+  setTimeout(() => {
+    const prevButton = buildNav('prev', block);
+    const nextButton = buildNav('next', block);
+    if (prevButton && nextButton) {
+      block.prepend(buildNav('prev', block));
+      block.append(buildNav('next', block));
+    }
+  }, 0);
 }
 
 export default async function decorate(block) {
@@ -152,18 +155,12 @@ export default async function decorate(block) {
   if (window.featuresArray) {
     loadCarousel(block, window.featuresArray);
   } else {
-    loadIms()
-      .then(async () => {
-        if (window.adobeIMS.isSignedInUser()) {
-          await getFeaturesArray();
-          loadCarousel(block, window.featuresArray);
-        } else {
-          loadCarousel(block);
-        }
-      })
-      .catch((e) => {
-        console.log('Unable to load IMS:', e);
-        loadCarousel(block);
-      });
+    if (!window.adobeIMS) {
+      await loadIms();
+    }
+    // eslint-disable-next-line max-len
+    const authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+    await getFeaturesArray(authToken);
+    loadCarousel(block, window.featuresArray);
   }
 }

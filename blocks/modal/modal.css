@@ -21,7 +21,7 @@ body.modal-open {
   .modal dialog {
     padding: 30px;
     width: 80vw;
-    max-width: 700px;
+    max-width: 938px;
   }
 
   .modal dialog .modal-content {
@@ -37,15 +37,26 @@ body.modal-open {
   position: absolute;
   top: 0;
   right: 0;
-  width: 20px;
   height: 100%;
-  max-height: 54px;
+  max-height: 35px;
   border-radius: 0 var(--dialog-border-radius) 0 0;
   background-color: unset;
   text-overflow: clip;
   margin: 0;
   border: none;
-  padding-right: 30px;
+  cursor: pointer;
+}
+
+.modal .close-button .icon{
+  display: block;
+  width: 25px;
+  height: 25px;
+  right: 0;
+}
+
+.modal .close-button:hover .icon{
+  background-color: #E6E6E6;
+  border-radius: 4px;
 }
 
 .modal dialog .section {

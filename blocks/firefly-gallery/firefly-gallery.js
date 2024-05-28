@@ -2,6 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
 
+const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
+
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const GALLERY_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets?sort=updated_desc&include_pending_assets=false&size=';
 const FAVOURITE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/$/likes';
@@ -229,6 +231,10 @@ async function loadImages(block, accessToken = '') {
 }
 
 export default async function decorate(block) {
+  if (!window.adobeIMS) {
+    await loadIms();
+  }
+  // eslint-disable-next-line max-len
   if (window.adobeIMS.isSignedInUser()) {
     await loadImages(block, window.adobeIMS.getAccessToken()?.token);
   } else {

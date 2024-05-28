@@ -1,8 +1,8 @@
-import { getLibs } from '../../scripts/utils.js';
+import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
 
-const { createTag } = await import(`${getLibs()}/utils/utils.js`);
+const { createTag, loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
-export default function decorate(block) {
+export default async function decorate(block) {
   // move the block content into a child element first
   const content = createTag('div', { class: 'content' });
   content.innerHTML = block.innerHTML;
@@ -26,19 +26,41 @@ export default function decorate(block) {
   });
   nav.append(ul);
   block.prepend(nav);
+  let featuresArray = [];
+  if (!window.adobeIMS) {
+    await loadIms();
+  }
+  // eslint-disable-next-line max-len
+  const authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+  if (window.featuresArray) {
+    featuresArray = window.featuresArray;
+  } else {
+    await getFeaturesArray(authToken);
+    featuresArray = window.featuresArray;
+  }
   // Replace the video links with videos
   [...content.children].forEach((row) => {
+    const featureFlagEl = row.querySelector('code');
+    if (featureFlagEl) {
+      const featureFlag = featureFlagEl.innerText.trim();
+      featureFlagEl.remove();
+      if (!featuresArray.includes(featureFlag)) {
+        row.remove();
+      }
+    }
     const firstLink = row.querySelector('a');
     if (firstLink.href && firstLink.href.endsWith('.mp4')) {
-      const video = createTag('video', {
-        src: firstLink.href,
-        controls: false,
-        autoplay: false,
-        muted: true,
-        loop: true,
-        playsinline: true,
+      const videoEl = document.createElement('video');
+      videoEl.src = firstLink.href;
+      videoEl.controls = false;
+      videoEl.autoplay = true;
+      videoEl.muted = true;
+      videoEl.loop = true;
+      videoEl.playsinline = true;
+      firstLink.replaceWith(videoEl);
+      videoEl.addEventListener('loadedmetadata', () => {
+        videoEl.play();
       });
-      firstLink.replaceWith(video);
     }
   });
 }
