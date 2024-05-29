@@ -12,6 +12,7 @@
 
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
+import { getMetadata } from './aem.js';
 
 // Add project-wide style path here.
 const STYLES = '/styles/styles.css';
@@ -69,11 +70,32 @@ async function headerModal() {
   });
 }
 
+async function decorateI18n() {
+  const locale = getMetadata('locale') || 'en-US'; // change this to pick locale from cookie set by header
+  const resp = await fetch('/drafts/kunwar/language-store.json');
+  if (resp.ok) {
+    const json = await resp.json();
+    document.querySelectorAll('code').forEach((el) => {
+      const key = el.textContent.trim();
+      if (key.startsWith('$')) {
+        const jsonKey = key.slice(1);
+        const data = json.data.find((entry) => entry.key === jsonKey);
+        if (data && data[locale]) {
+          const replacementText = data[locale];
+          const textNode = document.createTextNode(replacementText);
+          el.parentNode.replaceChild(textNode, el);
+        }
+      }
+    });
+  }
+}
+
 async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
+  await decorateI18n();
   await loadArea();
   await headerModal();
   setTimeout(() => { loadMartech(); }, 3000);
