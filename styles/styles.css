@@ -39,6 +39,8 @@
   --spectrum-global-color-gray-50: rgb(29 29 29);
   --spectrum-gray-100: rgb(50, 50, 50);
   --spectrum-gray-200: rgb(63, 63, 63);
+  --spectrum-gray-500: rgb(109, 109, 109);
+
 
   /* Modal display */
   .block.modal {
@@ -129,6 +131,22 @@
     color: inherit;
   }
 
+  .feds-navItem a[daa-ll*="What s New-7"] {
+    font-size: 0;
+  }
+
+  .feds-navItem a[daa-ll*="What s New-7"]::before {
+    content:'';
+    width: 18px;
+    height: 18px;
+    background: url('../../icons/whats-new.svg') left no-repeat;
+    display: inline-block;
+  }
+
+  .feds-navItem a[daa-ll*="What s New-7"]::after {
+    content:unset;
+  }
+
 
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] {
     font-size: 0;
@@ -184,9 +202,31 @@
     font-size: 12px;
   }
 
+  p.button-container {
+    align-items: center;
+    display: flex;
+  }
+
+  p.button-container a{
+    justify-content: center;
+    border: 2px solid rgb(2, 101, 220);
+    border-radius: 16px ;
+    background-color: rgb(2, 101, 220);
+    color: white;
+    font-size: 14px;
+    padding: 0 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  p.button-container:hover a{
+    border: 2px solid rgb(0, 84, 182);
+    background-color: rgb(0, 84, 182);
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
-}
+  }
 
   @media (width >= 600px) {
     main > div > div {
