@@ -75,6 +75,11 @@
   width: 100%;
   outline: none;
   border: none;
+  font-style: italic;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .superhero .content-container button {
@@ -134,7 +139,7 @@
   margin-right: 10px;
 }
 
-@media (width >= 900px) {
+@media (width >= 769px) {
   .superhero .generate-form {
     width: 85%;
     flex-direction: row;
