@@ -91,12 +91,12 @@ async function headerModal() {
   });
 }
 
-async function decorateI18n() {
+export default async function decorateI18n(block) {
   const locale = getMetadata('locale') || 'en-US'; // change this to pick locale from cookie set by header
   const resp = await fetch('/drafts/kunwar/language-store.json');
   if (resp.ok) {
     const json = await resp.json();
-    document.querySelectorAll('code').forEach((el) => {
+    block.querySelectorAll('code').forEach((el) => {
       const key = el.textContent.trim();
       if (key.startsWith('$')) {
         const jsonKey = key.slice(1);
@@ -116,7 +116,7 @@ async function loadPage() {
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
-  await decorateI18n();
+  await decorateI18n(document.querySelector('main'));
   await loadArea();
   await headerModal();
   setTimeout(() => {
