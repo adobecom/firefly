@@ -91,43 +91,63 @@ async function headerModal() {
   });
 }
 
+// Function to fetch language store data
+const langStoreCache = {
+  cache: null,
+  async fetchLangStoreData(locale, limit) {
+    const resp = await fetch(`/drafts/kunwar/lang-store.json?limit=${limit}&sheet=${locale}`);
+    if (resp.ok) {
+      const json = await resp.json();
+      return json.data;
+    }
+    return [];
+  },
+
+  async getData(locale, limit) {
+    if (!this.cache) {
+      this.cache = await this.fetchLangStoreData(locale, limit);
+    }
+    return this.cache;
+  },
+};
+
+// Process text using language store data
+const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
+  const jsonKey = match.slice(1);
+  const data = langStoreData.find((entry) => entry.key === jsonKey);
+  if (data && data[locale]) {
+    return data[locale];
+  }
+  return match;
+});
+
 export default async function decorateI18n(block) {
   const locale = getMetadata('locale') || 'en-US'; // change this to pick locale from cookie set by header
   const limit = 5000;
-  const resp = await fetch(`/drafts/kunwar/lang-store.json?limit=${limit}&sheet=${locale}`);
-  if (resp.ok) {
-    const json = await resp.json();
 
-    const processText = (text) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
-      const jsonKey = match.slice(1);
-      const data = json.data.find((entry) => entry.key === jsonKey);
-      if (data && data[locale]) {
-        return data[locale];
-      }
-      return match;
-    });
+  // Check & Fetch language store data if not already cached
+  const langStoreData = await langStoreCache.getData(locale, limit);
 
-    // Process single <code> elements not inside <pre>
-    block.querySelectorAll('code').forEach((el) => {
-      if (!el.closest('pre')) { // Skip <code> inside <pre>
-        const text = el.textContent.trim();
-        const newText = processText(text);
-        const textNode = document.createTextNode(newText);
-        el.parentNode.replaceChild(textNode, el);
-      }
-    });
-
-    // Process <pre><code> blocks
-    block.querySelectorAll('pre code').forEach((el) => {
+  // Process single <code> elements not inside <pre>
+  block.querySelectorAll('code').forEach((el) => {
+    if (!el.closest('pre')) { // Skip <code> inside <pre>
       const text = el.textContent.trim();
-      const keys = text.split(/\s+/);
-      const newTexts = keys.map((key) => {
-        const newText = processText(key);
-        return `<p>${newText}</p>`;
-      });
-      el.parentNode.outerHTML = newTexts.join('');
+      const newText = processText(text, langStoreData, locale);
+      const textNode = document.createTextNode(newText);
+      el.parentNode.replaceChild(textNode, el);
+    }
+  });
+
+  // Process multi-line <code> blocks wrapped in <pre>
+  block.querySelectorAll('pre code').forEach((el) => {
+    const text = el.textContent.trim();
+    const keys = text.split(/\s+/);
+    const newTexts = keys.map((key) => {
+      const newText = processText(key, langStoreData, locale);
+      return `<p>${newText}</p>`;
     });
-  }
+    el.parentNode.outerHTML = newTexts.join('');
+  });
 }
 
 async function loadPage() {
