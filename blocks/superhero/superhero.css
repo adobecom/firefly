@@ -82,6 +82,16 @@
   text-overflow: ellipsis;
 }
 
+.superhero .generate-input::after {
+  animation: 1s step-end infinite;
+  content: "";
+  border-right: solid .5px var(--spectrum-global-color-gray-800);
+  height: 20px;
+  width: 1px;
+  display: inline-block;
+  transform: translateY(5px) rotate(15deg);
+}
+
 .superhero .content-container button {
   width: 100%;
   background-color: var(--spectrum-button-background-color-default);
@@ -141,7 +151,7 @@
 
 @media (width >= 769px) {
   .superhero .generate-form {
-    width: 85%;
+    width: 80%;
     flex-direction: row;
   }
 
