@@ -93,7 +93,8 @@ async function headerModal() {
 
 export default async function decorateI18n(block) {
   const locale = getMetadata('locale') || 'en-US'; // change this to pick locale from cookie set by header
-  const resp = await fetch('/drafts/kunwar/language-store.json');
+  const limit = 5000;
+  const resp = await fetch(`/drafts/kunwar/lang-store.json?limit=${limit}&sheet=${locale}`);
   if (resp.ok) {
     const json = await resp.json();
 
