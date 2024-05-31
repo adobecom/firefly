@@ -58,6 +58,27 @@ const miloLibs = setLibs(LIBS);
   });
 }());
 
+async function loadProfile() {
+  if (!window.adobeIMS) return;
+  const authToken = window.adobeIMS.getAccessToken()?.token;
+  if (!authToken) return;
+  const url = 'https://uds.adobe-identity.com/userdocs/firefly-web';
+  const headers = new Headers({
+    'x-api-key': 'clio-playground-web',
+    Authorization: `Bearer ${authToken}`,
+  });
+  const resp = await fetch(url, {
+    headers,
+    mode: 'cors',
+  });
+  if (resp.ok) {
+    const profile = await resp.json();
+    if (!profile.data['whats-new-dialog-confirmed']) {
+      await openModal('/fragments/whatsnew');
+    }
+  }
+}
+
 async function headerModal() {
   const links = document.querySelectorAll('a[href*="/fragments/"]');
   if (!links || (links.length === 0)) return;
@@ -98,7 +119,10 @@ async function loadPage() {
   await decorateI18n();
   await loadArea();
   await headerModal();
-  setTimeout(() => { loadMartech(); }, 3000);
+  setTimeout(() => {
+    loadMartech();
+    loadProfile();
+  }, 3000);
 }
 
 loadPage();
