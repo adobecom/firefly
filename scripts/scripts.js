@@ -78,16 +78,28 @@ async function loadProfile() {
   }
 }
 
+// override the signIn method from milo header and load SUSI Light
+function signInOverride() {
+  console.log('Sign in clicked');
+  // Load SUSI libraries here
+}
+
 async function headerModal() {
   const links = document.querySelectorAll('a[href*="/fragments/"]');
   if (!links || (links.length === 0)) return;
   links.forEach((link) => {
-    // eslint-disable-next-line no-unused-vars
     link.addEventListener('click', async (e) => {
       e.preventDefault();
       await openModal(link.href);
     });
   });
+  // Sign-in override for SUSI Light
+  const signInElem = document.querySelector('header .feds-profile .feds-signIn');
+  signInElem.addEventListener('click', (e) => {
+    signInOverride();
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+  }, true);
 }
 
 async function loadPage() {
