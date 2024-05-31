@@ -96,17 +96,35 @@ export default async function decorateI18n(block) {
   const resp = await fetch('/drafts/kunwar/language-store.json');
   if (resp.ok) {
     const json = await resp.json();
-    block.querySelectorAll('code').forEach((el) => {
-      const key = el.textContent.trim();
-      if (key.startsWith('$')) {
-        const jsonKey = key.slice(1);
-        const data = json.data.find((entry) => entry.key === jsonKey);
-        if (data && data[locale]) {
-          const replacementText = data[locale];
-          const textNode = document.createTextNode(replacementText);
-          el.parentNode.replaceChild(textNode, el);
-        }
+
+    const processText = (text) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
+      const jsonKey = match.slice(1);
+      const data = json.data.find((entry) => entry.key === jsonKey);
+      if (data && data[locale]) {
+        return data[locale];
       }
+      return match;
+    });
+
+    // Process single <code> elements not inside <pre>
+    block.querySelectorAll('code').forEach((el) => {
+      if (!el.closest('pre')) { // Skip <code> inside <pre>
+        const text = el.textContent.trim();
+        const newText = processText(text);
+        const textNode = document.createTextNode(newText);
+        el.parentNode.replaceChild(textNode, el);
+      }
+    });
+
+    // Process <pre><code> blocks
+    block.querySelectorAll('pre code').forEach((el) => {
+      const text = el.textContent.trim();
+      const keys = text.split(/\s+/);
+      const newTexts = keys.map((key) => {
+        const newText = processText(key);
+        return `<p>${newText}</p>`;
+      });
+      el.parentNode.outerHTML = newTexts.join('');
     });
   }
 }
