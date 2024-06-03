@@ -1,3 +1,6 @@
+/* eslint-disable quote-props */
+/* eslint-disable quotes */
+/* eslint-disable no-console */
 /*
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -10,8 +13,12 @@
  * governing permissions and limitations under the License.
  */
 
+// import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
+import { loadScript } from './aem.js';
+
+const searchParams = new URLSearchParams(window.location.search);
 
 // Add project-wide style path here.
 const STYLES = '/styles/styles.css';
@@ -78,10 +85,125 @@ async function loadProfile() {
   }
 }
 
+async function preRedirectWork() {
+  return new Promise((resolve) => {
+    const tick = () => {
+      this.progress += 1;
+
+      // eslint-disable-next-line consistent-return
+      setTimeout(() => {
+        if (this.progress < 3) {
+          return tick();
+        }
+        this.progress = 0;
+        resolve(null);
+      }, 1000);
+    };
+
+    tick();
+  });
+}
+
+async function onAuthFailed(e) {
+  if (e.detail.reason === 'popup-blocked') {
+    const redirectUri = e.detail.fallbackUrl;
+    await preRedirectWork.apply(this);
+    window.location.assign(redirectUri);
+  }
+}
+
+async function onAuthCode(e) {
+  const code = e.detail;
+  if (searchParams.get('disable_local_msw') === 'true') {
+    this.token = code;
+  }
+}
+
+async function onRedirect(e) {
+  const redirectUri = e.detail;
+  await preRedirectWork.apply(this);
+  window.location.assign(redirectUri);
+}
+
+async function onToken(e) {
+  const token = e.detail;
+  if (searchParams.get('disable_local_msw') === 'true') {
+    this.token = token;
+  }
+
+  await window.adobeIMS.refreshToken();
+  this.userData = await window.adobeIMS.getProfile();
+}
+
+async function onError(e) {
+  if (e.detail.name === 'critical') {
+    console.error('critical', e);
+  }
+
+  if (e.detail.name === 'unrecoverable') {
+    console.error('unrecoverable', e);
+  }
+}
+
+function onProviderClicked(e) {
+  console.log('provider clicked', e.detail);
+}
+
 // override the signIn method from milo header and load SUSI Light
-function signInOverride() {
+async function signInOverride(button) {
   console.log('Sign in clicked');
-  // Load SUSI libraries here
+  const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
+  const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
+  const susiAuthParams = {
+    'client_id': 'milo-firefly',
+    'scope': 'AdobeID,openid',
+    'locale': 'en-us',
+    'response_type': 'token',
+    'dt': darkMode,
+    'redirect_uri': 'https://main--firefly--adobecom.hlx.page/',
+  };
+  if (searchParams.get('disable_local_msw') === 'true') {
+    // eslint-disable-next-line dot-notation
+    susiAuthParams['disable_local_msw'] = 'true';
+  }
+
+  const susiSentryTag = `<susi-sentry-light 
+    id="sentry"
+    variant="edu-express"
+    popup=true
+    stage=true
+  ></susi-sentry-light>`;
+  // const susiSentryTag = `<susi-sentry
+  //   id="sentry"
+  //   .authParams=${authParams}
+  //   .config=${config}
+  //   .popup=true
+  //   @on-auth-code=${onAuthCode}
+  //   @on-auth-failed=${onAuthFailed}
+  //   @on-error=${onError}
+  //   @on-load=''
+  //   @on-provider-clicked=${onProviderClicked}
+  //   @on-token=${onToken}
+  //   @redirect=${onRedirect}
+  // ></susi-sentry>`;
+
+  const susiSentryDiv = document.createElement('div');
+  susiSentryDiv.classList.add('section');
+  const main = document.querySelector('main');
+  susiSentryDiv.innerHTML = susiSentryTag;
+  const susiLightEl = susiSentryDiv.firstChild;
+  susiLightEl.config = susiConfig;
+  susiLightEl.authParams = susiAuthParams;
+  main.appendChild(susiSentryDiv);
+  window.adobeid = {
+    client_id: 'milo-firefly',
+    scope: 'AdobeID,openid',
+    locale: 'en-us',
+  };
+  await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
+  await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
+  await loadScript('/scripts/sentry/wrapper.js', { type: "module" });
+  // await loadScript('/scripts/sentry/edu-express.en-us.fc652747.js', { type: "module" });
 }
 
 async function headerModal() {
@@ -95,8 +217,9 @@ async function headerModal() {
   });
   // Sign-in override for SUSI Light
   const signInElem = document.querySelector('header .feds-profile .feds-signIn');
-  signInElem.addEventListener('click', (e) => {
-    signInOverride();
+  signInElem.addEventListener('click', async (e) => {
+    e.preventDefault();
+    signInOverride(e.target);
     e.stopImmediatePropagation();
     e.stopPropagation();
   }, true);
