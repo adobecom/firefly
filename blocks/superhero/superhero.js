@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
-import { getI18nValue } from '../../scripts/scripts.js';
+import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
@@ -102,7 +102,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const imageDetails = await resp.json();
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-    const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
+    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
     const authorName = imageDetails._embedded.owner.display_name;

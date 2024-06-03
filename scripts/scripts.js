@@ -92,7 +92,7 @@ async function headerModal() {
 }
 
 // Fetch locale from cookie
-function getLocaleFromCookie() {
+export function getLocaleFromCookie() {
   const match = document.cookie.match(/(^| )locale=([^;]+)/);
   if (match) {
     return match[2];
