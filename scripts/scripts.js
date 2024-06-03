@@ -159,6 +159,7 @@ export async function decorateI18n(block) {
     });
     el.parentNode.outerHTML = newTexts.join('');
   });
+}
 
 // Function to fetch value for a specific key
 export async function getI18nValue(key, locale = 'en-US', limit = 5000) {
