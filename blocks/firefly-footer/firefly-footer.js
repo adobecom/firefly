@@ -2,15 +2,17 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
-import { decorateI18n } from '../../scripts/scripts.js';
+import { decorateI18n, getLocaleFromCookie, convertLocaleFormat } from '../../scripts/scripts.js';
 
 const { createTag, getMetadata, decorateSVG } = await import(`${getLibs()}/utils/utils.js`);
 const BANNER_ENDPOINT = 'https://p13n.adobe.io/psdk/v2/content';
 
 async function decorateBanner(footerBanner) {
+  const locale = getLocaleFromCookie() || 'en-US';
+  const localeForAPI = convertLocaleFormat(locale);
   const surfaceId = 'Test_Firefly_Banner_Growth';
   const headers = new Headers({ 'X-Api-Key': 'clio-playground-web' });
-  const bannerResponse = await fetch(`${BANNER_ENDPOINT}?surfaceId=${surfaceId}&productLanguage=en_US&&clioPreferredLocale=en_US`, {
+  const bannerResponse = await fetch(`${BANNER_ENDPOINT}?surfaceId=${surfaceId}&productLanguage=${localeForAPI}&&clioPreferredLocale=${localeForAPI}`, {
     method: 'GET',
     headers,
   });

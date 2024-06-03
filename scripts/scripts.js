@@ -100,6 +100,10 @@ export function getLocaleFromCookie() {
   return null;
 }
 
+export function convertLocaleFormat(locale) {
+  return locale.replace('-', '_');
+}
+
 // Process i18n text
 const langStoreCache = {
   cache: null,
