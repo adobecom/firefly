@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -12,7 +13,6 @@
 
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
-import { getMetadata } from './aem.js';
 
 // Add project-wide style path here.
 const STYLES = '/styles/styles.css';
@@ -91,38 +91,49 @@ async function headerModal() {
   });
 }
 
-// Function to fetch language store data
+// Fetch locale from cookie
+function getLocaleFromCookie() {
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  if (match) {
+    return match[2];
+  }
+  return null;
+}
+
+// Process i18n text
 const langStoreCache = {
   cache: null,
+
   async fetchLangStoreData(locale, limit) {
     const resp = await fetch(`/drafts/kunwar/lang-store.json?limit=${limit}&sheet=${locale}`);
     if (resp.ok) {
       const json = await resp.json();
-      return json.data;
+      this.cache = json.data;
+      return this.cache;
     }
     return [];
   },
 
   async getData(locale, limit) {
-    if (!this.cache) {
-      this.cache = await this.fetchLangStoreData(locale, limit);
-    }
-    return this.cache;
+    return this.cache || this.fetchLangStoreData(locale, limit);
+  },
+
+  async getValueByKey(key, locale, limit) {
+    const data = await this.getData(locale, limit);
+    const langEntry = data.find((entry) => entry.key === key);
+    return langEntry?.[locale] ?? null;
   },
 };
 
-// Process text using language store data
 const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
   const jsonKey = match.slice(1);
   const data = langStoreData.find((entry) => entry.key === jsonKey);
-  if (data && data[locale]) {
-    return data[locale];
-  }
-  return match;
+  return data?.[locale] ?? match;
 });
 
-export default async function decorateI18n(block) {
-  const locale = getMetadata('locale') || 'en-US'; // change this to pick locale from cookie set by header
+// Decorate i18n text
+export async function decorateI18n(block) {
+  const locale = getLocaleFromCookie() || 'en-US';
   const limit = 5000;
 
   // Check & Fetch language store data if not already cached
@@ -148,6 +159,16 @@ export default async function decorateI18n(block) {
     });
     el.parentNode.outerHTML = newTexts.join('');
   });
+
+// Function to fetch value for a specific key
+export async function getI18nValue(key, locale = 'en-US', limit = 5000) {
+  try {
+    const value = await langStoreCache.getValueByKey(key, locale, limit);
+    return value ?? key;
+  } catch (error) {
+    console.error(`Error fetching i18n value for key: ${key}`, error);
+    return key;
+  }
 }
 
 async function loadPage() {
