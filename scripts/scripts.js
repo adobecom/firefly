@@ -109,7 +109,7 @@ const langStoreCache = {
   cache: null,
 
   async fetchLangStoreData(locale, limit) {
-    const resp = await fetch(`/drafts/kunwar/lang-store.json?limit=${limit}&sheet=${locale}`);
+    const resp = await fetch(`/localization/lang-store.json?limit=${limit}&sheet=${locale}`);
     if (resp.ok) {
       const json = await resp.json();
       this.cache = json.data;
