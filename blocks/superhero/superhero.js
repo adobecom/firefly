@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
+import { getI18nValue } from '../../scripts/scripts.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
@@ -131,7 +132,7 @@ export default async function decorate(block) {
   const form = createTag('div', { class: 'generate-form' });
   const input = createTag('span', { contenteditable: 'true', class: 'generate-input' });
   const generateButton = createTag('button', { class: 'generate-button' });
-  generateButton.textContent = 'Generate';
+  generateButton.textContent = await getI18nValue('prompt-bar-generate-button-title');
   form.append(input, generateButton);
   contentContainer.append(form);
   const author = createTag('div', { class: 'author' });
