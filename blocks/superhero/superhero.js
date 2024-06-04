@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
+import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
@@ -102,7 +103,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const imageDetails = await resp.json();
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-    const userLocale = window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
+    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
     const authorName = imageDetails._embedded.owner.display_name;
@@ -135,7 +136,7 @@ export default async function decorate(block) {
   const form = createTag('div', { class: 'generate-form' });
   const input = createTag('span', { contenteditable: 'true', class: 'generate-input' });
   const generateButton = createTag('button', { class: 'generate-button' });
-  generateButton.textContent = 'Generate';
+  generateButton.textContent = await getI18nValue('prompt-bar-generate-button-title');
   form.append(input, generateButton);
   contentContainer.append(form);
   const author = createTag('div', { class: 'author' });
