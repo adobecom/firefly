@@ -1,7 +1,8 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
-import { decorateIcons, getLibs, getFeaturesArray } from '../../scripts/utils.js';
+import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
