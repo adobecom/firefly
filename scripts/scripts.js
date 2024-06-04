@@ -236,11 +236,98 @@ async function headerModal() {
   }, true);
 }
 
+// Fetch locale from cookie
+export function getLocaleFromCookie() {
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  if (match) {
+    return match[2];
+  }
+  return null;
+}
+
+export function convertLocaleFormat(locale) {
+  return locale.replace('-', '_');
+}
+
+// Process i18n text
+const langStoreCache = {
+  cache: null,
+
+  async fetchLangStoreData(locale, limit) {
+    const resp = await fetch(`/localization/lang-store.json?limit=${limit}&sheet=${locale}`);
+    if (resp.ok) {
+      const json = await resp.json();
+      this.cache = json.data;
+      return this.cache;
+    }
+    return [];
+  },
+
+  async getData(locale, limit) {
+    return this.cache || this.fetchLangStoreData(locale, limit);
+  },
+
+  async getValueByKey(key, locale, limit) {
+    const data = await this.getData(locale, limit);
+    const langEntry = data.find((entry) => entry.key === key);
+    return langEntry?.[locale] ?? null;
+  },
+};
+
+const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
+  const jsonKey = match.slice(1);
+  const data = langStoreData.find((entry) => entry.key === jsonKey);
+  return data?.[locale] ?? match;
+});
+
+// Decorate i18n text
+export async function decorateI18n(block) {
+  const locale = getLocaleFromCookie() || 'en-US';
+  const limit = 5000;
+
+  // Check & Fetch language store data if not already cached
+  const langStoreData = await langStoreCache.getData(locale, limit);
+
+  // Process single <code> elements not inside <pre>
+  block.querySelectorAll('code').forEach((el) => {
+    if (!el.closest('pre')) { // Skip <code> inside <pre>
+      const text = el.textContent.trim();
+      const newText = processText(text, langStoreData, locale);
+      const textNode = document.createTextNode(newText);
+      el.parentNode.replaceChild(textNode, el);
+    }
+  });
+
+  // Process multi-line <code> blocks wrapped in <pre>
+  block.querySelectorAll('pre code').forEach((el) => {
+    const text = el.textContent.trim();
+    const keys = text.split(/\s+/);
+    const newTexts = keys.map((key) => {
+      const newText = processText(key, langStoreData, locale);
+      return `<p>${newText}</p>`;
+    });
+    el.parentNode.outerHTML = newTexts.join('');
+  });
+}
+
+// Function to fetch value for a specific key
+export async function getI18nValue(key, limit = 5000) {
+  try {
+    const locale = getLocaleFromCookie() || 'en-US';
+    const value = await langStoreCache.getValueByKey(key, locale, limit);
+    return value ?? key;
+  } catch (error) {
+    console.error(`Error fetching i18n value for key: ${key}`, error);
+    return key;
+  }
+}
+
 async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
+  await decorateI18n(document.querySelector('main'));
   await loadArea();
   await headerModal();
   setTimeout(() => {
