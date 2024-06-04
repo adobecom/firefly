@@ -1,6 +1,7 @@
 /* eslint-disable quote-props */
 /* eslint-disable no-underscore-dangle */
 import { getLibs } from '../../scripts/utils.js';
+import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -64,7 +65,8 @@ async function getImages(link, accessToken = '', next = '') {
 
 async function addCards(cardContainer, images, accessToken = '') {
   let heightOfContainer = 0;
-  await images.forEach((image) => {
+  const locale = getLocaleFromCookie() || 'en-US';
+  await images.forEach(async (image) => {
     const rendition = image._links.rendition.href;
     const maxWidth = image._links.rendition.max_width;
     const maxHeight = image._links.rendition.max_height;
@@ -73,7 +75,7 @@ async function addCards(cardContainer, images, accessToken = '') {
     const authorName = image._embedded.owner.display_name;
     const authorImage = image._embedded.owner._links.images[0].href;
     const imageUrn = image.urn;
-    const prompt = image.title;
+    const prompt = image.custom.input['firefly#prompts'][locale];
     const imageUrl = rendition.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION).replace('{size}', DEFAULT_SIZE);
     const communityUrl = COMMUNITY_URL + imageUrn;
     const liked = Boolean(image.liked);
@@ -107,7 +109,7 @@ async function addCards(cardContainer, images, accessToken = '') {
         href: communityUrl,
         class: 'viewLink button',
       });
-      viewLink.textContent = 'View';
+      viewLink.textContent = await getI18nValue('community-thumbnail-view-button');
       const favorite = createTag('button', { class: `favorite ${liked ? 'hide' : ''}` });
       const favoriteSelected = createTag('button', { class: `favorite liked ${liked ? '' : 'hide'}` });
       const viewButton = createTag('button', { class: 'view' });
