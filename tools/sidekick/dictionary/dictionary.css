@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 /* stylelint-disable color-function-notation */
 
 body {
@@ -15,7 +16,7 @@ main {
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 10%);
   position: relative;
-  height: 300px;
+  height: 375px;
 }
 
 #results {
@@ -134,4 +135,29 @@ header {
 .offscreen {
   position: absolute;
   top: -1000px;
+}
+
+.note {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 10%);
+}
+
+.note p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.note p:last-child {
+  margin-bottom: 0;
+}
+
+.note p::before {
+  content: "\26A0\FE0F";
+  margin-right: 5px;
+  font-size: 16px;
 }
