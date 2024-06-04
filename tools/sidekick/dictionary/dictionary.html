@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i18n Dictionary</title>
+  <link rel="stylesheet" href="/tools/sidekick/dictionary/dictionary.css">
+  <script src="/tools/sidekick/dictionary/dictionary.js" type="module"></script>
+</head>
+<body>
+  <header>
+    <h1>Dictionary</h1>
+  </header>
+  <main>
+    <div class="intro">
+      <p>Use this page to search for translation strings and copy their corresponding keys.</p>
+      <p>Select the locale/language you want to search in from the dropdown.</p>
+    </div>
+    <div class="filter-container">
+      <div class="language-select">
+        <select id="language"></select>
+      </div>
+      <div class="filter">
+        <div class="search-grid">
+          <input autocomplete="off" placeholder="Type to search" id="search">
+          <div id="autocomplete-list" class="autocomplete-suggestions hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div id="results"></div>
+  </main>
+  <textarea class="offscreen" id="copybuffer"></textarea>
+</body>
+</html>
