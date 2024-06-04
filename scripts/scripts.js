@@ -127,15 +127,16 @@ async function onRedirect(e) {
 
 async function onToken(e) {
   const token = e.detail;
+  console.log('token found: ', token);
   if (searchParams.get('disable_local_msw') === 'true') {
     this.token = token;
   }
-
   await window.adobeIMS.refreshToken();
   this.userData = await window.adobeIMS.getProfile();
 }
 
 async function onError(e) {
+  console.log(`onError: e: ${e}`);
   if (e.detail.name === 'critical') {
     console.error('critical', e);
   }
@@ -152,6 +153,7 @@ function onProviderClicked(e) {
 // override the signIn method from milo header and load SUSI Light
 async function signInOverride(button) {
   console.log('Sign in clicked');
+  console.log(window.location.href);
   const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
   const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
   const susiAuthParams = {
@@ -160,7 +162,7 @@ async function signInOverride(button) {
     'locale': 'en-us',
     'response_type': 'token',
     'dt': darkMode,
-    'redirect_uri': 'https://firefly-stage.corp.adobe.com',
+    'redirect_uri': window.location.href,
   };
   if (searchParams.get('disable_local_msw') === 'true') {
     // eslint-disable-next-line dot-notation
@@ -195,6 +197,12 @@ async function signInOverride(button) {
   susiLightEl.config = susiConfig;
   susiLightEl.authParams = susiAuthParams;
   main.prepend(susiSentryDiv);
+  susiLightEl.addEventListener('on-token', (e) => {
+    console.log(`event is ${JSON.stringify(e)}`);
+  });
+  susiLightEl.addEventListener('on-error', (e) => {
+    console.log(`event is ${JSON.stringify(e)}`);
+  });
   window.adobeid = {
     client_id: CONFIG.imsClientId,
     scope: CONFIG.scope,
@@ -203,7 +211,7 @@ async function signInOverride(button) {
   await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
   // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
   await loadScript('/scripts/sentry/bundle.js', { type: "module" });
-  // await loadScript('/scripts/sentry/edu-express.en-us.fc652747.js', { type: "module" });
+  // const iframe = susiLightEl.contentDocument.querySelector('iframe');
 }
 
 async function headerModal() {
