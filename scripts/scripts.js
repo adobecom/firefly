@@ -197,15 +197,39 @@ async function signInOverride(button) {
   susiLightEl.config = susiConfig;
   susiLightEl.authParams = susiAuthParams;
   main.prepend(susiSentryDiv);
-  susiLightEl.addEventListener('on-token', (e) => {
-    console.log(`event is ${JSON.stringify(e)}`);
-  }, true);
-  susiLightEl.addEventListener('on-error', (e) => {
-    console.log(`event is ${JSON.stringify(e)}`);
-  }, true);
-  susiLightEl.addEventListener('redirect', (e) => {
-    console.log(`event is ${e}`);
-  }, true);
+  let observerAttached = false;
+  const susiLightObserver = (mutationList, observer) => {
+    mutationList.forEach((mutation) => {
+      console.log('observer called on mutation');
+      if (mutation.type === "childList") {
+        if (susiLightEl.shadowRoot) {
+          console.log('shadown root exists');
+        } else {
+          console.log('shadow root does not exist');
+        }
+        if (!observerAttached && susiLightEl.shadowRoot) {
+          console.log("A child node has been added or removed.");
+          susiLightEl.shadowRoot.addEventListener('*', (e) => {
+            console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+          });
+          susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+            console.log(`event is ${JSON.stringify(e)}`);
+          });
+          susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+            console.log(`event is ${JSON.stringify(e)}`);
+          });
+          susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+            console.log(`event is ${e}`);
+          });
+          observerAttached = true;
+        }
+      }
+    });
+  };
+
+  // Create an observer instance linked to the callback function
+  const observer = new MutationObserver(susiLightObserver);
+  observer.observe(susiLightEl, { childList: true });
   window.adobeid = {
     client_id: CONFIG.imsClientId,
     scope: CONFIG.scope,
@@ -228,12 +252,14 @@ async function headerModal() {
   });
   // Sign-in override for SUSI Light
   const signInElem = document.querySelector('header .feds-profile .feds-signIn');
-  signInElem.addEventListener('click', async (e) => {
-    e.preventDefault();
-    signInOverride(e.target);
-    e.stopImmediatePropagation();
-    e.stopPropagation();
-  }, true);
+  if (signInElem) {
+    signInElem.addEventListener('click', async (e) => {
+      e.preventDefault();
+      signInOverride(e.target);
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+    }, true);
+  }
 }
 
 // Fetch locale from cookie
