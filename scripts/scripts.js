@@ -199,10 +199,13 @@ async function signInOverride(button) {
   main.prepend(susiSentryDiv);
   susiLightEl.addEventListener('on-token', (e) => {
     console.log(`event is ${JSON.stringify(e)}`);
-  });
+  }, true);
   susiLightEl.addEventListener('on-error', (e) => {
     console.log(`event is ${JSON.stringify(e)}`);
-  });
+  }, true);
+  susiLightEl.addEventListener('redirect', (e) => {
+    console.log(`event is ${e}`);
+  }, true);
   window.adobeid = {
     client_id: CONFIG.imsClientId,
     scope: CONFIG.scope,
