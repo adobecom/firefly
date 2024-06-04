@@ -155,24 +155,24 @@ async function signInOverride(button) {
   const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
   const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
   const susiAuthParams = {
-    'client_id': 'milo-firefly',
-    'scope': 'AdobeID,openid',
+    'client_id': CONFIG.imsClientId,
+    'scope': CONFIG.imsScope,
     'locale': 'en-us',
     'response_type': 'token',
     'dt': darkMode,
-    'redirect_uri': 'https://main--firefly--adobecom.hlx.page/',
+    'redirect_uri': 'https://firefly-stage.corp.adobe.com',
   };
   if (searchParams.get('disable_local_msw') === 'true') {
     // eslint-disable-next-line dot-notation
     susiAuthParams['disable_local_msw'] = 'true';
   }
 
-  const susiSentryTag = `<susi-sentry-light 
+  const susiSentryTag = `<susi-sentry 
     id="sentry"
-    variant="edu-express"
+    variant="large-buttons"
     popup=true
     stage=true
-  ></susi-sentry-light>`;
+  ></susi-sentry>`;
   // const susiSentryTag = `<susi-sentry
   //   id="sentry"
   //   .authParams=${authParams}
@@ -188,21 +188,21 @@ async function signInOverride(button) {
   // ></susi-sentry>`;
 
   const susiSentryDiv = document.createElement('div');
-  susiSentryDiv.classList.add('section');
+  susiSentryDiv.classList.add('sentry-wrapper');
   const main = document.querySelector('main');
   susiSentryDiv.innerHTML = susiSentryTag;
   const susiLightEl = susiSentryDiv.firstChild;
   susiLightEl.config = susiConfig;
   susiLightEl.authParams = susiAuthParams;
-  main.appendChild(susiSentryDiv);
+  main.prepend(susiSentryDiv);
   window.adobeid = {
-    client_id: 'milo-firefly',
-    scope: 'AdobeID,openid',
+    client_id: CONFIG.imsClientId,
+    scope: CONFIG.scope,
     locale: 'en-us',
   };
   await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-  await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-  await loadScript('/scripts/sentry/wrapper.js', { type: "module" });
+  // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
+  await loadScript('/scripts/sentry/bundle.js', { type: "module" });
   // await loadScript('/scripts/sentry/edu-express.en-us.fc652747.js', { type: "module" });
 }
 

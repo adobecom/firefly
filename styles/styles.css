@@ -229,6 +229,45 @@
     box-sizing: border-box;
   }
 
+  /* SUSI Light Style */
+  .sentry-wrapper {
+    display: flex;
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+    content: '';
+    background-color: rgba(0 0 0 / 50%);
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+  }
+
+  susi-sentry {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-items: center;
+    border-radius: 8px;
+    height: 480px;
+    width: 480px;
+    background-color: white;
+    padding-top: 20px;
+    z-index: 100000000000; /* SUSI should be higher than everything */
+  }
+  
+  .susiDarkTheme {
+    background-color: var(--spectrum-global-color-gray-50);
+  }
+  
+  .susiLightTheme {
+    background-color: white;
+  }
+  
+  .susiWrapper {
+    display: block;
+    height: var(--spectrum-global-dimension-size-4600);
+  }
+
   @media (width >= 600px) {
     main > div > div {
       max-width: 1500px;
@@ -247,7 +286,6 @@
       display: inline-block;
       padding: 5px;
     }
-  
   }
 
   @media (prefers-color-scheme: dark) {
