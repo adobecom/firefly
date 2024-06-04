@@ -1,54 +1,7 @@
-/* stylelint-disable no-descending-specificity */
-/* stylelint-disable color-function-notation */
 /* stylelint-disable selector-class-pattern */
+@import url('https://main--milo--adobecom.hlx.live/libs/blocks/global-navigation/global-navigation.css');
 
-/* 
- * Put project specific base styles here.
- *
- * Note: The proect does not load this file.
- *       You will need to load these using scripts.js.
- * 
- *
- */
-
- :root {
-  --navbar-height: 56px;
-  --fill-color: rgb(255, 255, 255);
-  --spectrum-global-dimension-size-200: 16px;
-  --spectrum-global-dimension-size-750: 60px;
-  --spectrum-global-dimension-size-800: 64px;
-  --spectrum-global-color-gray-800: rgb(34, 34, 34);
-  --spectrum-global-dimension-size-150: 12px;
-  --spectrum-font-size-300: 18px;
-
-  /* Button */
-  --spectrum-button-background-color-default: rgba(2, 101, 220);
-  --spectrum-button-background-color-hover: rgba(0, 84, 182);
-  --spectrum-button-border-color-default: transparent;
-  --spectrum-button-content-color-default: rgb(255, 255, 255);
-  --spectrum-button-animation-duration: 130ms;
-  --spectrum-button-border-radius: 20px;
-  --spectrum-button-border-width: 2px;
-  --spectrum-button-font-size: 16px;
-  --spectrum-bold-font-weight: 700;
-  --spectrum-button-padding-label-to-icon: 9px;  
-  --spectrum-button-height: 40px;
-  --spectrum-button-min-width: calc(40px * 2.25);
-  --spectrum-button-edge-to-text: 18px;
-
-  /* Colors */
-  --spectrum-global-color-gray-50: rgb(29 29 29);
-  --spectrum-gray-100: rgb(50, 50, 50);
-  --spectrum-gray-200: rgb(63, 63, 63);
-  --spectrum-gray-500: rgb(109, 109, 109);
-
-
-  /* Modal display */
-  .block.modal {
-    display: block;
-  }
-  
-  /* Navigation CSS Updates */
+header {
   .feds-topnav-wrapper {
     justify-content: space-between;
   }
@@ -76,7 +29,7 @@
     line-height: 18.2px;
     color: inherit;
     background-color: inherit;
-    border-color: rgba(213, 213, 213);
+    border-color: rgba(213 213 213);
   }
 
   .feds-navItem a.feds-cta[href*="discord"]::before {
@@ -102,7 +55,7 @@
     border-width: 2px;
     border-style: solid;
     border-radius: 16px;
-    border-color: rgba(213, 213, 213);
+    border-color: rgba(213 213 213);
     display: flex;
     height: 32px;
     min-width: 72px;
@@ -121,14 +74,14 @@
     content:'';
     width: 18px;
     height: 24px;
-    border-right: solid 1px rgba(177, 177, 177);
+    border-right: solid 1px rgba(177 177 177);
     display: inline-block;
     margin-right: 9px;
   }
 
   .feds-profile > .feds-signIn:hover,
   .feds-navItem .feds-cta:hover{
-    background-color:rgba(177, 177, 177);
+    background-color:rgba(177 177 177);
     color: inherit;
   }
 
@@ -198,86 +151,13 @@
     grid-row: 2;
     grid-column: 2; 
     font-style: italic;
-    color: rgba(109,109,109);
+    color: rgba(109 109 109);
     font-weight: 500;
     font-size: 12px;
   }
+}
 
-  p.button-container {
-    align-items: center;
-    display: flex;
-  }
-
-  p.button-container a {
-    justify-content: center;
-    border: 2px solid rgb(2, 101, 220);
-    border-radius: 16px ;
-    background-color: rgb(2, 101, 220);
-    color: white;
-    font-size: 14px;
-    padding: 0 14px;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  p.button-container:hover a {
-    border: 2px solid rgb(0, 84, 182);
-    background-color: rgb(0, 84, 182);
-  }
-
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /* SUSI Light Style */
-  .sentry-wrapper {
-    display: flex;
-    position: fixed;
-    min-width: 100vw;
-    min-height: 100vh;
-    content: '';
-    background-color: rgba(0 0 0 / 50%);
-    align-items: center;
-    justify-content: center;
-    z-index: 99;
-  }
-
-  susi-sentry {
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-items: center;
-    border-radius: 8px;
-    height: 480px;
-    width: 384px;
-    background-color: white;
-    padding-top: 20px;
-    z-index: 100000000000; /* SUSI should be higher than everything */
-  }
-  
-  .susiDarkTheme {
-    background-color: var(--spectrum-global-color-gray-50);
-  }
-  
-  .susiLightTheme {
-    background-color: white;
-  }
-  
-  .susiWrapper {
-    display: block;
-    height: var(--spectrum-global-dimension-size-4600);
-  }
-
-  @media (width >= 600px) {
-    main > div > div {
-      max-width: 1500px;
-      margin: 0 auto;
-    }
-
-    main > .section > .content {
-      max-width: 1500px;
-    }
-    
+  @media (width >= 600px) {    
     .feds-nav-wrapper {
       justify-content: center;
     }
@@ -287,12 +167,3 @@
       padding: 5px;
     }
   }
-
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-color: var(--spectrum-global-color-gray-50);
-      color: var(--spectrum-button-content-color-default);
-    }
-  }
-
-}
