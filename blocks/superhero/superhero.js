@@ -2,6 +2,7 @@
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
 
+const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
 const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
@@ -62,7 +63,7 @@ function typeAnimation(input, text, block) {
       index -= 1;
     }
     typeAnimation(input, text, block);
-  }, isAdding ? 100 : 50);
+  }, isAdding ? 75 : 50);
   input.addEventListener('click', () => {
     input.textContent = text;
     clearTimeout(timeoutid);
@@ -115,6 +116,9 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
 }
 
 export default async function decorate(block) {
+  if (!window.adobeIMS) {
+    await loadIms();
+  }
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
