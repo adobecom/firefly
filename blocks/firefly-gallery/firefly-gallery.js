@@ -1,13 +1,14 @@
 /* eslint-disable quote-props */
 /* eslint-disable no-underscore-dangle */
-import { getLibs } from '../../scripts/utils.js';
+import { getLibs, getEnvironment } from '../../scripts/utils.js';
 import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
-const GALLERY_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets?sort=updated_desc&include_pending_assets=false&size=';
-const FAVOURITE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/$/likes';
+const COMMUNITY_HUBS_URL = `https://community-hubs${getEnvironment() === 'stage' ? '-stage' : ''}.adobe.io`;
+const GALLERY_URL = `${COMMUNITY_HUBS_URL}/api/v2/ff_community/assets?sort=updated_desc&include_pending_assets=false&size=`;
+const FAVOURITE_URL = `${COMMUNITY_HUBS_URL}/api/v2/ff_community/assets/$/likes`;
 const COMMUNITY_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
 const DEFAULT_FORMAT = 'jpg';
 const DEFAULT_DIMENSION = 'width';
@@ -184,7 +185,7 @@ async function loadImages(block, accessToken = '') {
   if (block.classList.contains('full')) {
     IS_INFINITE_SCROLL = true;
   }
-  const link = block.querySelector('a')?.href || `${GALLERY_URL}${size}`;
+  const link = `${GALLERY_URL}${size}`;
   block.innerHTML = '';
   const images = await getImages(link, accessToken);
   // shuffle images

@@ -113,3 +113,15 @@ export async function getFeaturesArray(authToken) {
   }
   window.featuresArray = featuresArray;
 }
+
+/**
+ * Returns the environment based on the hostname of the current window location.
+ * @returns {string} The environment ('stage' or 'prod').
+ */
+export function getEnvironment() {
+  const { hostname } = window.location;
+  if (hostname.includes('localhost') || hostname.includes('hlx.live') || hostname.includes('hlx.page') || hostname.includes('firefly-stage')) {
+    return 'stage';
+  }
+  return 'prod';
+}
