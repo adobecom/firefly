@@ -62,7 +62,7 @@ function typeAnimation(input, text, block) {
       index -= 1;
     }
     typeAnimation(input, text, block);
-  }, isAdding ? 100 : 50);
+  }, isAdding ? 75 : 50);
   input.addEventListener('click', () => {
     input.textContent = text;
     clearTimeout(timeoutid);
@@ -102,7 +102,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const imageDetails = await resp.json();
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
+    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
     const authorName = imageDetails._embedded.owner.display_name;

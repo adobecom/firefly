@@ -72,6 +72,7 @@ async function loadProfile() {
   const headers = new Headers({
     'x-api-key': 'clio-playground-web',
     Authorization: `Bearer ${authToken}`,
+    UDS_APP_DOMAIN: 'firefly-web',
   });
   const resp = await fetch(url, {
     headers,
