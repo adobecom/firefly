@@ -105,38 +105,38 @@ async function preRedirectWork() {
   });
 }
 
-async function onAuthFailed(e) {
+const onAuthFailed = async (e) => {
   if (e.detail.reason === 'popup-blocked') {
     const redirectUri = e.detail.fallbackUrl;
     await preRedirectWork.apply(this);
     window.location.assign(redirectUri);
   }
-}
+};
 
-async function onAuthCode(e) {
+const onAuthCode = (e) => {
   const code = e.detail;
   if (searchParams.get('disable_local_msw') === 'true') {
     this.token = code;
   }
-}
+};
 
-async function onRedirect(e) {
+const onRedirect = async (e) => {
   const redirectUri = e.detail;
   await preRedirectWork.apply(this);
   window.location.assign(redirectUri);
-}
+};
 
-async function onToken(e) {
-  const token = e.detail;
-  console.log('token found: ', token);
-  if (searchParams.get('disable_local_msw') === 'true') {
-    this.token = token;
-  }
+const onToken = async (e) => {
+  this.token = e.detail;
+  console.log('token found: ', this.token);
+  // if (searchParams.get('disable_local_msw') === 'true') {
+  //   this.token = e.detail;
+  // }
   await window.adobeIMS.refreshToken();
   this.userData = await window.adobeIMS.getProfile();
-}
+};
 
-async function onError(e) {
+const onError = (e) => {
   console.log(`onError: e: ${e}`);
   if (e.detail.name === 'critical') {
     console.error('critical', e);
@@ -145,11 +145,11 @@ async function onError(e) {
   if (e.detail.name === 'unrecoverable') {
     console.error('unrecoverable', e);
   }
-}
+};
 
-function onProviderClicked(e) {
+const onProviderClicked = (e) => {
   console.log('provider clicked', e.detail);
-}
+};
 
 // override the signIn method from milo header and load SUSI Light
 async function signInOverride(button) {
@@ -175,6 +175,12 @@ async function signInOverride(button) {
     variant="large-buttons"
     popup=true
     stage=true
+    @on-token=${onToken}
+    @on-error=${onError}
+    @on-auth-code=${onAuthCode}
+    @on-auth-failed=${onAuthFailed}
+    @redirect=${onRedirect}
+    @on-provider-clicked=${onProviderClicked}
   ></susi-sentry>`;
   // const susiSentryTag = `<susi-sentry
   //   id="sentry"
@@ -198,15 +204,39 @@ async function signInOverride(button) {
   susiLightEl.config = susiConfig;
   susiLightEl.authParams = susiAuthParams;
   main.prepend(susiSentryDiv);
-  susiLightEl.addEventListener('on-token', (e) => {
-    console.log(`event is ${JSON.stringify(e)}`);
-  }, true);
-  susiLightEl.addEventListener('on-error', (e) => {
-    console.log(`event is ${JSON.stringify(e)}`);
-  }, true);
-  susiLightEl.addEventListener('redirect', (e) => {
-    console.log(`event is ${e}`);
-  }, true);
+  // let observerAttached = false;
+  // const susiLightObserver = (mutationList, observer) => {
+  //   mutationList.forEach((mutation) => {
+  //     console.log('observer called on mutation');
+  //     if (mutation.type === "childList") {
+  //       if (susiLightEl.shadowRoot) {
+  //         console.log('shadown root exists');
+  //       } else {
+  //         console.log('shadow root does not exist');
+  //       }
+  //       if (!observerAttached && susiLightEl.shadowRoot) {
+  //         console.log("A child node has been added or removed.");
+  //         susiLightEl.shadowRoot.addEventListener('*', (e) => {
+  //           console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+  //         });
+  //         susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+  //           console.log(`event is ${JSON.stringify(e)}`);
+  //         });
+  //         susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+  //           console.log(`event is ${JSON.stringify(e)}`);
+  //         });
+  //         susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+  //           console.log(`event is ${e}`);
+  //         });
+  //         observerAttached = true;
+  //       }
+  //     }
+  //   });
+  // };
+
+  // Create an observer instance linked to the callback function
+  // const observer = new MutationObserver(susiLightObserver);
+  // observer.observe(susiLightEl, { childList: true });
   window.adobeid = {
     client_id: CONFIG.imsClientId,
     scope: CONFIG.scope,
@@ -229,12 +259,14 @@ async function headerModal() {
   });
   // Sign-in override for SUSI Light
   const signInElem = document.querySelector('header .feds-profile .feds-signIn');
-  signInElem.addEventListener('click', async (e) => {
-    e.preventDefault();
-    signInOverride(e.target);
-    e.stopImmediatePropagation();
-    e.stopPropagation();
-  }, true);
+  if (signInElem) {
+    signInElem.addEventListener('click', async (e) => {
+      e.preventDefault();
+      signInOverride(e.target);
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+    }, true);
+  }
 }
 
 // Fetch locale from cookie
