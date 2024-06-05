@@ -153,7 +153,6 @@ const onProviderClicked = (e) => {
 
 async function connectedCallback() {
   console.log('connected callback');
-  super.connectedCallback();
   window.SENTRY_EVENTS = [];
   const qs = new URLSearchParams(window.location.hash.substring(1));
   if (qs.has('access_token')) {
