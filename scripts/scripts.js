@@ -151,6 +151,16 @@ const onProviderClicked = (e) => {
   console.log('provider clicked', e.detail);
 };
 
+async function connectedCallback() {
+  console.log('connected callback');
+  super.connectedCallback();
+  window.SENTRY_EVENTS = [];
+  const qs = new URLSearchParams(window.location.hash.substring(1));
+  if (qs.has('access_token')) {
+    await this.onToken({ detail: qs.get('access_token') });
+  }
+}
+
 // override the signIn method from milo header and load SUSI Light
 async function signInOverride(button) {
   console.log('Sign in clicked');
@@ -175,12 +185,6 @@ async function signInOverride(button) {
     variant="large-buttons"
     popup=true
     stage=true
-    @on-token=${onToken}
-    @on-error=${onError}
-    @on-auth-code=${onAuthCode}
-    @on-auth-failed=${onAuthFailed}
-    @redirect=${onRedirect}
-    @on-provider-clicked=${onProviderClicked}
   ></susi-sentry>`;
   // const susiSentryTag = `<susi-sentry
   //   id="sentry"
