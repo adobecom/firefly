@@ -2,7 +2,6 @@
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
 
-const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
 const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
@@ -103,7 +102,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const imageDetails = await resp.json();
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || navigator.language || 'en-US';
+    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
     const authorName = imageDetails._embedded.owner.display_name;
@@ -116,9 +115,6 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
 }
 
 export default async function decorate(block) {
-  if (!window.adobeIMS) {
-    await loadIms();
-  }
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
