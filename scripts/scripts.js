@@ -227,25 +227,25 @@ async function signInOverride(button) {
       setTimeout(() => {
         const iframe = susiLightEl.shadowRoot.querySelector('iframe');
         iframe.addEventListener('load', () => {
-          const largeButtons = iframe.contentDocument.querySelector('large-buttons')?.shadowRoot;
-          if (largeButtons) console.log('found largeButtons!');
-          largeButtons.addEventListener('click', (e) => {
+          const iframeContent = iframe.contentDocument;
+          if (iframeContent) console.log('found iframeContent!');
+          iframeContent.addEventListener('click', (e) => {
             console.log(`click in large-buttons: ${JSON.stringify(e)}`);
           });
           // add listeners to listen to custom events from susi-sentry
-          largeButtons.addEventListener('*', (e) => {
+          iframeContent.addEventListener('*', (e) => {
             console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
           });
-          largeButtons.addEventListener('message', (e) => {
+          iframeContent.addEventListener('message', (e) => {
             console.log('message event triggered', JSON.stringify(e));
           });
-          largeButtons.addEventListener('on-token', (e) => {
+          iframeContent.addEventListener('on-token', (e) => {
             console.log(`event is ${JSON.stringify(e)}`);
           });
-          largeButtons.addEventListener('on-error', (e) => {
+          iframeContent.addEventListener('on-error', (e) => {
             console.log(`event is ${JSON.stringify(e)}`);
           });
-          largeButtons.addEventListener('redirect', (e) => {
+          iframeContent.addEventListener('redirect', (e) => {
             console.log(`event is ${e}`);
           });
         });
