@@ -31,7 +31,7 @@ const CONFIG = {
   // codeRoot: '',
   // contentRoot: '',
   imsClientId: 'firefly-milo',
-  imsScope: 'AdobeID,openid,gnav',
+  imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
   geoRouting: 'off',
   fallbackRouting: 'off',
   decorateArea,
@@ -88,15 +88,16 @@ async function loadProfile() {
 
 async function preRedirectWork() {
   return new Promise((resolve) => {
+    let progress = 0;
     const tick = () => {
-      this.progress += 1;
+      progress += 1;
 
       // eslint-disable-next-line consistent-return
       setTimeout(() => {
-        if (this.progress < 3) {
+        if (progress < 3) {
           return tick();
         }
-        this.progress = 0;
+        progress = 0;
         resolve(null);
       }, 1000);
     };
@@ -105,38 +106,31 @@ async function preRedirectWork() {
   });
 }
 
-async function onAuthFailed(e) {
+const onAuthFailed = async (e) => {
+  console.debug('onAuthFailed: ', JSON.stringify(e));
   if (e.detail.reason === 'popup-blocked') {
     const redirectUri = e.detail.fallbackUrl;
     await preRedirectWork.apply(this);
     window.location.assign(redirectUri);
   }
-}
+};
 
-async function onAuthCode(e) {
-  const code = e.detail;
-  if (searchParams.get('disable_local_msw') === 'true') {
-    this.token = code;
-  }
-}
+const onAuthCode = (e) => {
+  console.debug('onAuthCode: ', JSON.stringify(e));
+};
 
-async function onRedirect(e) {
+const onRedirect = async (e) => {
   const redirectUri = e.detail;
   await preRedirectWork.apply(this);
   window.location.assign(redirectUri);
-}
+};
 
-async function onToken(e) {
-  const token = e.detail;
-  console.log('token found: ', token);
-  if (searchParams.get('disable_local_msw') === 'true') {
-    this.token = token;
-  }
+const onToken = async (e) => {
   await window.adobeIMS.refreshToken();
-  this.userData = await window.adobeIMS.getProfile();
-}
+  window.location.reload();
+};
 
-async function onError(e) {
+const onError = (e) => {
   console.log(`onError: e: ${e}`);
   if (e.detail.name === 'critical') {
     console.error('critical', e);
@@ -145,77 +139,80 @@ async function onError(e) {
   if (e.detail.name === 'unrecoverable') {
     console.error('unrecoverable', e);
   }
-}
+};
 
-function onProviderClicked(e) {
-  console.log('provider clicked', e.detail);
-}
+const onProviderClicked = (e) => {
+  console.debug('provider clicked', e);
+};
+
+const onSentryLoad = (e) => {
+  console.debug('susi-sentry loaded', e);
+};
+
+const onMessage = (e) => {
+  console.debug('onMessage: ', e);
+};
 
 // override the signIn method from milo header and load SUSI Light
 async function signInOverride(button) {
-  console.log('Sign in clicked');
-  console.log(window.location.href);
-  const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-  const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
-  const susiAuthParams = {
-    'client_id': CONFIG.imsClientId,
-    'scope': CONFIG.imsScope,
-    'locale': 'en-us',
-    'response_type': 'token',
-    'dt': darkMode,
-    'redirect_uri': window.location.href,
-  };
-  if (searchParams.get('disable_local_msw') === 'true') {
-    // eslint-disable-next-line dot-notation
-    susiAuthParams['disable_local_msw'] = 'true';
+  try {
+    const main = document.querySelector('main');
+    const sentryWrapper = main.querySelector('.sentry-wrapper');
+    if (sentryWrapper) {
+      sentryWrapper.classList.remove('hidden');
+    } else {
+      const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
+      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || true;
+      const susiAuthParams = {
+        'client_id': CONFIG.imsClientId,
+        'scope': CONFIG.imsScope,
+        'locale': 'en-us',
+        'response_type': 'token',
+        'dt': darkMode,
+        'redirect_uri': window.location.href,
+      };
+      if (searchParams.get('disable_local_msw') === 'true') {
+        // eslint-disable-next-line dot-notation
+        susiAuthParams['disable_local_msw'] = 'true';
+      }
+
+      const susiSentryTag = `<susi-sentry 
+        id="sentry"
+        variant="large-buttons"
+        popup=true
+        stage=true
+      ></susi-sentry>`;
+
+      const susiSentryDiv = document.createElement('div');
+      susiSentryDiv.classList.add('sentry-wrapper');
+      susiSentryDiv.innerHTML = susiSentryTag;
+      const susiLightEl = susiSentryDiv.firstChild;
+      susiLightEl.classList.add((darkMode === true) ? 'dark' : 'light');
+      susiLightEl.config = susiConfig;
+      susiLightEl.authParams = susiAuthParams;
+      main.prepend(susiSentryDiv);
+      // Register event listeners on susi-sentry
+      susiLightEl.addEventListener('message', onMessage);
+      susiLightEl.addEventListener('on-token', onToken);
+      susiLightEl.addEventListener('on-auth-code', onAuthCode);
+      susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
+      susiLightEl.addEventListener('on-error', onError);
+      susiLightEl.addEventListener('on-load', onSentryLoad);
+      susiLightEl.addEventListener('on-provider-clicked', onProviderClicked);
+      susiLightEl.addEventListener('redirect', onRedirect);
+
+      await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
+      // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
+      await loadScript('/scripts/sentry/bundle.js', { type: "module" });
+      window.addEventListener('click', (e) => {
+        // if sign-in modal open and user clicks out of it, close the modal
+        const isClickInsideModal = susiLightEl.contains(e.target);
+        if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
+      });
+    }
+  } catch (e) {
+    console.error(e);
   }
-
-  const susiSentryTag = `<susi-sentry 
-    id="sentry"
-    variant="large-buttons"
-    popup=true
-    stage=true
-  ></susi-sentry>`;
-  // const susiSentryTag = `<susi-sentry
-  //   id="sentry"
-  //   .authParams=${authParams}
-  //   .config=${config}
-  //   .popup=true
-  //   @on-auth-code=${onAuthCode}
-  //   @on-auth-failed=${onAuthFailed}
-  //   @on-error=${onError}
-  //   @on-load=''
-  //   @on-provider-clicked=${onProviderClicked}
-  //   @on-token=${onToken}
-  //   @redirect=${onRedirect}
-  // ></susi-sentry>`;
-
-  const susiSentryDiv = document.createElement('div');
-  susiSentryDiv.classList.add('sentry-wrapper');
-  const main = document.querySelector('main');
-  susiSentryDiv.innerHTML = susiSentryTag;
-  const susiLightEl = susiSentryDiv.firstChild;
-  susiLightEl.config = susiConfig;
-  susiLightEl.authParams = susiAuthParams;
-  main.prepend(susiSentryDiv);
-  susiLightEl.addEventListener('on-token', (e) => {
-    console.log(`event is ${JSON.stringify(e)}`);
-  }, true);
-  susiLightEl.addEventListener('on-error', (e) => {
-    console.log(`event is ${JSON.stringify(e)}`);
-  }, true);
-  susiLightEl.addEventListener('redirect', (e) => {
-    console.log(`event is ${e}`);
-  }, true);
-  window.adobeid = {
-    client_id: CONFIG.imsClientId,
-    scope: CONFIG.scope,
-    locale: 'en-us',
-  };
-  await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-  // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-  await loadScript('/scripts/sentry/bundle.js', { type: "module" });
-  // const iframe = susiLightEl.contentDocument.querySelector('iframe');
 }
 
 async function headerModal() {
@@ -228,14 +225,15 @@ async function headerModal() {
     });
   });
   // Sign-in override for SUSI Light
-  const signInElem = document.querySelector('header .feds-profile .feds-signIn');
-  if (!signInElem) return;
-  signInElem.addEventListener('click', async (e) => {
-    e.preventDefault();
-    signInOverride(e.target);
-    e.stopImmediatePropagation();
-    e.stopPropagation();
-  }, true);
+  const signInElem = document.querySelector('header #universal-nav .unav-comp-profile .profile-signed-out button');
+  if (signInElem) {
+    signInElem.addEventListener('click', async (e) => {
+      e.preventDefault();
+      signInOverride(e.target);
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+    }, true);
+  }
 }
 
 // Fetch locale from cookie
