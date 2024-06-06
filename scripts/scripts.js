@@ -255,16 +255,17 @@ async function signInOverride(button) {
     await loadScript('/scripts/sentry/bundle.js', { type: "module" });
     const iframe = susiLightEl.shadowRoot.querySelector('iframe');
     if (iframe) {
-      iframe.addEventListener('*', (e) => {
+      console.log('found iframe!');
+      window.addEventListener('*', (e) => {
         console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
       });
-      iframe.addEventListener('on-token', (e) => {
+      window.addEventListener('on-token', (e) => {
         console.log(`event is ${JSON.stringify(e)}`);
       });
-      susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+      window.addEventListener('on-error', (e) => {
         console.log(`event is ${JSON.stringify(e)}`);
       });
-      susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+      window.addEventListener('redirect', (e) => {
         console.log(`event is ${e}`);
       });
     }
