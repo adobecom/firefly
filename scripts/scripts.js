@@ -227,25 +227,7 @@ async function signInOverride(button) {
       setTimeout(() => {
         const iframe = susiLightEl.shadowRoot.querySelector('iframe');
         iframe.addEventListener('load', () => {
-          // iframe.addEventListener('click', (e) => {
-          //   console.log(`click in large-buttons: ${JSON.stringify(e)}`);
-          // });
-          // // add listeners to listen to custom events from susi-sentry
-          // iframe.addEventListener('*', (e) => {
-          //   console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-          // });
-          window.addEventListener('message', (e) => {
-            console.log('message event triggered', JSON.stringify(e));
-          });
-          // iframe.addEventListener('on-token', (e) => {
-          //   console.log(`event is ${JSON.stringify(e)}`);
-          // });
-          // iframe.addEventListener('on-error', (e) => {
-          //   console.log(`event is ${JSON.stringify(e)}`);
-          // });
-          // iframe.addEventListener('redirect', (e) => {
-          //   console.log(`event is ${e}`);
-          // });
+          window.adobeIMS.refreshToken();
         });
       });
     }
