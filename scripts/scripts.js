@@ -184,12 +184,6 @@ async function signInOverride(button) {
     variant="large-buttons"
     popup=true
     stage=true
-    @on-auth-code="${onAuthCode}"
-    @on-auth-failed="${onAuthFailed}"
-    @on-error="${onError}"
-    @on-provider-clicked="${onProviderClicked}"
-    @on-token="${onToken}"
-    @redirect="${onRedirect}"
   ></susi-sentry>`;
   // const susiSentryTag = `<susi-sentry
   //   id="sentry"
@@ -213,48 +207,53 @@ async function signInOverride(button) {
   susiLightEl.config = susiConfig;
   susiLightEl.authParams = susiAuthParams;
   main.prepend(susiSentryDiv);
-  // let observerAttached = false;
-  // const susiLightObserver = (mutationList, observer) => {
-  //   mutationList.forEach((mutation) => {
-  //     console.log('observer called on mutation');
-  //     if (mutation.type === "childList") {
-  //       if (susiLightEl.shadowRoot) {
-  //         console.log('shadown root exists');
-  //       } else {
-  //         console.log('shadow root does not exist');
-  //       }
-  //       if (!observerAttached && susiLightEl.shadowRoot) {
-  //         console.log("A child node has been added or removed.");
-  //         susiLightEl.shadowRoot.addEventListener('*', (e) => {
-  //           console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-  //         });
-  //         susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
-  //           console.log(`event is ${JSON.stringify(e)}`);
-  //         });
-  //         susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
-  //           console.log(`event is ${JSON.stringify(e)}`);
-  //         });
-  //         susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
-  //           console.log(`event is ${e}`);
-  //         });
-  //         observerAttached = true;
-  //       }
-  //     }
-  //   });
-  // };
+  susiLightEl.shadowRoot?.addEventListener('*', (e) => {
+    console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+  });
+  let observerAttached = false;
+  const susiLightObserver = (mutationList, observer) => {
+    mutationList.forEach((mutation) => {
+      console.log('observer called on mutation');
+      if (mutation.addedNodes.length) console.info('Node added: ', mutation.addedNodes[0]);
+      if (mutation.type === "childList") {
+        if (susiLightEl.shadowRoot) {
+          console.log('shadown root exists');
+        } else {
+          console.log('shadow root does not exist');
+        }
+        if (!observerAttached && susiLightEl.shadowRoot) {
+          console.log("A child node has been added or removed.");
+          susiLightEl.shadowRoot.addEventListener('*', (e) => {
+            console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+          });
+          susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+            console.log(`event is ${JSON.stringify(e)}`);
+          });
+          susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+            console.log(`event is ${JSON.stringify(e)}`);
+          });
+          susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+            console.log(`event is ${e}`);
+          });
+          observerAttached = true;
+        }
+      }
+    });
+  };
 
-  // Create an observer instance linked to the callback function
-  // const observer = new MutationObserver(susiLightObserver);
-  // observer.observe(susiLightEl, { childList: true });
   window.adobeid = {
     client_id: CONFIG.imsClientId,
     scope: CONFIG.scope,
     locale: 'en-us',
   };
   await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-  await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
+  // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
   await loadScript('/scripts/sentry/bundle.js', { type: "module" });
   // const iframe = susiLightEl.contentDocument.querySelector('iframe');
+  // Create an observer instance linked to the callback function
+  const observer = new MutationObserver(susiLightObserver);
+  const susiSentry = document.querySelector('susi-sentry');
+  observer.observe(susiLightEl, { childList: true });
 }
 
 async function headerModal() {
