@@ -66,7 +66,7 @@ export function createOptimizedFireflyPicture(
   fetchpriority = 'low',
   breakpoints = [
     // { media: '(min-width: 2000px)', width: '3000' },
-    { media: '(min-width: 1200px)', width: '2000' },
+    { media: '(min-width: 1200px)', width: '3000' },
     // { media: '(min-width: 900px)', width: '1200' },
     // { media: '(min-width: 600px)', width: '900' },
     // { media: '(min-width: 450px)', width: '600' },
