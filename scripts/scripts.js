@@ -243,8 +243,8 @@ async function signInOverride(button) {
     // Create an observer instance linked to the callback function
     // const observer = new MutationObserver(susiLightObserver);
     // const susiSentry = document.querySelector('susi-sentry');
-    if (susiSentry) console.log('found susi-sentry');
-    observer.observe(susiSentry, { subtree: true, childList: true });
+    // if (susiSentry) console.log('found susi-sentry');
+    // observer.observe(susiSentry, { subtree: true, childList: true });
     window.adobeid = {
       client_id: CONFIG.imsClientId,
       scope: CONFIG.scope,
