@@ -198,7 +198,7 @@ async function signInOverride(button) {
     //   @on-token=${onToken}
     //   @redirect=${onRedirect}
     // ></susi-sentry>`;
-  
+
     const susiSentryDiv = document.createElement('div');
     susiSentryDiv.classList.add('sentry-wrapper');
     const main = document.querySelector('main');
@@ -207,9 +207,6 @@ async function signInOverride(button) {
     susiLightEl.config = susiConfig;
     susiLightEl.authParams = susiAuthParams;
     main.prepend(susiSentryDiv);
-    susiLightEl.shadowRoot?.addEventListener('*', (e) => {
-      console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-    });
     // let observerAttached = false;
     // const susiLightObserver = (mutationList, observer) => {
     //   mutationList.forEach((mutation) => {
@@ -253,22 +250,21 @@ async function signInOverride(button) {
     await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
     // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
     await loadScript('/scripts/sentry/bundle.js', { type: "module" });
-    const iframe = susiLightEl.shadowRoot.querySelector('iframe');
-    if (iframe) {
-      console.log('found iframe!');
-      window.addEventListener('*', (e) => {
-        console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-      });
-      window.addEventListener('on-token', (e) => {
-        console.log(`event is ${JSON.stringify(e)}`);
-      });
-      window.addEventListener('on-error', (e) => {
-        console.log(`event is ${JSON.stringify(e)}`);
-      });
-      window.addEventListener('redirect', (e) => {
-        console.log(`event is ${e}`);
-      });
-    }
+    susiLightEl.shadowRoot.addEventListener('*', (e) => {
+      console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+    });
+    susiLightEl.shadowRoot.addEventListener('message', (e) => {
+      console.log('message event triggered', JSON.stringify(e));
+    });
+    susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+      console.log(`event is ${JSON.stringify(e)}`);
+    });
+    susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+      console.log(`event is ${JSON.stringify(e)}`);
+    });
+    susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+      console.log(`event is ${e}`);
+    });
   } catch (e) {
     console.error(e);
   }
