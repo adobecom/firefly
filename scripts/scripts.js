@@ -210,39 +210,39 @@ async function signInOverride(button) {
     susiLightEl.shadowRoot?.addEventListener('*', (e) => {
       console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
     });
-    let observerAttached = false;
-    const susiLightObserver = (mutationList, observer) => {
-      mutationList.forEach((mutation) => {
-        console.log('observer called on mutation');
-        if (mutation.addedNodes.length) console.info('Node added: ', mutation.addedNodes[0]);
-        if (mutation.type === "childList") {
-          if (susiLightEl.shadowRoot) {
-            console.log('shadown root exists');
-          } else {
-            console.log('shadow root does not exist');
-          }
-          if (!observerAttached && susiLightEl.shadowRoot) {
-            console.log("A child node has been added or removed.");
-            susiLightEl.shadowRoot.addEventListener('*', (e) => {
-              console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-            });
-            susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
-              console.log(`event is ${JSON.stringify(e)}`);
-            });
-            susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
-              console.log(`event is ${JSON.stringify(e)}`);
-            });
-            susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
-              console.log(`event is ${e}`);
-            });
-            observerAttached = true;
-          }
-        }
-      });
-    };
+    // let observerAttached = false;
+    // const susiLightObserver = (mutationList, observer) => {
+    //   mutationList.forEach((mutation) => {
+    //     console.log('observer called on mutation');
+    //     if (mutation.addedNodes.length) console.info('Node added: ', mutation.addedNodes[0]);
+    //     if (mutation.type === "childList") {
+    //       if (susiLightEl.shadowRoot) {
+    //         console.log('shadown root exists');
+    //       } else {
+    //         console.log('shadow root does not exist');
+    //       }
+    //       if (!observerAttached && susiLightEl.shadowRoot) {
+    //         console.log("A child node has been added or removed.");
+    //         susiLightEl.shadowRoot.addEventListener('*', (e) => {
+    //           console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+    //         });
+    //         susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+    //           console.log(`event is ${JSON.stringify(e)}`);
+    //         });
+    //         susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+    //           console.log(`event is ${JSON.stringify(e)}`);
+    //         });
+    //         susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+    //           console.log(`event is ${e}`);
+    //         });
+    //         observerAttached = true;
+    //       }
+    //     }
+    //   });
+    // };
     // Create an observer instance linked to the callback function
-    const observer = new MutationObserver(susiLightObserver);
-    const susiSentry = document.querySelector('susi-sentry');
+    // const observer = new MutationObserver(susiLightObserver);
+    // const susiSentry = document.querySelector('susi-sentry');
     if (susiSentry) console.log('found susi-sentry');
     observer.observe(susiSentry, { subtree: true, childList: true });
     window.adobeid = {
@@ -254,7 +254,20 @@ async function signInOverride(button) {
     // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
     await loadScript('/scripts/sentry/bundle.js', { type: "module" });
     const iframe = susiLightEl.shadowRoot.querySelector('iframe');
-    if (iframe) console.log('found iframe!');
+    if (iframe) {
+      iframe.addEventListener('*', (e) => {
+        console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+      });
+      iframe.addEventListener('on-token', (e) => {
+        console.log(`event is ${JSON.stringify(e)}`);
+      });
+      susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+        console.log(`event is ${JSON.stringify(e)}`);
+      });
+      susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+        console.log(`event is ${e}`);
+      });
+    }
   } catch (e) {
     console.error(e);
   }
