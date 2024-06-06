@@ -229,6 +229,7 @@ async function headerModal() {
   });
   // Sign-in override for SUSI Light
   const signInElem = document.querySelector('header .feds-profile .feds-signIn');
+  if (!signInElem) return;
   signInElem.addEventListener('click', async (e) => {
     e.preventDefault();
     signInOverride(e.target);
