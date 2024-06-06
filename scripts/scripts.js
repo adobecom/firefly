@@ -224,27 +224,30 @@ async function signInOverride(button) {
         const isClickInsideModal = susiLightEl.contains(e.target);
         if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
       });
-      const iframe = susiLightEl.shadowRoot.querySelector('iframe');
-      iframe.addEventListener('load', () => {
-        const largeButtons = iframe.querySelector('large-buttons')?.shadowRoot;
-        largeButtons.addEventListener('click', (e) => {
-          console.log(`click in large-buttons: ${JSON.stringify(e)}`);
-        });
-        // add listeners to listen to custom events from susi-sentry
-        largeButtons.addEventListener('*', (e) => {
-          console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-        });
-        largeButtons.addEventListener('message', (e) => {
-          console.log('message event triggered', JSON.stringify(e));
-        });
-        largeButtons.addEventListener('on-token', (e) => {
-          console.log(`event is ${JSON.stringify(e)}`);
-        });
-        largeButtons.addEventListener('on-error', (e) => {
-          console.log(`event is ${JSON.stringify(e)}`);
-        });
-        largeButtons.addEventListener('redirect', (e) => {
-          console.log(`event is ${e}`);
+      setTimeout(() => {
+        const iframe = susiLightEl.shadowRoot.querySelector('iframe');
+        iframe.addEventListener('load', () => {
+          const largeButtons = iframe.contentDocument.document.querySelector('large-buttons')?.shadowRoot;
+          if (largeButtons) console.log('found largeButtons!');
+          largeButtons.addEventListener('click', (e) => {
+            console.log(`click in large-buttons: ${JSON.stringify(e)}`);
+          });
+          // add listeners to listen to custom events from susi-sentry
+          largeButtons.addEventListener('*', (e) => {
+            console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+          });
+          largeButtons.addEventListener('message', (e) => {
+            console.log('message event triggered', JSON.stringify(e));
+          });
+          largeButtons.addEventListener('on-token', (e) => {
+            console.log(`event is ${JSON.stringify(e)}`);
+          });
+          largeButtons.addEventListener('on-error', (e) => {
+            console.log(`event is ${JSON.stringify(e)}`);
+          });
+          largeButtons.addEventListener('redirect', (e) => {
+            console.log(`event is ${e}`);
+          });
         });
       });
     }
