@@ -242,6 +242,10 @@
     z-index: 99;
   }
 
+  .sentry-wrapper.hidden {
+    display: none;
+  }
+  
   susi-sentry {
     display: flex;
     position: absolute;
