@@ -225,8 +225,8 @@ async function signInOverride(button) {
         if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
       });
       setTimeout(() => {
-        const susiSentry = susiLightEl.shadowRoot;
-        susiSentry.addEventListener('message', (msg) => {
+        // const susiSentry = susiLightEl.shadowRoot;
+        document.addEventListener('message', (msg) => {
           console.log('message from susi-sentry', JSON.stringify(msg));
         });
       });
