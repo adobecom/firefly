@@ -63,6 +63,10 @@
     width: inherit;
   }
 
+  .feds-brand-image img{
+    height: 28px;
+  }
+
   .feds-navItem{
     cursor: pointer;
     font-size: 16px;
@@ -283,10 +287,15 @@
     main > .section > .content {
       max-width: 1500px;
     }
+
+    .feds-brand{
+      margin-left: 10%;
+    }
     
     .feds-nav-wrapper {
       justify-content: center;
       flex-grow: 0;
+      margin-left: 2%;
     }
 
     .feds-utilities {
