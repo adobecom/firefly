@@ -2,7 +2,7 @@
 /* eslint-disable func-names */
 
 import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
-import { decorateIcons } from '../../scripts/aem.js';
+import { decorateIcons, createOptimizedPicture } from '../../scripts/aem.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -38,7 +38,6 @@ function buildNav(dir, carousel) {
   nav.classList.add('carousel-nav', `carousel-nav-${dir}`);
   nav.addEventListener('click', () => {
     const nextSlide = curSlide + (dir === 'prev' ? -1 : 1);
-    console.log(nextSlide + slidesDisplayed);
     if (nextSlide <= 0) {
       carousel.classList.add('hide-prev');
       carousel.classList.remove('hide-next');
@@ -57,6 +56,11 @@ function buildNav(dir, carousel) {
 function buildSlide(slide, index, featuresArray) {
   [...slide.children].forEach((div) => {
     div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
+    if (div.querySelector('picture')) {
+      const img = div.querySelector('img').src;
+      const { alt } = div.querySelector('img');
+      div.querySelector('picture').replaceWith(createOptimizedPicture(img, alt, false, [{ width: '350' }]));
+    }
   });
   const firstDiv = slide.querySelector('div');
   const featureFlagEl = firstDiv.querySelector('code');

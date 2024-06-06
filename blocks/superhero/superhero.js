@@ -34,6 +34,7 @@ function updateAuthor(author, authorName, authorImage) {
 }
 
 function typeAnimation(input, text, block) {
+  input.classList.remove('selected');
   const timeoutid = setTimeout(() => {
     input.innerText = text.slice(0, index);
     // If typing
@@ -48,6 +49,7 @@ function typeAnimation(input, text, block) {
       }
       // Continue to typing text by increasing index
       index += 1;
+      input.scrollLeft = input.scrollWidth;
     } else {
       // If removing
       if (index === 0) {
@@ -65,9 +67,23 @@ function typeAnimation(input, text, block) {
   }, isAdding ? 75 : 50);
   input.addEventListener('click', () => {
     input.textContent = text;
+    input.classList.add('selected');
     clearTimeout(timeoutid);
     index = 0;
     isAdding = true;
+    // select all the text content on click
+    const range = document.createRange();
+    range.selectNodeContents(input);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  });
+  // resume animation on click out event
+  input.addEventListener('blur', () => {
+    if (input.classList.contains('selected')) {
+      // eslint-disable-next-line no-use-before-define
+      animate(block);
+    }
   });
 }
 
@@ -131,6 +147,7 @@ export default async function decorate(block) {
   block.append(contentContainer);
   const form = createTag('div', { class: 'generate-form' });
   const input = createTag('span', { contenteditable: 'true', class: 'generate-input' });
+  input.textContent = await getI18nValue('prompt-bar-placeholder-text');
   const generateButton = createTag('button', { class: 'generate-button' });
   generateButton.textContent = await getI18nValue('prompt-bar-generate-button-title');
   form.append(input, generateButton);
