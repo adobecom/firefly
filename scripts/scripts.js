@@ -227,7 +227,7 @@ async function signInOverride(button) {
       setTimeout(() => {
         const iframe = susiLightEl.shadowRoot.querySelector('iframe');
         iframe.addEventListener('load', () => {
-          const largeButtons = iframe.contentDocument.document.querySelector('large-buttons')?.shadowRoot;
+          const largeButtons = iframe.contentWindow.document.querySelector('large-buttons')?.shadowRoot;
           if (largeButtons) console.log('found largeButtons!');
           largeButtons.addEventListener('click', (e) => {
             console.log(`click in large-buttons: ${JSON.stringify(e)}`);
