@@ -255,8 +255,12 @@
     height: 480px;
     width: 384px;
     background-color: white;
-    padding-top: 20px;
+    padding: 20px;
     z-index: 100000000000; /* SUSI should be higher than everything */
+  }
+
+  susi-sentry.dark {
+    background-color: #1D1D1D;
   }
   
   .susiDarkTheme {

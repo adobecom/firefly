@@ -31,7 +31,7 @@ const CONFIG = {
   // codeRoot: '',
   // contentRoot: '',
   imsClientId: 'firefly-milo',
-  imsScope: 'AdobeID,openid,gnav',
+  imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
   geoRouting: 'off',
   fallbackRouting: 'off',
   decorateArea,
@@ -88,15 +88,16 @@ async function loadProfile() {
 
 async function preRedirectWork() {
   return new Promise((resolve) => {
+    let progress = 0;
     const tick = () => {
-      this.progress += 1;
+      progress += 1;
 
       // eslint-disable-next-line consistent-return
       setTimeout(() => {
-        if (this.progress < 3) {
+        if (progress < 3) {
           return tick();
         }
-        this.progress = 0;
+        progress = 0;
         resolve(null);
       }, 1000);
     };
@@ -106,6 +107,7 @@ async function preRedirectWork() {
 }
 
 const onAuthFailed = async (e) => {
+  console.log('onAuthFailed: ', JSON.stringify(e));
   if (e.detail.reason === 'popup-blocked') {
     const redirectUri = e.detail.fallbackUrl;
     await preRedirectWork.apply(this);
@@ -114,6 +116,7 @@ const onAuthFailed = async (e) => {
 };
 
 const onAuthCode = (e) => {
+  console.log('onAuthCode: ', JSON.stringify(e));
   const code = e.detail;
   if (searchParams.get('disable_local_msw') === 'true') {
     this.token = code;
@@ -127,13 +130,8 @@ const onRedirect = async (e) => {
 };
 
 const onToken = async (e) => {
-  this.token = e.detail;
-  console.log('token found: ', this.token);
-  // if (searchParams.get('disable_local_msw') === 'true') {
-  //   this.token = e.detail;
-  // }
   await window.adobeIMS.refreshToken();
-  this.userData = await window.adobeIMS.getProfile();
+  window.location.reload();
 };
 
 const onError = (e) => {
@@ -148,17 +146,16 @@ const onError = (e) => {
 };
 
 const onProviderClicked = (e) => {
-  console.log('provider clicked', e.detail);
+  console.debug('provider clicked', e);
 };
 
-async function connectedCallback() {
-  console.log('connected callback');
-  window.SENTRY_EVENTS = [];
-  const qs = new URLSearchParams(window.location.hash.substring(1));
-  if (qs.has('access_token')) {
-    await this.onToken({ detail: qs.get('access_token') });
-  }
-}
+const onSentryLoad = (e) => {
+  console.debug('susi-sentry loaded', e);
+};
+
+const onMessage = (e) => {
+  console.debug('onMessage: ', e);
+};
 
 // override the signIn method from milo header and load SUSI Light
 async function signInOverride(button) {
@@ -168,9 +165,8 @@ async function signInOverride(button) {
     if (sentryWrapper) {
       sentryWrapper.classList.remove('hidden');
     } else {
-      console.log('Sign in clicked');
       const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
+      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || true;
       const susiAuthParams = {
         'client_id': CONFIG.imsClientId,
         'scope': CONFIG.imsScope,
@@ -190,32 +186,25 @@ async function signInOverride(button) {
         popup=true
         stage=true
       ></susi-sentry>`;
-      // const susiSentryTag = `<susi-sentry
-      //   id="sentry"
-      //   .authParams=${authParams}
-      //   .config=${config}
-      //   .popup=true
-      //   @on-auth-code=${onAuthCode}
-      //   @on-auth-failed=${onAuthFailed}
-      //   @on-error=${onError}
-      //   @on-load=''
-      //   @on-provider-clicked=${onProviderClicked}
-      //   @on-token=${onToken}
-      //   @redirect=${onRedirect}
-      // ></susi-sentry>`;
 
       const susiSentryDiv = document.createElement('div');
       susiSentryDiv.classList.add('sentry-wrapper');
       susiSentryDiv.innerHTML = susiSentryTag;
       const susiLightEl = susiSentryDiv.firstChild;
+      susiLightEl.classList.add((darkMode === true) ? 'dark' : 'light');
       susiLightEl.config = susiConfig;
       susiLightEl.authParams = susiAuthParams;
       main.prepend(susiSentryDiv);
-      window.adobeid = {
-        client_id: CONFIG.imsClientId,
-        scope: CONFIG.scope,
-        locale: 'en-us',
-      };
+      // Register event listeners on susi-sentry
+      susiLightEl.addEventListener('message', onMessage);
+      susiLightEl.addEventListener('on-token', onToken);
+      susiLightEl.addEventListener('on-auth-code', onAuthCode);
+      susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
+      susiLightEl.addEventListener('on-error', onError);
+      susiLightEl.addEventListener('on-load', onSentryLoad);
+      susiLightEl.addEventListener('on-provider-clicked', onProviderClicked);
+      susiLightEl.addEventListener('redirect', onRedirect);
+
       await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
       // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
       await loadScript('/scripts/sentry/bundle.js', { type: "module" });
@@ -223,12 +212,6 @@ async function signInOverride(button) {
         // if sign-in modal open and user clicks out of it, close the modal
         const isClickInsideModal = susiLightEl.contains(e.target);
         if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
-      });
-      setTimeout(() => {
-        // const susiSentry = susiLightEl.shadowRoot;
-        document.addEventListener('message', (msg) => {
-          console.log('message from susi-sentry', JSON.stringify(msg));
-        });
       });
     }
   } catch (e) {
