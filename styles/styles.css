@@ -49,12 +49,22 @@
   }
   
   /* Navigation CSS Updates */
+.feds-topnav {
+  max-width: none;
+  justify-content: unset;
+  justify-items: unset;
+}
+
   .feds-topnav-wrapper {
     justify-content: space-between;
   }
 
   .feds-brand-image{
     width: inherit;
+  }
+
+  .feds-brand-image img{
+    height: 28px;
   }
 
   .feds-navItem{
@@ -285,11 +295,21 @@
     main > .section > .content {
       max-width: 1500px;
     }
+
+    .feds-brand{
+      margin-left: 10%;
+    }
     
     .feds-nav-wrapper {
       justify-content: center;
+      flex-grow: 0;
+      margin-left: 2%;
     }
-    
+
+    .feds-utilities {
+     margin-left: auto;
+    }
+
     .feds-navItem a.feds-cta[href*="discord"] {
       display: inline-block;
       padding: 5px;

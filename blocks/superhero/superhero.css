@@ -155,7 +155,7 @@
   }
 
   .superhero .content-container button {
-    width: 13%;
+    width: 30%;
   }
 
   .superhero h1 {
@@ -165,6 +165,13 @@
     line-height: 90px;
     max-width: 100%;
   }
+}
+
+@media (width >= 1500px) {
+  .superhero .content-container button {
+    width: 13%;
+  }
+
 }
 
 @media (prefers-color-scheme: dark) {
