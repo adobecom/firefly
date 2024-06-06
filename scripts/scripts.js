@@ -184,6 +184,12 @@ async function signInOverride(button) {
     variant="large-buttons"
     popup=true
     stage=true
+    @on-auth-code="${onAuthCode}"
+    @on-auth-failed="${onAuthFailed}"
+    @on-error="${onError}"
+    @on-provider-clicked="${onProviderClicked}"
+    @on-token="${onToken}"
+    @redirect="${onRedirect}"
   ></susi-sentry>`;
   // const susiSentryTag = `<susi-sentry
   //   id="sentry"
