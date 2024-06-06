@@ -162,97 +162,101 @@ async function connectedCallback() {
 
 // override the signIn method from milo header and load SUSI Light
 async function signInOverride(button) {
-  console.log('Sign in clicked');
-  console.log(window.location.href);
-  const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-  const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
-  const susiAuthParams = {
-    'client_id': CONFIG.imsClientId,
-    'scope': CONFIG.imsScope,
-    'locale': 'en-us',
-    'response_type': 'token',
-    'dt': darkMode,
-    'redirect_uri': window.location.href,
-  };
-  if (searchParams.get('disable_local_msw') === 'true') {
-    // eslint-disable-next-line dot-notation
-    susiAuthParams['disable_local_msw'] = 'true';
-  }
-
-  const susiSentryTag = `<susi-sentry 
-    id="sentry"
-    variant="large-buttons"
-    popup=true
-    stage=true
-  ></susi-sentry>`;
-  // const susiSentryTag = `<susi-sentry
-  //   id="sentry"
-  //   .authParams=${authParams}
-  //   .config=${config}
-  //   .popup=true
-  //   @on-auth-code=${onAuthCode}
-  //   @on-auth-failed=${onAuthFailed}
-  //   @on-error=${onError}
-  //   @on-load=''
-  //   @on-provider-clicked=${onProviderClicked}
-  //   @on-token=${onToken}
-  //   @redirect=${onRedirect}
-  // ></susi-sentry>`;
-
-  const susiSentryDiv = document.createElement('div');
-  susiSentryDiv.classList.add('sentry-wrapper');
-  const main = document.querySelector('main');
-  susiSentryDiv.innerHTML = susiSentryTag;
-  const susiLightEl = susiSentryDiv.firstChild;
-  susiLightEl.config = susiConfig;
-  susiLightEl.authParams = susiAuthParams;
-  main.prepend(susiSentryDiv);
-  susiLightEl.shadowRoot?.addEventListener('*', (e) => {
-    console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-  });
-  let observerAttached = false;
-  const susiLightObserver = (mutationList, observer) => {
-    mutationList.forEach((mutation) => {
-      console.log('observer called on mutation');
-      if (mutation.addedNodes.length) console.info('Node added: ', mutation.addedNodes[0]);
-      if (mutation.type === "childList") {
-        if (susiLightEl.shadowRoot) {
-          console.log('shadown root exists');
-        } else {
-          console.log('shadow root does not exist');
-        }
-        if (!observerAttached && susiLightEl.shadowRoot) {
-          console.log("A child node has been added or removed.");
-          susiLightEl.shadowRoot.addEventListener('*', (e) => {
-            console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
-          });
-          susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
-            console.log(`event is ${JSON.stringify(e)}`);
-          });
-          susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
-            console.log(`event is ${JSON.stringify(e)}`);
-          });
-          susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
-            console.log(`event is ${e}`);
-          });
-          observerAttached = true;
-        }
-      }
+  try{
+    console.log('Sign in clicked');
+    const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
+    const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
+    const susiAuthParams = {
+      'client_id': CONFIG.imsClientId,
+      'scope': CONFIG.imsScope,
+      'locale': 'en-us',
+      'response_type': 'token',
+      'dt': darkMode,
+      'redirect_uri': window.location.href,
+    };
+    if (searchParams.get('disable_local_msw') === 'true') {
+      // eslint-disable-next-line dot-notation
+      susiAuthParams['disable_local_msw'] = 'true';
+    }
+  
+    const susiSentryTag = `<susi-sentry 
+      id="sentry"
+      variant="large-buttons"
+      popup=true
+      stage=true
+    ></susi-sentry>`;
+    // const susiSentryTag = `<susi-sentry
+    //   id="sentry"
+    //   .authParams=${authParams}
+    //   .config=${config}
+    //   .popup=true
+    //   @on-auth-code=${onAuthCode}
+    //   @on-auth-failed=${onAuthFailed}
+    //   @on-error=${onError}
+    //   @on-load=''
+    //   @on-provider-clicked=${onProviderClicked}
+    //   @on-token=${onToken}
+    //   @redirect=${onRedirect}
+    // ></susi-sentry>`;
+  
+    const susiSentryDiv = document.createElement('div');
+    susiSentryDiv.classList.add('sentry-wrapper');
+    const main = document.querySelector('main');
+    susiSentryDiv.innerHTML = susiSentryTag;
+    const susiLightEl = susiSentryDiv.firstChild;
+    susiLightEl.config = susiConfig;
+    susiLightEl.authParams = susiAuthParams;
+    main.prepend(susiSentryDiv);
+    susiLightEl.shadowRoot?.addEventListener('*', (e) => {
+      console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
     });
-  };
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(susiLightObserver);
-  const susiSentry = document.querySelector('susi-sentry');
-  observer.observe(susiSentry, { childList: true });
-  window.adobeid = {
-    client_id: CONFIG.imsClientId,
-    scope: CONFIG.scope,
-    locale: 'en-us',
-  };
-  await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-  // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-  await loadScript('/scripts/sentry/bundle.js', { type: "module" });
-  // const iframe = susiLightEl.contentDocument.querySelector('iframe');
+    let observerAttached = false;
+    const susiLightObserver = (mutationList, observer) => {
+      mutationList.forEach((mutation) => {
+        console.log('observer called on mutation');
+        if (mutation.addedNodes.length) console.info('Node added: ', mutation.addedNodes[0]);
+        if (mutation.type === "childList") {
+          if (susiLightEl.shadowRoot) {
+            console.log('shadown root exists');
+          } else {
+            console.log('shadow root does not exist');
+          }
+          if (!observerAttached && susiLightEl.shadowRoot) {
+            console.log("A child node has been added or removed.");
+            susiLightEl.shadowRoot.addEventListener('*', (e) => {
+              console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
+            });
+            susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+              console.log(`event is ${JSON.stringify(e)}`);
+            });
+            susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+              console.log(`event is ${JSON.stringify(e)}`);
+            });
+            susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+              console.log(`event is ${e}`);
+            });
+            observerAttached = true;
+          }
+        }
+      });
+    };
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(susiLightObserver);
+    const susiSentry = document.querySelector('susi-sentry');
+    if (susiSentry) console.log('found susi-sentry');
+    observer.observe(susiSentry, { subtree: true, childList: true });
+    window.adobeid = {
+      client_id: CONFIG.imsClientId,
+      scope: CONFIG.scope,
+      locale: 'en-us',
+    };
+    await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
+    // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
+    await loadScript('/scripts/sentry/bundle.js', { type: "module" });
+    // const iframe = susiLightEl.contentDocument.querySelector('iframe');
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 async function headerModal() {
