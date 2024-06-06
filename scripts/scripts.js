@@ -240,7 +240,10 @@ async function signInOverride(button) {
       }
     });
   };
-
+  // Create an observer instance linked to the callback function
+  const observer = new MutationObserver(susiLightObserver);
+  const susiSentry = document.querySelector('susi-sentry');
+  observer.observe(susiSentry, { childList: true });
   window.adobeid = {
     client_id: CONFIG.imsClientId,
     scope: CONFIG.scope,
@@ -250,10 +253,6 @@ async function signInOverride(button) {
   // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
   await loadScript('/scripts/sentry/bundle.js', { type: "module" });
   // const iframe = susiLightEl.contentDocument.querySelector('iframe');
-  // Create an observer instance linked to the callback function
-  const observer = new MutationObserver(susiLightObserver);
-  const susiSentry = document.querySelector('susi-sentry');
-  observer.observe(susiLightEl, { childList: true });
 }
 
 async function headerModal() {
