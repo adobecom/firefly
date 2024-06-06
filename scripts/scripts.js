@@ -224,21 +224,25 @@ async function signInOverride(button) {
         const isClickInsideModal = susiLightEl.contains(e.target);
         if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
       });
-
+      const iframe = susiLightEl.shadowRoot.querySelector('iframe');
+      const largeButtons = iframe.querySelector('large-buttons')?.shadowRoot;
+      largeButtons.addEventListener('click', (e) => {
+        console.log(`click in large-buttons: ${JSON.stringify(e)}`);
+      });
       // add listeners to listen to custom events from susi-sentry
-      susiLightEl.shadowRoot.addEventListener('*', (e) => {
+      largeButtons.addEventListener('*', (e) => {
         console.log('type: %s, original: %s, e: %O', e.type, e.detail.type, e);
       });
-      susiLightEl.shadowRoot.addEventListener('message', (e) => {
+      largeButtons.addEventListener('message', (e) => {
         console.log('message event triggered', JSON.stringify(e));
       });
-      susiLightEl.shadowRoot.addEventListener('on-token', (e) => {
+      largeButtons.addEventListener('on-token', (e) => {
         console.log(`event is ${JSON.stringify(e)}`);
       });
-      susiLightEl.shadowRoot.addEventListener('on-error', (e) => {
+      largeButtons.addEventListener('on-error', (e) => {
         console.log(`event is ${JSON.stringify(e)}`);
       });
-      susiLightEl.shadowRoot.addEventListener('redirect', (e) => {
+      largeButtons.addEventListener('redirect', (e) => {
         console.log(`event is ${e}`);
       });
     }
