@@ -107,7 +107,7 @@ async function preRedirectWork() {
 }
 
 const onAuthFailed = async (e) => {
-  console.log('onAuthFailed: ', JSON.stringify(e));
+  console.debug('onAuthFailed: ', JSON.stringify(e));
   if (e.detail.reason === 'popup-blocked') {
     const redirectUri = e.detail.fallbackUrl;
     await preRedirectWork.apply(this);
@@ -116,11 +116,7 @@ const onAuthFailed = async (e) => {
 };
 
 const onAuthCode = (e) => {
-  console.log('onAuthCode: ', JSON.stringify(e));
-  const code = e.detail;
-  if (searchParams.get('disable_local_msw') === 'true') {
-    this.token = code;
-  }
+  console.debug('onAuthCode: ', JSON.stringify(e));
 };
 
 const onRedirect = async (e) => {
