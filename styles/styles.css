@@ -49,6 +49,12 @@
   }
   
   /* Navigation CSS Updates */
+.feds-topnav {
+  max-width: none;
+  justify-content: unset;
+  justify-items: unset;
+}
+
   .feds-topnav-wrapper {
     justify-content: space-between;
   }
@@ -280,8 +286,13 @@
     
     .feds-nav-wrapper {
       justify-content: center;
+      flex-grow: 0;
     }
-    
+
+    .feds-utilities {
+     margin-left: auto;
+    }
+
     .feds-navItem a.feds-cta[href*="discord"] {
       display: inline-block;
       padding: 5px;
