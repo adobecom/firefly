@@ -66,11 +66,11 @@ export function createOptimizedFireflyPicture(
   fetchpriority = 'low',
   breakpoints = [
     // { media: '(min-width: 2000px)', width: '3000' },
-    { media: '(min-width: 1200px)', width: '2000' },
-    { media: '(min-width: 900px)', width: '1200' },
-    { media: '(min-width: 600px)', width: '900' },
-    { media: '(min-width: 450px)', width: '600' },
-    { width: '450' },
+    // { media: '(min-width: 1200px)', width: '2000' },
+    // { media: '(min-width: 900px)', width: '1200' },
+    // { media: '(min-width: 600px)', width: '900' },
+    // { media: '(min-width: 450px)', width: '600' },
+    { width: '2688' },
   ],
 ) {
   const picture = document.createElement('picture');
@@ -114,10 +114,6 @@ export async function getFeaturesArray(authToken) {
   window.featuresArray = featuresArray;
 }
 
-/**
- * Returns the environment based on the hostname of the current window location.
- * @returns {string} The environment ('stage' or 'prod').
- */
 export function getEnvironment() {
   const { hostname } = window.location;
   if (hostname.includes('localhost') || hostname.includes('hlx.live') || hostname.includes('hlx.page') || hostname.includes('firefly-stage')) {

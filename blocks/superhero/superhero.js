@@ -116,6 +116,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
   const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
   if (resp.ok) {
     const imageDetails = await resp.json();
+    console.log(imageDetails);
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
     const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
