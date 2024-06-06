@@ -225,9 +225,9 @@ async function signInOverride(button) {
         if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
       });
       setTimeout(() => {
-        const iframe = susiLightEl.shadowRoot.querySelector('iframe');
-        iframe.addEventListener('load', () => {
-          window.adobeIMS.refreshToken();
+        const susiSentry = susiLightEl.shadowRoot;
+        susiSentry.addEventListener('message', (msg) => {
+          console.log('message from susi-sentry', JSON.stringify(msg));
         });
       });
     }
