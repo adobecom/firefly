@@ -178,7 +178,7 @@ async function signInOverride(button) {
       // eslint-disable-next-line dot-notation
       susiAuthParams['disable_local_msw'] = 'true';
     }
-  
+
     const susiSentryTag = `<susi-sentry 
       id="sentry"
       variant="large-buttons"
@@ -253,7 +253,8 @@ async function signInOverride(button) {
     await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
     // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
     await loadScript('/scripts/sentry/bundle.js', { type: "module" });
-    // const iframe = susiLightEl.contentDocument.querySelector('iframe');
+    const iframe = susiLightEl.shadowRoot.querySelector('iframe');
+    if (iframe) console.log('found iframe!');
   } catch (e) {
     console.error(e);
   }
