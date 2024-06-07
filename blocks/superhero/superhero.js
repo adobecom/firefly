@@ -131,6 +131,15 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
   return null;
 }
 
+async function replaceWithHigherResolutionImage(block) {
+  const pics = block.querySelectorAll('.image-container picture');
+  pics.forEach((pic) => {
+    pic.querySelectorAll('source').forEach((source) => {
+      source.srcset = `${source.srcset.split('size/')[0]}size/2000`;
+    });
+  });
+}
+
 export default async function decorate(block) {
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
@@ -166,6 +175,7 @@ export default async function decorate(block) {
     }
   });
   setTimeout(() => {
+    replaceWithHigherResolutionImage(block);
     animate(block, true);
-  }, 3000);
+  }, 4000);
 }
