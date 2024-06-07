@@ -51,6 +51,10 @@
   filter: brightness(0) blur(10);
 }
 
+.superhero .generate-button {
+  cursor: pointer;
+}
+
 .superhero .generate-form {
   display: flex;
   flex-direction: column;

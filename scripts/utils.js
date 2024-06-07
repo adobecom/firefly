@@ -60,6 +60,7 @@ export function decorateArea(area = document) {
 
 export function createOptimizedFireflyPicture(
   src,
+  imageId,
   alt = '',
   active = false,
   eager = false,
@@ -83,6 +84,7 @@ export function createOptimizedFireflyPicture(
   });
   // fallback
   const img = document.createElement('img');
+  img.id = imageId;
   img.setAttribute('loading', eager ? 'eager' : 'lazy');
   img.setAttribute('fetchpriority', fetchpriority);
   img.setAttribute('class', active ? 'active' : '');

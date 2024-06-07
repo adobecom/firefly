@@ -120,7 +120,8 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
     const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
-    const picture = createOptimizedFireflyPicture(imageUrl, prompt, active, eager, fetchPriority);
+    // eslint-disable-next-line max-len
+    const picture = createOptimizedFireflyPicture(imageUrl, imageId, prompt, active, eager, fetchPriority);
     const authorName = imageDetails._embedded.owner.display_name;
     const authorImage = (imageDetails._embedded.owner._links.images)[0].href;
     if (authorName) picture.dataset.authorName = authorName;
