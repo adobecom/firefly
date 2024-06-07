@@ -175,7 +175,10 @@ export default async function decorate(block) {
     }
   });
   setTimeout(() => {
-    replaceWithHigherResolutionImage(block);
     animate(block, true);
-  }, 4000);
+  }, 3000);
+
+  setTimeout(() => {
+    replaceWithHigherResolutionImage(block);
+  }, 5000);
 }
