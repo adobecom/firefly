@@ -142,18 +142,26 @@ async function replaceWithHigherResolutionImage(block) {
 
 export default async function decorate(block) {
   const placeholderImage = block.querySelector('picture');
-  placeholderImage.querySelector('img').classList.add('active');
-// set eager loading for first image
-  placeholderImage.querySelector('img').setAttribute('loading', 'eager');
-  if(placeholderImage){
+  //   placeholderImage.querySelector('img').classList.add('active');
+  // // set eager loading for first image
+  //   placeholderImage.querySelector('img').setAttribute('loading', 'eager');
+  let placeholder;
+  if (placeholderImage) {
+    placeholder = placeholderImage.querySelector('img').src;
     placeholderImage.parentElement.remove();
   }
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
-  imageContainer.append(placeholderImage);
+  // imageContainer.append(placeholderImage);
   block.append(imageContainer);
   // Get the first image in quickly and then process the rest
+  const firstAssetId = assetIds[0];
+  const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
+  if (firstPicture !== null) {
+    firstPicture.querySelector('img').style = `background:url(${placeholder}) no-repeat;`;
+    imageContainer.replaceChildren(firstPicture);
+  }
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -172,18 +180,15 @@ export default async function decorate(block) {
   generateButton.addEventListener('click', () => {
     textToImage(block);
   });
-  setTimeout(async () => {
-     // Get the rest of the images
-     const firstAssetId = assetIds[0];
-  const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
-  if (firstPicture !== null) imageContainer.replaceChildren(firstPicture);
-  assetIds.forEach(async (assetId, i) => {
-    if (i !== 0) {
-      const picture = await createPitcureFromAssetId(assetId, false, true, 'high');
-      if (picture !== null) imageContainer.append(picture);
-    }
-  });
-   animate(block, true);
+  setTimeout(() => {
+    // Get the rest of the images
+    assetIds.forEach(async (assetId, i) => {
+      if (i !== 0) {
+        const picture = await createPitcureFromAssetId(assetId, false, true, 'high');
+        if (picture !== null) imageContainer.append(picture);
+      }
+    });
+    animate(block, true);
   }, 3000);
 
   // setTimeout(() => {
