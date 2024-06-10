@@ -125,7 +125,7 @@ const onRedirect = async (e) => {
   window.location.assign(redirectUri);
 };
 
-const onToken = async (e) => {
+const onToken = async () => {
   await window.adobeIMS.refreshToken();
   window.location.reload();
 };
@@ -154,7 +154,7 @@ const onMessage = (e) => {
 };
 
 // override the signIn method from milo header and load SUSI Light
-async function signInOverride(button) {
+async function signInOverride() {
   try {
     const main = document.querySelector('main');
     const sentryWrapper = main.querySelector('.sentry-wrapper');
@@ -229,7 +229,7 @@ async function headerModal() {
   if (signInElem) {
     signInElem.addEventListener('click', async (e) => {
       e.preventDefault();
-      signInOverride(e.target);
+      signInOverride();
       e.stopImmediatePropagation();
       e.stopPropagation();
     }, true);
