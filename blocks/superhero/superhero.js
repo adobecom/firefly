@@ -154,9 +154,6 @@ export default async function decorate(block) {
   imageContainer.append(placeholderImage);
   block.append(imageContainer);
   // Get the first image in quickly and then process the rest
-  const firstAssetId = assetIds[0];
-  const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
-  if (firstPicture !== null) imageContainer.replaceChildren(firstPicture);
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -175,8 +172,11 @@ export default async function decorate(block) {
   generateButton.addEventListener('click', () => {
     textToImage(block);
   });
-  setTimeout(() => {
+  setTimeout(async () => {
      // Get the rest of the images
+     const firstAssetId = assetIds[0];
+  const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
+  if (firstPicture !== null) imageContainer.replaceChildren(firstPicture);
   assetIds.forEach(async (assetId, i) => {
     if (i !== 0) {
       const picture = await createPitcureFromAssetId(assetId, false, true, 'high');
