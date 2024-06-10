@@ -28,7 +28,7 @@ const LIBS = '/libs';
 
 // Add any config options.
 const CONFIG = {
-  // codeRoot: '',
+  codeRoot: '/aemedge',
   // contentRoot: '',
   imsClientId: 'firefly-milo',
   imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
