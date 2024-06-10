@@ -330,6 +330,10 @@ async function loadPage() {
   await decorateI18n(document.querySelector('main'));
   await loadArea();
   await headerModal();
+  const link = document.createElement('link');
+  link.rel = 'preconnect';
+  link.href = 'https://cdn.cp.adobe.io';
+  document.head.appendChild(link);
   setTimeout(() => {
     loadMartech();
     loadProfile();
