@@ -138,7 +138,10 @@ export default async function decorate(block) {
   // Get the first image in quickly and then process the rest
   const firstAssetId = assetIds[0];
   const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
-  if (firstPicture !== null) imageContainer.append(firstPicture);
+  if (firstPicture !== null) {
+    imageContainer.append(firstPicture);
+    firstPicture.querySelector('img').style = 'background:url(https://main--firefly--adobecom.hlx.page/media/white-placeholder.png) no-repeat;';
+  }
   block.append(imageContainer);
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
