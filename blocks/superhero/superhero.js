@@ -140,7 +140,7 @@ export default async function decorate(block) {
   const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
   if (firstPicture !== null) {
     imageContainer.append(firstPicture);
-    firstPicture.querySelector('img').style = 'background:url(https://cdn.cp.adobe.io/content/2/rendition/234b76bc-2031-4706-a43e-1b14843e42e5/artwork/f712ec4e-f339-4544-ad07-8620b554c163/version/0/format/jpg/dimension/width/size/450) no-repeat;';
+    //firstPicture.querySelector('img').style = 'background:url(https://main--firefly--adobecom.hlx.page/media/white-placeholder.png) no-repeat;';
   }
   block.append(imageContainer);
   const parent = block.parentElement;
