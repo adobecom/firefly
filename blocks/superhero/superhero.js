@@ -141,14 +141,22 @@ async function replaceWithHigherResolutionImage(block) {
 }
 
 export default async function decorate(block) {
+  const placeholderImage = block.querySelector('picture');
+  placeholderImage.querySelector('img').classList.add('active');
+// set eager loading for first image
+  placeholderImage.querySelector('img').setAttribute('loading', 'eager');
+  if(placeholderImage){
+    placeholderImage.parentElement.remove();
+  }
   const assetIds = block.querySelectorAll('p');
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
+  imageContainer.append(placeholderImage);
+  block.append(imageContainer);
   // Get the first image in quickly and then process the rest
   const firstAssetId = assetIds[0];
   const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
-  if (firstPicture !== null) imageContainer.append(firstPicture);
-  block.append(imageContainer);
+  if (firstPicture !== null) imageContainer.replaceChildren(firstPicture);
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -175,10 +183,10 @@ export default async function decorate(block) {
       if (picture !== null) imageContainer.append(picture);
     }
   });
-    animate(block, true);
+   animate(block, true);
   }, 3000);
 
-  setTimeout(() => {
-    replaceWithHigherResolutionImage(block);
-  }, 5000);
+  // setTimeout(() => {
+  //   replaceWithHigherResolutionImage(block);
+  // }, 5000);
 }
