@@ -214,17 +214,11 @@
   }
 
   .feds-utilities .feds-navItem {
-    padding: 5px;
+    padding: 10px;
   }
 
   .feds-utilities .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] {
     padding: 0;
-  }
-
-  .feds-utilities .feds-navItem:not(:has(.feds-cta )) {
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 4px;
   }
 
   .feds-utilities .feds-navItem:not(:has(.feds-cta )):hover {
@@ -232,8 +226,6 @@
     border: 1px solid rgb(230, 230, 230);
     border-radius: 4px;
   }
-
-  
 
   .feds-utilities .feds-navItem:not(:has(.feds-cta )) *:hover {
     background-color: rgb(230, 230, 230);
@@ -245,11 +237,6 @@
 
   .feds-utilities .feds-navLink {
     column-gap: 0;
-  }
-
-  .feds-navLink--hoverCaret[aria-expanded = "true"] + .feds-popup {
-    display: flex;
-    flex-direction: column;
   }
 
   p.button-container {
