@@ -379,8 +379,8 @@ async function loadPage() {
   const config = setConfig({ ...CONFIG, miloLibs });
   await decorateI18n(document.querySelector('main'));
   await loadArea();
-  await headerModal();
   await loadHeaderUtils();
+  await headerModal();
   setTimeout(() => {
     loadMartech();
     loadProfile();
