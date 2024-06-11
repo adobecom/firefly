@@ -322,21 +322,6 @@ export async function getI18nValue(key, limit = 5000) {
   }
 }
 
-/**
- * Decorates external links by adding target="_blank" and rel="noopener".
- * @param {HTMLElement} element - The element containing the external links.
- */
-export function decorateExternalLink(element) {
-  const anchors = element.querySelectorAll('a');
-  anchors.forEach((link) => {
-    const url = new URL(link.getAttribute('href'));
-    if (!(window.location.hostname === url.hostname)) {
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener');
-    }
-  });
-}
-
 async function loadHeaderUtils() {
   const resp = await fetch('/fragments/header-utils.plain.html');
   if (resp.ok) {
@@ -396,7 +381,6 @@ async function loadPage() {
   await loadArea();
   await loadHeaderUtils();
   await headerModal();
-  await loadHeaderUtils();
   setTimeout(() => {
     loadMartech();
     loadProfile();
