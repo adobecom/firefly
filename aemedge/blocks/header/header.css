@@ -85,11 +85,12 @@ header {
     color: inherit;
   }
 
-  .feds-navItem a[daa-ll*="What s New-7"] {
+  .feds-navItem a[daa-ll*="What's-New"] {
     font-size: 0;
+    padding: 0;
   }
 
-  .feds-navItem a[daa-ll*="What s New-7"]::before {
+  .feds-navItem a[daa-ll*="What's-New"]::before {
     content:'';
     width: 18px;
     height: 18px;
@@ -97,7 +98,7 @@ header {
     display: inline-block;
   }
 
-  .feds-navItem a[daa-ll*="What s New-7"]::after {
+  .feds-navItem a[daa-ll*="What's-New"]::after {
     content:unset;
   }
 

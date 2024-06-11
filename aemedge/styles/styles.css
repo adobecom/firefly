@@ -138,15 +138,16 @@
 
   .feds-profile > .feds-signIn:hover,
   .feds-navItem .feds-cta:hover{
-    background-color:rgba(177, 177, 177);
+    background-color:rgb(230, 230, 230);
     color: inherit;
   }
 
-  .feds-navItem a[daa-ll*="What s New-7"] {
+  .feds-navItem a[daa-ll*="What's-New"] {
     font-size: 0;
+    padding: 0;
   }
 
-  .feds-navItem a[daa-ll*="What s New-7"]::before {
+  .feds-navItem a[daa-ll*="What's-New"]::before {
     content:'';
     width: 18px;
     height: 18px;
@@ -154,7 +155,7 @@
     display: inline-block;
   }
 
-  .feds-navItem a[daa-ll*="What s New-7"]::after {
+  .feds-navItem a[daa-ll*="What's-New"]::after {
     content:unset;
   }
 
@@ -211,6 +212,32 @@
     color: rgba(109,109,109);
     font-weight: 500;
     font-size: 12px;
+  }
+
+  .feds-utilities .feds-navItem {
+    padding: 10px;
+  }
+
+  .feds-utilities .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] {
+    padding: 0;
+  }
+
+  .feds-utilities .feds-navItem:not(:has(.feds-cta )):hover {
+    background-color: rgb(230, 230, 230);
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 4px;
+  }
+
+  .feds-utilities .feds-navItem:not(:has(.feds-cta )) *:hover {
+    background-color: rgb(230, 230, 230);
+  }
+
+  .feds-utilities .feds-navItem:has(.feds-cta ){
+    padding: 0;
+  }
+
+  .feds-utilities .feds-navLink {
+    column-gap: 0;
   }
 
   p.button-container {
@@ -284,6 +311,14 @@
   .susiWrapper {
     display: block;
     height: var(--spectrum-global-dimension-size-4600);
+  }
+
+  .universal-nav-container #universal-nav::before {
+    content: '';
+    width: 1px;
+    height: 24px;
+    background-color: rgba(177 177 177);
+    margin: 0 10px 0 16px;
   }
 
   @media (width >= 600px) {
