@@ -396,7 +396,6 @@ async function loadPage() {
   await loadArea();
   await loadHeaderUtils();
   await headerModal();
-  await loadHeaderUtils();
   setTimeout(() => {
     loadMartech();
     loadProfile();
