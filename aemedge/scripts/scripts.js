@@ -337,12 +337,13 @@ export function decorateExternalLink(element) {
   });
 }
 
+// Load header links that are wrapped in feds-utilities and aligned to the right
 async function loadHeaderUtils() {
   const resp = await fetch('/fragments/header-utils.plain.html');
   if (resp.ok) {
     const headerUtils = document.createElement('div');
     headerUtils.innerHTML = await resp.text();
-    console.log('headerUtils', headerUtils);
+    decorateExternalLink(headerUtils);
     const navItemWrapper = document.createElement('div');
     const children = headerUtils.querySelectorAll('p');
     children.forEach((p) => {
@@ -365,9 +366,37 @@ async function loadHeaderUtils() {
         const fedsMenuColumn = document.createElement('div');
         fedsMenuColumn.classList.add('feds-menu-column');
         fedsMenuColumn.append(ul);
+        ul.querySelectorAll('li').forEach((li) => {
+          if (li.querySelector('a')) {
+            li.querySelectorAll('a').forEach((anchor) => {
+              if (anchor.textContent.endsWith('.svg')) {
+                const picture = document.createElement('picture');
+                const img = document.createElement('img');
+                img.src = anchor.textContent;
+                img.loading = 'lazy';
+                picture.append(img);
+                anchor.before(picture);
+                anchor.remove();
+              }
+              anchor.classList.add('feds-navLink');
+              anchor.setAttribute('daa-ll', anchor.textContent);
+            });
+          } else {
+            const prevElement = li.previousElementSibling;
+            const ulEl = document.createElement('ul');
+            ulEl.append(li.cloneNode(true));
+            prevElement.append(ulEl);
+            li.remove();
+          }
+        });
         fedsMenuContent.append(fedsMenuColumn);
         ulWrapper.append(fedsMenuContent);
         navItem.append(button, ulWrapper);
+        button.addEventListener('click', () => {
+          navItem.classList.toggle('feds-dropdown--active');
+          button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+          button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
+        });
       } else if (a) {
         if (p.querySelector('em')) {
           a.className = 'feds-cta feds-cta--primary';
