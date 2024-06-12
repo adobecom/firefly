@@ -322,6 +322,100 @@ export async function getI18nValue(key, limit = 5000) {
   }
 }
 
+/**
+ * Decorates external links by adding target="_blank" and rel="noopener".
+ * @param {HTMLElement} element - The element containing the external links.
+ */
+export function decorateExternalLink(element) {
+  const anchors = element.querySelectorAll('a');
+  anchors.forEach((link) => {
+    const url = new URL(link.getAttribute('href'));
+    if (!(window.location.hostname === url.hostname)) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener');
+    }
+  });
+}
+
+// Load header links that are wrapped in feds-utilities and aligned to the right
+async function loadHeaderUtils() {
+  const resp = await fetch('/fragments/header-utils.plain.html');
+  if (resp.ok) {
+    const headerUtils = document.createElement('div');
+    headerUtils.innerHTML = await resp.text();
+    decorateExternalLink(headerUtils);
+    const navItemWrapper = document.createElement('div');
+    const children = headerUtils.querySelectorAll('p');
+    children.forEach((p) => {
+      const navItem = document.createElement('div');
+      navItem.classList.add('feds-navItem');
+      const a = p.querySelector('a');
+      const ul = p.nextElementSibling;
+      if (ul && ul.tagName === 'UL') {
+        const button = document.createElement('button');
+        button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-haspopup', 'true');
+        button.setAttribute('daa-lh', 'header|Open');
+        button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+        button.textContent = a.textContent;
+        const ulWrapper = document.createElement('div');
+        ulWrapper.classList.add('feds-popup');
+        const fedsMenuContent = document.createElement('div');
+        fedsMenuContent.classList.add('feds-menu-content');
+        const fedsMenuColumn = document.createElement('div');
+        fedsMenuColumn.classList.add('feds-menu-column');
+        fedsMenuColumn.append(ul);
+        ul.querySelectorAll('li').forEach((li) => {
+          if (li.querySelector('a')) {
+            li.querySelectorAll('a').forEach((anchor) => {
+              if (anchor.textContent.endsWith('.svg')) {
+                const picture = document.createElement('picture');
+                const img = document.createElement('img');
+                img.src = anchor.textContent;
+                img.loading = 'lazy';
+                picture.append(img);
+                anchor.before(picture);
+                anchor.remove();
+              }
+              anchor.classList.add('feds-navLink');
+              anchor.setAttribute('daa-ll', anchor.textContent);
+            });
+          } else {
+            const prevElement = li.previousElementSibling;
+            const ulEl = document.createElement('ul');
+            ulEl.append(li.cloneNode(true));
+            prevElement.append(ulEl);
+            li.remove();
+          }
+        });
+        fedsMenuContent.append(fedsMenuColumn);
+        ulWrapper.append(fedsMenuContent);
+        navItem.append(button, ulWrapper);
+        button.addEventListener('click', () => {
+          navItem.classList.toggle('feds-dropdown--active');
+          button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+          button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
+        });
+      } else if (a) {
+        if (p.querySelector('em')) {
+          a.className = 'feds-cta feds-cta--primary';
+        } else {
+          a.classList.add('feds-navLink');
+        }
+        a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+        navItem.append(a);
+      }
+      navItemWrapper.append(navItem);
+    });
+    const utilsWrapper = document.querySelector('.feds-utilities');
+    console.log('utilsWrapper', utilsWrapper);
+    if (utilsWrapper) {
+      utilsWrapper.prepend(...navItemWrapper.childNodes);
+    }
+  }
+}
+
 async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
@@ -329,6 +423,7 @@ async function loadPage() {
   const config = setConfig({ ...CONFIG, miloLibs });
   await decorateI18n(document.querySelector('main'));
   await loadArea();
+  await loadHeaderUtils();
   await headerModal();
   setTimeout(() => {
     loadMartech();
