@@ -170,7 +170,6 @@
     height: 18px;
     background: url('../../icons/feedback.svg') left no-repeat;
     display: inline-block;
-    margin-right: 9px;
   }
 
   .feds-navItem > button.feds-navLink.feds-navLink--hoverCaret[daa-ll*="Feedback"]::after {
@@ -215,11 +214,17 @@
   }
 
   .feds-utilities .feds-navItem {
-    padding: 10px;
+    padding: 5px;
   }
 
   .feds-utilities .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] {
     padding: 0;
+  }
+
+  .feds-utilities .feds-navItem:not(:has(.feds-cta )) {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 4px;
   }
 
   .feds-utilities .feds-navItem:not(:has(.feds-cta )):hover {
@@ -227,6 +232,8 @@
     border: 1px solid rgb(230, 230, 230);
     border-radius: 4px;
   }
+
+  
 
   .feds-utilities .feds-navItem:not(:has(.feds-cta )) *:hover {
     background-color: rgb(230, 230, 230);
@@ -348,11 +355,12 @@
 
     .feds-utilities {
      margin-left: auto;
+      gap: 10px;
     }
 
     .feds-navItem a.feds-cta[href*="discord"] {
-      display: inline-block;
-      padding: 5px;
+      display: flex;
+      padding: 15px;
     }
   }
 
