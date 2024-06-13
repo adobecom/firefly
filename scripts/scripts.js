@@ -17,6 +17,7 @@
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript } from './aem.js';
+import { initAnalytics } from './analytics.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -41,6 +42,7 @@ const CONFIG = {
     kr: { ietf: 'ko-KR', tk: 'zfo3ouc' },
   },
 };
+
 
 // Decorate the page with site specific needs.
 // decorateArea();
@@ -421,6 +423,7 @@ async function loadPage() {
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
+  await initAnalytics();
   await decorateI18n(document.querySelector('main'));
   await loadArea();
   await loadHeaderUtils();

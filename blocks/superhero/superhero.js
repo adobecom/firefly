@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
+import { ingestAnalytics, createAnalyticsEvent } from '../../scripts/analytics.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
@@ -157,6 +158,26 @@ export default async function decorate(block) {
   block.append(author);
   generateButton.addEventListener('click', () => {
     textToImage(block);
+    const analyticsEvent = createAnalyticsEvent({
+      eventCategory: 'WEB',
+      eventWorkflow: 'Playground',
+      eventUserAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+      sourceClientId: 'clio-playground-web',
+      sourceName: 'GenAI Playground',
+      sourceVersion: '1.0.8',
+      sourcePlatform: 'WEB',
+      userServiceCode: '',
+      envCompanyName: 'GenAI Playground',
+      eventUrl: 'https://firefly.adobe.com/',
+      eventLanguage: 'en-US',
+      userServiceLevel: 'anonymous',
+      eventSubcategory: 'Home',
+      eventType: 'click',
+      eventSubtype: 'Generate',
+      eventCount: 1,
+    });
+
+    ingestAnalytics(analyticsEvent);
   });
   // Get the rest of the images
   assetIds.forEach(async (assetId, i) => {
