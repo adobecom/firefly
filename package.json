@@ -9,8 +9,8 @@
     "test:watch": "npm test -- --watch",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint .",
-    "lint:css": "stylelint 'blocks/**/*.css' 'styles/*.css'",
-    "build-js": "browserify node_modules/@sentry/wrapper/dist/index.js -p esmify -o scripts/sentry/bundle.js"
+    "lint:css": "stylelint 'aemedge/blocks/**/*.css' 'aemedge/styles/*.css'",
+    "build-js": "browserify node_modules/@sentry/wrapper/dist/index.js -p esmify -o aemedge/scripts/sentry/bundle.js"
   },
   "repository": {
     "type": "git",
