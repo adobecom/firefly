@@ -17,7 +17,7 @@
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript } from './aem.js';
-import { initAnalytics } from './analytics.js';
+import { initAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -411,7 +411,6 @@ async function loadHeaderUtils() {
       navItemWrapper.append(navItem);
     });
     const utilsWrapper = document.querySelector('.feds-utilities');
-    console.log('utilsWrapper', utilsWrapper);
     if (utilsWrapper) {
       utilsWrapper.prepend(...navItemWrapper.childNodes);
     }
@@ -423,7 +422,6 @@ async function loadPage() {
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
-  await initAnalytics();
   await decorateI18n(document.querySelector('main'));
   await loadArea();
   await loadHeaderUtils();
@@ -431,6 +429,8 @@ async function loadPage() {
   setTimeout(() => {
     loadMartech();
     loadProfile();
+    initAnalytics();
+    recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
   }, 3000);
 }
 
