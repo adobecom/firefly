@@ -162,7 +162,7 @@ async function signInOverride() {
       sentryWrapper.classList.remove('hidden');
     } else {
       const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || true;
+      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
       const susiAuthParams = {
         'client_id': CONFIG.imsClientId,
         'scope': CONFIG.imsScope,
