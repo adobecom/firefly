@@ -374,18 +374,11 @@ async function loadFireflyUtils(gnav) {
               picture.append(img);
               anchor.before(picture);
               anchor.remove();
+            } else {
+              anchor.classList.add('feds-navLink');
+              anchor.setAttribute('daa-ll', anchor.textContent);
             }
-            anchor.classList.add('feds-navLink');
-            anchor.setAttribute('daa-ll', anchor.textContent);
           });
-        } else {
-          const prevElement = li.previousElementSibling;
-          const ulEl = document.createElement('ul');
-          ulEl.append(li.cloneNode(true));
-          if (prevElement) {
-            prevElement.append(ulEl);
-          }
-          li.remove();
         }
       });
       fedsMenuContent.append(fedsMenuColumn);
