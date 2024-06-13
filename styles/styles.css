@@ -272,7 +272,11 @@
 
   .feds-navLink--hoverCaret:hover, .feds-navLink--hoverCaret:focus {
     background-color: unset;
-}
+  }
+
+  .feds-navItem:not(:last-child) > .feds-navLink {
+    border-bottom: none;
+  }
 
   p.button-container {
     align-items: center;
@@ -410,6 +414,10 @@
 
     .feds-brand-image img {
       opacity: 0;
+    }
+
+    .feds-brand-image .logo-mobile {
+      opacity: 1;
     }
 
     .feds-brand-image .logo-light {
