@@ -21,14 +21,14 @@ import { loadScript } from './aem.js';
 const searchParams = new URLSearchParams(window.location.search);
 
 // Add project-wide style path here.
-const STYLES = '/styles/styles.css';
+const STYLES = '/aemedge/styles/styles.css';
 
 // Use 'https://milo.adobe.com/libs' if you cannot map '/libs' to milo's origin.
 const LIBS = '/libs';
 
 // Add any config options.
 const CONFIG = {
-  // codeRoot: '',
+  codeRoot: '/aemedge',
   // contentRoot: '',
   imsClientId: 'firefly-milo',
   imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
@@ -125,7 +125,7 @@ const onRedirect = async (e) => {
   window.location.assign(redirectUri);
 };
 
-const onToken = async (e) => {
+const onToken = async () => {
   await window.adobeIMS.refreshToken();
   window.location.reload();
 };
@@ -154,7 +154,7 @@ const onMessage = (e) => {
 };
 
 // override the signIn method from milo header and load SUSI Light
-async function signInOverride(button) {
+async function signInOverride() {
   try {
     const main = document.querySelector('main');
     const sentryWrapper = main.querySelector('.sentry-wrapper');
@@ -162,7 +162,7 @@ async function signInOverride(button) {
       sentryWrapper.classList.remove('hidden');
     } else {
       const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || true;
+      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
       const susiAuthParams = {
         'client_id': CONFIG.imsClientId,
         'scope': CONFIG.imsScope,
@@ -203,7 +203,7 @@ async function signInOverride(button) {
 
       await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
       // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-      await loadScript('/scripts/sentry/bundle.js', { type: "module" });
+      await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
       window.addEventListener('click', (e) => {
         // if sign-in modal open and user clicks out of it, close the modal
         const isClickInsideModal = susiLightEl.contains(e.target);
@@ -229,7 +229,7 @@ async function headerModal() {
   if (signInElem) {
     signInElem.addEventListener('click', async (e) => {
       e.preventDefault();
-      signInOverride(e.target);
+      signInOverride();
       e.stopImmediatePropagation();
       e.stopPropagation();
     }, true);
@@ -437,5 +437,5 @@ loadPage();
   const preview = new URL(window.location.href).searchParams.get('dapreview');
   if (!preview) return;
   const origin = preview === 'local' ? 'http://localhost:3000' : 'https://da.live';
-  import(`${origin}/scripts/dapreview.js`).then(({ default: daPreview }) => daPreview(loadPage));
+  import(`${origin}/aemedge/scripts/dapreview.js`).then(({ default: daPreview }) => daPreview(loadPage));
 }());
