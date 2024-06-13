@@ -49,14 +49,28 @@
   }
   
   /* Navigation CSS Updates */
+.global-navigation {
+  background-color: inherit;
+}
+
+.global-navigation *{
+   color: inherit;
+}
+
+
 .feds-topnav {
   max-width: none;
   justify-content: unset;
   justify-items: unset;
 }
 
+.feds-navItem--active > .feds-navLink:only-child {
+  cursor: pointer;
+}
+
   .feds-topnav-wrapper {
     justify-content: space-between;
+    background-color: inherit;
   }
 
   .feds-brand-image{
@@ -65,7 +79,13 @@
 
   .feds-brand-image img{
     height: 28px;
+    display: none;
   }
+
+  .feds-brand-image .logo-mobile{
+    display: block;
+  }
+
 
   .feds-navItem{
     cursor: pointer;
@@ -179,6 +199,8 @@
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"]+ .feds-popup{
     width: 225px;
     padding:6px 12px 9px;
+    border: 1px solid rgba(213, 213, 213);
+    border-radius: 4px;
   }
 
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li {
@@ -197,11 +219,13 @@
   }
   
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > picture {
+    position: relative;
     grid-row: 1; 
     grid-column: 1; 
     margin-right:8px;
     justify-self: center;
     align-self: center; 
+    left: 0;
   }
   
   .feds-navItem > button.feds-navLink[daa-ll*="Feedback"] + .feds-popup .feds-menu-content .feds-menu-column ul > li > ul {
@@ -222,7 +246,7 @@
   }
 
   .feds-utilities .feds-navItem:not(:has(.feds-cta )) {
-    background-color: white;
+    background-color: inherit;
     border: 1px solid white;
     border-radius: 4px;
   }
@@ -232,13 +256,7 @@
     border: 1px solid rgb(230, 230, 230);
     border-radius: 4px;
   }
-
   
-
-  .feds-utilities .feds-navItem:not(:has(.feds-cta )) *:hover {
-    background-color: rgb(230, 230, 230);
-  }
-
   .feds-utilities .feds-navItem:has(.feds-cta ){
     padding: 0;
   }
@@ -251,6 +269,10 @@
     display: flex;
     flex-direction: column;
   }
+
+  .feds-navLink--hoverCaret:hover, .feds-navLink--hoverCaret:focus {
+    background-color: unset;
+}
 
   p.button-container {
     align-items: center;
@@ -362,6 +384,18 @@
       display: flex;
       padding: 15px;
     }
+
+    .feds-brand-image img{
+      display: block;
+    }
+
+    .feds-brand-image .logo-mobile{
+      display: none;
+    }
+
+    .feds-brand-image .logo-dark{
+      display: none;
+    }
   }
 
   @media (prefers-color-scheme: dark) {
@@ -369,6 +403,73 @@
       background-color: var(--spectrum-global-color-gray-50);
       color: var(--spectrum-button-content-color-default);
     }
-  }
 
+    .feds-topnav-wrapper {
+      border-color: rgb(84, 84, 84);
+    }
+
+    .feds-brand-image img {
+      opacity: 0;
+    }
+
+    .feds-brand-image .logo-light {
+      display: none;
+    }
+
+    .feds-utilities .feds-navLink::before {
+      filter: invert(1);
+    }
+
+    .feds-navItem a.feds-cta[href*="discord"]::before {
+      filter: invert(1);
+    }
+
+    .feds-navItem .feds-cta {
+      border-color: rgb(84, 84, 84);
+    }
+
+    .feds-utilities .feds-navItem:not(:has(.feds-cta )):hover {
+      background-color: rgb(63, 63, 63);
+      border: 1px solid rgb(63, 63, 63);
+    }
+
+    .feds-utilities .feds-navItem:not(:has(.feds-cta )) *:hover {
+      background-color: rgb(63, 63, 63);
+    }
+
+    .feds-utilities .feds-navItem:not(:has(.feds-cta )) {
+      background-color: var(--spectrum-global-color-gray-50);
+      border: 1px solid var(--spectrum-global-color-gray-50);
+    }
+
+    .feds-profile > .feds-signIn:hover,
+    .feds-navItem .feds-cta:hover{
+      background-color: rgb(84, 84, 84);
+    }
+
+    .feds-popup {
+      background-color: inherit;
+    }
+
+    @media (min-width: 900px) {
+      .feds-navItem--active > .feds-navLink::before {
+        border-color: white;
+      }
+
+      .feds-navItem--active > .feds-navLink:only-child:hover, .feds-navItem--active > .feds-navLink:only-child:focus {
+        color: white;
+      }
+    }
+
+    @media (width >= 600px) {
+      .feds-brand-image .logo-mobile {
+        display: none;
+      }
+
+      .feds-brand-image .logo-dark {
+        display: block;
+        opacity: 1;
+      }
+    }
+  }
 }

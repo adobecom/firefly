@@ -416,6 +416,45 @@ async function loadHeaderUtils() {
   }
 }
 
+/**
+ * Decorates the Firefly logo. Adds logos for dark mode and mobile.
+ * @param {HTMLElement} gnav - The global navigation element.
+ */
+function decorateFireflyLogo(gnav) {
+  const logo = gnav.querySelector('.firefly-logo');
+  const brandContainer = document.querySelector('.feds-brand-image');
+  const defaultLogo = brandContainer.querySelector('img');
+  if (defaultLogo) {
+    defaultLogo.classList.add('logo-light');
+  }
+  if (logo) {
+    [...logo.children].forEach((row) => {
+      if (row.firstElementChild.innerText === 'dark') {
+        const img = document.createElement('img');
+        img.src = row.lastElementChild.querySelector('a').innerText;
+        img.classList.add('logo-dark');
+        img.loading = 'lazy';
+        brandContainer.append(img);
+      } else if (row.firstElementChild.innerText === 'mobile') {
+        const img = document.createElement('img');
+        img.src = row.lastElementChild.querySelector('a').innerText;
+        img.classList.add('logo-mobile');
+        img.loading = 'lazy';
+        brandContainer.append(img);
+      }
+    });
+  }
+}
+
+async function loadFireflyHeaderComponents() {
+  const resp = await fetch('/gnav.plain.html');
+  if (resp.ok) {
+    const gnav = document.createElement('div');
+    gnav.innerHTML = await resp.text();
+    decorateFireflyLogo(gnav);
+  }
+}
+
 async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
@@ -423,6 +462,7 @@ async function loadPage() {
   const config = setConfig({ ...CONFIG, miloLibs });
   await decorateI18n(document.querySelector('main'));
   await loadArea();
+  await loadFireflyHeaderComponents();
   await loadHeaderUtils();
   await headerModal();
   setTimeout(() => {
