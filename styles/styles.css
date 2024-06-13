@@ -265,6 +265,11 @@
     column-gap: 0;
   }
 
+  .feds-utilities {
+    margin-left: auto;
+     gap: 10px;
+   }
+
   .feds-navLink--hoverCaret[aria-expanded = "true"] + .feds-popup {
     display: flex;
     flex-direction: column;
@@ -377,11 +382,6 @@
       justify-content: center;
       flex-grow: 0;
       margin-left: 2%;
-    }
-
-    .feds-utilities {
-     margin-left: auto;
-      gap: 10px;
     }
 
     .feds-navItem a.feds-cta[href*="discord"] {
