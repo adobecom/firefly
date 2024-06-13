@@ -441,7 +441,6 @@ async function loadFireflyHeaderComponents() {
   if (resp.ok) {
     const gnav = document.createElement('div');
     gnav.innerHTML = await resp.text();
-    console.log(gnav);
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
