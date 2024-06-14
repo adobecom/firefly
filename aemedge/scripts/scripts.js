@@ -65,6 +65,7 @@ const miloLibs = setLibs(LIBS);
 }());
 
 async function loadProfile() {
+  await openModal('/fragments/legal');
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
@@ -425,9 +426,9 @@ async function loadPage() {
   await loadArea();
   await loadHeaderUtils();
   await headerModal();
+  loadProfile();
   setTimeout(() => {
     loadMartech();
-    loadProfile();
   }, 3000);
 }
 

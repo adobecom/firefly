@@ -1,0 +1,3 @@
+.modal.block:has(.legal-modal) dialog{
+    padding: 0;
+}
