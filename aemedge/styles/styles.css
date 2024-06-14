@@ -474,15 +474,20 @@
     }
 
     .feds-popup {
-      background-color: inherit;
-    }
-
-    .feds-popup .feds-menu-column>ul>li:hover {
-      background-color: rgba(255, 255, 255, 10%);
+      filter: invert(1);
+      background-color: rgb(226, 226, 226);
     }
 
     .feds-utilities .feds-navItem:not(:has(.feds-cta)):hover .feds-popup {
-      background-color: rgb(29, 29, 29);
+      background-color: rgb(226, 226, 226);
+    }
+
+    .feds-popup .feds-menu-column>ul>li:hover {
+      background-color: rgba(0, 0, 0, 10%);
+    }
+
+    .feds-popup .feds-menu-column>ul>li a{
+        color: rgb(20, 20, 20);
     }
 
     @media (min-width: 900px) {
