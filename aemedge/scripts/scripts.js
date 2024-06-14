@@ -347,8 +347,9 @@ async function loadFireflyUtils(gnav) {
     const navItem = document.createElement('div');
     navItem.classList.add('feds-navItem');
     const a = p.querySelector('a');
-    const ul = p.nextElementSibling;
-    if (ul && ul.tagName === 'UL') {
+    const nextEl = p.nextElementSibling;
+    if (nextEl && nextEl.tagName === 'UL') {
+      const ul = nextEl;
       const button = document.createElement('button');
       button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
       button.setAttribute('aria-expanded', 'false');
@@ -397,6 +398,12 @@ async function loadFireflyUtils(gnav) {
       }
       a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
       navItem.append(a);
+      if (nextEl && nextEl.tagName === 'H3') {
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('feds-tooltip');
+        tooltip.textContent = nextEl.textContent;
+        navItem.append(a, tooltip);
+      }
     }
     navItemWrapper.append(navItem);
   });
