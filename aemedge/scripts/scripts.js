@@ -154,7 +154,7 @@ const onMessage = (e) => {
 };
 
 // override the signIn method from milo header and load SUSI Light
-async function signInOverride() {
+export async function signInOverride() {
   try {
     const main = document.querySelector('main');
     const sentryWrapper = main.querySelector('.sentry-wrapper');
