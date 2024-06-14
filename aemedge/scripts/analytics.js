@@ -112,7 +112,7 @@ const getComputedContentValues = () => ({
 export function makeFinalPayload({ ...events }) {
   return {
     ...INGEST_BASE_PAYLOAD,
-    events: {
+    data: {
       ...INGEST_BASE_DATA_EVENT,
       ...INGEST_BASE_DATA_SOURCE,
       ...INGEST_BASE_DATA_USER,
