@@ -30,8 +30,10 @@ const LIBS = '/libs';
 const CONFIG = {
   codeRoot: '/aemedge',
   // contentRoot: '',
-  imsClientId: 'firefly-milo',
-  imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
+  // imsClientId: 'firefly-milo',
+  // imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
+  imsClientId: 'clio-playground-web',
+  imsScope: 'AdobeID,firefly_api,openid,pps.read,additional_info.projectedProductContext,additional_info.ownerOrg,uds_read,uds_write,ab.manage,read_organizations,additional_info.roles',
   geoRouting: 'off',
   fallbackRouting: 'off',
   decorateArea,
