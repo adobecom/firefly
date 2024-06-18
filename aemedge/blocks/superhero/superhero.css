@@ -127,7 +127,7 @@
   width: 18px;
   height: 18px;
   pointer-events: none;
-  background-image: url('/img/firefly/generate.svg');
+  background-image: url('../../img/firefly/generate.svg');
   background-repeat: no-repeat;
 }
 
