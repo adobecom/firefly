@@ -348,76 +348,78 @@ export function decorateExternalLink(element) {
 // Load header links that are wrapped in feds-utilities and aligned to the right
 async function loadFireflyUtils(gnav) {
   const headerUtils = gnav.querySelector('.firefly-utils');
-  decorateExternalLink(headerUtils);
-  const navItemWrapper = document.createElement('div');
-  const children = headerUtils.querySelectorAll('p');
-  children.forEach((p) => {
-    const navItem = document.createElement('div');
-    navItem.classList.add('feds-navItem');
-    const a = p.querySelector('a');
-    const nextEl = p.nextElementSibling;
-    if (nextEl && nextEl.tagName === 'UL') {
-      const ul = nextEl;
-      const button = document.createElement('button');
-      button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-haspopup', 'true');
-      button.setAttribute('daa-lh', 'header|Open');
-      button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-      button.textContent = a.textContent;
-      const ulWrapper = document.createElement('div');
-      ulWrapper.classList.add('feds-popup');
-      const fedsMenuContent = document.createElement('div');
-      fedsMenuContent.classList.add('feds-menu-content');
-      const fedsMenuColumn = document.createElement('div');
-      fedsMenuColumn.classList.add('feds-menu-column');
-      fedsMenuColumn.append(ul);
-      ul.querySelectorAll('li').forEach((li) => {
-        if (li.querySelector('a')) {
-          li.querySelectorAll('a').forEach((anchor) => {
-            if (anchor.textContent.endsWith('.svg')) {
-              const picture = document.createElement('picture');
-              const img = document.createElement('img');
-              img.src = anchor.textContent;
-              img.loading = 'lazy';
-              picture.append(img);
-              anchor.before(picture);
-              anchor.remove();
-            } else {
-              anchor.classList.add('feds-navLink');
-              anchor.setAttribute('daa-ll', anchor.textContent);
-            }
-          });
+  if (headerUtils) {
+    decorateExternalLink(headerUtils);
+    const navItemWrapper = document.createElement('div');
+    const children = headerUtils.querySelectorAll('p');
+    children.forEach((p) => {
+      const navItem = document.createElement('div');
+      navItem.classList.add('feds-navItem');
+      const a = p.querySelector('a');
+      const nextEl = p.nextElementSibling;
+      if (nextEl && nextEl.tagName === 'UL') {
+        const ul = nextEl;
+        const button = document.createElement('button');
+        button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-haspopup', 'true');
+        button.setAttribute('daa-lh', 'header|Open');
+        button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+        button.textContent = a.textContent;
+        const ulWrapper = document.createElement('div');
+        ulWrapper.classList.add('feds-popup');
+        const fedsMenuContent = document.createElement('div');
+        fedsMenuContent.classList.add('feds-menu-content');
+        const fedsMenuColumn = document.createElement('div');
+        fedsMenuColumn.classList.add('feds-menu-column');
+        fedsMenuColumn.append(ul);
+        ul.querySelectorAll('li').forEach((li) => {
+          if (li.querySelector('a')) {
+            li.querySelectorAll('a').forEach((anchor) => {
+              if (anchor.textContent.endsWith('.svg')) {
+                const picture = document.createElement('picture');
+                const img = document.createElement('img');
+                img.src = anchor.textContent;
+                img.loading = 'lazy';
+                picture.append(img);
+                anchor.before(picture);
+                anchor.remove();
+              } else {
+                anchor.classList.add('feds-navLink');
+                anchor.setAttribute('daa-ll', anchor.textContent);
+              }
+            });
+          }
+        });
+        fedsMenuContent.append(fedsMenuColumn);
+        ulWrapper.append(fedsMenuContent);
+        navItem.append(button, ulWrapper);
+        button.addEventListener('click', () => {
+          navItem.classList.toggle('feds-dropdown--active');
+          button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+          button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
+        });
+      } else if (a) {
+        if (p.querySelector('em')) {
+          a.className = 'feds-cta feds-cta--primary';
+        } else {
+          a.classList.add('feds-navLink');
         }
-      });
-      fedsMenuContent.append(fedsMenuColumn);
-      ulWrapper.append(fedsMenuContent);
-      navItem.append(button, ulWrapper);
-      button.addEventListener('click', () => {
-        navItem.classList.toggle('feds-dropdown--active');
-        button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-        button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
-      });
-    } else if (a) {
-      if (p.querySelector('em')) {
-        a.className = 'feds-cta feds-cta--primary';
-      } else {
-        a.classList.add('feds-navLink');
+        a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+        navItem.append(a);
+        if (nextEl && nextEl.tagName === 'H3') {
+          const tooltip = document.createElement('div');
+          tooltip.classList.add('feds-tooltip');
+          tooltip.textContent = nextEl.textContent;
+          navItem.append(a, tooltip);
+        }
       }
-      a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-      navItem.append(a);
-      if (nextEl && nextEl.tagName === 'H3') {
-        const tooltip = document.createElement('div');
-        tooltip.classList.add('feds-tooltip');
-        tooltip.textContent = nextEl.textContent;
-        navItem.append(a, tooltip);
-      }
+      navItemWrapper.append(navItem);
+    });
+    const utilsWrapper = document.querySelector('.feds-utilities');
+    if (utilsWrapper) {
+      utilsWrapper.prepend(...navItemWrapper.childNodes);
     }
-    navItemWrapper.append(navItem);
-  });
-  const utilsWrapper = document.querySelector('.feds-utilities');
-  if (utilsWrapper) {
-    utilsWrapper.prepend(...navItemWrapper.childNodes);
   }
 }
 
@@ -427,27 +429,29 @@ async function loadFireflyUtils(gnav) {
  */
 function decorateFireflyLogo(gnav) {
   const logo = gnav.querySelector('.firefly-logo');
-  const brandContainer = document.querySelector('.feds-brand-image');
-  const defaultLogo = brandContainer.querySelector('img');
-  if (defaultLogo) {
-    defaultLogo.classList.add('logo-light');
-  }
   if (logo) {
-    [...logo.children].forEach((row) => {
-      if (row.firstElementChild.innerText === 'dark') {
-        const img = document.createElement('img');
-        img.src = row.lastElementChild.querySelector('a').innerText;
-        img.classList.add('logo-dark');
-        img.loading = 'lazy';
-        brandContainer.append(img);
-      } else if (row.firstElementChild.innerText === 'mobile') {
-        const img = document.createElement('img');
-        img.src = row.lastElementChild.querySelector('a').innerText;
-        img.classList.add('logo-mobile');
-        img.loading = 'lazy';
-        brandContainer.append(img);
-      }
-    });
+    const brandContainer = document.querySelector('.feds-brand-image');
+    const defaultLogo = brandContainer.querySelector('img');
+    if (defaultLogo) {
+      defaultLogo.classList.add('logo-light');
+    }
+    if (logo) {
+      [...logo.children].forEach((row) => {
+        if (row.firstElementChild.innerText === 'dark') {
+          const img = document.createElement('img');
+          img.src = row.lastElementChild.querySelector('a').innerText;
+          img.classList.add('logo-dark');
+          img.loading = 'lazy';
+          brandContainer.append(img);
+        } else if (row.firstElementChild.innerText === 'mobile') {
+          const img = document.createElement('img');
+          img.src = row.lastElementChild.querySelector('a').innerText;
+          img.classList.add('logo-mobile');
+          img.loading = 'lazy';
+          brandContainer.append(img);
+        }
+      });
+    }
   }
 }
 
