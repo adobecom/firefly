@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
+import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
@@ -157,6 +158,11 @@ export default async function decorate(block) {
   block.append(author);
   generateButton.addEventListener('click', () => {
     textToImage(block);
+    const analyticsEvent = makeFinalPayload({
+      eventType: 'click',
+      eventSubtype: 'Generate',
+    });
+    ingestAnalytics(analyticsEvent);
   });
   // Get the rest of the images
   assetIds.forEach(async (assetId, i) => {

@@ -17,6 +17,7 @@
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript } from './aem.js';
+import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -234,6 +235,13 @@ async function headerModal() {
       signInOverride();
       e.stopImmediatePropagation();
       e.stopPropagation();
+
+      const analyticsEvent = makeFinalPayload({
+        'event.subcategory': 'Navigation',
+        'event.subtype': 'signin',
+        'event.type': 'click',
+      });
+      ingestAnalytics([analyticsEvent]);
     }, true);
   }
 }
@@ -453,6 +461,19 @@ async function loadFireflyHeaderComponents() {
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
+
+  const navLinks = document.querySelectorAll('nav a.feds-navLink');
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const analyticsEvent = makeFinalPayload({
+        "event.subcategory": "Navigation",
+        "event.subtype": link.innerText,
+        "event.type": "click",
+      });
+      ingestAnalytics([analyticsEvent]);
+    });
+  });
 }
 
 async function loadPage() {
@@ -467,6 +488,8 @@ async function loadPage() {
   setTimeout(() => {
     loadMartech();
     loadProfile();
+    initAnalytics();
+    recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
   }, 3000);
 }
 
