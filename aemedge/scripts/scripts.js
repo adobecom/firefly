@@ -65,11 +65,6 @@ const miloLibs = setLibs(LIBS);
 }());
 
 async function loadProfile() {
-  // below code to be removed
-  const parsedUrl = new URL(window.location.href);
-  if (parsedUrl.searchParams.has('loadLegal')) {
-    await openModal('/fragments/legal');
-  }
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
