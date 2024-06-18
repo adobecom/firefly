@@ -1,3 +1,62 @@
-.modal.block:has(.legal-modal) dialog{
+.modal.block:has(.legal-modal) dialog {
     padding: 0;
+    overflow: hidden;
+    border: none;
+    max-height: 90vh;
+    max-width: auto;
+}
+
+.modal.block:has(.legal-modal) dialog .close-button {
+   display: none;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content {
+    padding: 0;
+    overflow: hidden;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-content {
+    margin: 0 7%;
+    height: 100%;
+    overflow-y: auto;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-content a {
+    text-decoration: none;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-content h4 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-footer {
+    margin: 5% 7%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1%;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-footer button {
+    padding: 7px 14px;
+    border-radius: 16px;
+    background-color: var(--spectrum-global-color-gray-100);
+    border: 2px solid rgb(213, 213, 213);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.agree {
+    border-color: rgb(2, 101, 220);
+    background-color: rgb(2, 101, 220);
+    color: white;
+}
+
+@media screen and (min-width: 900px) {
+    .modal.block:has(.legal-modal) dialog {
+        max-width: 640px;
+    }
 }

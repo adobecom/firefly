@@ -461,9 +461,11 @@ async function loadPage() {
   const config = setConfig({ ...CONFIG, miloLibs });
   await decorateI18n(document.querySelector('main'));
   await loadArea();
-  await loadFireflyHeaderComponents();
   await headerModal();
   loadProfile();
+  setTimeout(() => {
+    loadFireflyHeaderComponents();
+  }, 0);
   setTimeout(() => {
     loadMartech();
   }, 3000);
