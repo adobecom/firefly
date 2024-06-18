@@ -17,7 +17,7 @@
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript } from './aem.js';
-import { initAnalytics, recordRenderPageEvent } from './analytics.js';
+import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -44,7 +44,6 @@ const CONFIG = {
     kr: { ietf: 'ko-KR', tk: 'zfo3ouc' },
   },
 };
-
 
 // Decorate the page with site specific needs.
 // decorateArea();
@@ -236,6 +235,13 @@ async function headerModal() {
       signInOverride();
       e.stopImmediatePropagation();
       e.stopPropagation();
+
+      const analyticsEvent = makeFinalPayload({
+        'event.subcategory': 'Navigation',
+        'event.subtype': 'signin',
+        'event.type': 'click',
+      });
+      ingestAnalytics([analyticsEvent]);
     }, true);
   }
 }
@@ -455,6 +461,19 @@ async function loadFireflyHeaderComponents() {
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
+
+  const navLinks = document.querySelectorAll('nav a.feds-navLink');
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const analyticsEvent = makeFinalPayload({
+        "event.subcategory": "Navigation",
+        "event.subtype": link.innerText,
+        "event.type": "click",
+      });
+      ingestAnalytics([analyticsEvent]);
+    });
+  });
 }
 
 async function loadPage() {

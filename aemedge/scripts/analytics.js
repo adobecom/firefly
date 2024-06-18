@@ -2,7 +2,6 @@
 import { getMetadata } from './aem.js';
 
 export function initAnalytics() {
-  console.log('Analytics initialized');
   const DUNAMIS_API_URL_STAGE = 'https://cc-api-data-stage.adobe.io/ingest';
   const DUNAMIS_API_URL_PROD = 'https://cc-api-data.adobe.io/ingest';
   const DUNAMIS_PROJECT_KEY = 'genai-web-service';
@@ -25,9 +24,6 @@ export function initAnalytics() {
 }
 
 export function ingestAnalytics(eventPayload) {
-  console.log('Window Object:', window.analyticsConfig);
-  console.log('Sending analytics event:', eventPayload);
-
   const headers = new Headers({
     'Content-Type': 'application/json',
     'x-api-key': window.analyticsConfig.apiKey,
@@ -44,10 +40,12 @@ export function ingestAnalytics(eventPayload) {
       if (!response.ok) {
         throw new Error(`Network response was not ok ${response.statusText}`);
       }
-      return response.json();
-    })
-    .then((data) => {
-      console.log('Successfully sent analytics event:', data);
+
+      if (response.headers.get('Content-Length') === '0') {
+        return {};
+      }
+
+      return response;
     })
     .catch((error) => {
       console.error('There was a problem with the fetch operation:', error);
@@ -67,7 +65,7 @@ const INGEST_BASE_PAYLOAD = {
   project: 'genai-web-service',
   environment: 'stage',
   ingesttype: 'dunamis',
-  timestamp: new Date().toISOString(),
+  time: new Date().toISOString(),
 };
 
 const INGEST_BASE_DATA_EVENT = {
@@ -95,13 +93,12 @@ const getComputedEventValues = (sessionGUID) => ({
   'event.coll_dts': new Date().toString(),
   'event.dts_start': new Date().toString(),
   'event.dts_end': new Date().toString(),
-  'event.guid': 'TODO : UUIDv4', // event guid
   'event.session_guid': sessionGUID,
   'event.language': window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US',
 });
 
 const getComputedContextValues = () => ({ 'context.init': false });
-const getComputedIMSValues = () => ({ 'user.service_code': 'TODO : IMS INFO SCOPE' });
+const getComputedIMSValues = () => ({ 'user.service_code': window.adobeIMS?.serviceRequest?.scope || '' });
 
 const getComputedContentValues = () => ({
   'content.name': '',
@@ -129,7 +126,6 @@ export function makeFinalPayload({ ...events }) {
 }
 
 export function recordRenderPageEvent(pageSource, feedbackId) {
-  console.log('Recording render page event');
   const event = makeFinalPayload({
     'content.id': '',
     'content.name': feedbackId ?? '',
