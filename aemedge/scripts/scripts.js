@@ -65,7 +65,6 @@ const miloLibs = setLibs(LIBS);
 }());
 
 async function loadProfile() {
-  await openModal('/fragments/legal');
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
@@ -83,6 +82,9 @@ async function loadProfile() {
     const profile = await resp.json();
     if (!profile.data['whats-new-dialog-confirmed']) {
       await openModal('/fragments/whatsnew');
+    }
+    if (!profile.data['legal-user-acceptance']) {
+      await openModal('/fragments/legal');
     }
   }
 }
