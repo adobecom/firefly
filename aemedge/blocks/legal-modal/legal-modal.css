@@ -25,6 +25,7 @@
 
 .modal.block:has(.legal-modal) dialog .modal-content .legal-content a {
     text-decoration: none;
+    outline: none;
 }
 
 .modal.block:has(.legal-modal) dialog .modal-content .legal-content h4 {
@@ -53,6 +54,83 @@
     border-color: rgb(2, 101, 220);
     background-color: rgb(2, 101, 220);
     color: white;
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.cancel {
+    border-color: rgb(213, 213, 213);
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.cancel:hover {
+    background-color: rgb(213, 213, 213);
+}
+
+.modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.agree:hover {
+    background-color: rgb(0, 89, 194);
+    border-color: rgb(0, 89, 194);
+}
+
+.legal-banner {
+    background-color: rgb(215, 25, 19);
+    display: flex;
+}
+
+.legal-banner .legal-banner-content {
+    color: var(--spectrum-button-content-color-default);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 1%;
+    width: 100%;
+}
+
+.legal-banner .legal-banner-content p{
+    font-size: 14px;
+    font-weight: 400;
+    flex-grow: 1;
+}
+
+.legal-banner .legal-banner-content img {
+    width: 18px;
+    height: 18px;
+    filter: invert(1);
+    margin-right: 0.5%;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.legal-banner .legal-banner-content button {
+    padding: 7px 14px;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 25%);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.legal-banner .legal-banner-content button:hover {
+    background-color: rgba(255, 255, 255, 25%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .modal.block:has(.legal-modal) dialog {
+        background-color: rgb(29, 29, 29);
+      color: var(--spectrum-button-content-color-default);
+    }
+
+    .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button {
+        color: white;
+    }
+
+    .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.cancel {
+        border-color :  rgb(112, 112, 112);
+    }
+
+    .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.cancel:hover {
+        background-color: rgb(84, 84, 84);
+    }
+
+    .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.agree:hover {
+        background-color: rgb(0, 89, 194);
+        border-color: rgb(0, 89, 194);
+    }
 }
 
 @media screen and (min-width: 900px) {

@@ -64,11 +64,34 @@ const miloLibs = setLibs(LIBS);
   });
 }());
 
+function loadLegalBanner() {
+  const legalBanner = document.createElement('div');
+  legalBanner.classList.add('legal-banner');
+  const legalBannerContent = document.createElement('div');
+  legalBannerContent.classList.add('legal-banner-content');
+  const legalBannerIcon = document.createElement('img');
+  legalBannerIcon.src = '../aemedge/icons/warning-black.svg';
+  legalBannerContent.append(legalBannerIcon);
+  const legalBannerText = document.createElement('p');
+  legalBannerText.textContent = 'To use Firefly, you must agree to the Adobe Generative AI User Guidelines.';
+  legalBannerContent.append(legalBannerText);
+  const legalBannerButton = document.createElement('button');
+  legalBannerButton.classList.add('legal-banner-button');
+  legalBannerButton.textContent = 'View User Guidelines';
+  legalBannerButton.addEventListener('click', async () => {
+    await openModal('/fragments/legal');
+  });
+  legalBannerContent.append(legalBannerButton);
+  legalBanner.append(legalBannerContent);
+  document.querySelector('header').prepend(legalBanner);
+}
+
 async function loadProfile() {
   // below code to be removed
   const parsedUrl = new URL(window.location.href);
   if (parsedUrl.searchParams.has('loadLegal')) {
     await openModal('/fragments/legal');
+    loadLegalBanner();
   }
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
@@ -90,6 +113,7 @@ async function loadProfile() {
     }
     if (!profile.data['legal-user-acceptance']) {
       await openModal('/fragments/legal');
+      loadLegalBanner();
     }
   }
 }

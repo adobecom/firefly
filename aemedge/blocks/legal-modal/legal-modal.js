@@ -1,25 +1,39 @@
 import { getLibs } from '../../scripts/utils.js';
+import { openModal } from '../modal/modal.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 async function legalUserAcceptance() {
-  if (!window.adobeIMS) {
-    await loadIms();
-  }
-  if (window.adobeIMS.isSignedInUser) {
-    const adobeIms = sessionStorage.getItem(Object.keys(sessionStorage).find((key) => key.includes('adobeid_ims')));
-    const adobeImsToken = JSON.parse(adobeIms);
-    if (adobeImsToken.userId) {
-      fetch('https://uds.adobe-identity.com/userdocs/firefly-web?version=0', {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${window.adobeIMS.getAccessToken().token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ documentId: { appDomain: 'firefly-web', ownerEntity: adobeImsToken.userId }, data: { 'legal-user-acceptance': 1701406800000 } }),
-      });
+  return new Promise((resolve, reject) => {
+    if (!window.adobeIMS) {
+      loadIms();
     }
-  }
+    if (window.adobeIMS.isSignedInUser()) {
+      const adobeIms = sessionStorage.getItem(Object.keys(sessionStorage).find((key) => key.includes('adobeid_ims')));
+      const adobeImsToken = JSON.parse(adobeIms);
+      if (adobeImsToken.userId) {
+        fetch('https://uds.adobe-identity.com/userdocs/firefly-web?version=0', {
+          method: 'PATCH',
+          headers: {
+            Authorization: `Bearer ${window.adobeIMS.getAccessToken().token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ documentId: { appDomain: 'firefly-web', ownerEntity: adobeImsToken.userId }, data: { 'legal-user-acceptance': 1701406800000 } }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              resolve(response);
+            } else {
+              reject(new Error('Fetch operation failed'));
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
+    }
+    reject();
+  });
 }
 
 export default async function decorate(block) {
@@ -36,9 +50,8 @@ export default async function decorate(block) {
   const cancel = document.createElement('button');
   cancel.classList.add('cancel');
   cancel.textContent = 'Cancel';
-  const dialogs = document.querySelectorAll('.dialog');
   cancel.addEventListener('click', () => {
-    block.remove();
+    const dialogs = document.querySelectorAll('dialog');
     dialogs.forEach((dialog) => {
       dialog.close();
     });
@@ -47,9 +60,13 @@ export default async function decorate(block) {
   agree.classList.add('agree');
   agree.textContent = 'Agree';
   agree.addEventListener('click', async () => {
-    await legalUserAcceptance();
-    dialogs.forEach((dialog) => {
-      dialog.close();
+    const dialogs = document.querySelectorAll('dialog');
+    legalUserAcceptance().then(() => {
+      dialogs.forEach((dialog) => {
+        dialog.close();
+      });
+      const legalBanner = document.querySelector('.legal-banner');
+      legalBanner.remove();
     });
   });
   legalFooter.append(cancel);
