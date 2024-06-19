@@ -122,7 +122,14 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     // eslint-disable-next-line max-len
-    const picture = createOptimizedFireflyPicture(imageUrl, imageId, prompt, active, eager, fetchPriority);
+    const picture = createOptimizedFireflyPicture(imageUrl, imageId, prompt, active, eager, fetchPriority, [
+      { media: '(min-width: 2000px)', width: '3000' },
+      { media: '(min-width: 1200px)', width: '2000' },
+      { media: '(min-width: 900px)', width: '1200' },
+      { media: '(min-width: 600px)', width: '900' },
+      { media: '(min-width: 450px)', width: '600' },
+      { width: '600' },
+    ]);
     const authorName = imageDetails._embedded.owner.display_name;
     const authorImage = (imageDetails._embedded.owner._links.images)[0].href;
     if (authorName) picture.dataset.authorName = authorName;
@@ -164,14 +171,15 @@ export default async function decorate(block) {
     });
     ingestAnalytics(analyticsEvent);
   });
-  // Get the rest of the images
-  assetIds.forEach(async (assetId, i) => {
-    if (i !== 0) {
-      const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
-      if (picture !== null) imageContainer.append(picture);
-    }
-  });
+
   setTimeout(() => {
+    // Get the rest of the images
+    assetIds.forEach(async (assetId, i) => {
+      if (i !== 0) {
+        const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
+        if (picture !== null) imageContainer.append(picture);
+      }
+    });
     animate(block, true);
   }, 3000);
 }
