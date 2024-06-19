@@ -166,14 +166,13 @@ export default async function decorate(block) {
   });
   // Get the rest of the images
   setTimeout(() => {
-    animate(block, true);
+    assetIds.forEach(async (assetId, i) => {
+      if (i !== 0) {
+        const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
+        if (picture !== null) imageContainer.append(picture);
+      }
+    });
   }, 0);
-  assetIds.forEach(async (assetId, i) => {
-    if (i !== 0) {
-      const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
-      if (picture !== null) imageContainer.append(picture);
-    }
-  });
   setTimeout(() => {
     animate(block, true);
   }, 3000);
