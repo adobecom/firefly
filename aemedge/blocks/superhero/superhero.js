@@ -165,13 +165,16 @@ export default async function decorate(block) {
     ingestAnalytics(analyticsEvent);
   });
   // Get the rest of the images
-  // assetIds.forEach(async (assetId, i) => {
-  //   if (i !== 0) {
-  //     const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
-  //     if (picture !== null) imageContainer.append(picture);
-  //   }
-  // });
-  // setTimeout(() => {
-  //   animate(block, true);
-  // }, 3000);
+  setTimeout(() => {
+    animate(block, true);
+  }, 0);
+  assetIds.forEach(async (assetId, i) => {
+    if (i !== 0) {
+      const picture = await createPitcureFromAssetId(assetId, false, false, 'high');
+      if (picture !== null) imageContainer.append(picture);
+    }
+  });
+  setTimeout(() => {
+    animate(block, true);
+  }, 3000);
 }
