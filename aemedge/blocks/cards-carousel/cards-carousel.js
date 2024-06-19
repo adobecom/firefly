@@ -4,6 +4,7 @@
 
 import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
 import { decorateIcons, createOptimizedPicture } from '../../scripts/aem.js';
+import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -126,6 +127,13 @@ function buildSlide(slide, index, featuresArray) {
     slide.classList.add('card-with-link');
     slide.addEventListener('click', () => {
       document.location.href = href;
+      const analyticsEvent = makeFinalPayload({
+        'event.subcategory': 'Landing Page',
+        'event.subtype': 'feature',
+        'event.type': 'click',
+        'event.value': slide.querySelector('.cards-card-body h3').innerText,
+      });
+      ingestAnalytics([analyticsEvent]);
     });
   }
   return slide;

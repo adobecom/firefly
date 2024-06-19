@@ -17,6 +17,7 @@
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript } from './aem.js';
+import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -30,8 +31,10 @@ const LIBS = '/libs';
 const CONFIG = {
   codeRoot: '/aemedge',
   // contentRoot: '',
-  imsClientId: 'firefly-milo',
-  imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
+  // imsClientId: 'firefly-milo',
+  // imsScope: 'AdobeID,openid,gnav,pps.read,additional_info.roles,read_organizations',
+  imsClientId: 'clio-playground-web',
+  imsScope: 'AdobeID,firefly_api,openid,pps.read,additional_info.projectedProductContext,additional_info.ownerOrg,uds_read,uds_write,ab.manage,read_organizations,additional_info.roles',
   geoRouting: 'off',
   fallbackRouting: 'off',
   decorateArea,
@@ -264,6 +267,13 @@ async function headerModal() {
       signInOverride();
       e.stopImmediatePropagation();
       e.stopPropagation();
+
+      const analyticsEvent = makeFinalPayload({
+        'event.subcategory': 'Navigation',
+        'event.subtype': 'signin',
+        'event.type': 'click',
+      });
+      ingestAnalytics([analyticsEvent]);
     }, true);
   }
 }
@@ -487,6 +497,19 @@ async function loadFireflyHeaderComponents() {
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
+
+  const navLinks = document.querySelectorAll('nav a.feds-navLink');
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const analyticsEvent = makeFinalPayload({
+        "event.subcategory": "Navigation",
+        "event.subtype": link.innerText,
+        "event.type": "click",
+      });
+      ingestAnalytics([analyticsEvent]);
+    });
+  });
 }
 
 async function loadPage() {
@@ -503,6 +526,8 @@ async function loadPage() {
   }, 0);
   setTimeout(() => {
     loadMartech();
+    initAnalytics();
+    recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
   }, 3000);
 }
 
