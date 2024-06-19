@@ -26,12 +26,12 @@ You need something like this in your .npmrc file:
 ```
 
 Replace %TOKEN% with the token you have, or if you need a new one:
-Go to artifactory
-Click sign in
-Click your name in the top right corner
-Click Edit Profile
-Click Generate an identity token
-Take the generated token and replace %TOKEN% in your .npmrc
+- Go to artifactory
+- Click sign in
+- Click your name in the top right corner
+- Click Edit Profile
+- Click Generate an identity token
+- Take the generated token and replace %TOKEN% in your .npmrc
 
 ## Testing
 ```sh
