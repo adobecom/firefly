@@ -38,7 +38,7 @@ export const [setLibs, getLibs] = (() => {
  * Note: This file should have no self-invoking functions.
  * ------------------------------------------------------------
  */
-const DEFAULT_SIZE = '2000';
+const DEFAULT_SIZE = '600';
 
 export function decorateArea(area = document) {
   const eagerLoad = (parent, selector) => {
