@@ -19,9 +19,9 @@ https://main--milo--adobecom.hlx.page/docs/engineering/running-milo-locally-deco
 To install the latest from @sentry-wrapper, you need to be on VPN and:
 
 You need something like this in your .npmrc file:
-`@sentry:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-sentry-release/
+```@sentry:registry=https://artifactory.corp.adobe.com/artifactory/api/npm/npm-sentry-release/
 
-//artifactory.corp.adobe.com/:_authToken=%TOKEN%`
+//artifactory.corp.adobe.com/:_authToken=%TOKEN%```
 
 Replace %TOKEN% with the token you have, or if you need a new one:
 Go to artifactory
