@@ -16,8 +16,12 @@
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
-import { loadScript } from './aem.js';
+import { loadScript, getMetadata } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
+
+const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
+const UDS_PROD_URL = 'https://uds.adobe-identity.com';
+const buildMode = getMetadata('buildmode');
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -67,11 +71,34 @@ const miloLibs = setLibs(LIBS);
   });
 }());
 
+function loadLegalBanner() {
+  const legalBanner = document.createElement('div');
+  legalBanner.classList.add('legal-banner');
+  const legalBannerContent = document.createElement('div');
+  legalBannerContent.classList.add('legal-banner-content');
+  const legalBannerIcon = document.createElement('img');
+  legalBannerIcon.src = '../aemedge/icons/warning-black.svg';
+  legalBannerContent.append(legalBannerIcon);
+  const legalBannerText = document.createElement('p');
+  legalBannerText.textContent = 'To use Firefly, you must agree to the Adobe Generative AI User Guidelines.';
+  legalBannerContent.append(legalBannerText);
+  const legalBannerButton = document.createElement('button');
+  legalBannerButton.classList.add('legal-banner-button');
+  legalBannerButton.textContent = 'View User Guidelines';
+  legalBannerButton.addEventListener('click', async () => {
+    await openModal('/fragments/legal');
+  });
+  legalBannerContent.append(legalBannerButton);
+  legalBanner.append(legalBannerContent);
+  document.querySelector('header').prepend(legalBanner);
+}
+
 async function loadProfile() {
+  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
-  const url = 'https://uds.adobe-identity.com/userdocs/firefly-web';
+  const url = `${udsUrl}/userdocs/firefly-web`;
   const headers = new Headers({
     'x-api-key': 'clio-playground-web',
     Authorization: `Bearer ${authToken}`,
@@ -86,6 +113,13 @@ async function loadProfile() {
     if (!profile.data['whats-new-dialog-confirmed']) {
       await openModal('/fragments/whatsnew');
     }
+    if (!profile.data['legal-user-acceptance']) {
+      await openModal('/fragments/legal');
+      loadLegalBanner();
+    }
+  } else {
+    await openModal('/fragments/legal');
+    loadLegalBanner();
   }
 }
 
@@ -350,76 +384,78 @@ export function decorateExternalLink(element) {
 // Load header links that are wrapped in feds-utilities and aligned to the right
 async function loadFireflyUtils(gnav) {
   const headerUtils = gnav.querySelector('.firefly-utils');
-  decorateExternalLink(headerUtils);
-  const navItemWrapper = document.createElement('div');
-  const children = headerUtils.querySelectorAll('p');
-  children.forEach((p) => {
-    const navItem = document.createElement('div');
-    navItem.classList.add('feds-navItem');
-    const a = p.querySelector('a');
-    const nextEl = p.nextElementSibling;
-    if (nextEl && nextEl.tagName === 'UL') {
-      const ul = nextEl;
-      const button = document.createElement('button');
-      button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-haspopup', 'true');
-      button.setAttribute('daa-lh', 'header|Open');
-      button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-      button.textContent = a.textContent;
-      const ulWrapper = document.createElement('div');
-      ulWrapper.classList.add('feds-popup');
-      const fedsMenuContent = document.createElement('div');
-      fedsMenuContent.classList.add('feds-menu-content');
-      const fedsMenuColumn = document.createElement('div');
-      fedsMenuColumn.classList.add('feds-menu-column');
-      fedsMenuColumn.append(ul);
-      ul.querySelectorAll('li').forEach((li) => {
-        if (li.querySelector('a')) {
-          li.querySelectorAll('a').forEach((anchor) => {
-            if (anchor.textContent.endsWith('.svg')) {
-              const picture = document.createElement('picture');
-              const img = document.createElement('img');
-              img.src = anchor.textContent;
-              img.loading = 'lazy';
-              picture.append(img);
-              anchor.before(picture);
-              anchor.remove();
-            } else {
-              anchor.classList.add('feds-navLink');
-              anchor.setAttribute('daa-ll', anchor.textContent);
-            }
-          });
+  if (headerUtils) {
+    decorateExternalLink(headerUtils);
+    const navItemWrapper = document.createElement('div');
+    const children = headerUtils.querySelectorAll('p');
+    children.forEach((p) => {
+      const navItem = document.createElement('div');
+      navItem.classList.add('feds-navItem');
+      const a = p.querySelector('a');
+      const nextEl = p.nextElementSibling;
+      if (nextEl && nextEl.tagName === 'UL') {
+        const ul = nextEl;
+        const button = document.createElement('button');
+        button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-haspopup', 'true');
+        button.setAttribute('daa-lh', 'header|Open');
+        button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+        button.textContent = a.textContent;
+        const ulWrapper = document.createElement('div');
+        ulWrapper.classList.add('feds-popup');
+        const fedsMenuContent = document.createElement('div');
+        fedsMenuContent.classList.add('feds-menu-content');
+        const fedsMenuColumn = document.createElement('div');
+        fedsMenuColumn.classList.add('feds-menu-column');
+        fedsMenuColumn.append(ul);
+        ul.querySelectorAll('li').forEach((li) => {
+          if (li.querySelector('a')) {
+            li.querySelectorAll('a').forEach((anchor) => {
+              if (anchor.textContent.endsWith('.svg')) {
+                const picture = document.createElement('picture');
+                const img = document.createElement('img');
+                img.src = anchor.textContent;
+                img.loading = 'lazy';
+                picture.append(img);
+                anchor.before(picture);
+                anchor.remove();
+              } else {
+                anchor.classList.add('feds-navLink');
+                anchor.setAttribute('daa-ll', anchor.textContent);
+              }
+            });
+          }
+        });
+        fedsMenuContent.append(fedsMenuColumn);
+        ulWrapper.append(fedsMenuContent);
+        navItem.append(button, ulWrapper);
+        button.addEventListener('click', () => {
+          navItem.classList.toggle('feds-dropdown--active');
+          button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+          button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
+        });
+      } else if (a) {
+        if (p.querySelector('em')) {
+          a.className = 'feds-cta feds-cta--primary';
+        } else {
+          a.classList.add('feds-navLink');
         }
-      });
-      fedsMenuContent.append(fedsMenuColumn);
-      ulWrapper.append(fedsMenuContent);
-      navItem.append(button, ulWrapper);
-      button.addEventListener('click', () => {
-        navItem.classList.toggle('feds-dropdown--active');
-        button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-        button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
-      });
-    } else if (a) {
-      if (p.querySelector('em')) {
-        a.className = 'feds-cta feds-cta--primary';
-      } else {
-        a.classList.add('feds-navLink');
+        a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+        navItem.append(a);
+        if (nextEl && nextEl.tagName === 'H3') {
+          const tooltip = document.createElement('div');
+          tooltip.classList.add('feds-tooltip');
+          tooltip.textContent = nextEl.textContent;
+          navItem.append(a, tooltip);
+        }
       }
-      a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-      navItem.append(a);
-      if (nextEl && nextEl.tagName === 'H3') {
-        const tooltip = document.createElement('div');
-        tooltip.classList.add('feds-tooltip');
-        tooltip.textContent = nextEl.textContent;
-        navItem.append(a, tooltip);
-      }
+      navItemWrapper.append(navItem);
+    });
+    const utilsWrapper = document.querySelector('.feds-utilities');
+    if (utilsWrapper) {
+      utilsWrapper.prepend(...navItemWrapper.childNodes);
     }
-    navItemWrapper.append(navItem);
-  });
-  const utilsWrapper = document.querySelector('.feds-utilities');
-  if (utilsWrapper) {
-    utilsWrapper.prepend(...navItemWrapper.childNodes);
   }
 }
 
@@ -429,27 +465,29 @@ async function loadFireflyUtils(gnav) {
  */
 function decorateFireflyLogo(gnav) {
   const logo = gnav.querySelector('.firefly-logo');
-  const brandContainer = document.querySelector('.feds-brand-image');
-  const defaultLogo = brandContainer.querySelector('img');
-  if (defaultLogo) {
-    defaultLogo.classList.add('logo-light');
-  }
   if (logo) {
-    [...logo.children].forEach((row) => {
-      if (row.firstElementChild.innerText === 'dark') {
-        const img = document.createElement('img');
-        img.src = row.lastElementChild.querySelector('a').innerText;
-        img.classList.add('logo-dark');
-        img.loading = 'lazy';
-        brandContainer.append(img);
-      } else if (row.firstElementChild.innerText === 'mobile') {
-        const img = document.createElement('img');
-        img.src = row.lastElementChild.querySelector('a').innerText;
-        img.classList.add('logo-mobile');
-        img.loading = 'lazy';
-        brandContainer.append(img);
-      }
-    });
+    const brandContainer = document.querySelector('.feds-brand-image');
+    const defaultLogo = brandContainer.querySelector('img');
+    if (defaultLogo) {
+      defaultLogo.classList.add('logo-light');
+    }
+    if (logo) {
+      [...logo.children].forEach((row) => {
+        if (row.firstElementChild.innerText === 'dark') {
+          const img = document.createElement('img');
+          img.src = row.lastElementChild.querySelector('a').innerText;
+          img.classList.add('logo-dark');
+          img.loading = 'lazy';
+          brandContainer.append(img);
+        } else if (row.firstElementChild.innerText === 'mobile') {
+          const img = document.createElement('img');
+          img.src = row.lastElementChild.querySelector('a').innerText;
+          img.classList.add('logo-mobile');
+          img.loading = 'lazy';
+          brandContainer.append(img);
+        }
+      });
+    }
   }
 }
 
@@ -483,11 +521,13 @@ async function loadPage() {
   const config = setConfig({ ...CONFIG, miloLibs });
   await decorateI18n(document.querySelector('main'));
   await loadArea();
-  await loadFireflyHeaderComponents();
   await headerModal();
+  loadProfile();
+  setTimeout(() => {
+    loadFireflyHeaderComponents();
+  }, 0);
   setTimeout(() => {
     loadMartech();
-    loadProfile();
     initAnalytics();
     recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
   }, 3000);

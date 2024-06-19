@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
@@ -168,12 +169,22 @@ export default async function decorate(block) {
   if (window.featuresArray) {
     loadCarousel(block, window.featuresArray);
   } else {
+    // eslint-disable-next-line no-lonely-if
+    let authToken;
     if (!window.adobeIMS) {
-      await loadIms();
+      loadIms().then(async () => {
+        authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+      }).catch(() => {
+        loadCarousel(block);
+      });
+    } else {
+      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
     }
-    // eslint-disable-next-line max-len
-    const authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-    await getFeaturesArray(authToken);
-    loadCarousel(block, window.featuresArray);
+    if (authToken) {
+      await getFeaturesArray(authToken);
+      loadCarousel(block, window.featuresArray);
+    } else {
+      loadCarousel(block);
+    }
   }
 }
