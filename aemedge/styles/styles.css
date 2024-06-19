@@ -384,6 +384,7 @@
     background-color: white;
     padding: 20px;
     z-index: 100000000000;
+    
     /* SUSI should be higher than everything */
   }
 
@@ -523,7 +524,7 @@
       }
     }
 
-    @media (width >=600px) {
+    @media (width >= 600px) {
       .feds-brand-image .logo-mobile {
         display: none;
       }
