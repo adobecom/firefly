@@ -1,9 +1,15 @@
 import { getLibs } from '../../scripts/utils.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
+import { getMetadata } from '../../scripts/aem.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
+const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
+const UDS_PROD_URL = 'https://uds.adobe-identity.com';
+
 async function legalUserAcceptance() {
+  const buildMode = getMetadata('buildmode');
+  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   return new Promise((resolve, reject) => {
     if (!window.adobeIMS) {
       loadIms();
@@ -12,7 +18,7 @@ async function legalUserAcceptance() {
       const adobeIms = sessionStorage.getItem(Object.keys(sessionStorage).find((key) => key.includes('adobeid_ims')));
       const adobeImsToken = JSON.parse(adobeIms);
       if (adobeImsToken.userId) {
-        fetch('https://uds.adobe-identity.com/userdocs/firefly-web?version=0', {
+        fetch(`${udsUrl}/userdocs/firefly-web?version=0`, {
           method: 'PATCH',
           headers: {
             Authorization: `Bearer ${window.adobeIMS.getAccessToken().token}`,
@@ -77,6 +83,7 @@ export default async function decorate(block) {
         dialog.close();
       });
       const legalBanner = document.querySelector('.legal-banner');
+      console.log('legalBanner', legalBanner);
       legalBanner.remove();
     });
   });

@@ -16,8 +16,12 @@
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { setLibs, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
-import { loadScript } from './aem.js';
+import { loadScript, getMetadata } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
+
+const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
+const UDS_PROD_URL = 'https://uds.adobe-identity.com';
+const buildMode = getMetadata('buildmode');
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -90,16 +94,11 @@ function loadLegalBanner() {
 }
 
 async function loadProfile() {
-  // below code to be removed
-  const parsedUrl = new URL(window.location.href);
-  if (parsedUrl.searchParams.has('loadLegal')) {
-    await openModal('/fragments/legal');
-    loadLegalBanner();
-  }
+  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
-  const url = 'https://uds.adobe-identity.com/userdocs/firefly-web';
+  const url = `${udsUrl}/userdocs/firefly-web`;
   const headers = new Headers({
     'x-api-key': 'clio-playground-web',
     Authorization: `Bearer ${authToken}`,
@@ -118,6 +117,9 @@ async function loadProfile() {
       await openModal('/fragments/legal');
       loadLegalBanner();
     }
+  } else {
+    await openModal('/fragments/legal');
+    loadLegalBanner();
   }
 }
 
