@@ -1,5 +1,5 @@
 import { getLibs } from '../../scripts/utils.js';
-import { openModal } from '../modal/modal.js';
+import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -61,6 +61,13 @@ export default async function decorate(block) {
   agree.textContent = 'Agree';
   agree.addEventListener('click', async () => {
     const dialogs = document.querySelectorAll('dialog');
+    const analyticsEvent = makeFinalPayload({
+      'event.subcategory': 'Landing Page',
+      'event.subtype': 'feature',
+      'event.type': 'click',
+      'event.value': 'legal-user-acceptance',
+    });
+    ingestAnalytics([analyticsEvent]);
     legalUserAcceptance().then(() => {
       dialogs.forEach((dialog) => {
         dialog.close();
