@@ -36,6 +36,16 @@ async function legalUserAcceptance() {
   });
 }
 
+function triggerAnalytics(legalContent) {
+  const analyticsEvent = makeFinalPayload({
+    'event.subcategory': 'Landing Page',
+    'event.subtype': 'feature',
+    'event.type': 'view',
+    'event.value': legalContent,
+  });
+  ingestAnalytics([analyticsEvent]);
+}
+
 export default async function decorate(block) {
   const heroPic = block.querySelector('picture');
   heroPic.parentElement.replaceWith(heroPic);
@@ -61,14 +71,8 @@ export default async function decorate(block) {
   agree.textContent = 'Agree';
   agree.addEventListener('click', async () => {
     const dialogs = document.querySelectorAll('dialog');
-    const analyticsEvent = makeFinalPayload({
-      'event.subcategory': 'Landing Page',
-      'event.subtype': 'feature',
-      'event.type': 'click',
-      'event.value': 'legal-user-acceptance',
-    });
-    ingestAnalytics([analyticsEvent]);
     legalUserAcceptance().then(() => {
+      triggerAnalytics(legalContent.textContent);
       dialogs.forEach((dialog) => {
         dialog.close();
       });
