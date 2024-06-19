@@ -1,30 +1,5 @@
 let dictionary = {};
 
-function getLanguages() {
-  fetch('/localization/lang-store.json')
-    .then((response) => response.json())
-    .then((data) => {
-      const languageSelect = document.getElementById('language');
-      const locales = data[':names'];
-      languageSelect.innerHTML = '';
-
-      locales.forEach((locale) => {
-        const option = document.createElement('option');
-        option.value = locale;
-        option.textContent = locale;
-        if (locale === 'en-US') {
-          option.selected = true; // Set en-US as the default selected language
-        }
-        languageSelect.appendChild(option);
-      });
-
-      const defaultLanguage = languageSelect.value;
-      fetchData(defaultLanguage);
-      document.getElementById('language').addEventListener('change', handleLanguageChange);
-    })
-    .catch((error) => console.error('Error fetching languages:', error));
-}
-
 function displayKey(query) {
   const key = dictionary[query];
   const resultDiv = document.getElementById('results');
@@ -80,7 +55,7 @@ function handleSearchInput() {
 }
 
 function fetchData(selectedLanguage) {
-  fetch(`/localization/lang-store.json?sheet=${selectedLanguage}`)
+  fetch(`/localization/lang-store.json?sheet=${selectedLanguage}&limit=10000`)
     .then((response) => response.json())
     .then((data) => {
       dictionary = data.data.reduce((acc, item) => {
@@ -103,6 +78,31 @@ function handleLanguageChange() {
   resultsSection.innerHTML = '';
 
   fetchData(selectedLanguage);
+}
+
+function getLanguages() {
+  fetch('/localization/lang-store.json')
+    .then((response) => response.json())
+    .then((data) => {
+      const languageSelect = document.getElementById('language');
+      const locales = data[':names'];
+      languageSelect.innerHTML = '';
+
+      locales.forEach((locale) => {
+        const option = document.createElement('option');
+        option.value = locale;
+        option.textContent = locale;
+        if (locale === 'en-US') {
+          option.selected = true; // Set en-US as the default selected language
+        }
+        languageSelect.appendChild(option);
+      });
+
+      const defaultLanguage = languageSelect.value;
+      fetchData(defaultLanguage);
+      document.getElementById('language').addEventListener('change', handleLanguageChange);
+    })
+    .catch((error) => console.error('Error fetching languages:', error));
 }
 
 getLanguages();
