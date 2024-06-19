@@ -38,9 +38,9 @@ async function legalUserAcceptance() {
 
 function triggerAnalytics(legalContent) {
   const analyticsEvent = makeFinalPayload({
-    'event.subcategory': 'Landing Page',
-    'event.subtype': 'feature',
-    'event.type': 'view',
+    'event.subcategory': 'Product Improvement',
+    'event.subtype': 'consent',
+    'event.type': 'success',
     'event.value': legalContent,
   });
   ingestAnalytics([analyticsEvent]);
