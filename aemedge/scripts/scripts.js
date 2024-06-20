@@ -535,10 +535,10 @@ async function loadPage() {
   await decorateI18n(document.querySelector('main'));
   await loadArea();
   buildAutoBlocks(document.querySelector('main'));
-  await headerModal();
   loadProfile();
-  setTimeout(() => {
-    loadFireflyHeaderComponents();
+  setTimeout(async () => {
+    await loadFireflyHeaderComponents();
+    await headerModal();
   }, 0);
   setTimeout(() => {
     loadMartech();
