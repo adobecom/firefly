@@ -92,20 +92,24 @@ function animate(block, first = false) {
   const active = block.querySelector('img.active');
   const input = block.querySelector('.generate-input');
   const activePicture = active.parentElement;
-  // Add Author information
-  const { authorName, authorImage } = activePicture.dataset;
-  if (authorName && authorImage) {
-    const author = block.querySelector('.author');
-    updateAuthor(author, authorName, authorImage);
-  }
   if (first) {
     typeAnimation(input, active.alt, block);
+    const { authorName, authorImage } = activePicture.dataset;
+    if (authorName && authorImage) {
+      const author = block.querySelector('.author');
+      updateAuthor(author, authorName, authorImage);
+    }
   } else {
     const nextSibling = active.parentElement.nextElementSibling;
+    const { authorName, authorImage } = nextSibling.dataset;
     const next = nextSibling?.querySelector('img') || block.querySelector('img');
     const nextText = next.alt;
     active.classList.remove('active');
     next.classList.add('active');
+    if (authorName && authorImage) {
+      const author = block.querySelector('.author');
+      updateAuthor(author, authorName, authorImage);
+    }
     input.textContent = '';
     typeAnimation(input, nextText, block);
   }
