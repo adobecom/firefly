@@ -97,10 +97,26 @@
   width: 100%;
   outline: none;
   border: none;
-  font-style: italic;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
+  transform: skew(-10deg);
+}
+
+.superhero .generate-input::after {
+  content: "";
+  position: relative;
+  border-style: solid;
+  border-width: 1px;
+  border-left: none;
+  border-bottom: none;
+  border-top: none;
+  animation: blink-caret .5s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: black }
 }
 
 .superhero .generate-input.selected {
@@ -194,5 +210,10 @@
   .superhero .generate-form {
     background-color: var(--spectrum-global-color-gray-50);
     color: var(--spectrum-button-content-color-default);
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: white }
   }
 }

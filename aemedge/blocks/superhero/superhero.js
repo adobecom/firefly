@@ -37,7 +37,7 @@ function updateAuthor(author, authorName, authorImage) {
 function typeAnimation(input, text, block) {
   input.classList.remove('selected');
   const timeoutid = setTimeout(() => {
-    input.innerText = text.slice(0, index);
+    input.innerText = `${text.slice(0, index)}`;
     // If typing
     if (isAdding) {
       if (index >= text.length) {
