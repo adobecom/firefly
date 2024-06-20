@@ -40,6 +40,18 @@ export const [setLibs, getLibs] = (() => {
  */
 const DEFAULT_SIZE = '2000';
 
+export function buildAutoBlocks(main) {
+  const tooltipSVG = main.querySelectorAll('picture > img[src*="tooltip.svg"]');
+
+  tooltipSVG.forEach((img) => {
+    const tooltipText = img.alt || '';
+    const tooltip = document.createElement('span');
+    tooltip.classList.add('tooltip-text');
+    tooltip.innerText = tooltipText;
+    img.parentNode.insertBefore(tooltip, img.nextSibling);
+  });
+}
+
 export function decorateArea(area = document) {
   const eagerLoad = (parent, selector) => {
     const img = parent.querySelector(selector);

@@ -14,7 +14,7 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, decorateArea } from './utils.js';
+import { setLibs, buildAutoBlocks, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript, getMetadata, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -534,6 +534,7 @@ async function loadPage() {
   loadFonts();
   await decorateI18n(document.querySelector('main'));
   await loadArea();
+  buildAutoBlocks(document.querySelector('main'));
   await headerModal();
   loadProfile();
   setTimeout(() => {
