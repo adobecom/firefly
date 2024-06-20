@@ -175,9 +175,6 @@
   border-radius: 16px;
 }
 
-.superhero .author span{
-}
-
 /* stylelint-disable-next-line no-descending-specificity */
 .superhero .author img {
   display: unset;
