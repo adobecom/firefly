@@ -448,25 +448,26 @@
     align-items: center;
   }
 
-  .tooltip-text {
-    visibility: hidden;
-    font-size: 12px;
-    background-color: rgba(109,109,109 );
-    color: #fff;
-    text-align: center;
+  .tooltip {
+    position: absolute;
+    background-color: rgba(109,109,109);
+    color: white;
     border-radius: 5px;
-    padding: 5px;
-    z-index: 1;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 12px;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s;
+    visibility: visible;
+    max-width: 140px;
+    white-space: warp;
+    overflow: hidden;
+    z-index: 99;
+    line-height: 2;
 }
 
-picture > img[src*="tooltip.svg"]:hover + .tooltip-text {
-    visibility: visible;
+picture > img[src*="tooltip.svg"]:hover + .tooltip {
     opacity: 1;
+    visibility: visible;
 }
 
   @media (width >= 600px) {
