@@ -103,7 +103,7 @@
   transform: skew(-10deg);
 }
 
-.superhero .generate-input::after {
+.superhero.type-started .generate-input::after {
   content: "";
   position: relative;
   border-style: solid;

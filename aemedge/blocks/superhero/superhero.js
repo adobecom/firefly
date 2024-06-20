@@ -180,6 +180,7 @@ export default async function decorate(block) {
         if (picture !== null) imageContainer.append(picture);
       }
     });
+    block.classList.add('type-started');
     animate(block, true);
   }, 3000);
 }
