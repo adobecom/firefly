@@ -37,7 +37,7 @@ function updateAuthor(author, authorName, authorImage) {
 function typeAnimation(input, text, block) {
   input.classList.remove('selected');
   const timeoutid = setTimeout(() => {
-    input.innerText = text.slice(0, index);
+    input.innerText = `${text.slice(0, index)}`;
     // If typing
     if (isAdding) {
       if (index >= text.length) {
@@ -92,20 +92,24 @@ function animate(block, first = false) {
   const active = block.querySelector('img.active');
   const input = block.querySelector('.generate-input');
   const activePicture = active.parentElement;
-  // Add Author information
-  const { authorName, authorImage } = activePicture.dataset;
-  if (authorName && authorImage) {
-    const author = block.querySelector('.author');
-    updateAuthor(author, authorName, authorImage);
-  }
   if (first) {
     typeAnimation(input, active.alt, block);
+    const { authorName, authorImage } = activePicture.dataset;
+    if (authorName && authorImage) {
+      const author = block.querySelector('.author');
+      updateAuthor(author, authorName, authorImage);
+    }
   } else {
     const nextSibling = active.parentElement.nextElementSibling;
+    const { authorName, authorImage } = nextSibling.dataset;
     const next = nextSibling?.querySelector('img') || block.querySelector('img');
     const nextText = next.alt;
     active.classList.remove('active');
     next.classList.add('active');
+    if (authorName && authorImage) {
+      const author = block.querySelector('.author');
+      updateAuthor(author, authorName, authorImage);
+    }
     input.textContent = '';
     typeAnimation(input, nextText, block);
   }
@@ -180,6 +184,7 @@ export default async function decorate(block) {
         if (picture !== null) imageContainer.append(picture);
       }
     });
+    block.classList.add('type-started');
     animate(block, true);
   }, 3000);
 }
