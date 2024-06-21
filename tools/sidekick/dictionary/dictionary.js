@@ -1,29 +1,32 @@
 let dictionary = {};
+let fuse;
 
 function displayKey(query) {
-  const key = dictionary[query];
+  const keys = dictionary[query.toLowerCase()];
   const resultDiv = document.getElementById('results');
   resultDiv.innerHTML = '';
 
-  if (key) {
-    const keyContainer = document.createElement('div');
-    keyContainer.classList.add('key-container');
-    keyContainer.textContent = `$${key}`;
+  if (keys) {
+    keys.forEach(key => {
+      const keyContainer = document.createElement('div');
+      keyContainer.classList.add('key-container');
+      keyContainer.textContent = `$${key}`;
 
-    const copyButton = document.createElement('button');
-    copyButton.classList.add('copy-button');
-    copyButton.textContent = 'Copy';
-    copyButton.addEventListener('click', () => {
-      const copyText = document.createElement('textarea');
-      copyText.value = `$${key}`;
-      document.body.appendChild(copyText);
-      copyText.select();
-      document.execCommand('copy');
-      document.body.removeChild(copyText);
+      const copyButton = document.createElement('button');
+      copyButton.classList.add('copy-button');
+      copyButton.textContent = 'Copy';
+      copyButton.addEventListener('click', () => {
+        const copyText = document.createElement('textarea');
+        copyText.value = `$${key}`;
+        document.body.appendChild(copyText);
+        copyText.select();
+        document.execCommand('copy');
+        document.body.removeChild(copyText);
+      });
+
+      keyContainer.appendChild(copyButton);
+      resultDiv.appendChild(keyContainer);
     });
-
-    keyContainer.appendChild(copyButton);
-    resultDiv.appendChild(keyContainer);
   } else {
     resultDiv.innerHTML = `<p>No key found for translation value "${query}".</p>`;
   }
@@ -31,24 +34,29 @@ function displayKey(query) {
 
 function handleSearchInput() {
   const query = this.value.toLowerCase();
-  const suggestions = Object.keys(dictionary).filter((value) => value.includes(query));
   const autocompleteList = document.getElementById('autocomplete-list');
   autocompleteList.innerHTML = '';
 
-  if (suggestions.length > 0) {
-    autocompleteList.classList.remove('hidden');
-    suggestions.forEach((suggestion) => {
-      const div = document.createElement('div');
-      div.classList.add('autocomplete-suggestion');
-      div.textContent = suggestion;
-      div.addEventListener('click', () => {
-        document.getElementById('search').value = suggestion;
-        autocompleteList.innerHTML = '';
-        autocompleteList.classList.add('hidden');
-        displayKey(suggestion);
+  if (query.length > 0) {
+    const suggestions = fuse.search(query).map(result => result.item);
+
+    if (suggestions.length > 0) {
+      autocompleteList.classList.remove('hidden');
+      suggestions.forEach((suggestion) => {
+        const div = document.createElement('div');
+        div.classList.add('autocomplete-suggestion');
+        div.textContent = suggestion;
+        div.addEventListener('click', () => {
+          document.getElementById('search').value = suggestion;
+          autocompleteList.innerHTML = '';
+          autocompleteList.classList.add('hidden');
+          displayKey(suggestion);
+        });
+        autocompleteList.appendChild(div);
       });
-      autocompleteList.appendChild(div);
-    });
+    } else {
+      autocompleteList.classList.add('hidden');
+    }
   } else {
     autocompleteList.classList.add('hidden');
   }
@@ -59,9 +67,15 @@ function fetchData(selectedLanguage) {
     .then((response) => response.json())
     .then((data) => {
       dictionary = data.data.reduce((acc, item) => {
-        acc[item[selectedLanguage].toLowerCase()] = item.key;
+        const value = item[selectedLanguage].toLowerCase();
+        if (!acc[value]) {
+          acc[value] = [];
+        }
+        acc[value].push(item.key);
         return acc;
       }, {});
+      const keys = Object.keys(dictionary);
+      fuse = new Fuse(keys, { threshold: 0.3 });
       document.getElementById('search').addEventListener('input', handleSearchInput);
     })
     .catch((error) => console.error('Error fetching data:', error));
