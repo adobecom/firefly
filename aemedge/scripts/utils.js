@@ -10,7 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const FEATURES_API = 'https://p13n.adobe.io/fg/api/v3/feature';
+import { getMetadata } from './aem.js';
+
+const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
+const FEATURES_API_PROD = 'https://p13n.adobe.io';
 
 /**
  * The decision engine for where to get Milo's libs from.
@@ -99,8 +102,10 @@ export function createOptimizedFireflyPicture(
  * @returns {Promise<Array>} A promise that resolves to an array of features.
  */
 export async function getFeaturesArray(authToken) {
+  const buildMode = getMetadata('buildmode');
+  const featuresUrl = buildMode === 'stage' ? FEATURES_API_STAGE : FEATURES_API_PROD;
   let featuresArray = [];
-  const url = `${FEATURES_API}?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
+  const url = `${featuresUrl}/fg/api/v3/feature?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
   const headers = new Headers({ 'X-Api-Key': 'clio-playground-web' });
   if (authToken) {
     headers.set('Authorization', `Bearer ${window.adobeIMS.getAccessToken()?.token}`);

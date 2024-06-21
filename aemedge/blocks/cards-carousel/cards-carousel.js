@@ -174,17 +174,23 @@ export default async function decorate(block) {
     if (!window.adobeIMS) {
       loadIms().then(async () => {
         authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+        if (authToken) {
+          await getFeaturesArray(authToken);
+          loadCarousel(block, window.featuresArray);
+        } else {
+          loadCarousel(block);
+        }
       }).catch(() => {
         loadCarousel(block);
       });
     } else {
       authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-    }
-    if (authToken) {
-      await getFeaturesArray(authToken);
-      loadCarousel(block, window.featuresArray);
-    } else {
-      loadCarousel(block);
+      if (authToken) {
+        await getFeaturesArray(authToken);
+        loadCarousel(block, window.featuresArray);
+      } else {
+        loadCarousel(block);
+      }
     }
   }
 }

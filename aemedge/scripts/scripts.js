@@ -15,12 +15,14 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { setLibs, decorateArea } from './utils.js';
-import { openModal } from '../blocks/modal/modal.js';
+import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, getMetadata } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
+const UPGRADE_API_STAGE = 'https://aps-web-stage.adobe.io';
+const UPGRADE_API_PROD = 'https://aps-web.adobe.io';
 const buildMode = getMetadata('buildmode');
 
 const searchParams = new URLSearchParams(window.location.search);
@@ -381,6 +383,36 @@ export function decorateExternalLink(element) {
   });
 }
 
+async function loadUpgradeModal() {
+  let upgradeUrl = (buildMode === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
+  upgradeUrl = `${upgradeUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
+  if (!window.adobeIMS) return;
+  const authToken = window.adobeIMS.getAccessToken()?.token;
+  if (!authToken) return;
+  const resp = await fetch(upgradeUrl, {
+    method: 'POST',
+    headers: {
+      'x-api-key': 'clio-playground-web',
+      Authorization: `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"en-US"},"workflowResult":{"type":"WEB_APP_MODAL_WORKFLOW","version":"2","id":"ondemand_purchase_subscription_workflow","instanceId":"0f3ee0d5-3cd5-4217-84e3-08162e04e54a","response":"ondemand_request::reason=ff_free_user_upgrade&contextual_params=eyJjbGkiOiJmaXJlZmx5IiwiY3R4IjoiaWYiLCJsYW5nIjoiZW4iLCJjbyI6IklOIiwiY3R4UnRVcmwiOiJodHRwczovL2ZpcmVmbHktc3RhZ2UuY29ycC5hZG9iZS5jb20vP2xhdW5jaFBheXdhbGw9dHJ1ZSZwYXl3YWxsVmFyaWF0aW9uPVVQU0VMTF9OQVZCQVIifQ==&device_type=DESKTOP"}}`,
+  });
+  if (resp.ok) {
+    const respJson = await resp.json();
+    console.log('respJson', respJson);
+    const upgradeIframeUrl = respJson.workflow.entryUrl;
+    if (upgradeIframeUrl) {
+      const iframe = document.createElement('iframe');
+      iframe.src = upgradeIframeUrl;
+      iframe.allow = 'payment';
+      iframe.style.display = 'block';
+      const modal = await createModal([iframe]);
+      modal.showModal();
+    }
+  }
+}
+
 // Load header links that are wrapped in feds-utilities and aligned to the right
 async function loadFireflyUtils(gnav) {
   const headerUtils = gnav.querySelector('.firefly-utils');
@@ -455,6 +487,13 @@ async function loadFireflyUtils(gnav) {
     const utilsWrapper = document.querySelector('.feds-utilities');
     if (utilsWrapper) {
       utilsWrapper.prepend(...navItemWrapper.childNodes);
+    }
+    const upgradeBtn = utilsWrapper.querySelector('[daa-ll="Upgrade"]');
+    if (upgradeBtn) {
+      upgradeBtn.parentElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadUpgradeModal();
+      });
     }
   }
 }

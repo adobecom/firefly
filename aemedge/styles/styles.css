@@ -113,12 +113,25 @@
     content: '';
     width: 18px;
     height: 14px;
-    background: url('../../icons/discord.svg') left no-repeat;
+    background: url('/aemedge/icons/discord.svg') left no-repeat;
+    display: inline-block;
+    margin-right: 9px;
+  }
+
+  .feds-navItem a.feds-cta[daa-ll="Upgrade"]::before {
+    content: '';
+    width: 18px;
+    height: 14px;
+    background: url('/aemedge/icons/upgrade-icon.svg') left no-repeat;
     display: inline-block;
     margin-right: 9px;
   }
 
   .feds-navItem a.feds-cta[href*="discord"] {
+    display: none;
+  }
+
+  .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
     display: none;
   }
 
@@ -171,7 +184,7 @@
     content: '';
     width: 18px;
     height: 18px;
-    background: url('../../icons/whats-new.svg') left no-repeat;
+    background: url('/aemedge/icons/whats-new.svg') left no-repeat;
     display: inline-block;
   }
 
@@ -188,7 +201,7 @@
     content: '';
     width: 18px;
     height: 18px;
-    background: url('../../icons/feedback.svg') left no-repeat;
+    background: url('/aemedge/icons/feedback.svg') left no-repeat;
     display: inline-block;
   }
 
@@ -413,6 +426,32 @@
     margin: 0 10px 0 16px;
   }
 
+  /* Upgrade Modal styling */
+  /* style dialog element has a child with class modal-content which has a iframe element child */
+  .modal.block:has(iframe) dialog {
+    padding: 0;
+    border: none;
+    width: fit-content;
+  }
+
+  .modal.block:has(iframe) dialog > .close-button {
+    display: none;
+  }
+
+  .modal.block:has(iframe) dialog > .modal-content {
+    padding: 0;
+  }
+
+
+  .modal.block dialog iframe{
+    width: 90vw;
+    height: 90vh;
+    max-width: 1280px;
+    border: none;
+  }
+
+
+
   @media (width >= 600px) {
     main>div>div {
       max-width: 1500px;
@@ -438,6 +477,14 @@
       padding: 15px;
     }
 
+    .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
+      display: flex;
+      padding: 15px;
+      background: linear-gradient(95deg, #ff477b 0%, #5c5ce0 49%, #318fff 100%);
+      color: white;
+      border: none;
+    }
+
     .feds-brand-image img {
       display: block;
     }
@@ -448,6 +495,12 @@
 
     .feds-brand-image .logo-dark {
       display: none;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .modal.block dialog iframe{
+      max-width: 1280px;
     }
   }
 
