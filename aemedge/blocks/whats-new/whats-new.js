@@ -66,18 +66,7 @@ export default async function decorate(block) {
   });
   nav.append(ul);
   block.prepend(nav);
-  let featuresArray = [];
-  if (!window.adobeIMS) {
-    await loadIms();
-  }
-  // eslint-disable-next-line max-len
-  const authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-  if (window.featuresArray) {
-    featuresArray = window.featuresArray;
-  } else {
-    await getFeaturesArray(authToken);
-    featuresArray = window.featuresArray;
-  }
+  const featuresArray = getFeaturesArray();
   // Replace the video links with videos
   [...content.children].forEach((row) => {
     const featureFlagEl = row.querySelector('code');

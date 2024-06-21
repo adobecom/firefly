@@ -135,6 +135,7 @@ export async function getFeaturesArray() {
     featuresArray = features.releases[0].features ? features.releases[0].features : [];
   }
   window.featuresArray = featuresArray;
+  return featuresArray;
 }
 
 /**

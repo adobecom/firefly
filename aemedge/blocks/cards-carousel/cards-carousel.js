@@ -137,7 +137,9 @@ function buildSlide(slide, index, featuresArray) {
   return slide;
 }
 
-function loadCarousel(block, featuresArray = []) {
+export default async function decorate(block) {
+  decorateIcons(block);
+  const featuresArray = await getFeaturesArray();
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
   const slides = [...block.children];
@@ -160,14 +162,4 @@ function loadCarousel(block, featuresArray = []) {
       block.append(buildNav('next', block));
     }
   }, 0);
-}
-
-export default async function decorate(block) {
-  decorateIcons(block);
-  if (window.featuresArray) {
-    loadCarousel(block, window.featuresArray);
-  } else {
-    await getFeaturesArray();
-    loadCarousel(block, window.featuresArray);
-  }
 }

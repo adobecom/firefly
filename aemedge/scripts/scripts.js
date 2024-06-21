@@ -14,7 +14,7 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, decorateArea } from './utils.js';
+import { setLibs, decorateArea, getFeaturesArray } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, getMetadata } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -417,6 +417,7 @@ async function loadUpgradeModal() {
 
 // Load header links that are wrapped in feds-utilities and aligned to the right
 async function loadFireflyUtils(gnav) {
+  const featuresArray = await getFeaturesArray();
   const headerUtils = gnav.querySelector('.firefly-utils');
   if (headerUtils) {
     decorateExternalLink(headerUtils);
@@ -424,74 +425,78 @@ async function loadFireflyUtils(gnav) {
     const children = headerUtils.querySelectorAll('p');
     children.forEach((p) => {
       const featureFlag = p.querySelector('code');
+      let showUtil = true;
       if (featureFlag) {
         const flag = featureFlag.textContent.trim();
-        if (!window.featuresArray.includes(flag)) {
-          return;
+        featureFlag.remove();
+        if (!featuresArray.includes(flag)) {
+          showUtil = false;
         }
       }
-      const navItem = document.createElement('div');
-      navItem.classList.add('feds-navItem');
-      const a = p.querySelector('a');
-      const nextEl = p.nextElementSibling;
-      if (nextEl && nextEl.tagName === 'UL') {
-        const ul = nextEl;
-        const button = document.createElement('button');
-        button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
-        button.setAttribute('aria-expanded', 'false');
-        button.setAttribute('aria-haspopup', 'true');
-        button.setAttribute('daa-lh', 'header|Open');
-        button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-        button.textContent = a.textContent;
-        const ulWrapper = document.createElement('div');
-        ulWrapper.classList.add('feds-popup');
-        const fedsMenuContent = document.createElement('div');
-        fedsMenuContent.classList.add('feds-menu-content');
-        const fedsMenuColumn = document.createElement('div');
-        fedsMenuColumn.classList.add('feds-menu-column');
-        fedsMenuColumn.append(ul);
-        ul.querySelectorAll('li').forEach((li) => {
-          if (li.querySelector('a')) {
-            li.querySelectorAll('a').forEach((anchor) => {
-              if (anchor.textContent.endsWith('.svg')) {
-                const picture = document.createElement('picture');
-                const img = document.createElement('img');
-                img.src = anchor.textContent;
-                img.loading = 'lazy';
-                picture.append(img);
-                anchor.before(picture);
-                anchor.remove();
-              } else {
-                anchor.classList.add('feds-navLink');
-                anchor.setAttribute('daa-ll', anchor.textContent);
-              }
-            });
+      if (showUtil) {
+        const navItem = document.createElement('div');
+        navItem.classList.add('feds-navItem');
+        const a = p.querySelector('a');
+        const nextEl = p.nextElementSibling;
+        if (nextEl && nextEl.tagName === 'UL') {
+          const ul = nextEl;
+          const button = document.createElement('button');
+          button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-haspopup', 'true');
+          button.setAttribute('daa-lh', 'header|Open');
+          button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+          button.textContent = a.textContent;
+          const ulWrapper = document.createElement('div');
+          ulWrapper.classList.add('feds-popup');
+          const fedsMenuContent = document.createElement('div');
+          fedsMenuContent.classList.add('feds-menu-content');
+          const fedsMenuColumn = document.createElement('div');
+          fedsMenuColumn.classList.add('feds-menu-column');
+          fedsMenuColumn.append(ul);
+          ul.querySelectorAll('li').forEach((li) => {
+            if (li.querySelector('a')) {
+              li.querySelectorAll('a').forEach((anchor) => {
+                if (anchor.textContent.endsWith('.svg')) {
+                  const picture = document.createElement('picture');
+                  const img = document.createElement('img');
+                  img.src = anchor.textContent;
+                  img.loading = 'lazy';
+                  picture.append(img);
+                  anchor.before(picture);
+                  anchor.remove();
+                } else {
+                  anchor.classList.add('feds-navLink');
+                  anchor.setAttribute('daa-ll', anchor.textContent);
+                }
+              });
+            }
+          });
+          fedsMenuContent.append(fedsMenuColumn);
+          ulWrapper.append(fedsMenuContent);
+          navItem.append(button, ulWrapper);
+          button.addEventListener('click', () => {
+            navItem.classList.toggle('feds-dropdown--active');
+            button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+            button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
+          });
+        } else if (a) {
+          if (p.querySelector('em')) {
+            a.className = 'feds-cta feds-cta--primary';
+          } else {
+            a.classList.add('feds-navLink');
           }
-        });
-        fedsMenuContent.append(fedsMenuColumn);
-        ulWrapper.append(fedsMenuContent);
-        navItem.append(button, ulWrapper);
-        button.addEventListener('click', () => {
-          navItem.classList.toggle('feds-dropdown--active');
-          button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-          button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
-        });
-      } else if (a) {
-        if (p.querySelector('em')) {
-          a.className = 'feds-cta feds-cta--primary';
-        } else {
-          a.classList.add('feds-navLink');
+          a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+          navItem.append(a);
+          if (nextEl && nextEl.tagName === 'H3') {
+            const tooltip = document.createElement('div');
+            tooltip.classList.add('feds-tooltip');
+            tooltip.textContent = nextEl.textContent;
+            navItem.append(a, tooltip);
+          }
         }
-        a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-        navItem.append(a);
-        if (nextEl && nextEl.tagName === 'H3') {
-          const tooltip = document.createElement('div');
-          tooltip.classList.add('feds-tooltip');
-          tooltip.textContent = nextEl.textContent;
-          navItem.append(a, tooltip);
-        }
+        navItemWrapper.append(navItem);
       }
-      navItemWrapper.append(navItem);
     });
     const utilsWrapper = document.querySelector('.feds-utilities');
     if (utilsWrapper) {
