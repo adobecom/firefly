@@ -14,7 +14,7 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, decorateArea } from './utils.js';
+import { setLibs, decorateArea, getEnvironment } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
 import { loadScript, getMetadata } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -22,7 +22,15 @@ import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 const buildMode = getMetadata('buildmode');
-
+const osMap = {
+  Mac: 'macOS',
+  Win: 'windows',
+  Linux: 'linux',
+  CrOS: 'chromeOS',
+  Android: 'android',
+  iPad: 'iPadOS',
+  iPhone: 'iOS',
+};
 const searchParams = new URLSearchParams(window.location.search);
 
 // Add project-wide style path here.
@@ -166,9 +174,9 @@ const onToken = async () => {
   await window.adobeIMS.refreshToken();
   if (window.UniversalNav) {
     // reload the UNAV piece only and hide susi-sentry popup
-    window.UniversalNav.reload();
     const susiSentryDiv = document.querySelector('.sentry-wrapper');
     susiSentryDiv.classList.add('hidden');
+    await window.UniversalNav.reload();
   } else {
     window.location.reload();
   }
@@ -197,8 +205,26 @@ const onMessage = (e) => {
   console.debug('onMessage: ', e);
 };
 
+const getDevice = () => {
+  const agent = navigator.userAgent;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [os, osName] of Object.entries(osMap)) {
+    if (agent.includes(os)) return osName;
+  }
+  // this should fallback into unknown but it's not supported yet so we are returning macOS
+  return "macOS";
+};
+
+const UNAV_ANALYTICS_CONTEXT = {
+  name: 'FireflyHome',
+  version: '1.0',
+  platform: "Web",
+  device: getDevice(),
+  os_version: navigator?.userAgentData?.platform || navigator?.platform,
+};
+
 // override the signIn method from milo header and load SUSI Light
-export async function signInOverride() {
+export async function overrideSignIn() {
   try {
     const main = document.querySelector('main');
     const sentryWrapper = main.querySelector('.sentry-wrapper');
@@ -259,6 +285,43 @@ export async function signInOverride() {
   }
 }
 
+async function overrideUNAV() {
+  // Sign-in override for SUSI Light
+  if (window.UniversalNav) {
+    console.debug('overriding the unav');
+    const { CONFIG: UNAVCONFIG, getUniversalNavLocale } = await import(`${miloLibs}/blocks/global-navigation/global-navigation.js`);
+    const visitorGuid = window.alloy ? await window.alloy('getIdentity')
+      .then((data) => data?.identity?.ECID).catch(() => undefined) : undefined;
+    const updatedProfileConfig = UNAVCONFIG.universalNav.components.profile;
+    updatedProfileConfig.attributes.callbacks.onSignIn = () => {
+      overrideSignIn();
+      const analyticsEvent = makeFinalPayload({
+        'event.subcategory': 'Navigation',
+        'event.subtype': 'signin',
+        'event.type': 'click',
+      });
+      ingestAnalytics([analyticsEvent]);
+    };
+    const updatedConfiguration = {
+      target: document.querySelector('header nav .feds-utilities'),
+      env: getEnvironment(),
+      theme: 'light',
+      locale: getUniversalNavLocale(window.adobeid.locale || navigator.locale),
+      children: [updatedProfileConfig, {
+        name: "app-switcher",
+        attributes: { crossOrigin: "anonymous" },
+      }],
+      imsClientId: CONFIG.imsClientId,
+      isSectionDividerRequired: false,
+      analyticsContext: {
+        consumer: UNAV_ANALYTICS_CONTEXT,
+        event: { visitor_guid: visitorGuid },
+      },
+    };
+    await window.UniversalNav.reload(updatedConfiguration);
+  }
+}
+
 async function headerModal() {
   const links = document.querySelectorAll('a[href*="/fragments/"]');
   if (!links || (links.length === 0)) return;
@@ -268,23 +331,6 @@ async function headerModal() {
       await openModal(link.href);
     });
   });
-  // Sign-in override for SUSI Light
-  const signInElem = document.querySelector('header #universal-nav .unav-comp-profile .profile-signed-out button');
-  if (signInElem) {
-    signInElem.addEventListener('click', async (e) => {
-      e.preventDefault();
-      signInOverride();
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-
-      const analyticsEvent = makeFinalPayload({
-        'event.subcategory': 'Navigation',
-        'event.subtype': 'signin',
-        'event.type': 'click',
-      });
-      ingestAnalytics([analyticsEvent]);
-    }, true);
-  }
 }
 
 // Fetch locale from cookie
@@ -530,6 +576,7 @@ async function loadPage() {
   await loadArea();
   loadProfile();
   setTimeout(async () => {
+    await overrideUNAV();
     await loadFireflyHeaderComponents();
     await headerModal();
   }, 0);

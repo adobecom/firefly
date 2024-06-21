@@ -1,7 +1,7 @@
 /* eslint-disable quote-props */
 /* eslint-disable no-underscore-dangle */
 import { getLibs, getEnvironment } from '../../scripts/utils.js';
-import { getI18nValue, getLocaleFromCookie, signInOverride } from '../../scripts/scripts.js';
+import { getI18nValue, getLocaleFromCookie, overrideSignIn } from '../../scripts/scripts.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -151,7 +151,7 @@ async function addCards(cardContainer, images, accessToken = '') {
             favoriteSelected.classList.remove('hide');
           }
         } else {
-          signInOverride();
+          overrideSignIn();
         }
       });
 
