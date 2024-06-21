@@ -336,8 +336,8 @@ export async function decorateI18n(block) {
 
   // Process single <code> elements not inside <pre>
   block.querySelectorAll('code').forEach((el) => {
-    if (!el.closest('pre')) { // Skip <code> inside <pre>
-      const text = el.textContent.trim();
+    const text = el.textContent.trim();
+    if (!el.closest('pre') && text.startsWith('$')) {
       const newText = processText(text, langStoreData, locale);
       const textNode = document.createTextNode(newText);
       el.parentNode.replaceChild(textNode, el);
@@ -347,12 +347,14 @@ export async function decorateI18n(block) {
   // Process multi-line <code> blocks wrapped in <pre>
   block.querySelectorAll('pre code').forEach((el) => {
     const text = el.textContent.trim();
-    const keys = text.split(/\s+/);
-    const newTexts = keys.map((key) => {
-      const newText = processText(key, langStoreData, locale);
-      return `<p>${newText}</p>`;
-    });
-    el.parentNode.outerHTML = newTexts.join('');
+    if (text.startsWith('$')) {
+      const keys = text.split(/\s+/);
+      const newTexts = keys.map((key) => {
+        const newText = processText(key, langStoreData, locale);
+        return `<p>${newText}</p>`;
+      });
+      el.parentNode.outerHTML = newTexts.join('');
+    }
   });
 }
 
