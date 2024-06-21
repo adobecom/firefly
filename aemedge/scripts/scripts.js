@@ -164,7 +164,14 @@ const onRedirect = async (e) => {
 
 const onToken = async () => {
   await window.adobeIMS.refreshToken();
-  window.location.reload();
+  if (window.UniversalNav) {
+    // reload the UNAV piece only and hide susi-sentry popup
+    window.UniversalNav.reload();
+    const susiSentryDiv = document.querySelector('.sentry-wrapper');
+    susiSentryDiv.classList.add('hidden');
+  } else {
+    window.location.reload();
+  }
 };
 
 const onError = (e) => {
@@ -228,8 +235,8 @@ export async function signInOverride() {
       susiLightEl.config = susiConfig;
       susiLightEl.authParams = susiAuthParams;
       main.prepend(susiSentryDiv);
-      // Register event listeners on susi-sentry
-      susiLightEl.addEventListener('message', onMessage);
+      // Register event listeners for susi-sentry
+      // susiLightEl.addEventListener('on-message', onMessage);
       susiLightEl.addEventListener('on-token', onToken);
       susiLightEl.addEventListener('on-auth-code', onAuthCode);
       susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
