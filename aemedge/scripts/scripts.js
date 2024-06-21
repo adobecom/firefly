@@ -280,13 +280,18 @@ async function headerModal() {
   }
 }
 
-// Fetch locale from cookie
-export function getLocaleFromCookie() {
+// Fetch locale from browser or cookie
+export function getLocale() {
   const match = document.cookie.match(/(^| )locale=([^;]+)/);
   if (match) {
     return match[2];
   }
-  return null;
+
+  const browserLocale = navigator.language || navigator.userLanguage;
+  if (browserLocale) {
+    return browserLocale;
+  }
+  return 'en-US';
 }
 
 export function convertLocaleFormat(locale) {
@@ -326,7 +331,7 @@ const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_
 
 // Decorate i18n text
 export async function decorateI18n(block) {
-  const locale = getLocaleFromCookie() || 'en-US';
+  const locale = getLocale() || 'en-US';
   const limit = 5000;
 
   // Check & Fetch language store data if not already cached
@@ -359,7 +364,7 @@ export async function decorateI18n(block) {
 // Function to fetch value for a specific key
 export async function getI18nValue(key, limit = 5000) {
   try {
-    const locale = getLocaleFromCookie() || 'en-US';
+    const locale = getLocale() || 'en-US';
     const value = await langStoreCache.getValueByKey(key, locale, limit);
     return value ?? key;
   } catch (error) {

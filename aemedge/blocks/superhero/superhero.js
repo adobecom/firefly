@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
-import { getI18nValue, getLocaleFromCookie } from '../../scripts/scripts.js';
+import { getI18nValue, getLocale } from '../../scripts/scripts.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
 const { createTag } = await import(`${getLibs()}/utils/utils.js`);
@@ -123,7 +123,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
     const imageDetails = await resp.json();
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
-    const userLocale = getLocaleFromCookie() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
+    const userLocale = getLocale() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     // eslint-disable-next-line max-len
     const picture = createOptimizedFireflyPicture(imageUrl, imageId, prompt, active, eager, fetchPriority, [
