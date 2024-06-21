@@ -97,11 +97,27 @@ export function createOptimizedFireflyPicture(
   return picture;
 }
 
+export async function getAccessToken() {
+  const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
+  let authToken;
+  if (!window.adobeIMS) {
+    loadIms().then(async () => {
+      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+    }).catch(() => {
+      authToken = null;
+    });
+  } else {
+    authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+  }
+  return authToken;
+}
+
 /**
  * Retrieves an array of features from the server.
  * @returns {Promise<Array>} A promise that resolves to an array of features.
  */
-export async function getFeaturesArray(authToken) {
+export async function getFeaturesArray() {
+  const authToken = await getAccessToken();
   const buildMode = getMetadata('buildmode');
   const featuresUrl = buildMode === 'stage' ? FEATURES_API_STAGE : FEATURES_API_PROD;
   let featuresArray = [];

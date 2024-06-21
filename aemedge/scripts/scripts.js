@@ -421,6 +421,13 @@ async function loadFireflyUtils(gnav) {
     const navItemWrapper = document.createElement('div');
     const children = headerUtils.querySelectorAll('p');
     children.forEach((p) => {
+      const featureFlag = p.querySelector('code');
+      if (featureFlag) {
+        const flag = featureFlag.textContent.trim();
+        if (!window.featuresArray.includes(flag)) {
+          return;
+        }
+      }
       const navItem = document.createElement('div');
       navItem.classList.add('feds-navItem');
       const a = p.querySelector('a');
