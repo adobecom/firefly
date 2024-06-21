@@ -291,7 +291,7 @@ export function getLocale() {
   if (browserLocale) {
     return browserLocale;
   }
-  return null;
+  return 'en-US';
 }
 
 export function convertLocaleFormat(locale) {
