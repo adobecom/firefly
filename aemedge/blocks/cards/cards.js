@@ -5,27 +5,40 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length >= 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
-    });
-    ul.append(li);
-  });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedFireflyPicture(img.src, img.alt, false, [{ width: '750' }])));
-  block.textContent = '';
-  block.append(ul);
+    while (row.firstElementChild) {
+      const col = row.firstElementChild;
+      if (col.querySelector('picture')) {
+        col.className = 'cards-card-image';
+        col.querySelectorAll('picture').forEach((picture, idx) => {
+          const img = picture.querySelector('img');
+          const replacedPicture = createOptimizedFireflyPicture(img.src, img.alt, false, [{ width: '750' }]);
+          picture.replaceWith(replacedPicture);
 
-  // Full card should be clickable
-  block.querySelectorAll('.cards > ul > li').forEach((card) => {
-    const anchor = card.querySelector('a');
+          if (idx === 0) {
+            replacedPicture.classList.add('card-bg-image');
+          } else {
+            replacedPicture.classList.add('card-fg-image');
+          }
+
+          if (replacedPicture.parentElement.tagName === 'P' && replacedPicture.parentElement.childElementCount === 1) {
+            const par = replacedPicture.parentElement;
+            par.before(replacedPicture);
+            par.remove();
+          }
+        });
+      } else col.className = 'cards-card-body';
+      li.append(col);
+    }
+
+    const anchor = li.querySelector('a');
     if (anchor && anchor.href) {
-      const alink = anchor.href;
-      card.classList.add('linked-card');
-
-      card.addEventListener('click', () => {
-        document.location.href = alink;
+      li.classList.add('linked-card');
+      li.addEventListener('click', () => {
+        document.location.href = anchor.href;
       });
     }
+
+    ul.append(li);
   });
+  block.replaceChildren(ul);
 }

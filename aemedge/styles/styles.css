@@ -413,12 +413,13 @@
     margin: 0 10px 0 16px;
   }
 
-  @media (width >= 600px) {
-    main>div>div {
-      max-width: 1500px;
-      margin: 0 auto;
-    }
+  main > div > div {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-inline: 24px;
+  }
 
+  @media (width >= 600px) {
     main>.section>.content {
       max-width: 1500px;
     }
