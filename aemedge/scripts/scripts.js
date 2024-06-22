@@ -22,22 +22,23 @@ import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 const buildMode = getMetadata('buildmode');
-const osMap = {
-  Mac: 'macOS',
-  Win: 'windows',
-  Linux: 'linux',
-  CrOS: 'chromeOS',
-  Android: 'android',
-  iPad: 'iPadOS',
-  iPhone: 'iOS',
-};
+// const osMap = {
+//   Mac: 'macOS',
+//   Win: 'windows',
+//   Linux: 'linux',
+//   CrOS: 'chromeOS',
+//   Android: 'android',
+//   iPad: 'iPadOS',
+//   iPhone: 'iOS',
+// };
 const searchParams = new URLSearchParams(window.location.search);
 
 // Add project-wide style path here.
 const STYLES = '/aemedge/styles/styles.css';
 
 // Use 'https://milo.adobe.com/libs' if you cannot map '/libs' to milo's origin.
-const LIBS = '/libs';
+// const LIBS = '/libs';
+const LIBS = 'https://expose-unav-config--milo--sharmrj.hlx.page/libs';
 
 // Add any config options.
 const CONFIG = {
@@ -205,122 +206,23 @@ const onMessage = (e) => {
   console.debug('onMessage: ', e);
 };
 
-const getDevice = () => {
-  const agent = navigator.userAgent;
-  // eslint-disable-next-line no-restricted-syntax
-  for (const [os, osName] of Object.entries(osMap)) {
-    if (agent.includes(os)) return osName;
-  }
-  // this should fallback into unknown but it's not supported yet so we are returning macOS
-  return "macOS";
-};
+// const getDevice = () => {
+//   const agent = navigator.userAgent;
+//   // eslint-disable-next-line no-restricted-syntax
+//   for (const [os, osName] of Object.entries(osMap)) {
+//     if (agent.includes(os)) return osName;
+//   }
+//   // this should fallback into unknown but it's not supported yet so we are returning macOS
+//   return "macOS";
+// };
 
-const UNAV_ANALYTICS_CONTEXT = {
-  name: 'FireflyHome',
-  version: '1.0',
-  platform: "Web",
-  device: getDevice(),
-  os_version: navigator?.userAgentData?.platform || navigator?.platform,
-};
-
-// override the signIn method from milo header and load SUSI Light
-export async function overrideSignIn() {
-  try {
-    const main = document.querySelector('main');
-    const sentryWrapper = main.querySelector('.sentry-wrapper');
-    if (sentryWrapper) {
-      sentryWrapper.classList.remove('hidden');
-    } else {
-      const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
-      const susiAuthParams = {
-        'client_id': CONFIG.imsClientId,
-        'scope': CONFIG.imsScope,
-        'locale': 'en-us',
-        'response_type': 'token',
-        'dt': darkMode,
-        'redirect_uri': window.location.href,
-      };
-      if (searchParams.get('disable_local_msw') === 'true') {
-        // eslint-disable-next-line dot-notation
-        susiAuthParams['disable_local_msw'] = 'true';
-      }
-
-      const susiSentryTag = `<susi-sentry 
-        id="sentry"
-        variant="large-buttons"
-        popup=true
-        stage=true
-      ></susi-sentry>`;
-
-      const susiSentryDiv = document.createElement('div');
-      susiSentryDiv.classList.add('sentry-wrapper');
-      susiSentryDiv.innerHTML = susiSentryTag;
-      const susiLightEl = susiSentryDiv.firstChild;
-      susiLightEl.classList.add((darkMode === true) ? 'dark' : 'light');
-      susiLightEl.config = susiConfig;
-      susiLightEl.authParams = susiAuthParams;
-      main.prepend(susiSentryDiv);
-      // Register event listeners for susi-sentry
-      // susiLightEl.addEventListener('on-message', onMessage);
-      susiLightEl.addEventListener('on-token', onToken);
-      susiLightEl.addEventListener('on-auth-code', onAuthCode);
-      susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
-      susiLightEl.addEventListener('on-error', onError);
-      susiLightEl.addEventListener('on-load', onSentryLoad);
-      susiLightEl.addEventListener('on-provider-clicked', onProviderClicked);
-      susiLightEl.addEventListener('redirect', onRedirect);
-
-      await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-      // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-      await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
-      window.addEventListener('click', (e) => {
-        // if sign-in modal open and user clicks out of it, close the modal
-        const isClickInsideModal = susiLightEl.contains(e.target);
-        if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
-      });
-    }
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function overrideUNAV() {
-  // Sign-in override for SUSI Light
-  if (window.UniversalNav) {
-    console.debug('overriding the unav');
-    const { CONFIG: UNAVCONFIG, getUniversalNavLocale } = await import(`${miloLibs}/blocks/global-navigation/global-navigation.js`);
-    const visitorGuid = window.alloy ? await window.alloy('getIdentity')
-      .then((data) => data?.identity?.ECID).catch(() => undefined) : undefined;
-    const updatedProfileConfig = UNAVCONFIG.universalNav.components.profile;
-    updatedProfileConfig.attributes.callbacks.onSignIn = () => {
-      overrideSignIn();
-      const analyticsEvent = makeFinalPayload({
-        'event.subcategory': 'Navigation',
-        'event.subtype': 'signin',
-        'event.type': 'click',
-      });
-      ingestAnalytics([analyticsEvent]);
-    };
-    const updatedConfiguration = {
-      target: document.querySelector('header nav .feds-utilities'),
-      env: getEnvironment(),
-      theme: 'light',
-      locale: getUniversalNavLocale(window.adobeid.locale || navigator.locale),
-      children: [updatedProfileConfig, {
-        name: "app-switcher",
-        attributes: { crossOrigin: "anonymous" },
-      }],
-      imsClientId: CONFIG.imsClientId,
-      isSectionDividerRequired: false,
-      analyticsContext: {
-        consumer: UNAV_ANALYTICS_CONTEXT,
-        event: { visitor_guid: visitorGuid },
-      },
-    };
-    await window.UniversalNav.reload(updatedConfiguration);
-  }
-}
+// const UNAV_ANALYTICS_CONTEXT = {
+//   name: 'FireflyHome',
+//   version: '1.0',
+//   platform: "Web",
+//   device: getDevice(),
+//   os_version: navigator?.userAgentData?.platform || navigator?.platform,
+// };
 
 async function headerModal() {
   const links = document.querySelectorAll('a[href*="/fragments/"]');
@@ -505,10 +407,13 @@ async function loadFireflyUtils(gnav) {
       }
       navItemWrapper.append(navItem);
     });
-    const utilsWrapper = document.querySelector('.feds-utilities');
+    const globalNavParent = document.querySelector('.feds-utilities');
+    const utilsWrapper = document.createElement('div');
+    utilsWrapper.classList.add('feds-utilities', 'links');
     if (utilsWrapper) {
       utilsWrapper.prepend(...navItemWrapper.childNodes);
     }
+    globalNavParent.parentElement.insertBefore(utilsWrapper, globalNavParent);
   }
 }
 
@@ -544,12 +449,12 @@ function decorateFireflyLogo(gnav) {
   }
 }
 
-async function loadFireflyHeaderComponents() {
+async function loadFireflyHeaderComponents(onlyUtils = false) {
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
     gnav.innerHTML = await resp.text();
-    decorateFireflyLogo(gnav);
+    if (!onlyUtils) decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
 
@@ -565,6 +470,112 @@ async function loadFireflyHeaderComponents() {
       ingestAnalytics([analyticsEvent]);
     });
   });
+}
+
+// override the signIn method from milo header and load SUSI Light
+export async function overrideSignIn() {
+  try {
+    const main = document.querySelector('main');
+    const sentryWrapper = main.querySelector('.sentry-wrapper');
+    if (sentryWrapper) {
+      sentryWrapper.classList.remove('hidden');
+    } else {
+      const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
+      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
+      const susiAuthParams = {
+        'client_id': CONFIG.imsClientId,
+        'scope': CONFIG.imsScope,
+        'locale': 'en-us',
+        'response_type': 'token',
+        'dt': darkMode,
+        'redirect_uri': window.location.href,
+      };
+      if (searchParams.get('disable_local_msw') === 'true') {
+        // eslint-disable-next-line dot-notation
+        susiAuthParams['disable_local_msw'] = 'true';
+      }
+
+      const susiSentryTag = `<susi-sentry 
+        id="sentry"
+        variant="large-buttons"
+        popup=true
+        stage=true
+      ></susi-sentry>`;
+
+      const susiSentryDiv = document.createElement('div');
+      susiSentryDiv.classList.add('sentry-wrapper');
+      susiSentryDiv.innerHTML = susiSentryTag;
+      const susiLightEl = susiSentryDiv.firstChild;
+      susiLightEl.classList.add((darkMode === true) ? 'dark' : 'light');
+      susiLightEl.config = susiConfig;
+      susiLightEl.authParams = susiAuthParams;
+      main.prepend(susiSentryDiv);
+      // Register event listeners for susi-sentry
+      // susiLightEl.addEventListener('on-message', onMessage);
+      susiLightEl.addEventListener('on-token', onToken);
+      susiLightEl.addEventListener('on-auth-code', onAuthCode);
+      susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
+      susiLightEl.addEventListener('on-error', onError);
+      susiLightEl.addEventListener('on-load', onSentryLoad);
+      susiLightEl.addEventListener('on-provider-clicked', onProviderClicked);
+      susiLightEl.addEventListener('redirect', onRedirect);
+
+      await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
+      // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
+      await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
+      window.addEventListener('click', (e) => {
+        // if sign-in modal open and user clicks out of it, close the modal
+        const isClickInsideModal = susiLightEl.contains(e.target);
+        if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
+      });
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function overrideUNAV() {
+  // Update a few things and reload UNAV so we can listen to messages and override sign in click.
+  if (window.UniversalNav) {
+    console.debug('overriding the unav');
+    const { CONFIG: UNAV_CONFIG } = await import(`${miloLibs}/blocks/global-navigation/global-navigation.js`);
+    // const visitorGuid = window.alloy ? await window.alloy('getIdentity')
+    //   .then((data) => data?.identity?.ECID).catch(() => undefined) : undefined;
+    const updatedUnavConfig = UNAV_CONFIG.universalNav.universalNavConfig;
+    console.log('updatedUnavConfig', updatedUnavConfig);
+    const { children } = updatedUnavConfig;
+    children.forEach((child) => {
+      if (child.name === 'profile') {
+        child.attributes.callbacks.onSignIn = () => {
+          overrideSignIn();
+          const analyticsEvent = makeFinalPayload({
+            'event.subcategory': 'Navigation',
+            'event.subtype': 'signin',
+            'event.type': 'click',
+          });
+          ingestAnalytics([analyticsEvent]);
+        };
+      }
+    });
+    console.log('updatedUnavConfig after change', updatedUnavConfig);
+    // const updatedConfiguration = {
+    //   target: document.querySelector('header nav .feds-utilities'),
+    //   env: getEnvironment(),
+    //   theme: 'light',
+    //   locale: getUniversalNavLocale(window.adobeid.locale || navigator.locale),
+    //   children: [updatedProfileConfig, {
+    //     name: "app-switcher",
+    //     attributes: { crossOrigin: "anonymous" },
+    //   }],
+    //   imsClientId: CONFIG.imsClientId,
+    //   isSectionDividerRequired: false,
+    //   analyticsContext: {
+    //     consumer: UNAV_ANALYTICS_CONTEXT,
+    //     event: { visitor_guid: visitorGuid },
+    //   },
+    // };
+    await window.UniversalNav.reload(updatedUnavConfig);
+  }
 }
 
 async function loadPage() {
