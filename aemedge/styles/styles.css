@@ -118,6 +118,14 @@
     margin-right: 9px;
   }
 
+  .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
+    display: flex;
+    padding: 15px;
+    background: linear-gradient(95deg, #ff477b 0%, #5c5ce0 49%, #318fff 100%);
+    color: white;
+    border: none;
+  }
+
   .feds-navItem a.feds-cta[daa-ll="Upgrade"]::before {
     content: '';
     width: 18px;
@@ -130,11 +138,6 @@
   .feds-navItem a.feds-cta[href*="discord"] {
     display: none;
   }
-
-  .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
-    display: none;
-  }
-
 
   .feds-profile>.feds-signIn {
     font-size: 14px;
@@ -475,14 +478,6 @@
     .feds-navItem a.feds-cta[href*="discord"] {
       display: flex;
       padding: 15px;
-    }
-
-    .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
-      display: flex;
-      padding: 15px;
-      background: linear-gradient(95deg, #ff477b 0%, #5c5ce0 49%, #318fff 100%);
-      color: white;
-      border: none;
     }
 
     .feds-brand-image img {
