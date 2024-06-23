@@ -413,6 +413,63 @@
     margin: 0 10px 0 16px;
   }
 
+
+  .section.gallery-description{
+    text-align: center;
+  }
+
+  .section.gallery-description h1{
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 46px;
+    margin: 0;
+  }
+
+  .section.gallery-description h2{
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 33px;
+  }
+
+  .section.gallery-description a,
+  .section.gallery-description a:visited {
+    background: rgba( 230,230,230 );
+    color : rgba(34, 34, 34);
+    justify-content: center;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    align-items: center;
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: rgba(109,109,109);
+    color: white;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    visibility: visible;
+    max-width: 140px;
+    white-space: warp;
+    overflow: hidden;
+    z-index: 99;
+    line-height: 2;
+}
+
+picture > img[src*="tooltip.svg"]:hover + .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
   @media (width >= 600px) {
     main>div>div {
       max-width: 1500px;
@@ -448,6 +505,13 @@
 
     .feds-brand-image .logo-dark {
       display: none;
+    }
+
+    .section.gallery-description a,
+    .section.gallery-description a:visited {
+      display: block;
+      margin-left: auto;
+      width: fit-content;
     }
   }
 

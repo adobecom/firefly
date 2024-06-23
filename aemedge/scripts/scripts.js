@@ -14,9 +14,9 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, decorateArea } from './utils.js';
+import { setLibs, buildAutoBlocks, decorateArea } from './utils.js';
 import { openModal } from '../blocks/modal/modal.js';
-import { loadScript, getMetadata } from './aem.js';
+import { loadScript, getMetadata, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
@@ -70,6 +70,18 @@ const miloLibs = setLibs(LIBS);
     document.head.appendChild(link);
   });
 }());
+
+/**
+ * load fonts.css and set a session storage flag
+ */
+async function loadFonts() {
+  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
+  try {
+    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
+  } catch (e) {
+    // do nothing
+  }
+}
 
 function loadLegalBanner() {
   const legalBanner = document.createElement('div');
@@ -526,8 +538,10 @@ async function loadPage() {
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
+  loadFonts();
   await decorateI18n(document.querySelector('main'));
   await loadArea();
+  buildAutoBlocks(document.querySelector('main'));
   loadProfile();
   setTimeout(async () => {
     await loadFireflyHeaderComponents();
