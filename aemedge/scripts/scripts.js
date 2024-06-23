@@ -14,9 +14,9 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, decorateArea, getFeaturesArray } from './utils.js';
+import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
-import { loadScript, getMetadata } from './aem.js';
+import { loadScript, getMetadata, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
@@ -72,6 +72,18 @@ const miloLibs = setLibs(LIBS);
     document.head.appendChild(link);
   });
 }());
+
+/**
+ * load fonts.css and set a session storage flag
+ */
+async function loadFonts() {
+  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
+  try {
+    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
+  } catch (e) {
+    // do nothing
+  }
+}
 
 function loadLegalBanner() {
   const legalBanner = document.createElement('div');
@@ -282,13 +294,18 @@ async function headerModal() {
   }
 }
 
-// Fetch locale from cookie
-export function getLocaleFromCookie() {
+// Fetch locale from browser or cookie
+export function getLocale() {
   const match = document.cookie.match(/(^| )locale=([^;]+)/);
   if (match) {
     return match[2];
   }
-  return null;
+
+  const browserLocale = navigator.language || navigator.userLanguage;
+  if (browserLocale) {
+    return browserLocale;
+  }
+  return 'en-US';
 }
 
 export function convertLocaleFormat(locale) {
@@ -328,7 +345,7 @@ const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_
 
 // Decorate i18n text
 export async function decorateI18n(block) {
-  const locale = getLocaleFromCookie() || 'en-US';
+  const locale = getLocale() || 'en-US';
   const limit = 5000;
 
   // Check & Fetch language store data if not already cached
@@ -361,7 +378,7 @@ export async function decorateI18n(block) {
 // Function to fetch value for a specific key
 export async function getI18nValue(key, limit = 5000) {
   try {
-    const locale = getLocaleFromCookie() || 'en-US';
+    const locale = getLocale() || 'en-US';
     const value = await langStoreCache.getValueByKey(key, locale, limit);
     return value ?? key;
   } catch (error) {
@@ -572,8 +589,10 @@ async function loadPage() {
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
+  loadFonts();
   await decorateI18n(document.querySelector('main'));
   await loadArea();
+  buildAutoBlocks(document.querySelector('main'));
   loadProfile();
   setTimeout(async () => {
     await loadFireflyHeaderComponents();
