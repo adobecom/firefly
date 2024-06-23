@@ -100,7 +100,7 @@
     color: inherit;
   }
 
-  .feds-navItem .feds-cta {
+  .feds-navItem.feds-cta {
     font-size: 14px;
     font-weight: 700;
     line-height: 18.2px;
@@ -109,30 +109,19 @@
     border-color: rgba(213, 213, 213);
   }
 
-  .feds-navItem a.feds-cta[href*="discord"]::before {
-    content: '';
+  .feds-navItem.feds-cta img{
     width: 18px;
     height: 14px;
-    background: url('/aemedge/icons/discord.svg') left no-repeat;
     display: inline-block;
     margin-right: 9px;
   }
 
-  .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
+  .feds-navItem.feds-cta--colored{
     display: flex;
     padding: 15px;
     background: linear-gradient(95deg, #ff477b 0%, #5c5ce0 49%, #318fff 100%);
     color: white;
     border: none;
-  }
-
-  .feds-navItem a.feds-cta[daa-ll="Upgrade"]::before {
-    content: '';
-    width: 18px;
-    height: 14px;
-    background: url('/aemedge/icons/upgrade-icon.svg') left no-repeat;
-    display: inline-block;
-    margin-right: 9px;
   }
 
   .feds-navItem a.feds-cta[href*="discord"] {
