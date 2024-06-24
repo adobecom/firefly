@@ -92,6 +92,9 @@
   padding: 4px 14px;
   grid-column: 2;
   grid-row: 3;
+  height: min-content;
+  align-self: flex-end;
+  justify-self: center;
 }
 
 .cards .cards-card-image picture {
