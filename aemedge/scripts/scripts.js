@@ -124,16 +124,13 @@ async function loadProfile() {
   });
   if (resp.ok) {
     const profile = await resp.json();
-    if (!profile.data['whats-new-dialog-confirmed']) {
+    if (typeof profile.data['whats-new-dialog-confirmed'] === 'undefined') {
       await openModal('/fragments/whatsnew');
     }
-    if (!profile.data['legal-user-acceptance']) {
+    if (typeof profile.data['legal-user-acceptance'] === 'undefined') {
       await openModal('/fragments/legal');
       loadLegalBanner();
     }
-  } else {
-    await openModal('/fragments/legal');
-    loadLegalBanner();
   }
 }
 
