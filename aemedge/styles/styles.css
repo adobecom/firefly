@@ -94,13 +94,15 @@
     line-height: 20.8px;
     text-decoration: none;
     vertical-align: top;
+    display: flex;
   }
 
   .feds-navLink:hover {
     color: inherit;
   }
 
-  .feds-navItem .feds-cta {
+  .feds-navItem.feds-cta {
+    padding: 15px;
     font-size: 14px;
     font-weight: 700;
     line-height: 18.2px;
@@ -109,34 +111,29 @@
     border-color: rgba(213, 213, 213);
   }
 
-  .feds-navItem a.feds-cta[href*="discord"]::before {
-    content: '';
-    width: 18px;
-    height: 14px;
-    background: url('/aemedge/icons/discord.svg') left no-repeat;
-    display: inline-block;
-    margin-right: 9px;
+  .feds-navItem>*:not(.feds-popup){
+    display: flex;
+    justify-content: center;
   }
 
-  .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
+  .feds-navItem.feds-cta span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feds-navItem.feds-cta img{
+    width: 18px;
+    height: 14px;
+    display: inline-block;
+  }
+
+  .feds-navItem.feds-cta--colored{
     display: flex;
     padding: 15px;
     background: linear-gradient(95deg, #ff477b 0%, #5c5ce0 49%, #318fff 100%);
     color: white;
     border: none;
-  }
-
-  .feds-navItem a.feds-cta[daa-ll="Upgrade"]::before {
-    content: '';
-    width: 18px;
-    height: 14px;
-    background: url('/aemedge/icons/upgrade-icon.svg') left no-repeat;
-    display: inline-block;
-    margin-right: 9px;
-  }
-
-  .feds-navItem a.feds-cta[href*="discord"] {
-    display: none;
   }
 
   .feds-profile>.feds-signIn {
@@ -173,7 +170,7 @@
   }
 
   .feds-profile>.feds-signIn:hover,
-  .feds-navItem .feds-cta:hover {
+  .feds-navItem.feds-cta:not(.feds-cta--colored):hover {
     background-color: rgb(230, 230, 230);
     color: inherit;
   }
@@ -258,32 +255,25 @@
     font-size: 12px;
   }
 
-  .feds-utility-links .feds-navItem {
+  .feds-utility-links .feds-navItem:not(.feds-cta) {
     padding: 5px;
+    background-color: inherit;
+    border: 1px solid white;
+    border-radius: 4px;
   }
 
   .feds-utility-links .feds-navItem>button.feds-navLink[daa-ll*="Feedback"] {
     padding: 0;
   }
 
-  .feds-utility-links .feds-navItem:not(:has(.feds-cta)) {
-    background-color: inherit;
-    border: 1px solid white;
-    border-radius: 4px;
-  }
-
-  .feds-utility-links .feds-navItem:not(:has(.feds-cta)):hover {
+  .feds-utility-links .feds-navItem:not(.feds-cta):hover {
     background-color: rgb(230, 230, 230);
     border: 1px solid rgb(230, 230, 230);
     border-radius: 4px;
   }
 
-  .feds-utility-links .feds-navItem:not(:has(.feds-cta)):hover .feds-popup {
+  .feds-utility-links .feds-navItem:not(.feds-cta):hover .feds-popup {
     background-color: rgb(250, 250, 250);
-  }
-
-  .feds-utility-links .feds-navItem:has(.feds-cta) {
-    padding: 0;
   }
 
   .feds-utility-links .feds-navLink {
@@ -538,11 +528,6 @@
       margin-left: 2%;
     }
 
-    .feds-navItem a.feds-cta[href*="discord"] {
-      display: flex;
-      padding: 15px;
-    }
-
     .feds-brand-image img {
       display: block;
     }
@@ -561,6 +546,18 @@
       margin-left: auto;
       width: fit-content;
     }
+
+  }
+
+  @media (width >= 900px) {
+    .feds-navItem.feds-cta a{
+      display: flex;
+    }
+    
+    .feds-navItem.feds-cta img{
+      margin-right: 9px;
+    }
+    
   }
 
   @media (prefers-color-scheme: dark) {
@@ -585,11 +582,11 @@
       display: none;
     }
 
-    .feds-utility-links .feds-navLink::before {
+    .feds-utility-links .feds-navLink::before, .feds-utility-links .feds-navLink a::before {
       filter: invert(1);
     }
 
-    .feds-navItem a.feds-cta[href*="discord"]::before {
+    .feds-navItem.feds-cta img[data-icon-name="discord"] {
       filter: invert(1);
     }
 
@@ -597,18 +594,18 @@
       border-color: rgb(84, 84, 84);
     }
 
-    .feds-utility-links .feds-navItem:not(:has(.feds-cta)):hover {
+    .feds-utility-links .feds-navItem:not(.feds-cta):hover {
       background-color: rgb(63, 63, 63);
       border: 1px solid rgb(63, 63, 63);
     }
 
-    .feds-utility-links .feds-navItem:not(:has(.feds-cta)) {
+    .feds-utility-links .feds-navItem:not(.feds-cta) {
       background-color: var(--spectrum-global-color-gray-50);
       border: 1px solid var(--spectrum-global-color-gray-50);
     }
 
     .feds-profile>.feds-signIn:hover,
-    .feds-navItem .feds-cta:hover {
+    .feds-navItem.feds-cta:not(.feds-cta--colored):hover {
       background-color: rgb(84, 84, 84);
     }
 
@@ -617,7 +614,7 @@
       background-color: rgb(226, 226, 226);
     }
 
-    .feds-utility-links .feds-navItem:not(:has(.feds-cta)):hover .feds-popup {
+    .feds-utility-links .feds-navItem:not(.feds-cta):hover .feds-popup {
       background-color: rgb(226, 226, 226);
     }
 

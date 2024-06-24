@@ -16,7 +16,7 @@
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
-import { loadScript, getMetadata, loadCSS } from './aem.js';
+import { loadScript, getMetadata, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
@@ -480,6 +480,7 @@ async function loadFireflyUtils(gnav) {
       if (showUtil) {
         const navItem = document.createElement('div');
         navItem.classList.add('feds-navItem');
+        const icon = p.querySelector('span.icon');
         const a = p.querySelector('a');
         const nextEl = p.nextElementSibling;
         if (nextEl && nextEl.tagName === 'UL') {
@@ -525,13 +526,22 @@ async function loadFireflyUtils(gnav) {
             button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
           });
         } else if (a) {
+          if (p.querySelector('strong em') || p.querySelector('em strong')) {
+            navItem.classList.add('feds-cta', 'feds-cta--colored');
+          } else
           if (p.querySelector('em')) {
-            a.className = 'feds-cta feds-cta--primary';
+            navItem.classList.add('feds-cta', 'feds-cta--primary');
           } else {
-            a.classList.add('feds-navLink');
+            navItem.classList.add('feds-navLink');
           }
           a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+          if (window.innerWidth < 900) {
+            a.textContent = '';
+          }
           navItem.append(a);
+          if (icon) {
+            a.prepend(icon);
+          }
           if (nextEl && nextEl.tagName === 'H3') {
             const tooltip = document.createElement('div');
             tooltip.classList.add('feds-tooltip');
@@ -550,6 +560,7 @@ async function loadFireflyUtils(gnav) {
       utilsWrapper.prepend(...navItemWrapper.childNodes);
     }
     globalNavParent.parentElement.insertBefore(utilsWrapper, globalNavParent);
+    decorateIcons(utilsWrapper);
     const upgradeBtn = utilsWrapper.querySelector('[daa-ll="Upgrade"]');
     if (upgradeBtn) {
       upgradeBtn.parentElement.addEventListener('click', (e) => {
@@ -593,7 +604,7 @@ function decorateFireflyLogo(gnav) {
 }
 
 async function loadFireflyHeaderComponents() {
-  const resp = await fetch('/gnav.plain.html');
+  const resp = await fetch('/drafts/kailas/ff-utils.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
     gnav.innerHTML = await resp.text();
