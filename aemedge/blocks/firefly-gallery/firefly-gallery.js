@@ -1,7 +1,7 @@
 /* eslint-disable quote-props */
 /* eslint-disable no-underscore-dangle */
 import { getLibs, getEnvironment } from '../../scripts/utils.js';
-import { getI18nValue, getLocaleFromCookie, signInOverride } from '../../scripts/scripts.js';
+import { getI18nValue, getLocale, signInOverride } from '../../scripts/scripts.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -66,7 +66,7 @@ async function getImages(link, accessToken = '', next = '') {
 
 async function addCards(cardContainer, images, accessToken = '') {
   let heightOfContainer = 0;
-  const locale = getLocaleFromCookie() || 'en-US';
+  const locale = getLocale() || 'en-US';
   await images.forEach(async (image) => {
     const rendition = image._links.rendition.href;
     const maxWidth = image._links.rendition.max_width;

@@ -40,6 +40,32 @@ export const [setLibs, getLibs] = (() => {
  */
 const DEFAULT_SIZE = '2000';
 
+function buildTooltip(main) {
+  const tooltipSVGs = main.querySelectorAll('picture > img[src*="tooltip.svg"]');
+
+  tooltipSVGs.forEach((img) => {
+    const tooltipText = img.alt.trim() || '';
+
+    img.addEventListener('mouseenter', () => {
+      const tooltip = document.createElement('span');
+      tooltip.classList.add('tooltip');
+      tooltip.textContent = tooltipText;
+      img.parentNode.appendChild(tooltip);
+    });
+
+    img.addEventListener('mouseleave', () => {
+      const tooltip = img.parentNode.querySelector('.tooltip');
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+  });
+}
+
+export function buildAutoBlocks(main) {
+  buildTooltip(main);
+}
+
 export function decorateArea(area = document) {
   const eagerLoad = (parent, selector) => {
     const img = parent.querySelector(selector);
