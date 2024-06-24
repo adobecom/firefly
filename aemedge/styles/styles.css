@@ -384,7 +384,7 @@
     background-color: white;
     padding: 20px;
     z-index: 100000000000;
-      
+    
     /* SUSI should be higher than everything */
   }
 
@@ -463,145 +463,142 @@
     overflow: hidden;
     z-index: 99;
     line-height: 2;
-  }
+}
 
-  picture > img[src*="tooltip.svg"]:hover + .tooltip {
+picture > img[src*="tooltip.svg"]:hover + .tooltip {
     opacity: 1;
     visibility: visible;
-  }
+}
 
   main>div>div {
     padding-inline: 24px;
-  }
-    
+
   @media (width >= 600px) {
     main>div>div {
       max-width: 1500px;
       margin: 0 auto;
     }
 
+    main>.section>.content {
+      max-width: 1500px;
+    }
+
+    .feds-brand {
+      margin-left: 10%;
+    }
+
+    .feds-nav-wrapper {
+      justify-content: center;
+      flex-grow: 0;
+      margin-left: 2%;
+    }
+
+    .feds-navItem a.feds-cta[href*="discord"] {
+      display: flex;
+      padding: 15px;
+    }
+
+    .feds-brand-image img {
+      display: block;
+    }
+
+    .feds-brand-image .logo-mobile {
+      display: none;
+    }
+
+    .feds-brand-image .logo-dark {
+      display: none;
+    }
+
+    .section.gallery-description a,
+    .section.gallery-description a:visited {
+      display: block;
+      margin-left: auto;
+      width: fit-content;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--spectrum-global-color-gray-50);
+      color: var(--spectrum-button-content-color-default);
+    }
+
+    .feds-topnav-wrapper {
+      border-color: rgb(84, 84, 84);
+    }
+
+    .feds-brand-image img {
+      opacity: 0;
+    }
+
+    .feds-brand-image .logo-mobile {
+      opacity: 1;
+    }
+
+    .feds-brand-image .logo-light {
+      display: none;
+    }
+
+    .feds-utilities .feds-navLink::before {
+      filter: invert(1);
+    }
+
+    .feds-navItem a.feds-cta[href*="discord"]::before {
+      filter: invert(1);
+    }
+
+    .feds-navItem .feds-cta {
+      border-color: rgb(84, 84, 84);
+    }
+
+    .feds-utilities .feds-navItem:not(:has(.feds-cta)):hover {
+      background-color: rgb(63, 63, 63);
+      border: 1px solid rgb(63, 63, 63);
+    }
+
+    .feds-utilities .feds-navItem:not(:has(.feds-cta)) {
+      background-color: var(--spectrum-global-color-gray-50);
+      border: 1px solid var(--spectrum-global-color-gray-50);
+    }
+
+    .feds-profile>.feds-signIn:hover,
+    .feds-navItem .feds-cta:hover {
+      background-color: rgb(84, 84, 84);
+    }
+
+    .feds-popup {
+      filter: invert(1);
+      background-color: rgb(226, 226, 226);
+    }
+
+    .feds-utilities .feds-navItem:not(:has(.feds-cta)):hover .feds-popup {
+      background-color: rgb(226, 226, 226);
+    }
+
+    .feds-popup .feds-menu-column>ul>li a{
+        color: rgb(20, 20, 20);
+    }
+
+    @media (min-width: 900px) {
+      .feds-navItem--active>.feds-navLink::before {
+        border-color: white;
+      }
+
+      .feds-navItem--active>.feds-navLink:only-child:hover,
+      .feds-navItem--active>.feds-navLink:only-child:focus {
+        color: white;
+      }
+    }
+
     @media (width >= 600px) {
-      main>.section>.content {
-        max-width: 1500px;
-      }
-
-      .feds-brand {
-        margin-left: 10%;
-      }
-
-      .feds-nav-wrapper {
-        justify-content: center;
-        flex-grow: 0;
-        margin-left: 2%;
-      }
-
-      .feds-navItem a.feds-cta[href*="discord"] {
-        display: flex;
-        padding: 15px;
-      }
-
-      .feds-brand-image img {
-        display: block;
-      }
-
       .feds-brand-image .logo-mobile {
         display: none;
       }
 
       .feds-brand-image .logo-dark {
-        display: none;
-      }
-
-      .section.gallery-description a,
-      .section.gallery-description a:visited {
         display: block;
-        margin-left: auto;
-        width: fit-content;
-      }
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: var(--spectrum-global-color-gray-50);
-        color: var(--spectrum-button-content-color-default);
-      }
-
-      .feds-topnav-wrapper {
-        border-color: rgb(84, 84, 84);
-      }
-
-      .feds-brand-image img {
-        opacity: 0;
-      }
-
-      .feds-brand-image .logo-mobile {
         opacity: 1;
-      }
-
-      .feds-brand-image .logo-light {
-        display: none;
-      }
-
-      .feds-utilities .feds-navLink::before {
-        filter: invert(1);
-      }
-
-      .feds-navItem a.feds-cta[href*="discord"]::before {
-        filter: invert(1);
-      }
-
-      .feds-navItem .feds-cta {
-        border-color: rgb(84, 84, 84);
-      }
-
-      .feds-utilities .feds-navItem:not(:has(.feds-cta)):hover {
-        background-color: rgb(63, 63, 63);
-        border: 1px solid rgb(63, 63, 63);
-      }
-
-      .feds-utilities .feds-navItem:not(:has(.feds-cta)) {
-        background-color: var(--spectrum-global-color-gray-50);
-        border: 1px solid var(--spectrum-global-color-gray-50);
-      }
-
-      .feds-profile>.feds-signIn:hover,
-      .feds-navItem .feds-cta:hover {
-        background-color: rgb(84, 84, 84);
-      }
-
-      .feds-popup {
-        filter: invert(1);
-        background-color: rgb(226, 226, 226);
-      }
-
-      .feds-utilities .feds-navItem:not(:has(.feds-cta)):hover .feds-popup {
-        background-color: rgb(226, 226, 226);
-      }
-
-      .feds-popup .feds-menu-column>ul>li a{
-        color: rgb(20, 20, 20);
-      }
-
-      @media (min-width: 900px) {
-        .feds-navItem--active>.feds-navLink::before {
-          border-color: white;
-        }
-
-        .feds-navItem--active>.feds-navLink:only-child:hover,
-        .feds-navItem--active>.feds-navLink:only-child:focus {
-          color: white;
-        }
-      }
-
-      @media (width >= 600px) {
-        .feds-brand-image .logo-mobile {
-          display: none;
-        }
-
-        .feds-brand-image .logo-dark {
-          display: block;
-          opacity: 1;
-        }
       }
     }
   }
