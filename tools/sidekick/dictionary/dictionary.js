@@ -1,6 +1,7 @@
 let dictionary = {};
 let fuse;
 
+// Display the key in the results section
 function displayKey(query) {
   const keys = dictionary[query.toLowerCase()];
   const resultDiv = document.getElementById('results');
@@ -32,6 +33,7 @@ function displayKey(query) {
   }
 }
 
+// Handle search input and display autocomplete suggestions
 function handleSearchInput() {
   const query = this.value.toLowerCase();
   const autocompleteList = document.getElementById('autocomplete-list');
@@ -62,18 +64,27 @@ function handleSearchInput() {
   }
 }
 
+// Fetch data from the localization files
 function fetchData(selectedLanguage) {
-  fetch(`/localization/lang-store.json?sheet=${selectedLanguage}&limit=10000`)
+  fetch(`/localization/${selectedLanguage}.json`)
     .then((response) => response.json())
     .then((data) => {
-      dictionary = data.data.reduce((acc, item) => {
-        const value = item[selectedLanguage].toLowerCase();
-        if (!acc[value]) {
-          acc[value] = [];
-        }
-        acc[value].push(item.key);
-        return acc;
-      }, {});
+      if (typeof data === 'object' && data !== null) {
+        dictionary = Object.keys(data).reduce((acc, key) => {
+          const value = data[key]?.toLowerCase(); 
+          if (value) {
+            const formattedKey = key.replace('@clio/playground:', '');
+            if (!acc[value]) {
+              acc[value] = [];
+            }
+            acc[value].push(formattedKey);
+          }
+          return acc;
+        }, {});
+      } else {
+        dictionary = {};
+      }
+
       const keys = Object.keys(dictionary);
       fuse = new Fuse(keys, { threshold: 0.3 });
       document.getElementById('search').addEventListener('input', handleSearchInput);
@@ -81,6 +92,9 @@ function fetchData(selectedLanguage) {
     .catch((error) => console.error('Error fetching data:', error));
 }
 
+
+
+// Handle language change
 function handleLanguageChange() {
   const selectedLanguage = document.getElementById('language').value;
   const searchInput = document.getElementById('search');
@@ -94,29 +108,31 @@ function handleLanguageChange() {
   fetchData(selectedLanguage);
 }
 
-function getLanguages() {
-  fetch('/localization/lang-store.json')
-    .then((response) => response.json())
-    .then((data) => {
-      const languageSelect = document.getElementById('language');
-      const locales = data[':names'];
-      languageSelect.innerHTML = '';
+// Get available languages
+async function getLanguages() {
+  try {
+    const response = await fetch('/drafts/kunwar/languages.json');
+    const data = await response.json();
+    const languageSelect = document.getElementById('language');
+    const locales = data.data.map(item => item.languages);
+    languageSelect.innerHTML = '';
 
-      locales.forEach((locale) => {
-        const option = document.createElement('option');
-        option.value = locale;
-        option.textContent = locale;
-        if (locale === 'en-US') {
-          option.selected = true; // Set en-US as the default selected language
-        }
-        languageSelect.appendChild(option);
-      });
+    locales.forEach((locale) => {
+      const option = document.createElement('option');
+      option.value = locale;
+      option.textContent = locale;
+      if (locale === 'en-US') {
+        option.selected = true; // Set en-US as the default selected language
+      }
+      languageSelect.appendChild(option);
+    });
 
-      const defaultLanguage = languageSelect.value;
-      fetchData(defaultLanguage);
-      document.getElementById('language').addEventListener('change', handleLanguageChange);
-    })
-    .catch((error) => console.error('Error fetching languages:', error));
+    const defaultLanguage = languageSelect.value;
+    fetchData(defaultLanguage);
+    document.getElementById('language').addEventListener('change', handleLanguageChange);
+  } catch (error) {
+    console.error('Error fetching languages:', error);
+  }
 }
 
 getLanguages();

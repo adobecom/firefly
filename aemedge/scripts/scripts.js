@@ -342,77 +342,94 @@ export function convertLocaleFormat(locale) {
 
 // Process i18n text
 const langStoreCache = {
-  cache: null,
+  cache: new Map(),
 
-  async fetchLangStoreData(locale, limit) {
-    const resp = await fetch(`/localization/lang-store.json?limit=${limit}&sheet=${locale}`);
-    if (resp.ok) {
-      const json = await resp.json();
-      this.cache = json.data;
-      return this.cache;
+  async fetchLangStoreData(locale) {
+    const resp = await fetch(`/localization/${locale}.json`);
+    if (!resp.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}'`);
     }
-    return [];
+
+    const json = await resp.json();
+    this.cache.set(locale, { locale, json, timestamp: Date.now() });
+    return json;
   },
 
-  async getData(locale, limit) {
-    return this.cache || this.fetchLangStoreData(locale, limit);
+  async getData(locale) {
+    if (!this.cache.has(locale)) {
+      await this.fetchLangStoreData(locale);
+    }
+
+    const cachedData = this.cache.get(locale);
+    if (cachedData) {
+      return cachedData.json;
+    }
+    return {};
   },
 
-  async getValueByKey(key, locale, limit) {
-    const data = await this.getData(locale, limit);
-    const langEntry = data.find((entry) => entry.key === key);
-    return langEntry?.[locale] ?? null;
+  async getValueByKey(key, locale) {
+    const data = await this.getData(locale);
+    const namespacedKey = `@clio/playground:${key}`;
+    return data[namespacedKey];
   },
 };
 
-const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
-  const jsonKey = match.slice(1);
-  const data = langStoreData.find((entry) => entry.key === jsonKey);
-  return data?.[locale] ?? match;
-});
+const processText = async (text, langStoreData) => {
+  const keys = text.match(/\$[a-zA-Z0-9_-]+/g);
+  if (!keys) return text;
+
+  let processedText = text;
+  keys.forEach((key) => {
+    const jsonKey = key.slice(1);
+    const namespacedKey = `@clio/playground:${jsonKey}`;
+    if (langStoreData[namespacedKey]) {
+      processedText = processedText.replace(key, langStoreData[namespacedKey]);
+    }
+  });
+  return processedText;
+};
+
+// Function to fetch value for a specific key
+export async function getI18nValue(key) {
+  try {
+    const locale = getLocale();
+    const value = await langStoreCache.getValueByKey(key, locale);
+    return value ?? key;
+  } catch (error) {
+    console.error(`Error fetching i18n value for key: ${key}`, error);
+    return key;
+  }
+}
 
 // Decorate i18n text
 export async function decorateI18n(block) {
-  const locale = getLocale() || 'en-US';
-  const limit = 5000;
+  const locale = getLocale();
 
   // Check & Fetch language store data if not already cached
-  const langStoreData = await langStoreCache.getData(locale, limit);
+  const langStoreData = await langStoreCache.getData(locale);
 
   // Process single <code> elements not inside <pre>
-  block.querySelectorAll('code').forEach((el) => {
+  block.querySelectorAll('code').forEach(async (el) => {
     const text = el.textContent.trim();
     if (!el.closest('pre') && text.startsWith('$')) {
-      const newText = processText(text, langStoreData, locale);
+      const newText = await processText(text, langStoreData);
       const textNode = document.createTextNode(newText);
       el.parentNode.replaceChild(textNode, el);
     }
   });
 
   // Process multi-line <code> blocks wrapped in <pre>
-  block.querySelectorAll('pre code').forEach((el) => {
+  block.querySelectorAll('pre code').forEach(async (el) => {
     const text = el.textContent.trim();
     if (text.startsWith('$')) {
       const keys = text.split(/\s+/);
-      const newTexts = keys.map((key) => {
-        const newText = processText(key, langStoreData, locale);
+      const newTexts = await Promise.all(keys.map(async (key) => {
+        const newText = await processText(key, langStoreData);
         return `<p>${newText}</p>`;
-      });
+      }));
       el.parentNode.outerHTML = newTexts.join('');
     }
   });
-}
-
-// Function to fetch value for a specific key
-export async function getI18nValue(key, limit = 5000) {
-  try {
-    const locale = getLocale() || 'en-US';
-    const value = await langStoreCache.getValueByKey(key, locale, limit);
-    return value ?? key;
-  } catch (error) {
-    console.error(`Error fetching i18n value for key: ${key}`, error);
-    return key;
-  }
 }
 
 /**
