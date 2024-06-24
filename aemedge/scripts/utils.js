@@ -9,9 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-import { getMetadata } from './aem.js';
-
 const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
 const FEATURES_API_PROD = 'https://p13n.adobe.io';
 
@@ -139,13 +136,25 @@ export async function getAccessToken() {
 }
 
 /**
+ * Returns the environment based on the hostname of the current window location.
+ * @returns {string} The environment ('stage' or 'prod').
+ */
+export function getEnvironment() {
+  const { hostname } = window.location;
+  if (hostname.includes('localhost') || hostname.includes('hlx.live') || hostname.includes('hlx.page') || hostname.includes('firefly-stage')) {
+    return 'stage';
+  }
+  return 'prod';
+}
+
+/**
  * Retrieves an array of features from the server.
  * @returns {Promise<Array>} A promise that resolves to an array of features.
  */
 export async function getFeaturesArray() {
   const authToken = await getAccessToken();
-  const buildMode = getMetadata('buildmode');
-  const featuresUrl = buildMode === 'stage' ? FEATURES_API_STAGE : FEATURES_API_PROD;
+  const environment = getEnvironment();
+  const featuresUrl = environment === 'stage' ? FEATURES_API_STAGE : FEATURES_API_PROD;
   let featuresArray = [];
   const url = `${featuresUrl}/fg/api/v3/feature?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
   const headers = new Headers({ 'X-Api-Key': 'clio-playground-web' });
@@ -162,16 +171,4 @@ export async function getFeaturesArray() {
   }
   window.featuresArray = featuresArray;
   return featuresArray;
-}
-
-/**
- * Returns the environment based on the hostname of the current window location.
- * @returns {string} The environment ('stage' or 'prod').
- */
-export function getEnvironment() {
-  const { hostname } = window.location;
-  if (hostname.includes('localhost') || hostname.includes('hlx.live') || hostname.includes('hlx.page') || hostname.includes('firefly-stage')) {
-    return 'stage';
-  }
-  return 'prod';
 }

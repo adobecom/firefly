@@ -14,16 +14,16 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray } from './utils.js';
+import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
-import { loadScript, getMetadata, decorateIcons, loadCSS } from './aem.js';
+import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 const UPGRADE_API_STAGE = 'https://aps-web-stage.adobe.io';
 const UPGRADE_API_PROD = 'https://aps-web.adobe.io';
-const buildMode = getMetadata('buildmode');
+const environment = getEnvironment();
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -108,7 +108,7 @@ function loadLegalBanner() {
 }
 
 async function loadProfile() {
-  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
+  const udsUrl = (environment === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
@@ -430,7 +430,7 @@ export function decorateExternalLink(element) {
 }
 
 async function loadUpgradeModal() {
-  let upgradeUrl = (buildMode === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
+  let upgradeUrl = (environment === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
   upgradeUrl = `${upgradeUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
