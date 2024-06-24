@@ -155,7 +155,7 @@ export default async function decorate(block) {
   const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
   if (firstPicture !== null) imageContainer.append(firstPicture);
   block.append(imageContainer);
-  await waitForLCP();
+
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -180,6 +180,7 @@ export default async function decorate(block) {
     ingestAnalytics(analyticsEvent);
   });
 
+  await waitForLCP();
   setTimeout(() => {
     // Get the rest of the images
     assetIds.forEach(async (assetId, i) => {
