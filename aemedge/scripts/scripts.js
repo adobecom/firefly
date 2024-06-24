@@ -604,7 +604,7 @@ function decorateFireflyLogo(gnav) {
 }
 
 async function loadFireflyHeaderComponents() {
-  const resp = await fetch('/drafts/kailas/ff-utils.plain.html');
+  const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
     gnav.innerHTML = await resp.text();
