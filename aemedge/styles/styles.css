@@ -472,7 +472,8 @@ picture > img[src*="tooltip.svg"]:hover + .tooltip {
 
   main>div>div {
     padding-inline: 24px;
-
+  }
+  
   @media (width >= 600px) {
     main>div>div {
       max-width: 1500px;
