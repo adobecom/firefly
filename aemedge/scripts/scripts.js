@@ -638,9 +638,9 @@ async function loadPage() {
   loadProfile();
   setTimeout(async () => {
     await loadFireflyHeaderComponents();
-    await headerModal();
   }, 0);
   setTimeout(() => {
+    headerModal();
     loadMartech();
     initAnalytics();
     recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
