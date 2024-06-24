@@ -17,105 +17,141 @@
 
 .cards > ul > li {
   border-radius: 16px;
+  min-height: 192px;
   position: relative;
 }
 
-.cards > ul > li.linked-card {
+.cards > ul > li.linked-card:hover {
   cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(112 112 112);
 }
 
-.cards > ul > li.linked-card:hover {
+.cards > ul > li.linked-card:focus-within {
   box-shadow: 0 0 0 1px rgba(112 112 112);
 }
 
 .cards.layout-50-50 > ul > li {
+  display: flex;
+  padding: 26px 15px;
   max-height: 192px;
 }
 
-.cards .cards-card-body {
-  margin: inherit;
-  padding-left: 16px;
-  
-}
-
-.cards .cards-card-body h4{
- font-size: 18px;
- margin: inherit;
-}
-
-.cards .cards-card-body h5{
-  font-size: 12px;
-  margin: inherit;
-}
-
-.cards .cards-card-body code,
-.cards .cards-card-body a {
-  font-size: 14px;
-  font-family: inherit;
-  font-weight: 600;
-  line-height: 18.2px;
-  width: fit-content;
-  border-radius: 8px;
-  color: rgba(0 0 0);
-  padding: 4px 10px;
-  background-color:rgba(230 230 230);
-  border-color: rgba(0 0 0 0%);
-  align-items:center;
-  justify-content:center;
-  text-decoration: none;
-}
-
-.cards .cards-card-body p > a {
-  border-radius: 18px;
-}
-
-.cards .cards-card-body p:has(a) {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 32px;
-  border-radius : 18px;
-}
-
-.cards > ul > li img {
-  width: 100%;
-  height: 100%; 
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  z-index: -2;
-  border-radius: 16px;
-}
-
-.cards > ul > li > .cards-card-image  p:nth-child(2) img{
-  display: block;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.cards > ul > li picture::after {
+.cards > ul > li::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(0 0 0 0%) 0%, rgba(0 0 0 80%) 100%);
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 80%) 100%);
   z-index: -1;
   border-radius: 16px;
 }
 
-@media (width >= 600px) {
-  .cards.layout-50-50 > ul {
-    grid-template-columns: repeat(2,1fr);
-  }
+.cards .cards-card-body {
+  display: grid;
+  column-gap: 1rem;
+  grid-template-columns: 1fr 72px;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+}
 
-  .cards .cards-card-body h4{
+.cards .cards-card-body > * {
+  grid-column: 1;
+}
+
+.cards .cards-card-body h4 {
+ font-size: 18px;
+ margin: 0 0 .25em;
+ align-self: end;
+}
+
+.cards .cards-card-body h5 {
+  font-size: 12px;
+  margin: 0;
+  align-self: center;
+}
+
+.cards .cards-card-body p {
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 8px;
+  color: rgba(0 0 0);
+  background-color:rgba(230 230 230);
+  border-color: rgba(0 0 0 0%);
+  width: fit-content;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.cards .cards-card-body p > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards .cards-card-body p:has(a) {
+  border-radius: 18px;
+  padding: 4px 14px;
+  grid-column: 2;
+  grid-row: 3;
+  height: min-content;
+  align-self: flex-end;
+  justify-self: center;
+}
+
+.cards .cards-card-image picture {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+
+.cards .cards-card-image picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  z-index: -2;
+}
+
+.cards .cards-card-image picture.card-fg-image {
+  left: unset;
+  bottom: 12px;
+  z-index: -2;
+}
+
+.cards .cards-card-image picture.card-fg-image img {
+  width: auto;
+  object-fit: contain;
+}
+
+
+@media (width >= 600px) {
+  .cards .cards-card-body h4 {
     font-size: 22px;
    }
    
-   .cards .cards-card-body h5{
+   .cards .cards-card-body h5 {
      font-size: 14px;
    }
+}
+
+@supports (container-type: inline-size) {
+  .cards.layout-50-50 {
+    /* stylelint-disable-next-line property-no-unknown */
+    container-type: inline-size;
+  }
+
+  /* stylelint-disable-next-line at-rule-no-unknown */
+  @container (min-width: 61rem) {
+    .cards.layout-50-50 > ul {
+      grid-template-columns: repeat(2,1fr);
+    }
+  }
+}
+
+
+@supports not (container-type: inline-size) {
+  @media (width >= 900px) {
+    .cards.layout-50-50 > ul {
+      grid-template-columns: repeat(2,1fr);
+    }
+  }
 }
