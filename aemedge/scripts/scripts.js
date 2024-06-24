@@ -292,17 +292,47 @@ async function headerModal() {
 }
 
 // Fetch locale from browser or cookie
+const FALLBACK_LOCALE = "en-US";
+
+function normalizeLocale(locale) {
+  const lowerCaseLocale = locale.toLowerCase();
+
+  // Handle Chinese locales
+  if (lowerCaseLocale.startsWith('zh')) {
+    if (lowerCaseLocale.includes("hans")) {
+      return "zh-Hans-CN";
+    }
+    if (lowerCaseLocale.includes("hant")) {
+      return "zh-Hant-TW";
+    }
+  }
+
+  // Handle English locale
+  const [language, region] = lowerCaseLocale.split(/[-_]/);
+  if (language.includes('en')) {
+    return FALLBACK_LOCALE;
+  }
+
+  // Default normalization for other locales
+  if (region) {
+    return `${language}-${region.toUpperCase()}`;
+  }
+
+  return FALLBACK_LOCALE;
+}
+
 export function getLocale() {
   const match = document.cookie.match(/(^| )locale=([^;]+)/);
   if (match) {
-    return match[2];
+    return normalizeLocale(match[2]);
   }
 
   const browserLocale = navigator.language || navigator.userLanguage;
   if (browserLocale) {
-    return browserLocale;
+    return normalizeLocale(browserLocale);
   }
-  return 'en-US';
+
+  return FALLBACK_LOCALE;
 }
 
 export function convertLocaleFormat(locale) {
