@@ -515,10 +515,14 @@ async function loadFireflyUtils(gnav) {
         navItemWrapper.append(navItem);
       }
     });
-    const utilsWrapper = document.querySelector('.feds-utilities');
+    const globalNavParent = document.querySelector('.feds-utilities');
+    if (!globalNavParent) return;
+    const utilsWrapper = document.createElement('div');
+    utilsWrapper.classList.add('feds-utility-links');
     if (utilsWrapper) {
       utilsWrapper.prepend(...navItemWrapper.childNodes);
     }
+    globalNavParent.parentElement.insertBefore(utilsWrapper, globalNavParent);
     const upgradeBtn = utilsWrapper.querySelector('[daa-ll="Upgrade"]');
     if (upgradeBtn) {
       upgradeBtn.parentElement.addEventListener('click', (e) => {
