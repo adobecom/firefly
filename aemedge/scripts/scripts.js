@@ -430,6 +430,7 @@ export function decorateExternalLink(element) {
 }
 
 async function loadUpgradeModal() {
+  const locale = getLocale() || 'en-US';
   let upgradeUrl = (environment === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
   upgradeUrl = `${upgradeUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
   if (!window.adobeIMS) return;
@@ -442,7 +443,7 @@ async function loadUpgradeModal() {
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
     },
-    body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"en-US"},"workflowResult":{"type":"WEB_APP_MODAL_WORKFLOW","version":"2","id":"ondemand_purchase_subscription_workflow","instanceId":"0f3ee0d5-3cd5-4217-84e3-08162e04e54a","response":"ondemand_request::reason=ff_free_user_upgrade&contextual_params=eyJjbGkiOiJmaXJlZmx5IiwiY3R4IjoiaWYiLCJsYW5nIjoiZW4iLCJjbyI6IklOIiwiY3R4UnRVcmwiOiJodHRwczovL2ZpcmVmbHktc3RhZ2UuY29ycC5hZG9iZS5jb20vP2xhdW5jaFBheXdhbGw9dHJ1ZSZwYXl3YWxsVmFyaWF0aW9uPVVQU0VMTF9OQVZCQVIifQ==&device_type=DESKTOP"}}`,
+    body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"${locale}"},"workflowResult":{"type":"WEB_APP_MODAL_WORKFLOW","version":"2","id":"ondemand_purchase_subscription_workflow","instanceId":"90591cfa-d610-4787-9c29-d82647d46a83","response":"ondemand_request::reason=ff_free_user_upgrade&contextual_params=eyJjbGkiOiJmaXJlZmx5IiwiY3R4IjoiaWYiLCJsYW5nIjoiZW4iLCJjbyI6IklOIiwiY3R4UnRVcmwiOiJodHRwczovL2ZpcmVmbHktc3RhZ2UuY29ycC5hZG9iZS5jb20vP2xhdW5jaFBheXdhbGw9dHJ1ZSZwYXl3YWxsVmFyaWF0aW9uPVVQU0VMTF9OQVZCQVIifQ==&device_type=DESKTOP"}}`,
   });
   if (resp.ok) {
     const respJson = await resp.json();
