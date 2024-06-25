@@ -604,7 +604,15 @@ function decorateFireflyLogo(gnav) {
   }
 }
 
+async function translateNavItems() {
+  const navWrapper = document.querySelector('.feds-nav-wrapper');
+  if (!navWrapper) return;
+  await decorateI18n(navWrapper);
+  navWrapper.style.visibility = 'visible';
+}
+
 async function loadFireflyHeaderComponents() {
+  await translateNavItems();
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');

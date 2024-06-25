@@ -57,6 +57,9 @@
     color: inherit;
   }
 
+  .feds-nav-wrapper{
+    visibility: hidden;
+  }
 
   .feds-topnav {
     max-width: none;
