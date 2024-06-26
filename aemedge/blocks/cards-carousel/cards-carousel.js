@@ -77,6 +77,10 @@ function buildSlide(slide, index, featuresArray) {
     }
   }
   filteredSlides += 1;
+  const icon = slide.querySelector('.icon');
+  if (icon) {
+    icon.parentElement.replaceWith(icon);
+  }
   const video = firstDiv.querySelector('a');
   if (video) {
     const image = firstDiv.querySelector('img');
@@ -110,6 +114,12 @@ function buildSlide(slide, index, featuresArray) {
       videoEl.classList.add('hide');
       image.classList.remove('hide');
     });
+    firstDiv.parentElement.prepend(videoEl);
+    firstDiv.parentElement.prepend(image);
+    if (icon) {
+      firstDiv.parentElement.prepend(icon);
+    }
+    firstDiv.remove();
   }
   slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
   slide.setAttribute('data-slide-index', index);
@@ -122,10 +132,6 @@ function buildSlide(slide, index, featuresArray) {
   linkWrapper.classList.add('card-link');
   linkWrapper.append(link.parentElement);
   slide.append(linkWrapper);
-  const icon = slide.querySelector('.icon');
-  if (icon) {
-    icon.parentElement.replaceWith(icon);
-  }
   const href = link?.href;
   if (href) {
     slide.classList.add('card-with-link');
