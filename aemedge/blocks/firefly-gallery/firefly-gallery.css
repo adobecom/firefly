@@ -164,14 +164,14 @@
     content: '';
     width: 16px;
     height: 16px;
-    background: url('../../icons/like.svg') center no-repeat;
+    background: url('/aemedge/icons/like.svg') center no-repeat;
   }
 
   .card .card-details .card-footer .favorite.liked::after {
     content: '';
     width: 16px;
     height: 16px;
-    background: url('../../icons/liked.svg') center no-repeat;
+    background: url('/aemedge/icons/liked.svg') center no-repeat;
     display: inline-block;
   }
 

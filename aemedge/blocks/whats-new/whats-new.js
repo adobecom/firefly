@@ -1,6 +1,4 @@
-import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
-
-import { getMetadata } from '../../scripts/aem.js';
+import { getLibs, getFeaturesArray, getEnvironment } from '../../scripts/utils.js';
 
 const { createTag, loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -8,8 +6,8 @@ const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 
 function registerWhatsNew() {
-  const buildMode = getMetadata('buildmode');
-  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
+  const environment = getEnvironment();
+  const udsUrl = (environment === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   return new Promise((resolve, reject) => {
     if (!window.adobeIMS) {
       loadIms();
@@ -66,18 +64,7 @@ export default async function decorate(block) {
   });
   nav.append(ul);
   block.prepend(nav);
-  let featuresArray = [];
-  if (!window.adobeIMS) {
-    await loadIms();
-  }
-  // eslint-disable-next-line max-len
-  const authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-  if (window.featuresArray) {
-    featuresArray = window.featuresArray;
-  } else {
-    await getFeaturesArray(authToken);
-    featuresArray = window.featuresArray;
-  }
+  const featuresArray = getFeaturesArray();
   // Replace the video links with videos
   [...content.children].forEach((row) => {
     const featureFlagEl = row.querySelector('code');
