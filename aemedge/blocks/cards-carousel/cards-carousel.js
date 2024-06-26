@@ -13,10 +13,15 @@ let curSlide = 0;
 let maxSlide = 0;
 let filteredSlides = 0;
 
-function scrollToSlide(carouselWrapper, slideIndex) {
+function scrollToSlide(carouselWrapper, slideIndex, dir) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
   const widthtoScroll = (carouselSlider.clientWidth > 767) ? 350 : 170;
-  const leftPos = (widthtoScroll * 2 * slideIndex);
+  let leftPos;
+  if (widthtoScroll === 350) {
+    leftPos = (widthtoScroll * 2 * slideIndex) + (dir === 'prev' ? -50 : 50);
+  } else {
+    leftPos = (widthtoScroll * 2 * slideIndex);
+  }
   carouselSlider.scrollTo({ left: leftPos, behavior: 'smooth' });
   const slides = carouselSlider.children;
   for (let i = 0; i < slides.length; i += 1) {
@@ -48,7 +53,7 @@ function buildNav(dir, carousel) {
       carousel.classList.remove('hide-prev');
       carousel.classList.remove('hide-next');
     }
-    scrollToSlide(carousel, nextSlide);
+    scrollToSlide(carousel, nextSlide, dir);
   });
   return nav;
 }
@@ -75,6 +80,7 @@ function buildSlide(slide, index, featuresArray) {
   const video = firstDiv.querySelector('a');
   if (video) {
     const image = firstDiv.querySelector('img');
+    const picture = firstDiv.querySelector('picture');
     const videoLink = video.href;
     const videoEl = document.createElement('video');
     videoEl.src = videoLink;
@@ -84,8 +90,8 @@ function buildSlide(slide, index, featuresArray) {
     videoEl.loop = true;
     videoEl.playsinline = true;
     videoEl.className = 'cards-card-video hide';
-    firstDiv.replaceWith(videoEl);
-    slide.prepend(image);
+    video.parentElement.replaceWith(videoEl);
+    picture.parentElement.replaceWith(image);
 
     slide.addEventListener('mouseenter', () => {
       videoEl.classList.remove('hide');
