@@ -36,12 +36,26 @@ header {
     content:'';
     width: 18px;
     height: 14px;
-    background: url('../../icons/discord.svg') left no-repeat;
+    background: url('/aemedge/icons/discord.svg') left no-repeat;
+    display: inline-block;
+    margin-right: 9px;
+  }
+
+
+  .feds-navItem a.feds-cta[daa-ll="Upgrade"]::before {
+    content:'';
+    width: 18px;
+    height: 14px;
+    background: url('/aemedge/icons/crown.svg') left no-repeat;
     display: inline-block;
     margin-right: 9px;
   }
 
   .feds-navItem a.feds-cta[href*="discord"] {
+    display: none;
+  }
+
+  .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
     display: none;
   }
 
@@ -94,7 +108,7 @@ header {
     content:'';
     width: 18px;
     height: 18px;
-    background: url('../../icons/whats-new.svg') left no-repeat;
+    background: url('/aemedge/icons/whats-new.svg') left no-repeat;
     display: inline-block;
   }
 
@@ -111,7 +125,7 @@ header {
     content:'';
     width: 18px;
     height: 18px;
-    background: url('../../icons/feedback.svg') left no-repeat;
+    background: url('/aemedge/icons/feedback.svg') left no-repeat;
     display: inline-block;
     margin-right: 9px;
   }
@@ -164,6 +178,11 @@ header {
     }
     
     .feds-navItem a.feds-cta[href*="discord"] {
+      display: inline-block;
+      padding: 5px;
+    }
+
+    .feds-navItem a.feds-cta[daa-ll="Upgrade"] {
       display: inline-block;
       padding: 5px;
     }

@@ -2,11 +2,9 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
-import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
+import { getFeaturesArray } from '../../scripts/utils.js';
 import { decorateIcons, createOptimizedPicture } from '../../scripts/aem.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
-
-const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 const SLIDE_ID_PREFIX = 'cards-carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
@@ -139,7 +137,9 @@ function buildSlide(slide, index, featuresArray) {
   return slide;
 }
 
-function loadCarousel(block, featuresArray = []) {
+export default async function decorate(block) {
+  decorateIcons(block);
+  const featuresArray = await getFeaturesArray();
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
   const slides = [...block.children];
@@ -162,29 +162,4 @@ function loadCarousel(block, featuresArray = []) {
       block.append(buildNav('next', block));
     }
   }, 0);
-}
-
-export default async function decorate(block) {
-  decorateIcons(block);
-  if (window.featuresArray) {
-    loadCarousel(block, window.featuresArray);
-  } else {
-    // eslint-disable-next-line no-lonely-if
-    let authToken;
-    if (!window.adobeIMS) {
-      loadIms().then(async () => {
-        authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-      }).catch(() => {
-        loadCarousel(block);
-      });
-    } else {
-      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-    }
-    if (authToken) {
-      await getFeaturesArray(authToken);
-      loadCarousel(block, window.featuresArray);
-    } else {
-      loadCarousel(block);
-    }
-  }
 }
