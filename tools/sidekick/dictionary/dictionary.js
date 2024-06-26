@@ -111,7 +111,7 @@ function handleLanguageChange() {
 // Get available languages
 async function getLanguages() {
   try {
-    const response = await fetch('/drafts/kunwar/languages.json');
+    const response = await fetch('/localization/languages.json');
     const data = await response.json();
     const languageSelect = document.getElementById('language');
     const locales = data.data.map(item => item.languages);
