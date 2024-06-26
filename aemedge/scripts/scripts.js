@@ -466,6 +466,7 @@ async function loadFireflyUtils(gnav) {
   const headerUtils = gnav.querySelector('.firefly-utils');
   if (headerUtils) {
     decorateExternalLink(headerUtils);
+    await decorateI18n(headerUtils);
     const navItemWrapper = document.createElement('div');
     const children = headerUtils.querySelectorAll('p');
     children.forEach((p) => {
@@ -492,7 +493,9 @@ async function loadFireflyUtils(gnav) {
           button.setAttribute('aria-haspopup', 'true');
           button.setAttribute('daa-lh', 'header|Open');
           button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-          button.textContent = a.textContent;
+          if (icon) {
+            button.prepend(icon);
+          }
           const ulWrapper = document.createElement('div');
           ulWrapper.classList.add('feds-popup');
           const fedsMenuContent = document.createElement('div');
@@ -527,15 +530,16 @@ async function loadFireflyUtils(gnav) {
             button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
           });
         } else if (a) {
-          if (p.querySelector('strong em') || p.querySelector('em strong')) {
+          a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+          if (a.textContent.toLowerCase().indexOf('upgrade') > -1) {
             navItem.classList.add('feds-cta', 'feds-cta--colored');
           } else
-          if (p.querySelector('em')) {
+          if (a.textContent.toLowerCase().indexOf('discord') > -1) {
             navItem.classList.add('feds-cta', 'feds-cta--primary');
           } else {
             navItem.classList.add('feds-navLink');
+            a.textContent = '';
           }
-          a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
           if (window.innerWidth < 900) {
             a.textContent = '';
           }
@@ -580,6 +584,7 @@ function decorateFireflyLogo(gnav) {
   const logo = gnav.querySelector('.firefly-logo');
   if (logo) {
     const brandContainer = document.querySelector('.feds-brand-image');
+    if (!brandContainer) return;
     const defaultLogo = brandContainer.querySelector('img');
     if (defaultLogo) {
       defaultLogo.classList.add('logo-light');
