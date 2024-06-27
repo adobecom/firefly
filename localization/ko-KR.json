@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "교육하기",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "컨셉",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "만든 날짜",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "Firefly Model",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "모델 이름",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "상태",
   "@clio/playground:enterprise-train-dashboard-header-text": "내 모델",

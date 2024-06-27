@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "Eğit",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "Konsept",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "Oluşturma Tarihi",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "Firefly Model",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "Model adı",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "Durum",
   "@clio/playground:enterprise-train-dashboard-header-text": "Modelleriniz",

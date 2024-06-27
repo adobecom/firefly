@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "[t5] ćłìø_Train_žż",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "[4f] ćłìø_Concept_žż",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "[t6] ćłìø_Created_žż",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "[8H] ćłìø_Firefly Model_žż",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "[t7] ćłìø_Model name_žż",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "[t8] ćłìø_Status_žż",
   "@clio/playground:enterprise-train-dashboard-header-text": "[t9] ćłìø_Your models_žż",

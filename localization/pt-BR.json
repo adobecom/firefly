@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "Treinar",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "Conceito",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "Criação",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "Firefly Model",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "Nome do modelo",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "Status",
   "@clio/playground:enterprise-train-dashboard-header-text": "Seus modelos",

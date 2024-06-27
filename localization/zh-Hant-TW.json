@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "訓練",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "概念",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "建立​時間",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "Firefly Model",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "模型​名稱",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "狀態",
   "@clio/playground:enterprise-train-dashboard-header-text": "您​的​模型",

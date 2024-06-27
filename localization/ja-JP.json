@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "訓練",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "コンセプト",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "作成​済み",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "Firefly Model",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "モデル​名",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "ステータス",
   "@clio/playground:enterprise-train-dashboard-header-text": "自分​の​モデル",

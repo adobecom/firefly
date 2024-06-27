@@ -311,6 +311,7 @@
   "@clio/playground:enterprise-train-button-train": "Kouluta",
   "@clio/playground:enterprise-train-dashboard-concept-field-label": "Konsepti",
   "@clio/playground:enterprise-train-dashboard-grid-view-created-header-text": "Luotu",
+  "@clio/playground:enterprise-train-dashboard-grid-view-firefly-model-text": "Firefly Model",
   "@clio/playground:enterprise-train-dashboard-grid-view-model-name-header-text": "Mallin nimi",
   "@clio/playground:enterprise-train-dashboard-grid-view-status-header-text": "Tila",
   "@clio/playground:enterprise-train-dashboard-header-text": "Omat mallit",
