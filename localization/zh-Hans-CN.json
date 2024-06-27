@@ -159,7 +159,7 @@
   "@clio/playground:autodub-popup-ethics-description": "Adobe 致力​于​以​负责​任​的​方式​开发 AI，​并​为​我们​的​社区​提供​有关​生成​媒体​的​透明度。<a>​了解​详情</a>",
   "@clio/playground:autodub-popup-ethics-heading": "Adobe 处理 AI 音​频​的​准则",
   "@clio/playground:autodub-popup-ethics-link": "https://www.adobe.com/go/AIEthics_cn",
-  "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "Cancel",
+  "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "取消",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-continue": "Continue",
   "@clio/playground:autodub-popup-not-complete-transcription-description": "Wait to review the transcript before generating, or continue to generate dubbing without reviewing your transcript. This action will use { credits, plural, one {<strong>{credits} credit</strong>} other {<strong>{credits} credits</strong>} }.",
   "@clio/playground:autodub-popup-not-complete-transcription-heading": "Transcript not complete",

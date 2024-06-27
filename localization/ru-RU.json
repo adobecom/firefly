@@ -159,7 +159,7 @@
   "@clio/playground:autodub-popup-ethics-description": "Adobe придерживается этичного подхода к ИИ, что подразумевает ответственную разработку и обеспечение прозрачности сведений о сгенерированных материалах в наших сообществах. <a>Подробнее</a>",
   "@clio/playground:autodub-popup-ethics-heading": "Подход Adobe к этичному использованию ИИ в аудио",
   "@clio/playground:autodub-popup-ethics-link": "https://www.adobe.com/go/AIEthics_ru",
-  "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "Cancel",
+  "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "Отмена",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-continue": "Continue",
   "@clio/playground:autodub-popup-not-complete-transcription-description": "Wait to review the transcript before generating, or continue to generate dubbing without reviewing your transcript. This action will use { credits, plural, one {<strong>{credits} credit</strong>} other {<strong>{credits} credits</strong>} }.",
   "@clio/playground:autodub-popup-not-complete-transcription-heading": "Transcript not complete",
