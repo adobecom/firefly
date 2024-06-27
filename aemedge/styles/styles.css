@@ -559,7 +559,7 @@
       display: none;
     }
 
-    .feds-utility-links .feds-navLink::before, .feds-utility-links .feds-navLink a::before {
+    .feds-utility-links .feds-navLink img {
       filter: invert(1);
     }
 
