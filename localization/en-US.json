@@ -501,7 +501,7 @@
   "@clio/playground:footer-privacy-policy": "Privacy Policy",
   "@clio/playground:footer-terms-of-use": "Terms of Use",
   "@clio/playground:forumdropdown-connect-learn-and-engage": "Connect, learn, and engage",
-  "@clio/playground:forumdropdown-connect-learn-and-engage-link": "https://community2.adobe.com/hb/adobe-firefly",
+  "@clio/playground:forumdropdown-connect-learn-and-engage-link": "https://www.adobe.com/go/firefly_community",
   "@clio/playground:forumdropdown-discussion-forum": "Discussion forum",
   "@clio/playground:forumdropdown-firefly-model-training-and-feedback": "Firefly model training and feedback",
   "@clio/playground:forumdropdown-join-the-discord-server": "Join the Discord server",
