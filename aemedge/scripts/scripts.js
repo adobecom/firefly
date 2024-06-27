@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable quote-props */
 /* eslint-disable quotes */
 /* eslint-disable no-console */
@@ -344,14 +345,21 @@ const langStoreCache = {
   cache: new Map(),
 
   async fetchLangStoreData(locale) {
-    const resp = await fetch(`/localization/${locale}.json`);
-    if (!resp.ok) {
-      throw new Error(`Failed to fetch data for locale '${locale}'`);
+    const resp1 = await fetch(`/localization/${locale}.json`);
+    if (!resp1.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}' from the main language store`);
     }
+    const json1 = await resp1.json();
 
-    const json = await resp.json();
-    this.cache.set(locale, { locale, json, timestamp: Date.now() });
-    return json;
+    // Fetch the second JSON file
+    const resp2 = await fetch(`/localization/community/${locale}.json`);
+    if (!resp2.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}' from the community language store`);
+    }
+    const json2 = await resp2.json();
+    const combinedJson = { ...json1, ...json2 };
+    this.cache.set(locale, { locale, json: combinedJson, timestamp: Date.now() });
+    return combinedJson;
   },
 
   async getData(locale) {
@@ -368,8 +376,16 @@ const langStoreCache = {
 
   async getValueByKey(key, locale) {
     const data = await this.getData(locale);
-    const namespacedKey = `@clio/playground:${key}`;
-    return data[namespacedKey];
+    const namespaces = ['@clio/playground', '@community/hubs'];
+
+    for (const namespace of namespaces) {
+      const namespacedKey = `${namespace}:${key}`;
+      if (data[namespacedKey]) {
+        return data[namespacedKey];
+      }
+    }
+
+    return "No translation found in the Language stores";
   },
 };
 
@@ -377,14 +393,20 @@ const processText = async (text, langStoreData) => {
   const keys = text.match(/\$[a-zA-Z0-9_-]+/g);
   if (!keys) return text;
 
+  const namespaces = ['@clio/playground', '@community/hubs'];
   let processedText = text;
+
   keys.forEach((key) => {
     const jsonKey = key.slice(1);
-    const namespacedKey = `@clio/playground:${jsonKey}`;
-    if (langStoreData[namespacedKey]) {
-      processedText = processedText.replace(key, langStoreData[namespacedKey]);
+    for (const namespace of namespaces) {
+      const namespacedKey = `${namespace}:${jsonKey}`;
+      if (langStoreData[namespacedKey]) {
+        processedText = processedText.replace(key, langStoreData[namespacedKey]);
+        break;
+      }
     }
   });
+
   return processedText;
 };
 
@@ -407,13 +429,22 @@ export async function decorateI18n(block) {
   // Check & Fetch language store data if not already cached
   const langStoreData = await langStoreCache.getData(locale);
 
+  // Helper function to safely replace HTML content
+  const replaceWithHTML = (element, html) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    while (tempDiv.firstChild) {
+      element.parentNode.insertBefore(tempDiv.firstChild, element);
+    }
+    element.parentNode.removeChild(element);
+  };
+
   // Process single <code> elements not inside <pre>
   block.querySelectorAll('code').forEach(async (el) => {
     const text = el.textContent.trim();
     if (!el.closest('pre') && text.startsWith('$')) {
       const newText = await processText(text, langStoreData);
-      const textNode = document.createTextNode(newText);
-      el.parentNode.replaceChild(textNode, el);
+      replaceWithHTML(el, newText);
     }
   });
 
@@ -426,7 +457,7 @@ export async function decorateI18n(block) {
         const newText = await processText(key, langStoreData);
         return `<p>${newText}</p>`;
       }));
-      el.parentNode.outerHTML = newTexts.join('');
+      replaceWithHTML(el.parentNode, newTexts.join(''));
     }
   });
 }
@@ -663,6 +694,7 @@ async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
   loadFonts();
+  decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
   await loadArea();
   buildAutoBlocks(document.querySelector('main'));

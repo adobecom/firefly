@@ -66,14 +66,21 @@ function handleSearchInput() {
 
 // Fetch data from the localization files
 function fetchData(selectedLanguage) {
-  fetch(`/localization/${selectedLanguage}.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      if (typeof data === 'object' && data !== null) {
-        dictionary = Object.keys(data).reduce((acc, key) => {
-          const value = data[key]?.toLowerCase(); 
+  const urls = [
+    `/localization/${selectedLanguage}.json`,
+    `/localization/community/${selectedLanguage}.json`
+  ];
+
+  Promise.all(urls.map(url => fetch(url).then(response => response.json())))
+    .then((results) => {
+      const [mainData, communityData] = results;
+
+      if (typeof mainData === 'object' && mainData !== null && typeof communityData === 'object' && communityData !== null) {
+        const combinedData = { ...mainData, ...communityData };
+        dictionary = Object.keys(combinedData).reduce((acc, key) => {
+          const value = combinedData[key]?.toLowerCase();
           if (value) {
-            const formattedKey = key.replace('@clio/playground:', '');
+            const formattedKey = key.replace(/@(clio\/playground|community\/hubs):/, '');
             if (!acc[value]) {
               acc[value] = [];
             }
@@ -91,7 +98,6 @@ function fetchData(selectedLanguage) {
     })
     .catch((error) => console.error('Error fetching data:', error));
 }
-
 
 
 // Handle language change
