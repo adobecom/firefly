@@ -159,7 +159,7 @@
   "@clio/playground:autodub-popup-ethics-description": "アドビ​は、​責任​ある​開発​を​行い、​生成​さ​れ​た​メディア​に関する​透明​性​を​コミュニティ​に​提供​する AI の​倫理​的​アプローチ​に​取り​組​んで​い​ます。<a>​詳細​情報</a>",
   "@clio/playground:autodub-popup-ethics-heading": "AI 音声​の​倫理​に対する​アドビ​の​アプローチ",
   "@clio/playground:autodub-popup-ethics-link": "https://www.adobe.com/go/AIEthics_jp",
-  "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "Cancel",
+  "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "キャンセル",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-continue": "続行 ",
   "@clio/playground:autodub-popup-not-complete-transcription-description": "Wait to review the transcript before generating, or continue to generate dubbing without reviewing your transcript. This action will use { credits, plural, one {<strong>{credits} credit</strong>} other {<strong>{credits} credits</strong>} }.",
   "@clio/playground:autodub-popup-not-complete-transcription-heading": "Transcript not complete",
