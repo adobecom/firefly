@@ -9,8 +9,15 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+// import { v4 as uuidv4 } from 'uuid';
+
 const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
 const FEATURES_API_PROD = 'https://p13n.adobe.io';
+const AccessProfileWorkflowRequestConfig = {
+  modalType: 'WEB_APP_MODAL_WORKFLOW',
+  version: '2',
+  workflowId: 'ondemand_purchase_subscription_workflow',
+};
 
 /**
  * The decision engine for where to get Milo's libs from.
@@ -171,4 +178,50 @@ export async function getFeaturesArray() {
   }
   window.featuresArray = featuresArray;
   return featuresArray;
+}
+
+function buildAccessProfileWorkflowResult(locale) {
+  const workflowResultReasonCode = 'ff_free_user_upgrade';
+  const nglLocale = locale;
+  const deviceType = 'DESKTOP';
+  const countryCode = 'US';
+  // set context url for paypal redirection.
+  const ctxUrl = new URL(window.location.origin);
+  ctxUrl.pathname = '';
+  ctxUrl.searchParams.set('launchPaywall', 'true');
+  ctxUrl.searchParams.set('paywallVariation', 'ff_free_user_upgrade');
+
+  const ctxRtUrl = ctxUrl.toString();
+  const contextualParams = {
+    cli: 'firefly',
+    ctx: 'if',
+    lang: nglLocale,
+    co: countryCode,
+    ctxRtUrl,
+  };
+  const workflowResult = {
+    type: AccessProfileWorkflowRequestConfig.modalType,
+    version: AccessProfileWorkflowRequestConfig.version,
+    id: AccessProfileWorkflowRequestConfig.workflowId,
+    // instanceId: uuidv4(),
+    instanceId: '2f1075dd-5ff3-4d0b-8d88-63017a192904',
+    response: `ondemand_request::reason=${workflowResultReasonCode}&contextual_params=${window.btoa(
+      JSON.stringify(contextualParams),
+    )}&device_type=${deviceType}`,
+  };
+  return workflowResult;
+}
+
+export function buildAccessProfileRequestBody(locale) {
+  const workflowResult = buildAccessProfileWorkflowResult(locale);
+  const requestBodyParameters = {
+    appDetails: {
+      nglAppId: 'Firefly1',
+      nglAppVersion: '1.0',
+      nglLibRuntimeMode: 'NAMED_USER_ONLINE',
+      locale,
+    },
+    workflowResult,
+  };
+  return JSON.stringify(requestBodyParameters);
 }
