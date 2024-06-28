@@ -44,7 +44,7 @@ export const [setLibs, getLibs] = (() => {
  */
 const DEFAULT_SIZE = '2000';
 
-async function buildTooltip(main) {
+function buildTooltip(main) {
   const icons = main.querySelectorAll('span[class*="icon-"]');
 
   icons.forEach(async (icon) => {
@@ -55,9 +55,21 @@ async function buildTooltip(main) {
     const tooltipKey = conf.pop().trim().replace('$', '');
     const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
     icon.dataset.tooltip = tooltipText;
-    const place = conf.pop()?.trim().toLowerCase() || 'right';
-    icon.className = `icon milo-tooltip ${place}`;
+    icon.setAttribute('alt', tooltipText);
     wrapper.parentElement.replaceChild(icon, wrapper);
+    icon.addEventListener('mouseenter', () => {
+      const tooltip = document.createElement('span');
+      tooltip.classList.add('tooltip');
+      tooltip.innerHTML = tooltipText;
+      icon.parentNode.appendChild(tooltip);
+    });
+
+    icon.addEventListener('mouseleave', () => {
+      const tooltip = icon.parentNode.querySelector('.tooltip');
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
   });
 }
 
