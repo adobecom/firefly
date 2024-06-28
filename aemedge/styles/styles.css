@@ -479,7 +479,20 @@
     border: none;
   }
 
-
+  .milo-tooltip::before {
+    background: rgba(112,112,112);
+    line-height: 1.3;
+    font-size:12px;
+    font-weight: 400;
+    padding: 4px 9px;
+    border: 8px solid rgba(112,112,112);
+    border-color: transparent rgba(112,112,112) transparent transparent;
+  }
+  
+  .milo-tooltip::after {
+    border: 8px solid rgba(112,112,112);
+    border-color: transparent rgba(112,112,112) transparent transparent;
+  }
 
   main>div>div {
     padding-inline: 24px;
@@ -610,7 +623,7 @@
       }
     }
 
-    @media (width >=600px) {
+    @media (width >= 600px) {
       .feds-brand-image .logo-mobile {
         display: none;
       }

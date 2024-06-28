@@ -694,9 +694,10 @@ async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
   loadFonts();
+  decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
-  await loadArea();
   buildAutoBlocks(document.querySelector('main'));
+  await loadArea();
   loadProfile();
   setTimeout(async () => {
     await loadFireflyHeaderComponents();
