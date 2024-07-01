@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Vaše oblíbené položky jsou uloženy v tomto prohlížeči na tomto zařízení. Nemůžete k nim přistupovat z jiných prohlížečů ani zařízení.",
   "@clio/playground:feature-page-access-denied-toast": "Je nám líto, ale přístup byl zamítnut. Nesplňujete věkové požadavky této konkrétní služby.",
   "@clio/playground:feature-page-learn-more": "Další informace",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Kvůli porušení pokynů pro uživatele již nemáte přístup ke službě Firefly. Další informace naleznete na stránce s častými dotazy.",
   "@clio/playground:feature-page-sign-in": "Přihlásit se",
   "@clio/playground:feature-page-zero-gb-user": "Nemáte ke službě Firefly přístup.",
   "@clio/playground:feature-request-access-button": "Žádost o přístup",

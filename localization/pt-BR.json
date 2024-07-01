@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Seus favoritos são salvos neste navegador neste dispositivo. Não é possível acessá-los em outros navegadores ou dispositivos.",
   "@clio/playground:feature-page-access-denied-toast": "Seu acesso foi negado. Você não atende aos requisitos de idade para este serviço específico.",
   "@clio/playground:feature-page-learn-more": "Saiba mais",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Você não tem mais acesso ao Firefly devido a uma violação de nossas Diretrizes do usuário. Acesse a página de Perguntas frequentes para saber mais.",
   "@clio/playground:feature-page-sign-in": "Fazer logon",
   "@clio/playground:feature-page-zero-gb-user": "Você não tem acesso ao Firefly.",
   "@clio/playground:feature-request-access-button": "Solicitar acesso",

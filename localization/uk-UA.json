@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Улюблені приклади збережено в цьому браузері на цьому пристрої. Їх не можна переглядати з інших браузерів чи пристроїв.",
   "@clio/playground:feature-page-access-denied-toast": "Вибачте, вам відмовлено в доступі. Ви не відповідаєте вимогам щодо віку для цієї конкретної послуги.",
   "@clio/playground:feature-page-learn-more": "Докладніше",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Ваш доступ до Firefly заблоковано через порушення наших умов використання. Детальніше див. на сторінці запитань і відповідей. ",
   "@clio/playground:feature-page-sign-in": "Увійти",
   "@clio/playground:feature-page-zero-gb-user": "У вас немає доступу до Firefly.",
   "@clio/playground:feature-request-access-button": "Запитати доступ",

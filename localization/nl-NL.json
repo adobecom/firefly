@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Je favorieten worden in deze browser op dit apparaat opgeslagen. Je hebt geen toegang tot deze programma's in andere browsers of apparaten.",
   "@clio/playground:feature-page-access-denied-toast": "De toegang is geweigerd. Je voldoet niet aan de leeftijdsvereisten voor deze specifieke service.",
   "@clio/playground:feature-page-learn-more": "Meer informatie",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Je hebt geen toegang meer tot Firefly vanwege een schending van onze gebruiksvoorwaarden. Ga naar de pagina met veelgestelde vragen voor meer informatie.",
   "@clio/playground:feature-page-sign-in": "Aanmelden",
   "@clio/playground:feature-page-zero-gb-user": "Je hebt geen toegang tot Firefly.",
   "@clio/playground:feature-request-access-button": "Toegang aanvragen",

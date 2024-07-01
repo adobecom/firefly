@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Sık kullanılanlar, kullandığınız aygıttaki bu tarayıcıya kaydedilir. Diğer tarayıcılardan veya aygıtlardan sık kullanılara erişemezsiniz.",
   "@clio/playground:feature-page-access-denied-toast": "Maalesef erişiminiz reddedildi. Bu hizmetin yaşla ilgili koşullarını karşılamıyorsunuz.",
   "@clio/playground:feature-page-learn-more": "Daha fazla bilgi",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Kullanıcı Kılavuzlarımızın ihlalinden dolayı artık Firefly'a erişiminiz bulunmamaktadır. Daha fazla bilgi için SSS sayfasını ziyaret edin.",
   "@clio/playground:feature-page-sign-in": "Giriş yap",
   "@clio/playground:feature-page-zero-gb-user": "Firefly erişiminiz bulunmamaktadır.",
   "@clio/playground:feature-request-access-button": "Erişim iste",

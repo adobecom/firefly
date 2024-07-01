@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Favorittene dine lagres i nettleseren på denne enheten. Du har ikke tilgang til dem i andre nettlesere eller på andre enheter.",
   "@clio/playground:feature-page-access-denied-toast": "Beklager, du har blitt nektet tilgang. Du oppfyller ikke alderskravene for denne spesifikke tjenesten.",
   "@clio/playground:feature-page-learn-more": "Finn ut mer",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Du har ikke lenger tilgang til Firefly på grunn av brudd på retningslinjene våre for bruk. Gå til siden med vanlige spørsmål for å finne ut mer.",
   "@clio/playground:feature-page-sign-in": "Logg på",
   "@clio/playground:feature-page-zero-gb-user": "Du har ikke tilgang til Firefly.",
   "@clio/playground:feature-request-access-button": "Be om tilgang",

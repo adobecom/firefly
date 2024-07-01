@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Twoje ulubione pliki zostaną zapisane w tej przeglądarce na tym urządzeniu. Nie można uzyskać do nich dostępu w innych przeglądarkach lub urządzeniach.",
   "@clio/playground:feature-page-access-denied-toast": "Przepraszamy, odmowa dostępu. Nie spełniasz wymagań wiekowych dla tej konkretnej usługi.",
   "@clio/playground:feature-page-learn-more": "Więcej informacji",
-  "@clio/playground:feature-page-restricted-due-violations": "Użytkownik utraci dostęp do Firefly z powodu naruszenia Wytycznych dla użytkowników. Odwiedź stronę z często zadawanymi pytaniami, aby dowiedzieć się więcej.",
+  "@clio/playground:feature-page-restricted-due-violations": "Nie masz już dostępu do usługi Firefly z powodu naruszenia naszych Wytycznych dla użytkowników. Odwiedź stronę Często zadawane pytania, aby dowiedzieć się więcej.",
   "@clio/playground:feature-page-sign-in": "Zaloguj się",
   "@clio/playground:feature-page-zero-gb-user": "Nie masz dostępu do usługi Firefly.",
   "@clio/playground:feature-request-access-button": "Poproś o dostęp",

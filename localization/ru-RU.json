@@ -414,7 +414,7 @@
   "@clio/playground:favorites-page-tooltip-label": "Ваше избранное сохранено в этом браузере на этом устройстве. Оно недоступно в других браузерах или на других устройствах.",
   "@clio/playground:feature-page-access-denied-toast": "Ваш доступ отклонен. Вы не соответствуете возрастным требованиям для использования сервиса.",
   "@clio/playground:feature-page-learn-more": "Подробнее",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to Firefly due to violation of our User Guidelines. Visit the FAQ page to learn more.",
+  "@clio/playground:feature-page-restricted-due-violations": "Для вас закрыт доступ к Firefly в связи с нарушением наших правил использования. Чтобы узнать больше, посетите страницу часто задаваемых вопросов.",
   "@clio/playground:feature-page-sign-in": "Войти",
   "@clio/playground:feature-page-zero-gb-user": "У вас нет доступа к Firefly.",
   "@clio/playground:feature-request-access-button": "Запросить доступ",
