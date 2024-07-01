@@ -402,6 +402,7 @@
 
   .section.gallery-description {
     text-align: center;
+    margin : 24px auto;
   }
 
   .section.gallery-description h1 {
@@ -424,7 +425,7 @@
     background: rgba(230, 230, 230);
     color: rgba(34, 34, 34);
     justify-content: center;
-    padding: 4px 8px;
+    padding: 8px;
     border: none;
     border-radius: 7px;
     font-size: 12px;
@@ -440,15 +441,16 @@
     color: white;
     border-radius: 5px;
     font-size: 12px;
-    opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
     visibility: visible;
-    max-width: 140px;
+    max-width: 160px;
     white-space: warp;
     overflow: hidden;
     z-index: 99;
-    line-height: 2;
+    line-height: 1.6;
+    margin-left: 8px;
+    padding: 8px;
   }
 
   picture>img[src*="tooltip.svg"]:hover+.tooltip {
@@ -479,7 +481,20 @@
     border: none;
   }
 
-
+  .milo-tooltip::before {
+    background: rgba(112,112,112);
+    line-height: 1.3;
+    font-size:12px;
+    font-weight: 400;
+    padding: 4px 9px;
+    border: 8px solid rgba(112,112,112);
+    border-color: transparent rgba(112,112,112) transparent transparent;
+  }
+  
+  .milo-tooltip::after {
+    border: 8px solid rgba(112,112,112);
+    border-color: transparent rgba(112,112,112) transparent transparent;
+  }
 
   main>div>div {
     padding-inline: 24px;
@@ -610,7 +625,7 @@
       }
     }
 
-    @media (width >=600px) {
+    @media (width >= 600px) {
       .feds-brand-image .logo-mobile {
         display: none;
       }
