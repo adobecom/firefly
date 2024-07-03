@@ -1410,7 +1410,7 @@
   "@clio/playground:video-object-removal-popup-not-enough-storage-heading": "Upload nicht möglich",
   "@clio/playground:video-object-removal-saving-progress": "Fortschritt wird gespeichert...",
   "@clio/playground:video-object-removal-saving-progress-circle": "laden",
-  "@clio/playground:video-object-removal-timeline-page-request-access-turned-off": "Deine generativen Credits reichen nicht aus, um diese Funktion zu verwenden. Warte auf das monatliche Zurücksetzen deiner Credits oder kontaktiere deine IT-Administrator bzw. deinen IT-Administrator für Details.",
+  "@clio/playground:video-object-removal-timeline-page-request-access-turned-off": "Deine generativen Credits reichen nicht aus, um diese Funktion zu verwenden. Warte auf das monatliche Zurücksetzen deiner Credits oder kontaktiere deine IT-Administration für Details.",
   "@clio/playground:video-object-removal-upgrade-request-approved": "Deine Anfrage wurde genehmigt.",
   "@clio/playground:video-object-removal-video-canvas-layer": "Video-Arbeitsfläche",
   "@clio/playground:video-object-removal-workflow-page-cancel-button": "Abbrechen",
