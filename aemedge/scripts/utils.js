@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -10,7 +11,10 @@
  * governing permissions and limitations under the License.
  */
 
-const FEATURES_API = 'https://p13n.adobe.io/fg/api/v3/feature';
+import { getI18nValue } from './scripts.js';
+
+const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
+const FEATURES_API_PROD = 'https://p13n.adobe.io';
 
 /**
  * The decision engine for where to get Milo's libs from.
@@ -41,20 +45,27 @@ export const [setLibs, getLibs] = (() => {
 const DEFAULT_SIZE = '2000';
 
 function buildTooltip(main) {
-  const tooltipSVGs = main.querySelectorAll('picture > img[src*="tooltip.svg"]');
+  const icons = main.querySelectorAll('span[class*="icon-"]');
 
-  tooltipSVGs.forEach((img) => {
-    const tooltipText = img.alt.trim() || '';
-
-    img.addEventListener('mouseenter', () => {
+  icons.forEach(async (icon) => {
+    const wrapper = icon.closest('em');
+    if (!wrapper) return;
+    wrapper.className = 'tooltip-wrapper';
+    const conf = wrapper.textContent.split('|');
+    const tooltipKey = conf.pop().trim().replace('$', '');
+    const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
+    icon.dataset.tooltip = tooltipText;
+    icon.setAttribute('alt', tooltipText);
+    wrapper.parentElement.replaceChild(icon, wrapper);
+    icon.addEventListener('mouseenter', () => {
       const tooltip = document.createElement('span');
       tooltip.classList.add('tooltip');
-      tooltip.textContent = tooltipText;
-      img.parentNode.appendChild(tooltip);
+      tooltip.innerHTML = tooltipText;
+      icon.parentNode.appendChild(tooltip);
     });
 
-    img.addEventListener('mouseleave', () => {
-      const tooltip = img.parentNode.querySelector('.tooltip');
+    icon.addEventListener('mouseleave', () => {
+      const tooltip = icon.parentNode.querySelector('.tooltip');
       if (tooltip) {
         tooltip.remove();
       }
@@ -120,13 +131,43 @@ export function createOptimizedFireflyPicture(
   return picture;
 }
 
+export async function getAccessToken() {
+  const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
+  let authToken;
+  if (!window.adobeIMS) {
+    loadIms().then(async () => {
+      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+    }).catch(() => {
+      authToken = null;
+    });
+  } else {
+    authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+  }
+  return authToken;
+}
+
+/**
+ * Returns the environment based on the hostname of the current window location.
+ * @returns {string} The environment ('stage' or 'prod').
+ */
+export function getEnvironment() {
+  const { hostname } = window.location;
+  if (hostname.includes('localhost') || hostname.includes('hlx.live') || hostname.includes('hlx.page') || hostname.includes('firefly-stage')) {
+    return 'stage';
+  }
+  return 'prod';
+}
+
 /**
  * Retrieves an array of features from the server.
  * @returns {Promise<Array>} A promise that resolves to an array of features.
  */
-export async function getFeaturesArray(authToken) {
+export async function getFeaturesArray() {
+  const authToken = await getAccessToken();
+  const environment = getEnvironment();
+  const featuresUrl = environment === 'stage' ? FEATURES_API_STAGE : FEATURES_API_PROD;
   let featuresArray = [];
-  const url = `${FEATURES_API}?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
+  const url = `${featuresUrl}/fg/api/v3/feature?clientId=clio-playground-web&meta=true&clioPreferredLocale=en_US`;
   const headers = new Headers({ 'X-Api-Key': 'clio-playground-web' });
   if (authToken) {
     headers.set('Authorization', `Bearer ${window.adobeIMS.getAccessToken()?.token}`);
@@ -140,16 +181,5 @@ export async function getFeaturesArray(authToken) {
     featuresArray = features.releases[0].features ? features.releases[0].features : [];
   }
   window.featuresArray = featuresArray;
-}
-
-/**
- * Returns the environment based on the hostname of the current window location.
- * @returns {string} The environment ('stage' or 'prod').
- */
-export function getEnvironment() {
-  const { hostname } = window.location;
-  if (hostname.includes('localhost') || hostname.includes('hlx.live') || hostname.includes('hlx.page') || hostname.includes('firefly-stage')) {
-    return 'stage';
-  }
-  return 'prod';
+  return featuresArray;
 }

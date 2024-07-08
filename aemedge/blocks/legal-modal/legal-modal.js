@@ -1,6 +1,5 @@
-import { getLibs } from '../../scripts/utils.js';
+import { getLibs, getEnvironment } from '../../scripts/utils.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
-import { getMetadata } from '../../scripts/aem.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
@@ -8,8 +7,8 @@ const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 
 async function legalUserAcceptance() {
-  const buildMode = getMetadata('buildmode');
-  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
+  const environment = getEnvironment();
+  const udsUrl = (environment === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   return new Promise((resolve, reject) => {
     if (!window.adobeIMS) {
       loadIms();

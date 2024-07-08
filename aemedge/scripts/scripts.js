@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable quote-props */
 /* eslint-disable quotes */
 /* eslint-disable no-console */
@@ -14,14 +15,16 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
-import { setLibs, buildAutoBlocks, decorateArea } from './utils.js';
-import { openModal } from '../blocks/modal/modal.js';
-import { loadScript, getMetadata, loadCSS } from './aem.js';
+import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
+import { openModal, createModal } from '../blocks/modal/modal.js';
+import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
 
 const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 const UDS_PROD_URL = 'https://uds.adobe-identity.com';
-const buildMode = getMetadata('buildmode');
+const UPGRADE_API_STAGE = 'https://aps-web-stage.adobe.io';
+const UPGRADE_API_PROD = 'https://aps-web.adobe.io';
+const environment = getEnvironment();
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -106,7 +109,7 @@ function loadLegalBanner() {
 }
 
 async function loadProfile() {
-  const udsUrl = (buildMode === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
+  const udsUrl = (environment === 'prod') ? UDS_PROD_URL : UDS_STAGE_URL;
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
   if (!authToken) return;
@@ -122,16 +125,13 @@ async function loadProfile() {
   });
   if (resp.ok) {
     const profile = await resp.json();
-    if (!profile.data['whats-new-dialog-confirmed']) {
+    if (typeof profile.data['whats-new-dialog-confirmed'] === 'undefined') {
       await openModal('/fragments/whatsnew');
     }
-    if (!profile.data['legal-user-acceptance']) {
+    if (typeof profile.data['legal-user-acceptance'] === 'undefined') {
       await openModal('/fragments/legal');
       loadLegalBanner();
     }
-  } else {
-    await openModal('/fragments/legal');
-    loadLegalBanner();
   }
 }
 
@@ -342,77 +342,124 @@ export function convertLocaleFormat(locale) {
 
 // Process i18n text
 const langStoreCache = {
-  cache: null,
+  cache: new Map(),
 
-  async fetchLangStoreData(locale, limit) {
-    const resp = await fetch(`/localization/lang-store.json?limit=${limit}&sheet=${locale}`);
-    if (resp.ok) {
-      const json = await resp.json();
-      this.cache = json.data;
-      return this.cache;
+  async fetchLangStoreData(locale) {
+    const resp1 = await fetch(`/localization/${locale}.json`);
+    if (!resp1.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}' from the main language store`);
     }
-    return [];
+    const json1 = await resp1.json();
+
+    // Fetch the second JSON file
+    const resp2 = await fetch(`/localization/community/${locale}.json`);
+    if (!resp2.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}' from the community language store`);
+    }
+    const json2 = await resp2.json();
+    const combinedJson = { ...json1, ...json2 };
+    this.cache.set(locale, { locale, json: combinedJson, timestamp: Date.now() });
+    return combinedJson;
   },
 
-  async getData(locale, limit) {
-    return this.cache || this.fetchLangStoreData(locale, limit);
+  async getData(locale) {
+    if (!this.cache.has(locale)) {
+      await this.fetchLangStoreData(locale);
+    }
+
+    const cachedData = this.cache.get(locale);
+    if (cachedData) {
+      return cachedData.json;
+    }
+    return {};
   },
 
-  async getValueByKey(key, locale, limit) {
-    const data = await this.getData(locale, limit);
-    const langEntry = data.find((entry) => entry.key === key);
-    return langEntry?.[locale] ?? null;
+  async getValueByKey(key, locale) {
+    const data = await this.getData(locale);
+    const namespaces = ['@clio/playground', '@community/hubs'];
+
+    for (const namespace of namespaces) {
+      const namespacedKey = `${namespace}:${key}`;
+      if (data[namespacedKey]) {
+        return data[namespacedKey];
+      }
+    }
+
+    return "No translation found in the Language stores";
   },
 };
 
-const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
-  const jsonKey = match.slice(1);
-  const data = langStoreData.find((entry) => entry.key === jsonKey);
-  return data?.[locale] ?? match;
-});
+const processText = async (text, langStoreData) => {
+  const keys = text.match(/\$[a-zA-Z0-9_-]+/g);
+  if (!keys) return text;
 
-// Decorate i18n text
-export async function decorateI18n(block) {
-  const locale = getLocale() || 'en-US';
-  const limit = 5000;
+  const namespaces = ['@clio/playground', '@community/hubs'];
+  let processedText = text;
 
-  // Check & Fetch language store data if not already cached
-  const langStoreData = await langStoreCache.getData(locale, limit);
-
-  // Process single <code> elements not inside <pre>
-  block.querySelectorAll('code').forEach((el) => {
-    const text = el.textContent.trim();
-    if (!el.closest('pre') && text.startsWith('$')) {
-      const newText = processText(text, langStoreData, locale);
-      const textNode = document.createTextNode(newText);
-      el.parentNode.replaceChild(textNode, el);
+  keys.forEach((key) => {
+    const jsonKey = key.slice(1);
+    for (const namespace of namespaces) {
+      const namespacedKey = `${namespace}:${jsonKey}`;
+      if (langStoreData[namespacedKey]) {
+        processedText = processedText.replace(key, langStoreData[namespacedKey]);
+        break;
+      }
     }
   });
 
-  // Process multi-line <code> blocks wrapped in <pre>
-  block.querySelectorAll('pre code').forEach((el) => {
-    const text = el.textContent.trim();
-    if (text.startsWith('$')) {
-      const keys = text.split(/\s+/);
-      const newTexts = keys.map((key) => {
-        const newText = processText(key, langStoreData, locale);
-        return `<p>${newText}</p>`;
-      });
-      el.parentNode.outerHTML = newTexts.join('');
-    }
-  });
-}
+  return processedText;
+};
 
 // Function to fetch value for a specific key
-export async function getI18nValue(key, limit = 5000) {
+export async function getI18nValue(key) {
   try {
-    const locale = getLocale() || 'en-US';
-    const value = await langStoreCache.getValueByKey(key, locale, limit);
+    const locale = getLocale();
+    const value = await langStoreCache.getValueByKey(key, locale);
     return value ?? key;
   } catch (error) {
     console.error(`Error fetching i18n value for key: ${key}`, error);
     return key;
   }
+}
+
+// Decorate i18n text
+export async function decorateI18n(block) {
+  const locale = getLocale();
+
+  // Check & Fetch language store data if not already cached
+  const langStoreData = await langStoreCache.getData(locale);
+
+  // Helper function to safely replace HTML content
+  const replaceWithHTML = (element, html) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    while (tempDiv.firstChild) {
+      element.parentNode.insertBefore(tempDiv.firstChild, element);
+    }
+    element.parentNode.removeChild(element);
+  };
+
+  // Process single <code> elements not inside <pre>
+  block.querySelectorAll('code').forEach(async (el) => {
+    const text = el.textContent.trim();
+    if (!el.closest('pre') && text.startsWith('$')) {
+      const newText = await processText(text, langStoreData);
+      replaceWithHTML(el, newText);
+    }
+  });
+
+  // Process multi-line <code> blocks wrapped in <pre>
+  block.querySelectorAll('pre code').forEach(async (el) => {
+    const text = el.textContent.trim();
+    if (text.startsWith('$')) {
+      const keys = text.split(/\s+/);
+      const newTexts = await Promise.all(keys.map(async (key) => {
+        const newText = await processText(key, langStoreData);
+        return `<p>${newText}</p>`;
+      }));
+      replaceWithHTML(el.parentNode, newTexts.join(''));
+    }
+  });
 }
 
 /**
@@ -430,80 +477,149 @@ export function decorateExternalLink(element) {
   });
 }
 
+async function loadUpgradeModal() {
+  const locale = getLocale() || 'en-US';
+  let upgradeUrl = (environment === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
+  upgradeUrl = `${upgradeUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
+  if (!window.adobeIMS) return;
+  const authToken = window.adobeIMS.getAccessToken()?.token;
+  if (!authToken) return;
+  const resp = await fetch(upgradeUrl, {
+    method: 'POST',
+    headers: {
+      'x-api-key': 'clio-playground-web',
+      Authorization: `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"${locale}"},"workflowResult":{"type":"WEB_APP_MODAL_WORKFLOW","version":"2","id":"ondemand_purchase_subscription_workflow","instanceId":"90591cfa-d610-4787-9c29-d82647d46a83","response":"ondemand_request::reason=ff_free_user_upgrade&contextual_params=eyJjbGkiOiJmaXJlZmx5IiwiY3R4IjoiaWYiLCJsYW5nIjoiZW4iLCJjbyI6IklOIiwiY3R4UnRVcmwiOiJodHRwczovL2ZpcmVmbHktc3RhZ2UuY29ycC5hZG9iZS5jb20vP2xhdW5jaFBheXdhbGw9dHJ1ZSZwYXl3YWxsVmFyaWF0aW9uPVVQU0VMTF9OQVZCQVIifQ==&device_type=DESKTOP"}}`,
+  });
+  if (resp.ok) {
+    const respJson = await resp.json();
+    console.log('respJson', respJson);
+    const upgradeIframeUrl = respJson.workflow.entryUrl;
+    if (upgradeIframeUrl) {
+      const iframe = document.createElement('iframe');
+      iframe.src = upgradeIframeUrl;
+      iframe.allow = 'payment';
+      iframe.style.display = 'block';
+      const modal = await createModal([iframe]);
+      modal.showModal();
+    }
+  }
+}
+
 // Load header links that are wrapped in feds-utilities and aligned to the right
 async function loadFireflyUtils(gnav) {
+  const featuresArray = await getFeaturesArray();
   const headerUtils = gnav.querySelector('.firefly-utils');
   if (headerUtils) {
     decorateExternalLink(headerUtils);
+    await decorateI18n(headerUtils);
     const navItemWrapper = document.createElement('div');
     const children = headerUtils.querySelectorAll('p');
     children.forEach((p) => {
-      const navItem = document.createElement('div');
-      navItem.classList.add('feds-navItem');
-      const a = p.querySelector('a');
-      const nextEl = p.nextElementSibling;
-      if (nextEl && nextEl.tagName === 'UL') {
-        const ul = nextEl;
-        const button = document.createElement('button');
-        button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
-        button.setAttribute('aria-expanded', 'false');
-        button.setAttribute('aria-haspopup', 'true');
-        button.setAttribute('daa-lh', 'header|Open');
-        button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-        button.textContent = a.textContent;
-        const ulWrapper = document.createElement('div');
-        ulWrapper.classList.add('feds-popup');
-        const fedsMenuContent = document.createElement('div');
-        fedsMenuContent.classList.add('feds-menu-content');
-        const fedsMenuColumn = document.createElement('div');
-        fedsMenuColumn.classList.add('feds-menu-column');
-        fedsMenuColumn.append(ul);
-        ul.querySelectorAll('li').forEach((li) => {
-          if (li.querySelector('a')) {
-            li.querySelectorAll('a').forEach((anchor) => {
-              if (anchor.textContent.endsWith('.svg')) {
-                const picture = document.createElement('picture');
-                const img = document.createElement('img');
-                img.src = anchor.textContent;
-                img.loading = 'lazy';
-                picture.append(img);
-                anchor.before(picture);
-                anchor.remove();
-              } else {
-                anchor.classList.add('feds-navLink');
-                anchor.setAttribute('daa-ll', anchor.textContent);
-              }
-            });
-          }
-        });
-        fedsMenuContent.append(fedsMenuColumn);
-        ulWrapper.append(fedsMenuContent);
-        navItem.append(button, ulWrapper);
-        button.addEventListener('click', () => {
-          navItem.classList.toggle('feds-dropdown--active');
-          button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-          button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
-        });
-      } else if (a) {
-        if (p.querySelector('em')) {
-          a.className = 'feds-cta feds-cta--primary';
-        } else {
-          a.classList.add('feds-navLink');
-        }
-        a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
-        navItem.append(a);
-        if (nextEl && nextEl.tagName === 'H3') {
-          const tooltip = document.createElement('div');
-          tooltip.classList.add('feds-tooltip');
-          tooltip.textContent = nextEl.textContent;
-          navItem.append(a, tooltip);
+      const featureFlag = p.querySelector('code');
+      let showUtil = true;
+      if (featureFlag) {
+        const flag = featureFlag.textContent.trim();
+        featureFlag.remove();
+        if (!featuresArray.includes(flag)) {
+          showUtil = false;
         }
       }
-      navItemWrapper.append(navItem);
+      if (showUtil) {
+        const navItem = document.createElement('div');
+        navItem.classList.add('feds-navItem');
+        const icon = p.querySelector('span.icon');
+        const a = p.querySelector('a');
+        const nextEl = p.nextElementSibling;
+        if (nextEl && nextEl.tagName === 'UL') {
+          const ul = nextEl;
+          const button = document.createElement('button');
+          button.classList.add('feds-navLink', 'feds-navLink--hoverCaret');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-haspopup', 'true');
+          button.setAttribute('daa-lh', 'header|Open');
+          button.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+          if (icon) {
+            button.prepend(icon);
+          }
+          const ulWrapper = document.createElement('div');
+          ulWrapper.classList.add('feds-popup');
+          const fedsMenuContent = document.createElement('div');
+          fedsMenuContent.classList.add('feds-menu-content');
+          const fedsMenuColumn = document.createElement('div');
+          fedsMenuColumn.classList.add('feds-menu-column');
+          fedsMenuColumn.append(ul);
+          ul.querySelectorAll('li').forEach((li) => {
+            if (li.querySelector('a')) {
+              li.querySelectorAll('a').forEach((anchor) => {
+                if (anchor.textContent.endsWith('.svg')) {
+                  const picture = document.createElement('picture');
+                  const img = document.createElement('img');
+                  img.src = anchor.textContent;
+                  img.loading = 'lazy';
+                  picture.append(img);
+                  anchor.before(picture);
+                  anchor.remove();
+                } else {
+                  anchor.classList.add('feds-navLink');
+                  anchor.setAttribute('daa-ll', anchor.textContent);
+                }
+              });
+            }
+          });
+          fedsMenuContent.append(fedsMenuColumn);
+          ulWrapper.append(fedsMenuContent);
+          navItem.append(button, ulWrapper);
+          button.addEventListener('click', () => {
+            navItem.classList.toggle('feds-dropdown--active');
+            button.setAttribute('aria-expanded', button.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+            button.setAttribute('daa-lh', button.getAttribute('aria-expanded') === 'true' ? 'header|Close' : 'header|Open');
+          });
+        } else if (a) {
+          a.setAttribute('daa-ll', a.textContent.replace(/\s+/g, '-'));
+          if (a.textContent.toLowerCase().indexOf('upgrade') > -1) {
+            navItem.classList.add('feds-cta', 'feds-cta--colored');
+          } else
+          if (a.textContent.toLowerCase().indexOf('discord') > -1) {
+            navItem.classList.add('feds-cta', 'feds-cta--primary');
+          } else {
+            navItem.classList.add('feds-navLink');
+            a.textContent = '';
+          }
+          if (window.innerWidth < 900) {
+            a.textContent = '';
+          }
+          navItem.append(a);
+          if (icon) {
+            a.prepend(icon);
+          }
+          if (nextEl && nextEl.tagName === 'H3') {
+            const tooltip = document.createElement('div');
+            tooltip.classList.add('feds-tooltip');
+            tooltip.textContent = nextEl.textContent;
+            navItem.append(a, tooltip);
+          }
+        }
+        navItemWrapper.append(navItem);
+      }
     });
-    const utilsWrapper = document.querySelector('.feds-utilities');
+    const globalNavParent = document.querySelector('.feds-utilities');
+    if (!globalNavParent) return;
+    const utilsWrapper = document.createElement('div');
+    utilsWrapper.classList.add('feds-utility-links');
     if (utilsWrapper) {
       utilsWrapper.prepend(...navItemWrapper.childNodes);
+    }
+    globalNavParent.parentElement.insertBefore(utilsWrapper, globalNavParent);
+    decorateIcons(utilsWrapper);
+    const upgradeBtn = utilsWrapper.querySelector('[daa-ll="Upgrade"]');
+    if (upgradeBtn) {
+      upgradeBtn.parentElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadUpgradeModal();
+      });
     }
   }
 }
@@ -516,6 +632,7 @@ function decorateFireflyLogo(gnav) {
   const logo = gnav.querySelector('.firefly-logo');
   if (logo) {
     const brandContainer = document.querySelector('.feds-brand-image');
+    if (!brandContainer) return;
     const defaultLogo = brandContainer.querySelector('img');
     if (defaultLogo) {
       defaultLogo.classList.add('logo-light');
@@ -540,7 +657,15 @@ function decorateFireflyLogo(gnav) {
   }
 }
 
+async function translateNavItems() {
+  const navWrapper = document.querySelector('.feds-nav-wrapper');
+  if (!navWrapper) return;
+  await decorateI18n(navWrapper);
+  navWrapper.style.visibility = 'visible';
+}
+
 async function loadFireflyHeaderComponents() {
+  await translateNavItems();
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
@@ -569,15 +694,16 @@ async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
   loadFonts();
+  decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
-  await loadArea();
   buildAutoBlocks(document.querySelector('main'));
+  await loadArea();
   loadProfile();
   setTimeout(async () => {
     await loadFireflyHeaderComponents();
-    await headerModal();
   }, 0);
   setTimeout(() => {
+    headerModal();
     loadMartech();
     initAnalytics();
     recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);

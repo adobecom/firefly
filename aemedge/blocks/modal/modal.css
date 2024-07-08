@@ -24,6 +24,10 @@ body.modal-open {
     max-width: 938px;
   }
 
+  .modal.block:has(iframe) dialog {
+    max-width: unset;
+  }
+
   .modal dialog .modal-content {
     max-height: calc(100vh - 90px);
   }

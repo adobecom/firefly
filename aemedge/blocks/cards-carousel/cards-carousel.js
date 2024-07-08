@@ -2,11 +2,9 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
-import { getLibs, getFeaturesArray } from '../../scripts/utils.js';
+import { getFeaturesArray } from '../../scripts/utils.js';
 import { decorateIcons, createOptimizedPicture } from '../../scripts/aem.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
-
-const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
 const SLIDE_ID_PREFIX = 'cards-carousel-slide';
 const SLIDE_CONTROL_ID_PREFIX = 'cards-carousel-slide-control';
@@ -15,10 +13,15 @@ let curSlide = 0;
 let maxSlide = 0;
 let filteredSlides = 0;
 
-function scrollToSlide(carouselWrapper, slideIndex) {
+function scrollToSlide(carouselWrapper, slideIndex, dir) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
   const widthtoScroll = (carouselSlider.clientWidth > 767) ? 350 : 170;
-  const leftPos = (widthtoScroll * 2 * slideIndex);
+  let leftPos;
+  if (widthtoScroll === 350) {
+    leftPos = (widthtoScroll * 2 * slideIndex) + (dir === 'prev' ? -50 : 50);
+  } else {
+    leftPos = (widthtoScroll * 2 * slideIndex);
+  }
   carouselSlider.scrollTo({ left: leftPos, behavior: 'smooth' });
   const slides = carouselSlider.children;
   for (let i = 0; i < slides.length; i += 1) {
@@ -50,7 +53,7 @@ function buildNav(dir, carousel) {
       carousel.classList.remove('hide-prev');
       carousel.classList.remove('hide-next');
     }
-    scrollToSlide(carousel, nextSlide);
+    scrollToSlide(carousel, nextSlide, dir);
   });
   return nav;
 }
@@ -74,9 +77,14 @@ function buildSlide(slide, index, featuresArray) {
     }
   }
   filteredSlides += 1;
+  const icon = slide.querySelector('.icon');
+  if (icon) {
+    icon.parentElement.replaceWith(icon);
+  }
   const video = firstDiv.querySelector('a');
   if (video) {
     const image = firstDiv.querySelector('img');
+    const picture = firstDiv.querySelector('picture');
     const videoLink = video.href;
     const videoEl = document.createElement('video');
     videoEl.src = videoLink;
@@ -86,8 +94,8 @@ function buildSlide(slide, index, featuresArray) {
     videoEl.loop = true;
     videoEl.playsinline = true;
     videoEl.className = 'cards-card-video hide';
-    firstDiv.replaceWith(videoEl);
-    slide.prepend(image);
+    video.parentElement.replaceWith(videoEl);
+    picture.parentElement.replaceWith(image);
 
     slide.addEventListener('mouseenter', () => {
       videoEl.classList.remove('hide');
@@ -106,6 +114,12 @@ function buildSlide(slide, index, featuresArray) {
       videoEl.classList.add('hide');
       image.classList.remove('hide');
     });
+    firstDiv.parentElement.prepend(videoEl);
+    firstDiv.parentElement.prepend(image);
+    if (icon) {
+      firstDiv.parentElement.prepend(icon);
+    }
+    firstDiv.remove();
   }
   slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
   slide.setAttribute('data-slide-index', index);
@@ -118,10 +132,6 @@ function buildSlide(slide, index, featuresArray) {
   linkWrapper.classList.add('card-link');
   linkWrapper.append(link.parentElement);
   slide.append(linkWrapper);
-  const icon = slide.querySelector('.icon');
-  if (icon) {
-    icon.parentElement.replaceWith(icon);
-  }
   const href = link?.href;
   if (href) {
     slide.classList.add('card-with-link');
@@ -139,7 +149,9 @@ function buildSlide(slide, index, featuresArray) {
   return slide;
 }
 
-function loadCarousel(block, featuresArray = []) {
+export default async function decorate(block) {
+  decorateIcons(block);
+  const featuresArray = await getFeaturesArray();
   const carousel = document.createElement('div');
   carousel.classList.add('cards-carousel-slide-container');
   const slides = [...block.children];
@@ -162,29 +174,4 @@ function loadCarousel(block, featuresArray = []) {
       block.append(buildNav('next', block));
     }
   }, 0);
-}
-
-export default async function decorate(block) {
-  decorateIcons(block);
-  if (window.featuresArray) {
-    loadCarousel(block, window.featuresArray);
-  } else {
-    // eslint-disable-next-line no-lonely-if
-    let authToken;
-    if (!window.adobeIMS) {
-      loadIms().then(async () => {
-        authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-      }).catch(() => {
-        loadCarousel(block);
-      });
-    } else {
-      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-    }
-    if (authToken) {
-      await getFeaturesArray(authToken);
-      loadCarousel(block, window.featuresArray);
-    } else {
-      loadCarousel(block);
-    }
-  }
 }
