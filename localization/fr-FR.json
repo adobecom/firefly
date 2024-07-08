@@ -161,7 +161,7 @@
   "@clio/playground:autodub-popup-ethics-link": "https://www.adobe.com/go/AIEthics_fr",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "Annuler",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-continue": "Continuer",
-  "@clio/playground:autodub-popup-not-complete-transcription-description": "Patientez pour vérifier la transcription avant de générer ou continuez, pour générer le doublage sans examiner la transcription. Cette action utilise { credits, plural, one {<strong>{credits} crédit</strong>} other {<strong>{credits} crédits</strong>} }.",
+  "@clio/playground:autodub-popup-not-complete-transcription-description": "Patientez pour vérifier la transcription avant de générer le doublage, ou continuez pour le générer sans examiner la transcription. Cette action utilise { credits, plural, one {<strong>{credits} crédit</strong>} other {<strong>{credits} crédits</strong>} }.",
   "@clio/playground:autodub-popup-not-complete-transcription-heading": "Transcription non terminée",
   "@clio/playground:autodub-popup-not-complete-translations--btn-ok": "OK",
   "@clio/playground:autodub-popup-not-complete-translations-description": "Les crédits prélevés pour des traductions incomplètes ont été remboursés sur votre compte.",
