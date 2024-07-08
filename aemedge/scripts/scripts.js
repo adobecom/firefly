@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable quote-props */
 /* eslint-disable quotes */
 /* eslint-disable no-console */
@@ -341,77 +342,124 @@ export function convertLocaleFormat(locale) {
 
 // Process i18n text
 const langStoreCache = {
-  cache: null,
+  cache: new Map(),
 
-  async fetchLangStoreData(locale, limit) {
-    const resp = await fetch(`/localization/lang-store.json?limit=${limit}&sheet=${locale}`);
-    if (resp.ok) {
-      const json = await resp.json();
-      this.cache = json.data;
-      return this.cache;
+  async fetchLangStoreData(locale) {
+    const resp1 = await fetch(`/localization/${locale}.json`);
+    if (!resp1.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}' from the main language store`);
     }
-    return [];
+    const json1 = await resp1.json();
+
+    // Fetch the second JSON file
+    const resp2 = await fetch(`/localization/community/${locale}.json`);
+    if (!resp2.ok) {
+      throw new Error(`Failed to fetch data for locale '${locale}' from the community language store`);
+    }
+    const json2 = await resp2.json();
+    const combinedJson = { ...json1, ...json2 };
+    this.cache.set(locale, { locale, json: combinedJson, timestamp: Date.now() });
+    return combinedJson;
   },
 
-  async getData(locale, limit) {
-    return this.cache || this.fetchLangStoreData(locale, limit);
+  async getData(locale) {
+    if (!this.cache.has(locale)) {
+      await this.fetchLangStoreData(locale);
+    }
+
+    const cachedData = this.cache.get(locale);
+    if (cachedData) {
+      return cachedData.json;
+    }
+    return {};
   },
 
-  async getValueByKey(key, locale, limit) {
-    const data = await this.getData(locale, limit);
-    const langEntry = data.find((entry) => entry.key === key);
-    return langEntry?.[locale] ?? null;
+  async getValueByKey(key, locale) {
+    const data = await this.getData(locale);
+    const namespaces = ['@clio/playground', '@community/hubs'];
+
+    for (const namespace of namespaces) {
+      const namespacedKey = `${namespace}:${key}`;
+      if (data[namespacedKey]) {
+        return data[namespacedKey];
+      }
+    }
+
+    return "No translation found in the Language stores";
   },
 };
 
-const processText = (text, langStoreData, locale) => text.replace(/\$[a-zA-Z0-9_-]+/g, (match) => {
-  const jsonKey = match.slice(1);
-  const data = langStoreData.find((entry) => entry.key === jsonKey);
-  return data?.[locale] ?? match;
-});
+const processText = async (text, langStoreData) => {
+  const keys = text.match(/\$[a-zA-Z0-9_-]+/g);
+  if (!keys) return text;
 
-// Decorate i18n text
-export async function decorateI18n(block) {
-  const locale = getLocale() || 'en-US';
-  const limit = 5000;
+  const namespaces = ['@clio/playground', '@community/hubs'];
+  let processedText = text;
 
-  // Check & Fetch language store data if not already cached
-  const langStoreData = await langStoreCache.getData(locale, limit);
-
-  // Process single <code> elements not inside <pre>
-  block.querySelectorAll('code').forEach((el) => {
-    const text = el.textContent.trim();
-    if (!el.closest('pre') && text.startsWith('$')) {
-      const newText = processText(text, langStoreData, locale);
-      const textNode = document.createTextNode(newText);
-      el.parentNode.replaceChild(textNode, el);
+  keys.forEach((key) => {
+    const jsonKey = key.slice(1);
+    for (const namespace of namespaces) {
+      const namespacedKey = `${namespace}:${jsonKey}`;
+      if (langStoreData[namespacedKey]) {
+        processedText = processedText.replace(key, langStoreData[namespacedKey]);
+        break;
+      }
     }
   });
 
-  // Process multi-line <code> blocks wrapped in <pre>
-  block.querySelectorAll('pre code').forEach((el) => {
-    const text = el.textContent.trim();
-    if (text.startsWith('$')) {
-      const keys = text.split(/\s+/);
-      const newTexts = keys.map((key) => {
-        const newText = processText(key, langStoreData, locale);
-        return `<p>${newText}</p>`;
-      });
-      el.parentNode.outerHTML = newTexts.join('');
-    }
-  });
-}
+  return processedText;
+};
 
 // Function to fetch value for a specific key
-export async function getI18nValue(key, limit = 5000) {
+export async function getI18nValue(key) {
   try {
-    const locale = getLocale() || 'en-US';
-    const value = await langStoreCache.getValueByKey(key, locale, limit);
+    const locale = getLocale();
+    const value = await langStoreCache.getValueByKey(key, locale);
     return value ?? key;
   } catch (error) {
     console.error(`Error fetching i18n value for key: ${key}`, error);
     return key;
   }
+}
+
+// Decorate i18n text
+export async function decorateI18n(block) {
+  const locale = getLocale();
+
+  // Check & Fetch language store data if not already cached
+  const langStoreData = await langStoreCache.getData(locale);
+
+  // Helper function to safely replace HTML content
+  const replaceWithHTML = (element, html) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    while (tempDiv.firstChild) {
+      element.parentNode.insertBefore(tempDiv.firstChild, element);
+    }
+    element.parentNode.removeChild(element);
+  };
+
+  // Process single <code> elements not inside <pre>
+  block.querySelectorAll('code').forEach(async (el) => {
+    const text = el.textContent.trim();
+    if (!el.closest('pre') && text.startsWith('$')) {
+      const newText = await processText(text, langStoreData);
+      replaceWithHTML(el, newText);
+    }
+  });
+
+  // Process multi-line <code> blocks wrapped in <pre>
+  block.querySelectorAll('pre code').forEach(async (el) => {
+    const text = el.textContent.trim();
+    if (text.startsWith('$')) {
+      const keys = text.split(/\s+/);
+      const newTexts = await Promise.all(keys.map(async (key) => {
+        const newText = await processText(key, langStoreData);
+        return `<p>${newText}</p>`;
+      }));
+      replaceWithHTML(el.parentNode, newTexts.join(''));
+    }
+  });
 }
 
 /**
@@ -646,9 +694,10 @@ async function loadPage() {
   // eslint-disable-next-line no-unused-vars
   const config = setConfig({ ...CONFIG, miloLibs });
   loadFonts();
+  decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
-  await loadArea();
   buildAutoBlocks(document.querySelector('main'));
+  await loadArea();
   loadProfile();
   setTimeout(async () => {
     await loadFireflyHeaderComponents();

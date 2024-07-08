@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*
  * Copyright 2022 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -9,6 +10,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
+import { getI18nValue } from './scripts.js';
+
 const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
 const FEATURES_API_PROD = 'https://p13n.adobe.io';
 
@@ -41,20 +45,27 @@ export const [setLibs, getLibs] = (() => {
 const DEFAULT_SIZE = '2000';
 
 function buildTooltip(main) {
-  const tooltipSVGs = main.querySelectorAll('picture > img[src*="tooltip.svg"]');
+  const icons = main.querySelectorAll('span[class*="icon-"]');
 
-  tooltipSVGs.forEach((img) => {
-    const tooltipText = img.alt.trim() || '';
-
-    img.addEventListener('mouseenter', () => {
+  icons.forEach(async (icon) => {
+    const wrapper = icon.closest('em');
+    if (!wrapper) return;
+    wrapper.className = 'tooltip-wrapper';
+    const conf = wrapper.textContent.split('|');
+    const tooltipKey = conf.pop().trim().replace('$', '');
+    const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
+    icon.dataset.tooltip = tooltipText;
+    icon.setAttribute('alt', tooltipText);
+    wrapper.parentElement.replaceChild(icon, wrapper);
+    icon.addEventListener('mouseenter', () => {
       const tooltip = document.createElement('span');
       tooltip.classList.add('tooltip');
-      tooltip.textContent = tooltipText;
-      img.parentNode.appendChild(tooltip);
+      tooltip.innerHTML = tooltipText;
+      icon.parentNode.appendChild(tooltip);
     });
 
-    img.addEventListener('mouseleave', () => {
-      const tooltip = img.parentNode.querySelector('.tooltip');
+    icon.addEventListener('mouseleave', () => {
+      const tooltip = icon.parentNode.querySelector('.tooltip');
       if (tooltip) {
         tooltip.remove();
       }
