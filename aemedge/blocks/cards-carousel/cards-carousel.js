@@ -13,6 +13,23 @@ let curSlide = 0;
 let maxSlide = 0;
 let filteredSlides = 0;
 
+function updateNavButtons(carouselWrapper) {
+  const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
+  const { scrollLeft } = carouselSlider;
+  const maxScrollLeft = carouselSlider.scrollWidth - carouselSlider.clientWidth;
+
+  if (scrollLeft <= 0) {
+    carouselWrapper.classList.add('hide-prev');
+    carouselWrapper.classList.remove('hide-next');
+  } else if (scrollLeft >= maxScrollLeft) {
+    carouselWrapper.classList.add('hide-next');
+    carouselWrapper.classList.remove('hide-prev');
+  } else {
+    carouselWrapper.classList.remove('hide-prev');
+    carouselWrapper.classList.remove('hide-next');
+  }
+}
+
 function scrollToSlide(carouselWrapper, slideIndex, dir) {
   const carouselSlider = carouselWrapper.querySelector('.cards-carousel-slide-container');
   const widthtoScroll = (carouselSlider.clientWidth > 767) ? 350 : 170;
@@ -31,6 +48,7 @@ function scrollToSlide(carouselWrapper, slideIndex, dir) {
     slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
   }
   curSlide = slideIndex;
+  updateNavButtons(carouselWrapper);
 }
 
 function buildNav(dir, carousel) {
@@ -174,4 +192,5 @@ export default async function decorate(block) {
       block.append(buildNav('next', block));
     }
   }, 0);
+  carousel.addEventListener('scroll', () => updateNavButtons(block));
 }
