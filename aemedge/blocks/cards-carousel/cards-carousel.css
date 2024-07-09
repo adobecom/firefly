@@ -17,7 +17,7 @@
   height: 100%;
   width: 100%;
   margin: 20px auto;
-  gap: 15px;
+  gap: 11px;
   position: relative;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -132,32 +132,41 @@
 }
 
 .cards-carousel .cards-carousel-slide h3 strong{
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .cards-carousel .cards-carousel-slide p{
-  color: black;
+  color: rgb(0, 0, 0);
   font-size: 12px;
+  font-weight: 400;
   min-height: 35px;
   line-height: 1.3;
   margin: 0;
 }
 
 .cards-carousel .cards-card-body {
-  margin: 0 24px;
+  margin: 0 25px auto 17px;
 }
 
 .cards-carousel .cards-card-body h3 {
-  font-size: var(--body-font-size-xl);
-  letter-spacing: var(--letter-spacing-3);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--body-font-family);
+  letter-spacing: normal;
+  line-height: 20.8px;
+  margin: 8px auto;
+  color: rgb(0, 0, 0);
+
 }
 
 .cards-carousel .card-link {
   display: flex;
-  margin: 24px 0 0;
+  margin: 18px auto 0;
   padding-bottom: 12px;
   justify-content: flex-end;
   flex-direction: column;
+  max-width: 160px;
+  width: max-content;
 }
 
 .cards-carousel .card-link p{
@@ -240,10 +249,26 @@
   .cards-carousel .cards-carousel-slide {
     width: 350px;
   }
+  
+
+  .cards-carousel .cards-card-body h3 {
+    font-size: 18px;
+    margin: 13px auto 8px;
+  }
+
+  .cards-carousel .cards-card-body p {
+    margin-bottom: 12px;
+  }
 
   .cards-carousel .card-link {
-   flex-direction: row;
-   margin: 24px 16px 0;
+    flex-direction: row;
+    align-items: end;
+    margin: inherit;
+    max-width: inherit;
+    width: initial;
+    padding-right: 17px;
+    padding-bottom: 7px;
+
   }
 
   .cards-carousel .card-link p{
