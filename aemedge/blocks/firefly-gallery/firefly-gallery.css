@@ -1,3 +1,4 @@
+/* stylelint-disable color-function-notation */
   /* overlay style */
   .section.overlay > div:nth-last-of-type(2) {
     position: absolute;
@@ -51,7 +52,7 @@
     overflow: hidden;
     
     /* make the row height small and set the span via js */
-    grid-gap: 10px;
+    grid-gap: 16px;
   }
 
   .card {
@@ -88,20 +89,39 @@
     transition-delay: 0s;
   }
 
+  .card .card-details .author {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-family: var(--body-font-family);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    color: #FFF;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
   .card .card-details .author img {
-    vertical-align: middle;
-    padding-right: 10px;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: #eaeaea;
+    margin-right: 4px;
+    border-radius: 12px;
   }
 
   .card .card-details .prompt {
-    overflow: hidden;
-    line-clamp: 2;
     color: #FFF;
-    font-family: adobe-clean, sans-serif;
+    font-family: var(--body-font-family);
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
   }
 
   .card .card-details .card-footer {
@@ -123,6 +143,8 @@
     height: 24px;
     background-color: var(--color-white);
     font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .card .card-details .card-footer button.view a {
@@ -134,7 +156,6 @@
     font-weight: 700;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
 
   .card .card-details .card-footer button.favorite {
