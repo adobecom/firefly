@@ -572,7 +572,7 @@ async function overrideUNAV() {
     //     event: { visitor_guid: visitorGuid },
     //   },
     // };
-    await window.UniversalNav.reload(updatedUnavConfig);
+    await window.UniversalNav.reload(UNAV_CONFIG.universalNav.universalNavConfig);
   }
 }
 
