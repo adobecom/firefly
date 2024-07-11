@@ -15,6 +15,7 @@
  */
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+// eslint-disable-next-line import/no-cycle
 import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
@@ -203,7 +204,7 @@ const onMessage = (e) => {
 };
 
 // override the signIn method from milo header and load SUSI Light
-export async function signInOverride() {
+export async function overrideSignIn() {
   try {
     const main = document.querySelector('main');
     const sentryWrapper = main.querySelector('.sentry-wrapper');
@@ -240,8 +241,8 @@ export async function signInOverride() {
       susiLightEl.config = susiConfig;
       susiLightEl.authParams = susiAuthParams;
       main.prepend(susiSentryDiv);
-      // Register event listeners on susi-sentry
-      susiLightEl.addEventListener('message', onMessage);
+      // Register event listeners for susi-sentry
+      // susiLightEl.addEventListener('on-message', onMessage);
       susiLightEl.addEventListener('on-token', onToken);
       susiLightEl.addEventListener('on-auth-code', onAuthCode);
       susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
@@ -256,11 +257,40 @@ export async function signInOverride() {
       window.addEventListener('click', (e) => {
         // if sign-in modal open and user clicks out of it, close the modal
         const isClickInsideModal = susiLightEl.contains(e.target);
-        if (susiLightEl.checkVisibility() && !isClickInsideModal) susiSentryDiv.classList.add('hidden');
+        const profileButton = document.querySelector('#unav-profile');
+        const isClickOnProfile = profileButton.contains(e.target);
+        if (susiLightEl.checkVisibility() && !isClickInsideModal && !isClickOnProfile) susiSentryDiv.classList.add('hidden');
+        if (!susiLightEl.checkVisibility() && isClickOnProfile) susiSentryDiv.classList.remove('hidden');
       });
     }
   } catch (e) {
     console.error(e);
+  }
+}
+
+async function overrideUNAV() {
+  // Update a few things and reload UNAV so we can listen to messages and override sign in click.
+  if (window.UniversalNav) {
+    console.debug('overriding the unav');
+    const { CONFIG: UNAV_CONFIG } = await import(`${miloLibs}/blocks/global-navigation/global-navigation.js`);
+    // const visitorGuid = window.alloy ? await window.alloy('getIdentity')
+    //   .then((data) => data?.identity?.ECID).catch(() => undefined) : undefined;
+    const { children } = UNAV_CONFIG.universalNav.universalNavConfig;
+    children.forEach((child) => {
+      if (child.name === 'profile') {
+        child.attributes.callbacks.onSignIn = () => {
+          overrideSignIn();
+          const analyticsEvent = makeFinalPayload({
+            'event.subcategory': 'Navigation',
+            'event.subtype': 'signin',
+            'event.type': 'click',
+          });
+          ingestAnalytics([analyticsEvent]);
+        };
+      }
+    });
+    console.log('updatedUnavConfig after change', UNAV_CONFIG.universalNav.universalNavConfig);
+    await window.UniversalNav.reload(UNAV_CONFIG.universalNav.universalNavConfig);
   }
 }
 
@@ -273,23 +303,6 @@ async function headerModal() {
       await openModal(link.href);
     });
   });
-  // Sign-in override for SUSI Light
-  const signInElem = document.querySelector('header #universal-nav .unav-comp-profile .profile-signed-out button');
-  if (signInElem) {
-    signInElem.addEventListener('click', async (e) => {
-      e.preventDefault();
-      signInOverride();
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-
-      const analyticsEvent = makeFinalPayload({
-        'event.subcategory': 'Navigation',
-        'event.subtype': 'signin',
-        'event.type': 'click',
-      });
-      ingestAnalytics([analyticsEvent]);
-    }, true);
-  }
 }
 
 // Fetch locale from browser or cookie
@@ -700,6 +713,7 @@ async function loadPage() {
   await loadArea();
   loadProfile();
   setTimeout(async () => {
+    await overrideUNAV();
     await loadFireflyHeaderComponents();
   }, 0);
   setTimeout(() => {
