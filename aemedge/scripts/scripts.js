@@ -541,9 +541,7 @@ async function overrideUNAV() {
     const { CONFIG: UNAV_CONFIG } = await import(`${miloLibs}/blocks/global-navigation/global-navigation.js`);
     // const visitorGuid = window.alloy ? await window.alloy('getIdentity')
     //   .then((data) => data?.identity?.ECID).catch(() => undefined) : undefined;
-    const updatedUnavConfig = UNAV_CONFIG.universalNav.universalNavConfig;
-    console.log('updatedUnavConfig', updatedUnavConfig);
-    const { children } = updatedUnavConfig;
+    const { children } = UNAV_CONFIG.universalNav.universalNavConfig;
     children.forEach((child) => {
       if (child.name === 'profile') {
         child.attributes.callbacks.onSignIn = () => {
@@ -557,7 +555,7 @@ async function overrideUNAV() {
         };
       }
     });
-    console.log('updatedUnavConfig after change', updatedUnavConfig);
+    console.log('updatedUnavConfig after change', UNAV_CONFIG.universalNav.universalNavConfig);
     // const updatedConfiguration = {
     //   target: document.querySelector('header nav .feds-utilities'),
     //   env: getEnvironment(),
