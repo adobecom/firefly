@@ -919,6 +919,7 @@
   "@clio/playground:property-panel-mobile-tray-apply-label": "Käytä",
   "@clio/playground:property-panel-mobile-tray-close-label": "Sulje",
   "@clio/playground:property-panel-sidebar-style-match-gallery-title": "Viitekuvagalleria",
+  "@clio/playground:property-panel-style-kit-view-in-files": "View in Files",
   "@clio/playground:property-single-panel-structure-match-gallery-title": "Viitekuvagalleria",
   "@clio/playground:property-single-panel-style-kit-gallery-title": "Selaa tyylipaketteja",
   "@clio/playground:property-single-panel-style-match-gallery-title": "Viitekuvagalleria",

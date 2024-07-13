@@ -919,6 +919,7 @@
   "@clio/playground:property-panel-mobile-tray-apply-label": "Zastosuj",
   "@clio/playground:property-panel-mobile-tray-close-label": "Zamknij",
   "@clio/playground:property-panel-sidebar-style-match-gallery-title": "Galeria obrazów referencyjnych",
+  "@clio/playground:property-panel-style-kit-view-in-files": "Wyświetlanie w plikach",
   "@clio/playground:property-single-panel-structure-match-gallery-title": "Galeria obrazów referencyjnych",
   "@clio/playground:property-single-panel-style-kit-gallery-title": "Przeglądaj zestawy stylów",
   "@clio/playground:property-single-panel-style-match-gallery-title": "Galeria obrazów referencyjnych",
