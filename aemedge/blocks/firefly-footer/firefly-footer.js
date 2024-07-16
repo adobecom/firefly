@@ -66,7 +66,10 @@ export default async function decorate(block) {
         decorateSVG(link);
       });
 
-      block.innerHTML = tempDiv.innerHTML;
+      block.innerHTML = '';
+      while (tempDiv.firstChild) {
+        block.appendChild(tempDiv.firstChild);
+      }
       decorateI18n(block);
     }
   }
