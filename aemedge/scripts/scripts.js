@@ -682,7 +682,13 @@ async function loadFireflyHeaderComponents() {
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
-    gnav.innerHTML = await resp.text();
+    const html = await resp.text();
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    while (tempDiv.firstChild) {
+      gnav.appendChild(tempDiv.firstChild);
+    }
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
