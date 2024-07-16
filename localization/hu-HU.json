@@ -278,7 +278,7 @@
   "@clio/playground:enterprise-image-properties-title": "Kép tulajdonságai",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "Modell frissítése",
   "@clio/playground:enterprise-model-expiry-button-continue-to-model": "Tovább a modellhez",
-  "@clio/playground:enterprise-model-expiry-button-duplicate": "Megkettőzés",
+  "@clio/playground:enterprise-model-expiry-button-duplicate": "Duplikálás",
   "@clio/playground:enterprise-model-expiry-dialog-desc": "A Firefly Image Model 2 hamarosan lejár. A modell módosításához és a Firefly Image Model 3 megtartásához válassza ki a „Duplikálás” lehetőséget.",
   "@clio/playground:enterprise-model-expiry-dialog-title": "„{modelName}” megtartása",
   "@clio/playground:enterprise-model-properties-cover": "Borító",
