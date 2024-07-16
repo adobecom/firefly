@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable color-function-notation */
 .modal.block:has(.legal-modal) dialog {
     padding: 0;
     overflow: hidden;
@@ -51,26 +53,26 @@
 }
 
 .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.agree {
-    border-color: rgb(2, 101, 220);
-    background-color: rgb(2, 101, 220);
+    border-color: rgba(2, 101, 220);
+    background-color: rgba(2, 101, 220);
     color: white;
 }
 
 .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.cancel {
-    border-color: rgb(213, 213, 213);
+    border-color: rgba(213, 213, 213);
 }
 
 .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.cancel:hover {
-    background-color: rgb(213, 213, 213);
+    background-color: rgba(213, 213, 213);
 }
 
 .modal.block:has(.legal-modal) dialog .modal-content .legal-footer button.agree:hover {
-    background-color: rgb(0, 89, 194);
-    border-color: rgb(0, 89, 194);
+    background-color: rgba(0, 89, 194);
+    border-color: rgba(0, 89, 194);
 }
 
 .legal-banner {
-    background-color: rgb(215, 25, 19);
+    background-color: rgba(215, 25, 19);
     display: flex;
 }
 
@@ -96,7 +98,6 @@
     margin-right: 0.5%;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .legal-banner .legal-banner-content button {
     padding: 7px 14px;
     border-radius: 16px;
