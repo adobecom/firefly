@@ -1174,7 +1174,7 @@
   "@clio/playground:text-to-image-style-coachmark-title": "Faire correspondre le style d’image",
   "@clio/playground:text-to-image-style-kit-cascading-coachmark-content": "Enregistrez et partagez votre image en tant que kit stylistique en sélectionnant les réglages que les utilisateurs peuvent remixer pour créer leurs propres variantes.",
   "@clio/playground:text-to-image-style-kit-cascading-coachmark-title": "Permettez aux autres utilisateurs de personnaliser votre image",
-  "@clio/playground:text-to-image-style-kit-coachmark-content": "Votre kit stylistique peut être ouvert directement à partir du panneau ou de la section Fichiers de la page d’accueil.",
+  "@clio/playground:text-to-image-style-kit-coachmark-content": "Vous pouvez rechercher et ouvrir votre kit stylistique directement depuis le panneau ou de la section Fichiers de la page d’accueil.",
   "@clio/playground:text-to-image-style-kit-coachmark-how-url": "https://www.adobe.com/go/firefly_stylekits_fr",
   "@clio/playground:text-to-image-style-kit-coachmark-learn more": "En savoir plus",
   "@clio/playground:text-to-image-style-kit-coachmark-ok": "OK",
