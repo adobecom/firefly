@@ -482,10 +482,18 @@ export async function decorateI18n(block) {
 export function decorateExternalLink(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((link) => {
-    const url = new URL(link.getAttribute('href'));
-    if (!(window.location.hostname === url.hostname)) {
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener');
+    const href = link.getAttribute('href');
+
+    if (href) {
+      try {
+        const url = new URL(href, window.location.origin);
+        if (!(window.location.hostname === url.hostname)) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        }
+      } catch (e) {
+        console.error(`Invalid URL: ${href}`, e);
+      }
     }
   });
 }
