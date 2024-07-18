@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Språk for resultat",
   "@clio/playground:autodub-page-progress-modal-content": "Vent til filen er ferdig behandlet, eller lukk denne fanen og kom tilbake senere for å gå gjennom resultatene.",
   "@clio/playground:autodub-page-progress-modal-processing": "Behandler ...",
-  "@clio/playground:autodub-page-share-text": "Jeg oversatte videoen min med Firefly Autodub. Prøv det selv!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Se den oversatte videoen min!",
   "@clio/playground:autodub-page-source-language": "Kildespråk",
   "@clio/playground:autodub-page-source-language-auto-detected": "(automatisk oppdaget)",

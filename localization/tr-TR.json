@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Çıktı Dili",
   "@clio/playground:autodub-page-progress-modal-content": "Dosya işlemesinin tamamlanmasını bekleyin veya bu sekmeyi kapatın ve sonuçlarınızı incelemek üzere daha sonra geri dönün.",
   "@clio/playground:autodub-page-progress-modal-processing": "İşleniyor...",
-  "@clio/playground:autodub-page-share-text": "Videomu Firefly Autodub kullanarak çevirdim. Videoma göz atın.",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Çevrilmiş videoma göz atın.",
   "@clio/playground:autodub-page-source-language": "Kaynak Dil",
   "@clio/playground:autodub-page-source-language-auto-detected": "(otomatik algılandı)",

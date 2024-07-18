@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Język wyjściowy",
   "@clio/playground:autodub-page-progress-modal-content": "Poczekaj na zakończenie przetwarzania pliku lub zamknij tę kartę i wróć później, aby sprawdzić wyniki.",
   "@clio/playground:autodub-page-progress-modal-processing": "Przetwarzanie…",
-  "@clio/playground:autodub-page-share-text": "Przetłumaczyłem mój film za pomocą usługi Firefly Autodub. Sprawdź już teraz!",
+  "@clio/playground:autodub-page-share-text": "Przetłumaczyłem mój film za pomocą Adobe Dubbing i Lip Sync. Sprawdź to!",
   "@clio/playground:autodub-page-share-title": "Obejrzyj mój przetłumaczony film!",
   "@clio/playground:autodub-page-source-language": "Język źródłowy",
   "@clio/playground:autodub-page-source-language-auto-detected": "(wykryte automatyczne)",

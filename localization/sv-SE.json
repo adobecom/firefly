@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Utmatningsspråk",
   "@clio/playground:autodub-page-progress-modal-content": "Vänta tills filen är klar med bearbetningen eller stäng den här fliken och kom tillbaka senare för att granska dina resultat.",
   "@clio/playground:autodub-page-progress-modal-processing": "Bearbetar …",
-  "@clio/playground:autodub-page-share-text": "Jag översatte min video med hjälp av Firefly Autodub. Kolla in den!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Kolla in min översatta video!",
   "@clio/playground:autodub-page-source-language": "Källspråk",
   "@clio/playground:autodub-page-source-language-auto-detected": "(automatiskt detekterat)",

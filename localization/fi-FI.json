@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Tulokieli",
   "@clio/playground:autodub-page-progress-modal-content": "Odota tiedoston käsittelyn valmistumista tai sulje tämä välilehti ja palaa myöhemmin tarkastelemaan tuloksia.",
   "@clio/playground:autodub-page-progress-modal-processing": "Käsitellään...",
-  "@clio/playground:autodub-page-share-text": "Käänsin videoni Firefly Autodubin avulla. Katso se!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Katso käännetty videoni!",
   "@clio/playground:autodub-page-source-language": "Lähdekieli",
   "@clio/playground:autodub-page-source-language-auto-detected": "(tunnistettu automaattisesti)",

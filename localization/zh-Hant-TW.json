@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "輸出​語言",
   "@clio/playground:autodub-page-progress-modal-content": "請​等待​您​的​檔案​完成​處理，​或是​關閉​此​標籤​並在​稍後​返回​檢閱​結果。",
   "@clio/playground:autodub-page-progress-modal-processing": "正在​處理...",
-  "@clio/playground:autodub-page-share-text": "我​已​使用 Firefly Autodub 翻譯​我的​影片。​看看​結果​如何！",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "請​查看​我的​翻譯​影片！",
   "@clio/playground:autodub-page-source-language": "來源​語言",
   "@clio/playground:autodub-page-source-language-auto-detected": "(​自動​偵測)",

@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Цільова мова",
   "@clio/playground:autodub-page-progress-modal-content": "Зачекайте закінчення обробки файлу або закрийте вкладку й поверніться пізніше, щоб переглянути результати.",
   "@clio/playground:autodub-page-progress-modal-processing": "Обробка…",
-  "@clio/playground:autodub-page-share-text": "Моє відео перекладено за допомогою Firefly Autodub. Перегляньте!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Перегляньте моє перекладене відео!",
   "@clio/playground:autodub-page-source-language": "Вихідна мова",
   "@clio/playground:autodub-page-source-language-auto-detected": "(автоматично виявлено)",

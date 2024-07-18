@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Jazyk výstupu",
   "@clio/playground:autodub-page-progress-modal-content": "Počkejte, až se zpracuje soubor, nebo zavřete tuto kartu a výsledky zkontrolujte později.",
   "@clio/playground:autodub-page-progress-modal-processing": "Probíhá zpracování...",
-  "@clio/playground:autodub-page-share-text": "Přeložil jsem video pomocí služby Firefly Autodub. Koukněte na to!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Koukněte na moje přeložené video!",
   "@clio/playground:autodub-page-source-language": "Zdrojový jazyk",
   "@clio/playground:autodub-page-source-language-auto-detected": "(automaticky detekováno)",

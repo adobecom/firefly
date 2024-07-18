@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "결과 언어",
   "@clio/playground:autodub-page-progress-modal-content": "파일 처리가 완료될 때까지 기다리거나, 이 탭을 닫고 나중에 돌아와서 결과를 검토하세요.",
   "@clio/playground:autodub-page-progress-modal-processing": "처리 중...",
-  "@clio/playground:autodub-page-share-text": "Firefly Autodub​을 사용하여 비디오를 번역했습니다. 확인해 주세요!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "번역한 영상을 확인해 보세요!",
   "@clio/playground:autodub-page-source-language": "소스 언어",
   "@clio/playground:autodub-page-source-language-auto-detected": "(​자동 감지)",

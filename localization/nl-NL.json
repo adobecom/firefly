@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Uitvoertaal",
   "@clio/playground:autodub-page-progress-modal-content": "Wacht tot het bestand is verwerkt of sluit dit tabblad en kom later terug om de resultaten te bekijken.",
   "@clio/playground:autodub-page-progress-modal-processing": "Verwerken...",
-  "@clio/playground:autodub-page-share-text": "Ik heb mijn video vertaald met Firefly Autodub. Moet je eens kijken!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Bekijk mijn vertaalde video!",
   "@clio/playground:autodub-page-source-language": "Brontaal",
   "@clio/playground:autodub-page-source-language-auto-detected": "(automatisch gedetecteerd)",

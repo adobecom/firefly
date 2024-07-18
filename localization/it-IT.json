@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Lingua output",
   "@clio/playground:autodub-page-progress-modal-content": "Attendi il completamento dell'elaborazione del file o chiudi questa scheda. Torna quindi in un secondo momento per rivedere i risultati.",
   "@clio/playground:autodub-page-progress-modal-processing": "Elaborazione in corso...",
-  "@clio/playground:autodub-page-share-text": "Ho tradotto il mio video utilizzando Firefly Autodub. Guardalo.",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Guarda il mio video tradotto.",
   "@clio/playground:autodub-page-source-language": "Lingua di origine",
   "@clio/playground:autodub-page-source-language-auto-detected": "(rilevamento automatico)",

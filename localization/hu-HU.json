@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "Célnyelv",
   "@clio/playground:autodub-page-progress-modal-content": "Várjon, amíg a fájl feldolgozása befejeződik, vagy zárja be ezt a lapot, és térjen vissza később az eredmények megtekintéséhez.",
   "@clio/playground:autodub-page-progress-modal-processing": "Feldolgozás...",
-  "@clio/playground:autodub-page-share-text": "A videóm lefordításához a Firefly Autodub-at használtam. Tekintse meg!",
+  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
   "@clio/playground:autodub-page-share-title": "Nézze meg a lefordított videómat!",
   "@clio/playground:autodub-page-source-language": "Forrásnyelv",
   "@clio/playground:autodub-page-source-language-auto-detected": "(automatikusan felismerve)",
