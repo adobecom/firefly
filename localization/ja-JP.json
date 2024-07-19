@@ -131,7 +131,7 @@
   "@clio/playground:autodub-page-output-language": "出力​言語",
   "@clio/playground:autodub-page-progress-modal-content": "ファイル​の​処理​が​終わる​の​を​待つ​か、​この​タブ​を​閉​じ​て​後で​戻​って​結果​を​確認​し​て​くだ​さい。",
   "@clio/playground:autodub-page-progress-modal-processing": "処理​中...",
-  "@clio/playground:autodub-page-share-text": "I translated my video using Adobe Dubbing and Lip Sync. Check it out!",
+  "@clio/playground:autodub-page-share-text": "Adobe の​ダビング​と​リップ​シンク​で​動画​を​翻訳​しま​した。​ご覧​くだ​さい。",
   "@clio/playground:autodub-page-share-title": "翻訳​した​動画​を​ご覧​くだ​さい",
   "@clio/playground:autodub-page-source-language": "ソース​言語",
   "@clio/playground:autodub-page-source-language-auto-detected": "(​自動​検出)",
