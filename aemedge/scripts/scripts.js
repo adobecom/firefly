@@ -17,7 +17,7 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
-import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
+import { setLibs, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -497,6 +497,39 @@ export function decorateExternalLink(element) {
       }
     }
   });
+}
+
+function buildTooltip(main) {
+  const icons = main.querySelectorAll('span[class*="icon-"]');
+
+  icons.forEach(async (icon) => {
+    const wrapper = icon.closest('em');
+    if (!wrapper) return;
+    wrapper.className = 'tooltip-wrapper';
+    const conf = wrapper.textContent.split('|');
+    const tooltipKey = conf.pop().trim().replace('$', '');
+    const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
+    icon.dataset.tooltip = tooltipText;
+    icon.setAttribute('alt', tooltipText);
+    wrapper.parentElement.replaceChild(icon, wrapper);
+    icon.addEventListener('mouseenter', () => {
+      const tooltip = document.createElement('span');
+      tooltip.classList.add('tooltip');
+      tooltip.innerHTML = tooltipText;
+      icon.parentNode.appendChild(tooltip);
+    });
+
+    icon.addEventListener('mouseleave', () => {
+      const tooltip = icon.parentNode.querySelector('.tooltip');
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+  });
+}
+
+export function buildAutoBlocks(main) {
+  buildTooltip(main);
 }
 
 async function loadUpgradeModal() {
