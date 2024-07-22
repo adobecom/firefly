@@ -674,7 +674,7 @@
   "@clio/playground:home-page-inpaint-title": "Generativt fyll (forhåndsvisning)",
   "@clio/playground:home-page-modules-aria-label-next": "Neste side med moduler",
   "@clio/playground:home-page-modules-aria-label-previous": "Forrige side med moduler",
-  "@clio/playground:home-page-modules-desc": "Eksperimenter med det nyeste innen generativ kunstig intelligens fra Adobe Firefly og annen generativ KI, og fortell oss hva du synes.",
+  "@clio/playground:home-page-modules-desc": "Experiment with the latest innovations from Firefly and other generative AI technology, and let us know what you think.",
   "@clio/playground:home-page-modules-header": "Skap med generativ kunstig intelligens",
   "@clio/playground:home-page-recolor-deep-link": "https://creativecloud.adobe.com/campaign/illustrator?locale=nb&workflow=launch&id=EEE_202306_generative-recolor_Recolor-your-artwork-in-seconds&min-version=27.9&uri=adbai%3A%2F%2Fapp%2Fv1%3Fconsumer.name%3DHelpX%26exp.campaign_id%3DEEE_202306_generative-recolor_Recolor-your-artwork-in-seconds%26source.name%3DILST%26source.version%3D27.9%26content.type%3DcmAppFeatures%26headless%3Dtrue%26action%3DLearnAndSearch%26env.com.name%3DUnified-Panel%26owner%3DE2E%2520Enablement%26sampleFile%3Dhttps%253A%252F%252Fhelpx.adobe.com%252Fcontent%252Fdam%252Fhelp%252Fen%252Fillustrator%252Fusing%252Fgenerative-recolor%252FGenAI_Recolor.ai%26order%3DcmAppFeatures%26owner%3DE2E%2520Enablement%26c_1%3D1935764588%26dc_1%3DGenerative%2520Recolor%2520Art%2520Dialog%26command_type%3Dstatic%2Cdynamic%26tf_order%3Dc_1,dc_1",
   "@clio/playground:home-page-recolor-description": "Generer fargevariasjoner av vektorgrafikken din.",
