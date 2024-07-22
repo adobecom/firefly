@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_cz",
   "@clio/playground:autodub-something-went-wrong": "Došlo k chybě. Zkuste to znovu později nebo <a>kontaktujte podporu</a> s žádostí o asistenci.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_cz",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "Je nám líto, ale tato služba není ve vašem regionu dostupná.",
   "@clio/playground:browse-aria-label": "Procházet stylové sady",
   "@clio/playground:browse-kits-button-label": "Procházet sady",

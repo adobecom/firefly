@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_hu",
   "@clio/playground:autodub-something-went-wrong": "Hiba történt. Kérjük, próbálja újra, vagy <a>forduljon az ügyfélszolgálathoz</a>.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_hu",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "Sajnáljuk, ez a szolgáltatás az Ön régiójában nem elérhető.",
   "@clio/playground:browse-aria-label": "Stíluskészletek böngészése",
   "@clio/playground:browse-kits-button-label": "Készletek böngészése",

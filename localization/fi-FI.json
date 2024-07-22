@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_fi",
   "@clio/playground:autodub-something-went-wrong": "Jokin meni vikaan. Yritä uudelleen tai <a>ota yhteys tukeen</a>.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_fi",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "Valitettavasti palvelu ei ole saatavilla alueellasi.",
   "@clio/playground:browse-aria-label": "Selaa tyylipaketteja",
   "@clio/playground:browse-kits-button-label": "Selaa paketteja",

@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_dk",
   "@clio/playground:autodub-something-went-wrong": "Noget gik galt. Prøv igen, eller <a>kontakt support</a> for at få hjælp.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_dk",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "Vi beklager. Denne tjeneste er desværre ikke tilgængelig i din region.",
   "@clio/playground:browse-aria-label": "Se stilsæt",
   "@clio/playground:browse-kits-button-label": "Søg sæt",

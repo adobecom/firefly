@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_cn",
   "@clio/playground:autodub-something-went-wrong": "出现​错误。​请​重​试​或<a>​联系​支持​人员</a>​获取​帮助。",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_cn",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "抱歉，​此​设备​部​适用​于​您​所在​区域。",
   "@clio/playground:browse-aria-label": "浏览​样式​套​件",
   "@clio/playground:browse-kits-button-label": "浏览​套​件",

@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_es",
   "@clio/playground:autodub-something-went-wrong": "Se ha producido un error. Inténtalo de nuevo o <a>ponte en contacto con el servicio de asistencia</a> para obtener ayuda.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_es",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "Lo sentimos, este servicio no está disponible en tu región.",
   "@clio/playground:browse-aria-label": "Examinar kits de estilo",
   "@clio/playground:browse-kits-button-label": "Examinar kits",

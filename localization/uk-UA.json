@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_ua",
   "@clio/playground:autodub-something-went-wrong": "Сталася помилка. Повторіть спробу або зверніться по допомогу в <a>службу підтримки</a>.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_ua",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "На жаль, ця служба недоступна у вашому регіоні.",
   "@clio/playground:browse-aria-label": "Переглянути набори стилів",
   "@clio/playground:browse-kits-button-label": "Пошук наборів",

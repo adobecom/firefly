@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_jp",
   "@clio/playground:autodub-something-went-wrong": "問題​が​発生​しま​した。​再​試行​する​か<a>​サポート​に​お​問い合わせ</a>​くだ​さい。",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_jp",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "この​サービス​は、​お客様​の​地域​では​ご​利用​い​た​だけ​ま​せん。",
   "@clio/playground:browse-aria-label": "スタイル​キット​を​参照",
   "@clio/playground:browse-kits-button-label": "キット​を​参照",

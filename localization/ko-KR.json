@@ -180,6 +180,7 @@
   "@clio/playground:autodub-restricted-content-url": "https://www.adobe.com/go/adobe-gen-ai-user-guidelines_kr",
   "@clio/playground:autodub-something-went-wrong": "문제가 발생했습니다. 다시 시도하거나 <a>​지원팀</a>​에 지원을 문의하세요.",
   "@clio/playground:autodub-something-went-wrong-url": "https://www.adobe.com/go/Using_ADLS_kr",
+  "@clio/playground:autodub-too-many-requests": "There are too many requests to generate media in progress. Please wait a few minutes before trying again.",
   "@clio/playground:autodub-unauthorised-bks-authorisation": "죄송합니다, 귀하의 지역에서는 이 서비스를 이용할 수 없습니다.",
   "@clio/playground:browse-aria-label": "스타일 키트 찾아보기",
   "@clio/playground:browse-kits-button-label": "키트 찾아보기",
