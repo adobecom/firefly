@@ -767,8 +767,12 @@ async function loadPage() {
   setTimeout(() => {
     headerModal();
     loadMartech();
-    initAnalytics();
-    recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
+    initAnalytics().then(() => {
+      const pageName = document.querySelector('a.feds-navLink[aria-current="page"]').textContent;
+      recordRenderPageEvent(pageName, undefined);
+    }).catch((error) => {
+      console.error('Failed to initialize analytics:', error);
+    });
   }, 3000);
 }
 
