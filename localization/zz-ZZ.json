@@ -387,6 +387,8 @@
   "@clio/playground:error-page-generic-body": "[hR] ćłìø_Please try again._žż",
   "@clio/playground:error-page-generic-title": "[hS] ćłìø_Something went wrong_žż",
   "@clio/playground:error-page-module-unavailable-body": "[2a] ćłìø_Sorry, this feature isn't available._žż",
+  "@clio/playground:error-page-module-unavailable-on-device-body": "[8f] ćłìø_Sorry, this feature isn't available. Try accessing from another device or browser._žż",
+  "@clio/playground:error-page-module-unavailable-on-device-title": "[8e] ćłìø_Can’t access_žż",
   "@clio/playground:error-page-module-unavailable-title": "[2b] ćłìø_Can’t access_žż",
   "@clio/playground:error-page-no-mobile-media-type": "[vc] ćłìø_No mobile support_žż",
   "@clio/playground:error-page-no-mobile-media-type-body": "[vd] ćłìø_Creating custom models is available for desktop only at this time_žż",

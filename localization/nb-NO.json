@@ -387,6 +387,8 @@
   "@clio/playground:error-page-generic-body": "Prøv på nytt.",
   "@clio/playground:error-page-generic-title": "Noe gikk galt",
   "@clio/playground:error-page-module-unavailable-body": "Beklager, denne funksjonen er ikke tilgjengelig.",
+  "@clio/playground:error-page-module-unavailable-on-device-body": "Sorry, this feature isn't available. Try accessing from another device or browser.",
+  "@clio/playground:error-page-module-unavailable-on-device-title": "Can’t access",
   "@clio/playground:error-page-module-unavailable-title": "Kunne ikke få tilgang",
   "@clio/playground:error-page-no-mobile-media-type": "Støttes ikke på mobil",
   "@clio/playground:error-page-no-mobile-media-type-body": "Det er kun mulig å opprette egendefinerte modeller på datamaskin for øyeblikket",

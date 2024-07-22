@@ -387,6 +387,8 @@
   "@clio/playground:error-page-generic-body": "Försök igen.",
   "@clio/playground:error-page-generic-title": "Ett fel uppstod",
   "@clio/playground:error-page-module-unavailable-body": "Den här funktionen är tyvärr inte tillgänglig.",
+  "@clio/playground:error-page-module-unavailable-on-device-body": "Sorry, this feature isn't available. Try accessing from another device or browser.",
+  "@clio/playground:error-page-module-unavailable-on-device-title": "Can’t access",
   "@clio/playground:error-page-module-unavailable-title": "Ingen åtkomst",
   "@clio/playground:error-page-no-mobile-media-type": "Inget mobilt stöd",
   "@clio/playground:error-page-no-mobile-media-type-body": "Skapande av anpassad modell är endast tillgängligt för datorer just nu",

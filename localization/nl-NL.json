@@ -387,6 +387,8 @@
   "@clio/playground:error-page-generic-body": "Probeer het opnieuw.",
   "@clio/playground:error-page-generic-title": "Er is iets misgegaan",
   "@clio/playground:error-page-module-unavailable-body": "Deze functie is helaas niet beschikbaar.",
+  "@clio/playground:error-page-module-unavailable-on-device-body": "Sorry, this feature isn't available. Try accessing from another device or browser.",
+  "@clio/playground:error-page-module-unavailable-on-device-title": "Can’t access",
   "@clio/playground:error-page-module-unavailable-title": "Geen toegang",
   "@clio/playground:error-page-no-mobile-media-type": "Geen ondersteuning voor mobiele apparaten",
   "@clio/playground:error-page-no-mobile-media-type-body": "Het maken van aangepaste modellen is momenteel alleen beschikbaar voor de desktop",
