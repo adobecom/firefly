@@ -710,26 +710,49 @@ async function loadFireflyHeaderComponents() {
 }
 
 async function loadPage() {
-  // eslint-disable-next-line no-unused-vars
-  const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
-  // eslint-disable-next-line no-unused-vars
-  const config = setConfig({ ...CONFIG, miloLibs });
-  loadFonts();
-  decorateIcons(document.querySelector('main'));
-  await decorateI18n(document.querySelector('main'));
-  buildAutoBlocks(document.querySelector('main'));
-  await loadArea();
-  loadProfile();
-  setTimeout(async () => {
-    await overrideUNAV();
-    await loadFireflyHeaderComponents();
-  }, 0);
-  setTimeout(() => {
-    headerModal();
-    loadMartech();
-    initAnalytics();
-    recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
-  }, 3000);
+  const overlay = document.createElement('div');
+  overlay.id = 'overlay';
+  document.body.appendChild(overlay);
+
+  const spinner = document.createElement('div');
+  spinner.id = 'spinner';
+  document.body.appendChild(spinner);
+
+  try {
+    // eslint-disable-next-line no-unused-vars
+    const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
+    // eslint-disable-next-line no-unused-vars
+    const config = setConfig({ ...CONFIG, miloLibs });
+    loadFonts();
+    decorateIcons(document.querySelector('main'));
+
+    buildAutoBlocks(document.querySelector('main'));
+    await loadArea();
+    await decorateI18n(document.querySelector('main'));
+
+    document.body.removeChild(spinner);
+    document.body.removeChild(overlay);
+
+    loadProfile();
+    setTimeout(async () => {
+      await overrideUNAV();
+      await loadFireflyHeaderComponents();
+    }, 0);
+    setTimeout(() => {
+      headerModal();
+      loadMartech();
+      initAnalytics().then(() => {
+        const pageName = document.querySelector('a.feds-navLink[aria-current="page"]').textContent;
+        recordRenderPageEvent(pageName, undefined);
+      }).catch((error) => {
+        console.error('Failed to initialize analytics:', error);
+      });
+    }, 3000);
+  } catch (error) {
+    console.error('Error loading page:', error);
+    document.body.removeChild(spinner);
+    document.body.removeChild(overlay);
+  }
 }
 
 loadPage();
