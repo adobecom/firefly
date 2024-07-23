@@ -271,7 +271,7 @@
   "@clio/playground:enterprise-firefly-image-3-dialog-primary-message": "Train your models with Firefly Image 3 Model for the latest features and capabilities.",
   "@clio/playground:enterprise-firefly-image-3-dialog-remind-me-again-cta": "다시 알려주세요",
   "@clio/playground:enterprise-firefly-image-3-dialog-reminder-secondary-message": "To continue using your existing models, you must retrain them with Image 3 Model by October 31, 2024.",
-  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly image Model 3 Model is now available",
+  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 모델을 지금 사용할 수 있습니다",
   "@clio/playground:enterprise-help-text-concept-id": "컨셉 필드에 모델의 주요 주제를 입력합니다. 예를 들어 모델이 반려견 스팟에서 훈련된 경우 스팟을 입력합니다.",
   "@clio/playground:enterprise-image-properties-caption": "캡션",
   "@clio/playground:enterprise-image-properties-label-generating-caption": "캡션 생성 중",
