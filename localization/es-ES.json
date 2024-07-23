@@ -271,7 +271,7 @@
   "@clio/playground:enterprise-firefly-image-3-dialog-primary-message": "Entrena tus modelos con el modelo Firefly Image 3 para probar las últimas funciones.",
   "@clio/playground:enterprise-firefly-image-3-dialog-remind-me-again-cta": "Recuérdamelo más tarde",
   "@clio/playground:enterprise-firefly-image-3-dialog-reminder-secondary-message": "To continue using your existing models, you must retrain them with Image 3 Model by <strong>October 31, 2024</strong>.",
-  "@clio/playground:enterprise-firefly-image-3-dialog-title": "El modelo Firefly Image 3 está disponible",
+  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 Model is now available",
   "@clio/playground:enterprise-help-text-concept-id": "Introduce el tema principal de tu modelo en el campo de concepto. Por ejemplo, si entrenaste el modelo con tu perro Spot, introduce “Spot”.",
   "@clio/playground:enterprise-image-properties-caption": "Pie de ilustración",
   "@clio/playground:enterprise-image-properties-label-generating-caption": "Generando pie de ilustración",

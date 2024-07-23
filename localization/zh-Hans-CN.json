@@ -271,7 +271,7 @@
   "@clio/playground:enterprise-firefly-image-3-dialog-primary-message": "使用 Firefly Image 3 模型​的​最新​功能​训练​您​的​模型。",
   "@clio/playground:enterprise-firefly-image-3-dialog-remind-me-again-cta": "再次​提醒​我",
   "@clio/playground:enterprise-firefly-image-3-dialog-reminder-secondary-message": "To continue using your existing models, you must retrain them with Image 3 Model by <strong>October 31, 2024</strong>.",
-  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 模型​现​已​可用",
+  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 Model is now available",
   "@clio/playground:enterprise-help-text-concept-id": "在​概念​字​段中​输入​模型​的​主题。​例如，​如果​您​的​模型​是在​小狗 Spot 上​训练​的，​则​输入 Spot。",
   "@clio/playground:enterprise-image-properties-caption": "题​注",
   "@clio/playground:enterprise-image-properties-label-generating-caption": "正在​生成​题​注",

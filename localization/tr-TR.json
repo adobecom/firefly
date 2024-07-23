@@ -271,7 +271,7 @@
   "@clio/playground:enterprise-firefly-image-3-dialog-primary-message": "En yeni özellikler için modellerinizi Firefly Image 3 modeliyle eğitin.",
   "@clio/playground:enterprise-firefly-image-3-dialog-remind-me-again-cta": "Sonra hatırlat",
   "@clio/playground:enterprise-firefly-image-3-dialog-reminder-secondary-message": "To continue using your existing models, you must retrain them with Image 3 Model by <strong>October 31, 2024</strong>.",
-  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 Modeli artık kullanılabilir",
+  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 Model is now available",
   "@clio/playground:enterprise-help-text-concept-id": "Konsept alanına modelinizin ana öznesini girin. Örneğin, modeliniz, köpeğiniz Spot ile eğitildiyse Spot girin.",
   "@clio/playground:enterprise-image-properties-caption": "Alt Yazı",
   "@clio/playground:enterprise-image-properties-label-generating-caption": "Resim yazısı oluşturuluyor",

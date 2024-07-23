@@ -271,7 +271,7 @@
   "@clio/playground:enterprise-firefly-image-3-dialog-primary-message": "Firefly Image 3 Model で​モデル​を​トレーニング​すると、​最新​の​機能​と​性能​を​活用​でき​ます。",
   "@clio/playground:enterprise-firefly-image-3-dialog-remind-me-again-cta": "後で​通知",
   "@clio/playground:enterprise-firefly-image-3-dialog-reminder-secondary-message": "To continue using your existing models, you must retrain them with Image 3 Model by <strong>October 31, 2024</strong>.",
-  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image Model 3 モデル​が​利用​可能​に",
+  "@clio/playground:enterprise-firefly-image-3-dialog-title": "Firefly Image 3 Model is now available",
   "@clio/playground:enterprise-help-text-concept-id": "コンセプト​フィールド​に​は​モデル​の​メイン​の​被写体​を​入力​し​ます。​例えば、​モデル​の​被写体​が​飼​って​いる​犬​の「​スポット」​で​ある​場合、「​スポット」​と​入力​し​ます。",
   "@clio/playground:enterprise-image-properties-caption": "キャプション",
   "@clio/playground:enterprise-image-properties-label-generating-caption": "キャプション​を​生成​中",
