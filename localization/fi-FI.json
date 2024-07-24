@@ -1207,7 +1207,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Tyylipaketti",
   "@clio/playground:text2image-propertyInspector-section-styles": "Tyylit",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Poista objektisommitelmakuva, jotta voit käyttää sommitelmaviitettä.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Objektisommitelmia ei tueta käytettäessä mukautettuja malleja. Jos haluat käyttää objektisommitelmia, vaihda Firefly Image 3 -malliin.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use Object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Poista sommitelmaviitekuva, jotta voit käyttää objektisommitelmia.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Lisää sommitelmaan objekti.",

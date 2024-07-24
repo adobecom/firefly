@@ -1207,7 +1207,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Style Kit",
   "@clio/playground:text2image-propertyInspector-section-styles": "Styles",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "To use composition reference, remove the object composite image.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use Object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "To use object composites, remove the composition reference image.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Add an object to composite.",

@@ -1207,7 +1207,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Stíluskészlet",
   "@clio/playground:text2image-propertyInspector-section-styles": "Stílusok",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "A kompozíciós referencia használatához távolítsa el az objektumkompozit képet.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Az objektumkompozitok nem támogatottak egyéni modellek használata esetén. Az objektumkompozitok használatához váltson Firefly Image 3 modellre.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use Object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Az objektumkompozitok használatához távolítsa el a kompozíciós referenciaképet.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Tárgy hozzáadása kompozithoz.",
