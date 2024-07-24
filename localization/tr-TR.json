@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Medyanız en az 5 saniye uzunluğunda olmalıdır. Lütfen yeni bir dosya yükleyin.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Dosya formatı desteklenmiyor. Lütfen yeni bir dosya yükleyin.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Videonuzun kare hızı saniyede 60 kareden az olmalıdır. Lütfen yeni bir dosya yükleyin.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Videonuzun çözünürlüğü 4K'den düşük olmalıdır. Lütfen yeni bir dosya yükleyin.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Dosyanızın sesi yok. Lütfen yeni bir dosya yükleyin.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Dosya okunamıyor. Lütfen yeni bir dosya yükleyin.",
   "@clio/playground:autodub-home-page-queue": "Sıra",

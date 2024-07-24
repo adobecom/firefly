@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Plik multimedialny musi trwać co najmniej 5 sekund. Prześlij nowy plik.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Ten format pliku nie jest obsługiwany. Prześlij nowy plik.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Częstotliwość odświeżania filmu musi wynosić mniej niż 60 kl./s. Prześlij nowy plik.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Rozdzielczość filmu musi być mniejsza niż 4K. Prześlij nowy plik.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Rozdzielczość filmu powinna być mniejsza niż 4K. Prześlij nowy plik.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Plik nie ma dźwięku. Prześlij nowy plik.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Nie można odczytać pliku. Prześlij nowy plik.",
   "@clio/playground:autodub-home-page-queue": "Kolejka",

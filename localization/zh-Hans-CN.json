@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "您​的​媒体​时​长​必须​至少 5 秒。​请​上​传​新​文件。",
   "@clio/playground:autodub-home-page-invalid-file-type": "不​支持​此​文件​格式。​请​上​传​新的​文件。",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "您​的​视频​帧​率​必须​小​于​每秒 60 帧。​请​上​传​新​文件。",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "您​的​视频​分辨​率​必须​小​于 4K。​请​上​传​新的​文件。",
   "@clio/playground:autodub-home-page-missing-audio-track": "您​的​文件​没有​音​频。​请​上​传​新的​文件。",
   "@clio/playground:autodub-home-page-missing-file-metadata": "无法​读​取​文件。​请​上​传​新​文件。",
   "@clio/playground:autodub-home-page-queue": "列​队",

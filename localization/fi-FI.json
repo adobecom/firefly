@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Mediatiedoston on oltava vähintään 5 sekuntia pitkä. Lataa uusi tiedosto.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Tiedostomuotoa ei tueta. Lataa uusi tiedosto.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Videon kuvataajuuden on oltava alle 60 kuvaa/s. Lataa uusi tiedosto.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Videon resoluution on oltava alle 4K. Lataa uusi tiedosto.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Tiedostossa ei ole ääntä. Lataa uusi tiedosto.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Tiedostoa ei voi lukea. Lataa uusi tiedosto.",
   "@clio/playground:autodub-home-page-queue": "Jono",

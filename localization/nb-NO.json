@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Mediet må vare i minst 5 sekunder. Last opp en ny fil.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Filformatet støttes ikke. Last opp en ny fil.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Bildefrekvensen til videoen må være på mindre enn 60 bilder per sekund. Last opp en ny fil.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Videooppløsningen må være mindre enn 4K. Last opp en ny fil.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Filen har ingen lyd. Last opp en ny fil.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Kan ikke lese filen. Last opp en ny fil.",
   "@clio/playground:autodub-home-page-queue": "Kø",

@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Deine Mediendatei muss mindestens 5 Sekunden lang sein. Lade eine neue Datei hoch.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Dateiformat wird nicht unterstützt. Lade eine neue Datei hoch.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Die Bildrate deines Videos muss weniger als 60 Bilder pro Sekunde betragen. Lade eine neue Datei hoch.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Die Auflösung deines Videos muss weniger als 4K betragen. Lade eine neue Datei hoch.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Deine Datei hat kein Audio. Lade eine neue Datei hoch.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Datei kann nicht gelesen werden. Lade eine neue Datei hoch.",
   "@clio/playground:autodub-home-page-queue": "Warteschlange",

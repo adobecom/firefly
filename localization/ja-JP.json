@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "メディア​は 5 秒​以上​で​ある​必要​が​あり​ます。​新しい​ファイル​を​アップ​ロード​し​て​くだ​さい。",
   "@clio/playground:autodub-home-page-invalid-file-type": "ファイル​の​形式​が​サポート​さ​れ​てい​ま​せん。​新しい​ファイル​を​アップ​ロード​し​て​くだ​さい。",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "動画​の​フレーム​レート​は 60 フレーム/​秒​未満​に​する​必要​が​あり​ます。​新しい​ファイル​を​アップ​ロード​し​て​くだ​さい。",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "動画​の​解像度​は 4K 未満​に​する​必要​が​あり​ます。​新しい​ファイル​を​アップ​ロード​し​て​くだ​さい。",
   "@clio/playground:autodub-home-page-missing-audio-track": "ファイル​に​音声​が​ありま​せん。​新しい​ファイル​を​アップ​ロード​し​て​くだ​さい。",
   "@clio/playground:autodub-home-page-missing-file-metadata": "ファイル​を​読み​取​れ​ま​せん。​新しい​ファイル​を​アップ​ロード​し​て​くだ​さい。",
   "@clio/playground:autodub-home-page-queue": "キュー",

@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Vaše média by měla být delší než 5 sekund. Zkuste nahrát nový soubor.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Formát souboru není podporován. Nahrajte nový soubor.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Snímkový kmitočet videa musí být menší než 60 sn./s. Nahrajte nový soubor.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Rozlišení videa musí být nižší než 4K. Nahrajte nový soubor.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Váš soubor nemá zvuk. Zkuste nahrát nový soubor.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Nelze přečíst soubor. Nahrajte nový soubor.",
   "@clio/playground:autodub-home-page-queue": "Fronta",

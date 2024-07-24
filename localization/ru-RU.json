@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Продолжительность медиафайла должна быть более 5 секунд. Добавьте другой файл.",
   "@clio/playground:autodub-home-page-invalid-file-type": "Формат файла не поддерживается. Добавьте другой файл.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "Частота кадров в видео должна быть менее 60 кадр/с. Добавьте другой файл.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "Видео должно иметь разрешение не более 4K. Добавьте другой файл.",
   "@clio/playground:autodub-home-page-missing-audio-track": "В файле нет звука. Добавьте другой файл.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Невозможно прочесть файл. Добавьте другой файл.",
   "@clio/playground:autodub-home-page-queue": "Очередь",

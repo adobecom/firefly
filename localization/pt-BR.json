@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Sua mídia deve ter pelo menos 5 segundos de duração. Faça upload de um novo arquivo.",
   "@clio/playground:autodub-home-page-invalid-file-type": "O formato do arquivo é incompatível. Faça upload de um novo arquivo.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "A taxa de quadros do seu vídeo deve ser inferior a 60 quadros por segundo. Faça upload de um novo arquivo.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "A resolução de seu vídeo deve ser inferior a 4K. Faça upload de um novo arquivo.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Seu arquivo não tem áudio. Faça upload de um novo arquivo.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Não foi possível ler o arquivo. Faça upload de um novo arquivo.",
   "@clio/playground:autodub-home-page-queue": "Fila",

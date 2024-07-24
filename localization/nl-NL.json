@@ -90,7 +90,7 @@
   "@clio/playground:autodub-home-page-invalid-file-duration-min": "Je media moet ten minste 5 seconden lang zijn. Upload een nieuw bestand.",
   "@clio/playground:autodub-home-page-invalid-file-type": "De indeling van het bestand wordt niet ondersteund. Upload een nieuw bestand.",
   "@clio/playground:autodub-home-page-invalid-frame-rate": "De framesnelheid van je video moet minder dan 60 frames per seconde zijn. Upload een nieuw bestand.",
-  "@clio/playground:autodub-home-page-invalid-video-resolution": "Your video resolution must be less than 4K. Please upload a new file.",
+  "@clio/playground:autodub-home-page-invalid-video-resolution": "De resolutie van je video moet minder zijn dan 4K. Upload een nieuw bestand.",
   "@clio/playground:autodub-home-page-missing-audio-track": "Je bestand bevat geen audio. Upload een nieuw bestand.",
   "@clio/playground:autodub-home-page-missing-file-metadata": "Kan bestand niet lezen. Upload een nieuw bestand.",
   "@clio/playground:autodub-home-page-queue": "Wachtrij",
