@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable quote-props */
 /* eslint-disable quotes */
@@ -16,7 +17,7 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
-import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
+import { setLibs, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -498,6 +499,39 @@ export function decorateExternalLink(element) {
   });
 }
 
+function buildTooltip(main) {
+  const icons = main.querySelectorAll('span[class*="icon-"]');
+
+  icons.forEach(async (icon) => {
+    const wrapper = icon.closest('em');
+    if (!wrapper) return;
+    wrapper.className = 'tooltip-wrapper';
+    const conf = wrapper.textContent.split('|');
+    const tooltipKey = conf.pop().trim().replace('$', '');
+    const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
+    icon.dataset.tooltip = tooltipText;
+    icon.setAttribute('alt', tooltipText);
+    wrapper.parentElement.replaceChild(icon, wrapper);
+    icon.addEventListener('mouseenter', () => {
+      const tooltip = document.createElement('span');
+      tooltip.classList.add('tooltip');
+      tooltip.innerHTML = tooltipText;
+      icon.parentNode.appendChild(tooltip);
+    });
+
+    icon.addEventListener('mouseleave', () => {
+      const tooltip = icon.parentNode.querySelector('.tooltip');
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+  });
+}
+
+export function buildAutoBlocks(main) {
+  buildTooltip(main);
+}
+
 async function loadUpgradeModal() {
   const locale = getLocale() || 'en-US';
   let upgradeUrl = (environment === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
@@ -690,7 +724,13 @@ async function loadFireflyHeaderComponents() {
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
-    gnav.innerHTML = await resp.text();
+    const html = await resp.text();
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    while (tempDiv.firstChild) {
+      gnav.appendChild(tempDiv.firstChild);
+    }
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
@@ -727,8 +767,12 @@ async function loadPage() {
   setTimeout(() => {
     headerModal();
     loadMartech();
-    initAnalytics();
-    recordRenderPageEvent(document.querySelector('a.feds-navLink[aria-current="page"]').textContent, undefined);
+    initAnalytics().then(() => {
+      const pageName = document.querySelector('a.feds-navLink[aria-current="page"]').textContent;
+      recordRenderPageEvent(pageName, undefined);
+    }).catch((error) => {
+      console.error('Failed to initialize analytics:', error);
+    });
   }, 3000);
 }
 

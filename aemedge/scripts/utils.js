@@ -11,8 +11,6 @@
  * governing permissions and limitations under the License.
  */
 
-import { getI18nValue } from './scripts.js';
-
 const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
 const FEATURES_API_PROD = 'https://p13n.adobe.io';
 
@@ -43,39 +41,6 @@ export const [setLibs, getLibs] = (() => {
  * ------------------------------------------------------------
  */
 const DEFAULT_SIZE = '2000';
-
-function buildTooltip(main) {
-  const icons = main.querySelectorAll('span[class*="icon-"]');
-
-  icons.forEach(async (icon) => {
-    const wrapper = icon.closest('em');
-    if (!wrapper) return;
-    wrapper.className = 'tooltip-wrapper';
-    const conf = wrapper.textContent.split('|');
-    const tooltipKey = conf.pop().trim().replace('$', '');
-    const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
-    icon.dataset.tooltip = tooltipText;
-    icon.setAttribute('alt', tooltipText);
-    wrapper.parentElement.replaceChild(icon, wrapper);
-    icon.addEventListener('mouseenter', () => {
-      const tooltip = document.createElement('span');
-      tooltip.classList.add('tooltip');
-      tooltip.innerHTML = tooltipText;
-      icon.parentNode.appendChild(tooltip);
-    });
-
-    icon.addEventListener('mouseleave', () => {
-      const tooltip = icon.parentNode.querySelector('.tooltip');
-      if (tooltip) {
-        tooltip.remove();
-      }
-    });
-  });
-}
-
-export function buildAutoBlocks(main) {
-  buildTooltip(main);
-}
 
 export function decorateArea(area = document) {
   const eagerLoad = (parent, selector) => {

@@ -82,7 +82,6 @@ export default async function decorate(block) {
         dialog.close();
       });
       const legalBanner = document.querySelector('.legal-banner');
-      console.log('legalBanner', legalBanner);
       legalBanner.remove();
     });
   });

@@ -1,5 +1,6 @@
 /* stylelint-disable color-function-notation */
-  /* overlay style */
+
+/* overlay style */
   .section.overlay > div:nth-last-of-type(2) {
     position: absolute;
     min-width: 100%;
@@ -80,7 +81,6 @@
     left: 0;
     bottom: 0;
     right: 0;
-    /* stylelint-disable-next-line color-function-notation */
     background: rgba(0, 0, 0, 64.7%);
     color: white;
     padding: 10px;
