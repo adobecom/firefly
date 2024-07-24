@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Chcete-li použít referenční kompozici, odstraňte obrázek kompozice objektů.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Použití vlastních modelů nepodporuje kompozice objektů. Chcete-li je použít, přepněte na model Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Chcete-li použít kompozici objektů, odstraňte referenční obrázek kompozice.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Chcete-li použít kompozici objektů, přepněte na model Image 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Přidání objektu do kompozice.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "Pokud je použita kompozice objektů, jiné možnosti nástroje text na obrázek jsou vypnuty. Odstraňte obrázek objektu a můžete zobrazit všechny možnosti.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Přidejte referenční obrázek, se kterým se má shodovat obrys a hloubka",

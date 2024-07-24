@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "To use composition reference, remove the object composite image.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "To use object composites, remove the composition reference image.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "To use object composites, switch to Image Model 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Add an object to composite.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "If an object composite is applied, other text-to-image options are turned off. Remove the object image to show all options.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Add a reference image to match its outline and depth",

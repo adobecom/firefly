@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Pour utiliser une référence de composition, supprimez l’image de scène composite.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Les modèles personnalisés ne permettent pas l’utilisation de scènes composites. Pour utiliser des scènes composites, basculez vers le modèle Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Pour utiliser des scènes composites, supprimez l’image de référence de composition.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Pour utiliser des scènes composites, basculez vers le modèle Image 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Ajouter un objet à une scène composite",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "L’application d’une scène composite désactive les autres options de la fonctionnalité Du texte à l’image. Supprimez l’image de l’objet pour afficher toutes les options.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Ajouter une image de référence pour assurer la cohérence avec son contour et sa profondeur",

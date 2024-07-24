@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Для використання зразка композиції видаліть складене зображення об’єкта.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Композиції об’єктів не підтримуються при використанні власних моделей. Щоб використовувати композиції об’єктів, перейдіть на модель Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Для використання композиції об’єктів видаліть зображення зі зразком композиції.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Для використання композиції об’єктів перейдіть на модель зображень 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Додайте об’єкт до композиції.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "Якщо застосовано композицію об’єктів, інші функції перетворення тексту на зображення вимкнено. Видаліть зображення об’єкта, щоб побачити всі функції.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Додайте референсне зображення, щоб зіставити контур і глибину",

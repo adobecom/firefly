@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Fjern objektsammensætningsbilledet for at bruge kompositionsreference.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Objektsammensætninger understøttes ikke ved hjælp af brugerdefinerede modeller. Skift til Firefly Image 3-model for at bruge objektsammensætninger.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Fjern kompositionsreferencebilledet for at bruge objektsammensætninger.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Skift til Image 3-model for at bruge objektsammensætninger.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Føj et objekt til en sammensætning.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "Hvis der anvendes en objektsammensætning, slås andre tekst til billede-indstillinger fra. Fjern objektbilledet for at se alle indstillinger.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Tilføj et referencebillede for at matche dets kontur og dybde",

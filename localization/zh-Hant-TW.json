@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "若要​使用​構圖​參考​功能，​請​移除​物件​合成​影像。",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "若要​使用​物件​合成​功能，​請​移除​構圖​參考​影像。",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "若要​使用​物件​合成​功能，​請​切換​為 Image 模型 3。",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "新增​物件​至​合成。",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "若​已​套用​物件​合成，「​以​文字​建立​影像」​的​其他​選項​會​關閉。​若要​顯示​所有​選項，​請​移除​物件​影像。",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "新增​參考​影像​以​符合​其​輪廓​和​深度",

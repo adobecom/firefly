@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Verwijder de afbeelding voor objectcompositie om compositiereferentie te gebruiken.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Objectcomposities wordt niet ondersteund bij gebruik van aangepaste modellen. Schakel over naar Firefly-model Image 3 als je Objectcomposities wilt gebruiken.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Verwijder de referentieafbeelding voor compositie om objectcomposities te gebruiken.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Schakel over naar model Image 3 als je objectcomposities wilt gebruiken.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Voeg een object toe aan de compositie.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "Als een objectcompositie wordt toegepast, worden andere opties voor Tekst naar afbeelding uitgeschakeld. Verwijder de objectafbeelding om alle opties weer te geven.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Voeg een referentieafbeelding toe om de contouren en diepte mee af te stemmen",

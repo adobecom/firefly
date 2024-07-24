@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Om du vill använda referensbilden för sammansättning tar du bort bilden med sammansatta objekt.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Sammansatta objekt stöds inte med anpassade modeller. Växla till Firefly Image 3-modellen för att använda sammansatta objekt.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Om du vill använda sammansatta objekt tar du bort referensbilden för sammansättning.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Om du vill använda sammansatta objekt växlar du till Image-modell 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Lägg till ett objekt i sammansättningen.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "Om ett sammansatt objekt används stängs andra Text till bild-alternativ av. Ta bort objektbilden för att visa alla alternativ.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Lägg till en referensbild för att matcha kontur och djup",

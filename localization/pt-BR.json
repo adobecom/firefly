@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Para usar a referência de composição, remova a imagem de composições de objetos.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Composições de objeto não são compatíveis com o uso de modelos personalizados. Para usar composições de objeto, alterne para o Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Para usar composições de objetos, remova a imagem de referência da composição.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Para usar composições de objeto, alterne para o Image Model 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Object composites isn't supported using Firefly Image 2 Model. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Adicionar um objeto à composição.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "Se uma composição de objeto for aplicada, outras opções de texto para imagem serão desativadas. Remova a imagem do objeto para mostrar todas as opções.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Adicione uma imagem de referência para combinar com o contorno e a profundidade",

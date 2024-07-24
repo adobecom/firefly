@@ -1209,7 +1209,7 @@
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Aby użyć obrazu referencyjnego kompozycji, usuń obraz kompozycji z obiektów.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Kompozycje z obiektów nie są obsługiwane przez modele niestandardowe. Aby użyć kompozycji z obiektów, przejdź na model Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Aby użyć kompozycji z obiektów, usuń obraz referencyjny kompozycji.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Aby użyć kompozycji z obiektów, przełącz się na model Image 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Kompozyty obiektowe nie są obsługiwane przy użyciu modelu Firefly Image 2. Aby użyć kompozytów obiektowych, przełącz się na Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Dodaj obiekt do kompozycji.",
   "@clio/playground:text2image-propertyInspector-structure-object-warning-help-text": "W przypadku zastosowania kompozycji z obiektów inne opcje funkcji Tekst na obraz są wyłączone. Usuń obraz obiektu, aby wyświetlić wszystkie opcje.",
   "@clio/playground:text2image-propertyInspector-structure-reference-tooltip-label": "Dodaj obraz referencyjny, aby dopasować do niego kontur i głębię",
