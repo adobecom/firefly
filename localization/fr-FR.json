@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "File d’attente",
   "@clio/playground:autodub-home-page-queue-description": "Les fichiers seront définitivement supprimés au bout de 7 jours",
   "@clio/playground:autodub-home-page-sample-video-heading": "Exemple de vidéo",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Format vidéo d’entrée : .mp4, .mov, jusqu’à 60 i/s et 4K<br></br>Format audio d’entrée : .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Glisser-déposer votre fichier",
   "@clio/playground:autodub-home-page-title-mobile": "Chargez une vidéo ou un fichier audio pour traduire les paroles dans une autre langue.",
   "@clio/playground:autodub-home-page-upload-info-label": "Pour obtenir de meilleurs résultats, charger une video avec un minimum de mouvement et de bruit de fond",

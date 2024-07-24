@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Cola",
   "@clio/playground:autodub-home-page-queue-description": "Los archivos se eliminarán de forma permanente tras 7 días",
   "@clio/playground:autodub-home-page-sample-video-heading": "Vídeo de muestra",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "\"Formato de vídeo de entrada: .mp4, .mov, hasta 60 fps y hasta 4K<br></br>Formato de audio de entrada: .mp3, .wav, .aac\"",
   "@clio/playground:autodub-home-page-title": "Arrastra y suelta el archivo",
   "@clio/playground:autodub-home-page-title-mobile": "Carga vídeos o audios para traducirlos a un nuevo idioma",
   "@clio/playground:autodub-home-page-upload-info-label": "Para obtener mejores resultados, carga un vídeo que tenga movimiento y ruido de fondo mínimos",

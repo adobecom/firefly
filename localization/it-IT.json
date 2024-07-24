@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Coda",
   "@clio/playground:autodub-home-page-queue-description": "I file verranno eliminati in modo definitivo dopo 7 giorni",
   "@clio/playground:autodub-home-page-sample-video-heading": "Video di esempio",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Formato video in ingresso: .mp4, .mov, fomp a 60 fps, fino a 4K<br></br><br></br>Formato audio in ingresso: .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Trascina il file",
   "@clio/playground:autodub-home-page-title-mobile": "Carica video o audio e traduci in una nuova lingua.",
   "@clio/playground:autodub-home-page-upload-info-label": "Per risultati ottimali, carica un video con rumori di fondo e movimenti minimi",

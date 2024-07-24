@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Очередь",
   "@clio/playground:autodub-home-page-queue-description": "Файлы будут безвозвратно удалены через 7 дней",
   "@clio/playground:autodub-home-page-sample-video-heading": "Образец видео",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Формат входного видео: .mp4, .mov, до 60 кадр/с, до 4K<br></br>Формат входного аудио: .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Перетащите файл",
   "@clio/playground:autodub-home-page-title-mobile": "Добавьте видео или аудио, чтобы перевести его на другой язык",
   "@clio/playground:autodub-home-page-upload-info-label": "Для получения наилучших результатов добавьте видео с минимальным фоновым шумом и движением",

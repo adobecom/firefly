@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Wachtrij",
   "@clio/playground:autodub-home-page-queue-description": "Bestanden worden na 7 dagen definitief verwijderd",
   "@clio/playground:autodub-home-page-sample-video-heading": "Voorbeeldvideo",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Video-indelingen: .mp4, .mov, tot 60 fps, tot 4K<br></br>Audio-indelingen: .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Je bestand slepen en neerzetten",
   "@clio/playground:autodub-home-page-title-mobile": "Video- of audiomateriaal uploaden om het naar een andere taal te vertalen",
   "@clio/playground:autodub-home-page-upload-info-label": "Upload voor het beste resultaat een video met zo min mogelijk achtergrondruis en bewegingen",

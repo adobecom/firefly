@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "キュー",
   "@clio/playground:autodub-home-page-queue-description": "ファイル​は 7 日​後に​完全​に​削除​さ​れ​ます",
   "@clio/playground:autodub-home-page-sample-video-heading": "サンプル​動画",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "入力​動画​の​形式 : .mp4、.mov、​最大 60 fps、​最大 4K<br></br>​入力​音声​の​形式 : .mp3、.wav、.aac",
   "@clio/playground:autodub-home-page-title": "ファイル​を​ドラッグ＆​ドロップ",
   "@clio/playground:autodub-home-page-title-mobile": "動画​や​音声​を​アップ​ロード​し​て​別​の​言語​に​翻訳",
   "@clio/playground:autodub-home-page-upload-info-label": "最適​な​結果​を​得る​に​は、​背景​の​ノイズ​と​動き​を​最小限​に​した​動画​を​アップ​ロード​し​て​くだ​さい",
