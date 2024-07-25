@@ -1203,7 +1203,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "スタイル​キット",
   "@clio/playground:text2image-propertyInspector-section-styles": "スタイル",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "構成​参照​を​使用​する​に​は、​オブジェクト​の​合成​画像​を​削除​し​ます。",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "カスタム​モデル​を​使用​した​オブジェクト​の​合成​は​サポート​さ​れ​てい​ま​せん。​オブジェクト​の​合成​を​使用​する​に​は、Firefly Image 3 モデル​に​切り替え​て​くだ​さい。",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "オブジェクト​の​合成​を​使用​する​に​は、​構成​参照​画像​を​削除​し​ます。",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "オブジェクト​の​合成​は、Firefly Image 2 モデル​では​サポート​さ​れ​てい​ま​せん。Firefly Image 3 モデル​に​切り替え​て​くだ​さい。",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "オブジェクト​を​合成​に​追加​し​ます。",

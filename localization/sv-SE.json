@@ -1203,7 +1203,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Stiluppsättning",
   "@clio/playground:text2image-propertyInspector-section-styles": "Stilar",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Om du vill använda referensbilden för sammansättning tar du bort bilden med sammansatta objekt.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Sammansatta objekt stöds inte med anpassade modeller. Växla till Firefly Image 3-modellen för att använda sammansatta objekt.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Om du vill använda sammansatta objekt tar du bort referensbilden för sammansättning.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Sammansatta objekt stöds inte med Firefly Image 2-modellen. Växla till Firefly Image 3-modellen för att använda sammansatta objekt.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Lägg till ett objekt i sammansättningen.",

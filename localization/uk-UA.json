@@ -1203,7 +1203,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Набір стилю",
   "@clio/playground:text2image-propertyInspector-section-styles": "Стилі",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Для використання зразка композиції видаліть складене зображення об’єкта.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Композиції об’єктів не підтримуються при використанні власних моделей. Щоб використовувати композиції об’єктів, перейдіть на модель Firefly Image 3.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Для використання композиції об’єктів видаліть зображення зі зразком композиції.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Композиції об’єктів не підтримуються при використанні моделі Firefly Image 2. Щоб використовувати композиції об’єктів, перейдіть на модель Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Додайте об’єкт до композиції.",
