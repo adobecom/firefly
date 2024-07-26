@@ -1203,7 +1203,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Stijlkit",
   "@clio/playground:text2image-propertyInspector-section-styles": "Stijlen",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Verwijder de afbeelding voor objectcompositie om compositiereferentie te gebruiken.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Objectcomposities wordt niet ondersteund bij gebruik van aangepaste modellen. Schakel over naar Firefly-model Image 3 als je Objectcomposities wilt gebruiken.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Verwijder de referentieafbeelding voor compositie om objectcomposities te gebruiken.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Objectcomposities wordt niet ondersteund bij gebruik van Firefly-model Image 2. Schakel over naar Firefly-model Image 3 als je Objectcomposities wilt gebruiken.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Voeg een object toe aan de compositie.",

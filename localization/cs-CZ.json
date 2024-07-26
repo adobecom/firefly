@@ -1203,7 +1203,7 @@
   "@clio/playground:text2image-propertyInspector-section-style-kit": "Stylová sada",
   "@clio/playground:text2image-propertyInspector-section-styles": "Styly",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Chcete-li použít referenční kompozici, odstraňte obrázek kompozice objektů.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Object composites isn't supported using custom models. To use object composites, switch to Firefly Image 3 Model.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Použití vlastních modelů nepodporuje kompozice objektů. Chcete-li je použít, přepněte na model Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Chcete-li použít kompozici objektů, odstraňte referenční obrázek kompozice.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Použití modelu Firefly Image 2 nepodporuje kompozice objektů. Chcete-li je použít, přepněte na model Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Přidání objektu do kompozice.",
