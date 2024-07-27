@@ -1204,6 +1204,7 @@
   "@clio/playground:text2image-propertyInspector-section-styles": "스타일",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "합성 참조를 사용하려면 오브젝트 합성 이미지를 제거하세요.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "사용자 정의 모델을 사용하면 오브젝트 합성이 지원되지 않습니다. 오브젝트 합성을 사용하려면 Firefly Image 3 모델로 전환하세요.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models-preview-and-test": "Object composites isn't supported in Preview and test.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "오브젝트 합성을 사용하려면 합성 참조 이미지를 제거하세요.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Firefly Image 2 모델을 사용하면 오브젝트 합성이 지원되지 않습니다. 오브젝트 합성을 사용하려면 Firefly Image 3 모델로 전환하세요.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "오브젝트를 합성에 추가",
