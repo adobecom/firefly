@@ -1,18 +1,19 @@
 /* eslint-disable no-console */
-import { getMetadata } from './aem.js';
+import { getLibs, getEnvironment } from './utils.js';
 
-export function initAnalytics() {
+export async function initAnalytics() {
+  const { getConfig } = await import(`${getLibs()}/utils/utils.js`);
+  const { replaceKey } = await import(`${getLibs()}/features/placeholders.js`);
+
   const DUNAMIS_API_URL_STAGE = 'https://cc-api-data-stage.adobe.io/ingest';
   const DUNAMIS_API_URL_PROD = 'https://cc-api-data.adobe.io/ingest';
-  const DUNAMIS_PROJECT_KEY = 'genai-web-service';
-  const DUNAMIS_API_KEY = 'genai-web-service';
-
-  const buildMode = getMetadata('buildmode');
+  const DUNAMIS_PROJECT_KEY = await replaceKey('dunamis_project_key', getConfig());
+  const DUNAMIS_API_KEY = await replaceKey('dunamis_api_key', getConfig());
 
   let url;
-  if (buildMode === 'prod') {
+  if (getEnvironment() === 'prod') {
     url = DUNAMIS_API_URL_PROD;
-  } else if (buildMode === 'stage') {
+  } else if (getEnvironment() === 'stage') {
     url = DUNAMIS_API_URL_STAGE;
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable quote-props */
 /* eslint-disable quotes */
@@ -16,7 +17,7 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
-import { setLibs, buildAutoBlocks, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
+import { setLibs, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -221,9 +222,9 @@ export async function overrideSignIn() {
         'dt': darkMode,
         'redirect_uri': window.location.href,
       };
+
       if (searchParams.get('disable_local_msw') === 'true') {
-        // eslint-disable-next-line dot-notation
-        susiAuthParams['disable_local_msw'] = 'true';
+        susiAuthParams.disable_local_msw = 'true';
       }
 
       const susiSentryTag = `<susi-sentry 
@@ -241,8 +242,17 @@ export async function overrideSignIn() {
       susiLightEl.config = susiConfig;
       susiLightEl.authParams = susiAuthParams;
       main.prepend(susiSentryDiv);
+
+      // Remove existing listeners to prevent duplicates
+      susiLightEl.removeEventListener('on-token', onToken);
+      susiLightEl.removeEventListener('on-auth-code', onAuthCode);
+      susiLightEl.removeEventListener('on-auth-failed', onAuthFailed);
+      susiLightEl.removeEventListener('on-error', onError);
+      susiLightEl.removeEventListener('on-load', onSentryLoad);
+      susiLightEl.removeEventListener('on-provider-clicked', onProviderClicked);
+      susiLightEl.removeEventListener('redirect', onRedirect);
+
       // Register event listeners for susi-sentry
-      // susiLightEl.addEventListener('on-message', onMessage);
       susiLightEl.addEventListener('on-token', onToken);
       susiLightEl.addEventListener('on-auth-code', onAuthCode);
       susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
@@ -251,20 +261,32 @@ export async function overrideSignIn() {
       susiLightEl.addEventListener('on-provider-clicked', onProviderClicked);
       susiLightEl.addEventListener('redirect', onRedirect);
 
-      await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-      // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-      await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
+      try {
+        await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
+        await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
+      } catch (scriptLoadError) {
+        console.error('Error loading scripts:', scriptLoadError);
+        return;
+      }
+
       window.addEventListener('click', (e) => {
-        // if sign-in modal open and user clicks out of it, close the modal
-        const isClickInsideModal = susiLightEl.contains(e.target);
+        // Ensure susiLightEl and profileButton are defined before accessing properties
         const profileButton = document.querySelector('#unav-profile');
+        if (!susiLightEl || !profileButton) return;
+
+        // If sign-in modal open and user clicks out of it, close the modal
+        const isClickInsideModal = susiLightEl.contains(e.target);
         const isClickOnProfile = profileButton.contains(e.target);
-        if (susiLightEl.checkVisibility() && !isClickInsideModal && !isClickOnProfile) susiSentryDiv.classList.add('hidden');
-        if (!susiLightEl.checkVisibility() && isClickOnProfile) susiSentryDiv.classList.remove('hidden');
+        if (susiLightEl.checkVisibility() && !isClickInsideModal && !isClickOnProfile) {
+          susiSentryDiv.classList.add('hidden');
+        }
+        if (!susiLightEl.checkVisibility() && isClickOnProfile) {
+          susiSentryDiv.classList.remove('hidden');
+        }
       });
     }
   } catch (e) {
-    console.error(e);
+    console.error('An error occurred in overrideSignIn:', e);
   }
 }
 
@@ -498,6 +520,39 @@ export function decorateExternalLink(element) {
   });
 }
 
+function buildTooltip(main) {
+  const icons = main.querySelectorAll('span[class*="icon-"]');
+
+  icons.forEach(async (icon) => {
+    const wrapper = icon.closest('em');
+    if (!wrapper) return;
+    wrapper.className = 'tooltip-wrapper';
+    const conf = wrapper.textContent.split('|');
+    const tooltipKey = conf.pop().trim().replace('$', '');
+    const tooltipText = await getI18nValue(tooltipKey) || tooltipKey;
+    icon.dataset.tooltip = tooltipText;
+    icon.setAttribute('alt', tooltipText);
+    wrapper.parentElement.replaceChild(icon, wrapper);
+    icon.addEventListener('mouseenter', () => {
+      const tooltip = document.createElement('span');
+      tooltip.classList.add('tooltip');
+      tooltip.innerHTML = tooltipText;
+      icon.parentNode.appendChild(tooltip);
+    });
+
+    icon.addEventListener('mouseleave', () => {
+      const tooltip = icon.parentNode.querySelector('.tooltip');
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+  });
+}
+
+export function buildAutoBlocks(main) {
+  buildTooltip(main);
+}
+
 async function loadUpgradeModal() {
   const locale = getLocale() || 'en-US';
   let upgradeUrl = (environment === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
@@ -690,7 +745,13 @@ async function loadFireflyHeaderComponents() {
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
     const gnav = document.createElement('div');
-    gnav.innerHTML = await resp.text();
+    const html = await resp.text();
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    while (tempDiv.firstChild) {
+      gnav.appendChild(tempDiv.firstChild);
+    }
     decorateFireflyLogo(gnav);
     loadFireflyUtils(gnav);
   }
@@ -710,49 +771,30 @@ async function loadFireflyHeaderComponents() {
 }
 
 async function loadPage() {
-  const overlay = document.createElement('div');
-  overlay.id = 'overlay';
-  document.body.appendChild(overlay);
-
-  const spinner = document.createElement('div');
-  spinner.id = 'spinner';
-  document.body.appendChild(spinner);
-
-  try {
-    // eslint-disable-next-line no-unused-vars
-    const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
-    // eslint-disable-next-line no-unused-vars
-    const config = setConfig({ ...CONFIG, miloLibs });
-    loadFonts();
-    decorateIcons(document.querySelector('main'));
-
-    buildAutoBlocks(document.querySelector('main'));
-    await loadArea();
-    await decorateI18n(document.querySelector('main'));
-
-    document.body.removeChild(spinner);
-    document.body.removeChild(overlay);
-
-    loadProfile();
-    setTimeout(async () => {
-      await overrideUNAV();
-      await loadFireflyHeaderComponents();
-    }, 0);
-    setTimeout(() => {
-      headerModal();
-      loadMartech();
-      initAnalytics().then(() => {
-        const pageName = document.querySelector('a.feds-navLink[aria-current="page"]').textContent;
-        recordRenderPageEvent(pageName, undefined);
-      }).catch((error) => {
-        console.error('Failed to initialize analytics:', error);
-      });
-    }, 3000);
-  } catch (error) {
-    console.error('Error loading page:', error);
-    document.body.removeChild(spinner);
-    document.body.removeChild(overlay);
-  }
+  // eslint-disable-next-line no-unused-vars
+  const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
+  // eslint-disable-next-line no-unused-vars
+  const config = setConfig({ ...CONFIG, miloLibs });
+  loadFonts();
+  decorateIcons(document.querySelector('main'));
+  await decorateI18n(document.querySelector('main'));
+  buildAutoBlocks(document.querySelector('main'));
+  await loadArea();
+  loadProfile();
+  setTimeout(async () => {
+    await overrideUNAV();
+    await loadFireflyHeaderComponents();
+  }, 0);
+  setTimeout(() => {
+    headerModal();
+    loadMartech();
+    initAnalytics().then(() => {
+      const pageName = document.querySelector('a.feds-navLink[aria-current="page"]').textContent;
+      recordRenderPageEvent(pageName, undefined);
+    }).catch((error) => {
+      console.error('Failed to initialize analytics:', error);
+    });
+  }, 3000);
 }
 
 loadPage();

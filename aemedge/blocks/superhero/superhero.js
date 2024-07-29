@@ -3,12 +3,14 @@ import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
 import { getI18nValue, getLocale } from '../../scripts/scripts.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
-const { createTag } = await import(`${getLibs()}/utils/utils.js`);
+const { createTag, getConfig } = await import(`${getLibs()}/utils/utils.js`);
+const { replaceKey } = await import(`${getLibs()}/features/placeholders.js`);
+
 const ASSET_BASE_URL = 'https://community-hubs.adobe.io/api/v2/ff_community/assets/';
 const TEXT_TO_IMAGE_BASE_URL = 'https://firefly.adobe.com/community/view/texttoimage?id=';
 const DEFAULT_FORMAT = 'jpg';
 const DEFAULT_DIMENSION = 'width';
-const API_KEY = 'clio-playground-web';
+const API_KEY = await replaceKey('superhero_api_key', getConfig());
 let index = 0;
 let isAdding = true;
 
