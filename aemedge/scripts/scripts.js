@@ -222,9 +222,9 @@ export async function overrideSignIn() {
         'dt': darkMode,
         'redirect_uri': window.location.href,
       };
+
       if (searchParams.get('disable_local_msw') === 'true') {
-        // eslint-disable-next-line dot-notation
-        susiAuthParams['disable_local_msw'] = 'true';
+        susiAuthParams.disable_local_msw = 'true';
       }
 
       const susiSentryTag = `<susi-sentry 
@@ -242,8 +242,17 @@ export async function overrideSignIn() {
       susiLightEl.config = susiConfig;
       susiLightEl.authParams = susiAuthParams;
       main.prepend(susiSentryDiv);
+
+      // Remove existing listeners to prevent duplicates
+      susiLightEl.removeEventListener('on-token', onToken);
+      susiLightEl.removeEventListener('on-auth-code', onAuthCode);
+      susiLightEl.removeEventListener('on-auth-failed', onAuthFailed);
+      susiLightEl.removeEventListener('on-error', onError);
+      susiLightEl.removeEventListener('on-load', onSentryLoad);
+      susiLightEl.removeEventListener('on-provider-clicked', onProviderClicked);
+      susiLightEl.removeEventListener('redirect', onRedirect);
+
       // Register event listeners for susi-sentry
-      // susiLightEl.addEventListener('on-message', onMessage);
       susiLightEl.addEventListener('on-token', onToken);
       susiLightEl.addEventListener('on-auth-code', onAuthCode);
       susiLightEl.addEventListener('on-auth-failed', onAuthFailed);
@@ -252,20 +261,32 @@ export async function overrideSignIn() {
       susiLightEl.addEventListener('on-provider-clicked', onProviderClicked);
       susiLightEl.addEventListener('redirect', onRedirect);
 
-      await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
-      // await loadScript('https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js', { type: "module" });
-      await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
+      try {
+        await loadScript('https://auth.services.adobe.com/imslib/imslib.min.js');
+        await loadScript('/aemedge/scripts/sentry/bundle.js', { type: "module" });
+      } catch (scriptLoadError) {
+        console.error('Error loading scripts:', scriptLoadError);
+        return;
+      }
+
       window.addEventListener('click', (e) => {
-        // if sign-in modal open and user clicks out of it, close the modal
-        const isClickInsideModal = susiLightEl.contains(e.target);
+        // Ensure susiLightEl and profileButton are defined before accessing properties
         const profileButton = document.querySelector('#unav-profile');
+        if (!susiLightEl || !profileButton) return;
+
+        // If sign-in modal open and user clicks out of it, close the modal
+        const isClickInsideModal = susiLightEl.contains(e.target);
         const isClickOnProfile = profileButton.contains(e.target);
-        if (susiLightEl.checkVisibility() && !isClickInsideModal && !isClickOnProfile) susiSentryDiv.classList.add('hidden');
-        if (!susiLightEl.checkVisibility() && isClickOnProfile) susiSentryDiv.classList.remove('hidden');
+        if (susiLightEl.checkVisibility() && !isClickInsideModal && !isClickOnProfile) {
+          susiSentryDiv.classList.add('hidden');
+        }
+        if (!susiLightEl.checkVisibility() && isClickOnProfile) {
+          susiSentryDiv.classList.remove('hidden');
+        }
       });
     }
   } catch (e) {
-    console.error(e);
+    console.error('An error occurred in overrideSignIn:', e);
   }
 }
 
