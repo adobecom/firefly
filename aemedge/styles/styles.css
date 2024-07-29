@@ -57,6 +57,10 @@
     color: inherit;
   }
 
+  .global-navigation a:hover {
+    color: inherit;
+  }
+
   .global-navigation .feds-nav-wrapper{
     visibility: hidden;
   }
