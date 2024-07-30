@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Ah, não",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Uma ou mais palavras podem não atender às Diretrizes do usuário e foram removidas.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "A legenda deve conter o conceito \"{conceptId}\"",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Insira uma legenda com pelo menos 25 caracteres. Inclua o nome do conceito na legenda ou adicione o nome do conceito ausente no painel {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Insira uma legenda com pelo menos 25 caracteres.",
   "@clio/playground:enterprise-error-image-resolution": "Resolução da imagem",
   "@clio/playground:enterprise-error-image-resolution-desc": "Sua imagem deve ter no mínimo 512 por 512 pixels. Para obter a melhor qualidade, é necessário ter pelo menos 1.024 por 1.024 pixels.",

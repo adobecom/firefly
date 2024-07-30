@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Oj då!",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Det kan hända att ett eller flera ord inte uppfyller användarvillkoren och därför har tagits bort.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Bildtexten måste innehålla konceptet ”{conceptId}”.",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Ange en bildtext med minst 25 tecken. Inkludera konceptnamnet i bildtexten eller lägg till det konceptnamn som saknas i panelen {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Ange en bildtext med minst 25 tecken.",
   "@clio/playground:enterprise-error-image-resolution": "Bildupplösning",
   "@clio/playground:enterprise-error-image-resolution-desc": "Bilden måste vara minst 512 x 512 pixlar. För bästa kvalitet krävs minst 1 024 x 1 024 pixlar.",

@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Oha",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Ein oder mehrere Wörter verstoßen u. U. gegen die Benutzungsrichtlinien und wurden entfernt.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Die Caption muss das Konzept „{conceptId}“ enthalten",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Gib eine Caption mit mindestens 25 Zeichen ein. Schließe den Konzeptnamen in deine Caption ein, oder füge einen fehlenden Konzeptnamen im Bedienfeld „ {modelPropertiesComp}“ hinzu.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Gib eine Caption mit mindestens 25 Zeichen ein.",
   "@clio/playground:enterprise-error-image-resolution": "Bildauflösung",
   "@clio/playground:enterprise-error-image-resolution-desc": "Dein Bild muss mindestens 512 x 512 Pixel groß sein. Die beste Qualität erzielst du mit mindestens 1024 x 1024 Pixel.",

@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "申し訳​ありま​せん",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "1 つ​または​複数​の​単語​が​ユーザー​ガイドライン​を​満​た​し​てい​ない​可能性​が​ある​ため、​削除​さ​れ​ま​した。",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "キャプション​に​は​コンセプト「{conceptId}」​を​含める​必要​が​あり​ます",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "キャプション​を 25 文字​以上​で​入力​し​て​くだ​さい。​キャプション​に​コンセプト​名​を​含める​か、{modelPropertiesComp} パネル​に​記載​の​ない​コンセプト​名​を​追加​し​ます。",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "キャプション​は 25 文字​以上​で​入力​し​て​くだ​さい。",
   "@clio/playground:enterprise-error-image-resolution": "画像​の​解像度",
   "@clio/playground:enterprise-error-image-resolution-desc": "画像​は 512 × 512 ピクセル​以上​に​する​必要​が​あり​ます。​最高​の​画質​を​得る​に​は、1024 × 1024 ピクセル​以上​が​必要​です。",

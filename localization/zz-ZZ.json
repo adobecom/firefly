@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "[4a] ćłìø_Uh oh_žż",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "[4b] ćłìø_One or more words may not meet User Guidelines and were removed._žż",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "[6w] ćłìø_Caption must contain the concept \"{conceptId}\"_žż",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "[5b] ćłìø_Enter a caption with at least 25 characters. Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel._žż",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "[5b] ćłìø_Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel._žż",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "[67] ćłìø_Enter a caption with at least 25 characters._žż",
   "@clio/playground:enterprise-error-image-resolution": "[tm] ćłìø_Image resolution_žż",
   "@clio/playground:enterprise-error-image-resolution-desc": "[tn] ćłìø_Your image must be at least 512 by 512 pixels. For best quality, at least 1,024 by 1,024 pixels._žż",

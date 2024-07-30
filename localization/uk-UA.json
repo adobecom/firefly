@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Ой-ой",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Одне або кілька слів порушують правила користування, їх було видалено.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Супровідний підпис має містити концепцію «{conceptId}»",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Уведіть супровідний підпис, який містить щонайменше 25 символів. Включіть у супровідний підпис назву концепції або додайте відсутню назву концепції в панелі {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Уведіть супровідний підпис, який містить щонайменше 25 символів",
   "@clio/playground:enterprise-error-image-resolution": "Роздільна здатність зображення",
   "@clio/playground:enterprise-error-image-resolution-desc": "Роздільна здатність зображення має бути принаймні 512 на 512 пікселів. Якщо ви хочете отримати найкращу якість – щонайменше 1024 на 1024 пікселі.",

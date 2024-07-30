@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Voi ei",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Vähintään yksi sana poistettiin, koska se saattoi olla käyttäjän ohjeiden vastainen.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Kuvatekstissä on oltava konsepti \"{conceptId}\"",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Kirjoita kuvateksti, jossa on vähintään 25 merkkiä. Sisällytä kuvatekstiin konseptin nimi tai lisää puuttuva konseptin nimi {modelPropertiesComp} -paneelissa.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Kirjoita kuvateksti, jossa on vähintään 25 merkkiä.",
   "@clio/playground:enterprise-error-image-resolution": "Kuvan resoluutio",
   "@clio/playground:enterprise-error-image-resolution-desc": "Kuvassa on oltava vähintään 512 x 512 pikseliä. Parhaan mahdollisen laadun varmistamiseksi kuvassa on oltava vähintään 1 024 x 1 024 pikseliä.",

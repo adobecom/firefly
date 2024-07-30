@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "이런",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "하나 이상의 단어가 사용자 가이드라인을 충족하지 않을 수 있으며 제거되었습니다.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "캡션에는 \"{conceptId}\" 컨셉이 포함되어야 합니다.",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "25​자 이상의 캡션을 입력하세요. 캡션에 개념 이름을 포함하거나 {modelPropertiesComp} 패널에 누락된 컨셉 이름을 추가하세요.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "25​자 이상으로 캡션을 입력합니다.",
   "@clio/playground:enterprise-error-image-resolution": "이미지 해상도",
   "@clio/playground:enterprise-error-image-resolution-desc": "이미지는 512x512​픽셀 이상이어야 합니다. 최상의 품질을 얻으려면 최소 1,024 x 1,024​픽셀이 필요합니다.",

@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "¡Vaya!",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Parece que una o varias palabras no cumplen las Directrices para usuarios y se han eliminado.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "El pie de ilustración debe contener el concepto \"{conceptId}\"",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Introduce un pie de ilustración que tenga al menos 25 caracteres. Incluye el nombre del concepto o añade el que falte en el panel {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Introduce un pie de ilustración que tenga al menos 25 caracteres.",
   "@clio/playground:enterprise-error-image-resolution": "Resolución de imagen",
   "@clio/playground:enterprise-error-image-resolution-desc": "La imagen debe tener al menos 512 por 512 píxeles. Y para obtener la mejor calidad, al menos 1024 por 1024 píxeles.",

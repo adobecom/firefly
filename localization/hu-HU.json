@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Ajjaj",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Egy vagy több szó nem felelt meg a Felhasználói irányelveknek, ezért el lett távolítva.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "A képaláírásnak tartalmaznia kell az alábbi koncepciót: {conceptId}.",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Legalább 25 karakteres koncepciót adjon meg. A képaláírás tartalmazza a koncepció nevét, vagy adja meg a hiányzó nevet a {modelPropertiesComp} panelen.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Adjon meg egy legalább 25 karakterből álló feliratot.",
   "@clio/playground:enterprise-error-image-resolution": "Képfelbontás",
   "@clio/playground:enterprise-error-image-resolution-desc": "A képnek legalább 512 x 512 képpont felbontásúnak kell lennie. A legjobb minőség érdekében 1024 x 1024 képpontos felbontás javasolt.",

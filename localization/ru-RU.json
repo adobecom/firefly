@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Ой!",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Возможно, одно или несколько слов не соответствуют правилам использования и были удалены.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Надпись должна содержать концепцию \"{conceptId}\"",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Введите надпись длиной не менее 25 символов. Добавьте в нее название концепции или добавьте отсутствующее название концепции на панель \"{modelPropertiesComp}\".",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Введите надпись длиной не менее 25 символов.",
   "@clio/playground:enterprise-error-image-resolution": "Разрешение изображения",
   "@clio/playground:enterprise-error-image-resolution-desc": "Ваше изображение должно иметь разрешение не менее 512 на 512 пикс. Для лучшего качества — не менее 1024 на 1024 пикс.",

@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Ups...",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Co najmniej jedno słowo nie spełnia Wytycznych dla użytkowników i zostało usunięte.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Podpis musi zawierać koncept „{conceptId}”.",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Wprowadź podpis zawierający co najmniej 25 znaków. Dodaj nazwę konceptu do podpisu lub w panelu {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Wprowadź podpis zawierający co najmniej 25 znaków.",
   "@clio/playground:enterprise-error-image-resolution": "Rozdzielczość obrazu",
   "@clio/playground:enterprise-error-image-resolution-desc": "Obraz musi mieć wymiary co najmniej 512 × 512 pikseli, a żeby uzyskać najlepszą jakość — co najmniej 1024 × 1024 pikseli.",

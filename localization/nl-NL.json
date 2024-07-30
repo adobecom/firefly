@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Oeps",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Een of meer woorden voldoen mogelijk niet aan de gebruikersrichtlijnen en zijn verwijderd.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Het bijschrift moet je concept {conceptId} bevatten",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Voer een bijschrift in van minimaal 25 tekens. Neem de conceptnaam op in je bijschrift of voeg de ontbrekende conceptnaam toe in het deelvenster {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Voer een bijschrift in van minimaal 25 tekens.",
   "@clio/playground:enterprise-error-image-resolution": "Afbeeldingsresolutie",
   "@clio/playground:enterprise-error-image-resolution-desc": "De afbeelding moet minimaal 512 x 512 pixels zijn. Voor de beste kwaliteit minimaal 1024 x 1024 pixels.",

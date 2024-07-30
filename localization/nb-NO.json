@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Oi, da",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Det kan hende at ett eller flere ord ikke samsvarer med retningslinjene for bruk, og de ble fjernet.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Bildeteksten må inneholde konseptet «{conceptId}»",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Skriv inn en bildetekst med minst 25 tegn. Inkludert navnet på konseptet i bildeteksten, eller legg til manglende konseptnavn i {modelPropertiesComp}-panelet.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Skriv inn en bildetekst med minst 25 tegn.",
   "@clio/playground:enterprise-error-image-resolution": "Bildeoppløsning",
   "@clio/playground:enterprise-error-image-resolution-desc": "Bildet ditt må være minst 512 ganger 512 piksler. For å få best kvalitet bør det være minst 1024 ganger 1024 piksler.",

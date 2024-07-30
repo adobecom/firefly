@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "呃​哦",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "一个​或​多个​字词​不​符合​用户​准则，​已​被​移除。",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "必须​包含​您​的​概念“{conceptId}”。",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "输入​至少 25 个​字符​的​题​注。​在​题​注​中​包含​概念​名称，​或者​在 {modelPropertiesComp} 面板​中​添加​缺失​的​概念​名称。",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "输入​至少 25 个​字符​的​题​注。",
   "@clio/playground:enterprise-error-image-resolution": "图像​分辨​率",
   "@clio/playground:enterprise-error-image-resolution-desc": "图像​必须​至少​为 512 x 512 像​素。​为了​获得​最佳​质量，​图像​必须​至少​为 1,024 x 1,024 像​素。",

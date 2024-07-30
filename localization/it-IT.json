@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Oh oh",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Una o più parole potrebbero non soddisfare le Linee guida utente e sono state rimosse.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "La didascalia deve contenere il concetto \"{conceptId}\"",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Inserisci una didascalia con almeno 25 caratteri. Includi il nome del concetto nella didascalia o aggiungi il nome del concetto mancante nel pannello {modelProprietiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Inserisci una didascalia con almeno 25 caratteri.",
   "@clio/playground:enterprise-error-image-resolution": "Risoluzione dell'immagine",
   "@clio/playground:enterprise-error-image-resolution-desc": "L'immagine deve essere di almeno 512 per 512 pixel. Per una qualità migliore, almeno 1.024 per 1.024 pixel.",

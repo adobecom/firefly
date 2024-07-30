@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Ale ne",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Zdá se, že jedno nebo více slov nesplňuje pokyny pro uživatele a byly odstraněny.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Popisek musí obsahovat koncept „{conceptId}“",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "Zadejte popisek s nejméně 25 znaky. Do popisku zahrňte název konceptu nebo přidejte chybějící název konceptu do panelu {modelPropertiesComp}.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "Zadejte popisek s nejméně 25 znaky",
   "@clio/playground:enterprise-error-image-resolution": "Rozlišení obrázku",
   "@clio/playground:enterprise-error-image-resolution-desc": "Váš obrázek musí mít rozlišení alespoň 512 na 512 pixelů. Pro dosažení nejvyšší kvality doporučujeme alespoň 1 024 na 1 024 pixelů.",

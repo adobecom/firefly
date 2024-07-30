@@ -259,7 +259,7 @@
   "@clio/playground:enterprise-error-caption-contains-warning": "Bir sorun oluştu",
   "@clio/playground:enterprise-error-caption-contains-warning-desc": "Bir veya daha fazla kelime Kullanıcı Kılavuzlarına uymadığından kaldırıldı.",
   "@clio/playground:enterprise-error-caption-missing-concept-helper-text": "Resim yazısı \"{conceptId}\" konseptini içermelidir",
-  "@clio/playground:enterprise-error-caption-missing-concept-id": "En az 25 karakter içeren bir resim yazısı girin. Resim yazınızın konsept adını dahil edin veya eksik konsept adını {modelPropertiesComp} paneline ekleyin.",
+  "@clio/playground:enterprise-error-caption-missing-concept-id": "Include the concept name in your caption, or add missing concept name in {modelPropertiesComp} panel.",
   "@clio/playground:enterprise-error-caption-missing-concept-id-style": "En az 25 karakter içeren bir resim yazısı girin.",
   "@clio/playground:enterprise-error-image-resolution": "Görüntü çözünürlüğü",
   "@clio/playground:enterprise-error-image-resolution-desc": "Görüntünüz en az 512 x 512 piksel olmalıdır. En iyi kalite içinse en az 1.024 x 1.024 piksel boyutunda görüntü kullanın.",
