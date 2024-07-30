@@ -1205,7 +1205,7 @@
   "@clio/playground:text2image-propertyInspector-section-styles": "Стили",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "Для использования справочной композиции удалите изображение составного объекта.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Функция \"Составные объекты\" не поддерживается для использовании пользовательских моделей. Для использования составных моделей переключитесь на модель Firefly Image 3.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models-preview-and-test": "Составные объекты не поддерживаются в версии \"Предварительный просмотр\" и тестовой версии.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models-preview-and-test": "Object composites isn't supported in <strong>Preview and test</strong>.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "Для использования составных объектов удалите изображение справочной композиции.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Функция \"Составные объекты\" не поддерживается с моделью Firefly Image 2. Для использования составных моделей переключитесь на модель Firefly Image 3.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Добавьте объект в составной.",

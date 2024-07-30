@@ -1205,7 +1205,7 @@
   "@clio/playground:text2image-propertyInspector-section-styles": "Stiler",
   "@clio/playground:text2image-propertyInspector-structure-match-help-text-for-disabled-options": "For å bruke komposisjonsreferanse må du fjerne bildet for objektsammensetning.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models": "Objektsammensetninger støttes ikke ved bruk av egendefinerte modeller. Hvis du vil bruke sammensetninger, må du bytte til Firefly Image 3-modellen.",
-  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models-preview-and-test": "Objektsammensetninger støttes ikke i Forhåndsvisning og testing.",
+  "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-custom-models-preview-and-test": "Object composites isn't supported in <strong>Preview and test</strong>.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-disabled-options": "For å bruke objektsammensetninger må du fjerne referansebildet for komposisjon.",
   "@clio/playground:text2image-propertyInspector-structure-object-help-text-for-unsupported-version": "Objektsammensetninger støttes ikke ved bruk av Firefly Image 2-modellen. Hvis du vil bruke objektsammensetninger, må du bytte til Firefly Image 3-modellen.",
   "@clio/playground:text2image-propertyInspector-structure-object-tooltip-label": "Legg til et objekt i sammensetningen.",
