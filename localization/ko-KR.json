@@ -497,7 +497,7 @@
   "@clio/playground:feedback-module-report": "보고서",
   "@clio/playground:feedback-module-report-tooltip": "유해하거나 불쾌감을 주는 이미지 보고",
   "@clio/playground:firefly-banner-community-translate-message": "Microsoft Translator​에서 제공하는 Firefly 프롬프트에 대한 언어 번역입니다.",
-  "@clio/playground:flagged-image-content": "This image has a generative AI usage preference applied that indicates it can't be used. <a>Learn more</a>.",
+  "@clio/playground:flagged-image-content": "이 이미지에는 생성형 AI 사용 기본 설정이 적용되어 있어 사용할 수 없습니다. <a>​자세히 알아보기</a>",
   "@clio/playground:flagged-image-content-learn-more-url": "https://www.adobe.com/go/helpx-genai-usage_kr",
   "@clio/playground:flagged-image-heading": "다른 이미지 업로드",
   "@clio/playground:flagged-image-upload-another-button-label": "다른 이미지 업로드",

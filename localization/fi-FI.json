@@ -497,7 +497,7 @@
   "@clio/playground:feedback-module-report": "Raportti",
   "@clio/playground:feedback-module-report-tooltip": "Ilmoita haitallisista tai loukkaavista kuvista",
   "@clio/playground:firefly-banner-community-translate-message": "Microsoft Translator kääntää Firefly-kehotteet eri kielistä.",
-  "@clio/playground:flagged-image-content": "This image has a generative AI usage preference applied that indicates it can't be used. <a>Learn more</a>.",
+  "@clio/playground:flagged-image-content": "Kuvassa on generatiivisen tekoälyn käyttöasetus, josta johtuen sitä ei voi käyttää. <a>Lue lisää</a>.",
   "@clio/playground:flagged-image-content-learn-more-url": "https://www.adobe.com/go/helpx-genai-usage_fi",
   "@clio/playground:flagged-image-heading": "Lataa uusi kuva",
   "@clio/playground:flagged-image-upload-another-button-label": "Lataa uusi kuva",

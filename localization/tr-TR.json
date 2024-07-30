@@ -497,7 +497,7 @@
   "@clio/playground:feedback-module-report": "Rapor",
   "@clio/playground:feedback-module-report-tooltip": "Zararlı veya rahatsız edici görüntüleri bildirin",
   "@clio/playground:firefly-banner-community-translate-message": "Firefly istemleri için dil çevirileri Microsoft Translator tarafından sağlanır.",
-  "@clio/playground:flagged-image-content": "This image has a generative AI usage preference applied that indicates it can't be used. <a>Learn more</a>.",
+  "@clio/playground:flagged-image-content": "Bu görüntü üzerinde görüntünün kullanılamayacağını belirten bir üretken yapay zeka kullanım tercihi bildirimi bulunuyor. <a>Daha fazla bilgi edinin</a>.",
   "@clio/playground:flagged-image-content-learn-more-url": "https://www.adobe.com/go/helpx-genai-usage_tr",
   "@clio/playground:flagged-image-heading": "Başka bir görüntü yükle",
   "@clio/playground:flagged-image-upload-another-button-label": "Başka bir görüntü yükle",
