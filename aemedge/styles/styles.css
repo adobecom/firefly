@@ -526,7 +526,6 @@
     }
 
     .global-navigation .feds-nav-wrapper {
-      justify-content: center;
       flex-grow: 0;
       margin-left: 2%;
     }
@@ -553,6 +552,10 @@
   }
 
   @media (width >= 900px) {
+    .global-navigation .feds-nav {
+      padding: 0;
+    }
+
     .global-navigation .feds-navItem a{
       display: flex;
     }
