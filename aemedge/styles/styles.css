@@ -552,6 +552,10 @@
   }
 
   @media (width >= 900px) {
+    .global-navigation .feds-nav-wrapper{
+      width: auto;
+    }
+
     .global-navigation .feds-nav {
       padding: 0;
     }
