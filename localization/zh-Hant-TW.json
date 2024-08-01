@@ -304,6 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "僅​支援 jpg 和 png 檔案。",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "範例​提示​必須​包含「{conceptId}」​概念",
   "@clio/playground:enterprise-sample-prompt-title": "範例​提示",
+  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "新增​範例​提示，​以​實際​範例​表現​如何​有效​使用​您​的​模型",
   "@clio/playground:enterprise-sample-prompt-with-concept": "輸入​內含​概念的​範例​提示",
   "@clio/playground:enterprise-select-images-title": "從​您​的​電腦​選取​影像",

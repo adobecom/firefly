@@ -304,6 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Sono supportati solo file jpg e png.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "Il prompt campione deve contenere il concetto \"{conceptId}\"",
   "@clio/playground:enterprise-sample-prompt-title": "Prompt campione",
+  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Aggiungi un prompt di esempio che rifletta un esempio pratico di come utilizzare efficacemente il modello",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Inserisci un prompt campione con un concetto",
   "@clio/playground:enterprise-select-images-title": "Seleziona le immagini dal computer",
