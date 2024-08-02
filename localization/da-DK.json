@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Kun jgp- og png-filer understøttes.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "Prompteksemplet skal indeholde konceptet \"{conceptId}\"",
   "@clio/playground:enterprise-sample-prompt-title": "Prompteksempel",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "Eksempelprompten skal indeholde mindst 50 tegn.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Tilføj et prompteksempel, der er et praktisk eksempel på, hvordan man effektivt bruger din model",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Indtast et prompteksempel med et koncept",
   "@clio/playground:enterprise-select-images-title": "Vælg billeder fra din computer",

@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Поддерживаются только файлы JPG и PNG",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "Образец запроса должен содержать концепцию \"{conceptId}\"",
   "@clio/playground:enterprise-sample-prompt-title": "Пример запроса",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "Пример запроса должен содержать не менее 50 символов.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Добавьте пример запроса, показывающий, как можно эффективно использовать вашу модель",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Введите пример запроса с концепцией",
   "@clio/playground:enterprise-select-images-title": "Выберите изображения на компьютере",

@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Endast jpg- och png-filer stöds.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "Exempelbeskrivningen måste innehålla konceptet \"{conceptId}\"",
   "@clio/playground:enterprise-sample-prompt-title": "Exempelbeskrivning",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "Exempelbeskrivningen måste innehålla minst 50 tecken.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Lägg till en exempelbeskrivning som återger ett praktiskt exempel på hur man effektivt använder din modell",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Ange en exempelbeskrivning med ett koncept",
   "@clio/playground:enterprise-select-images-title": "Välj bilder från datorn",

@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Somente arquivos jpg e png são compatíveis.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "A solicitação de amostra deve conter o conceito \"{conceptId}\"",
   "@clio/playground:enterprise-sample-prompt-title": "Amostra de solicitação",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "A amostra de solicitação deve conter pelo menos 50 caracteres.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Adicione uma amostra de solicitação que reflita um exemplo prático de como usar seu modelo de forma eficaz",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Insira uma solicitação de amostra com um conceito",
   "@clio/playground:enterprise-select-images-title": "Selecione imagens do seu computador",

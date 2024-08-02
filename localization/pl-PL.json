@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Obsługiwane są tylko pliki jpg i png.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "Przykładowe polecenie musi zawierać koncept „{conceptId}”",
   "@clio/playground:enterprise-sample-prompt-title": "Przykładowe polecenie",
-  "@clio/playground:enterprise-sample-prompt-too-short": "Przykładowy monit musi zawierać co najmniej 50 znaków.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "Przykładowe polecenie musi składać się z co najmniej 50 znaków.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Dodaj przykładowe polecenie, które odzwierciedla praktyczny przykład efektywnego korzystania z modelu",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Wprowadź przykładowe polecenie zawierające koncept",
   "@clio/playground:enterprise-select-images-title": "Wybierz obrazy z komputera",
