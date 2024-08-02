@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "jpg, png 파일만 지원됩니다.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "샘플 프롬프트에는 \"{conceptId}\" 컨셉이 포함되어야 합니다.",
   "@clio/playground:enterprise-sample-prompt-title": "샘플 프롬프트",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "샘플 프롬프트는 50​자 이상이어야 합니다.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "모델을 효과적으로 사용하는 방법에 대한 실제 사례를 반영하는 샘플 프롬프트를 추가하세요",
   "@clio/playground:enterprise-sample-prompt-with-concept": "컨셉이 있는 샘플 프롬프트를 입력하세요",
   "@clio/playground:enterprise-select-images-title": "컴퓨터에서 이미지 선택",
