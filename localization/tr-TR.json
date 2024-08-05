@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Yalnızca jpg ve png dosyaları desteklenir.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "Örnek istem \"{conceptId}\" Konseptini içermelidir",
   "@clio/playground:enterprise-sample-prompt-title": "Örnek istem",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "Örnek istem en az 50 karakterden oluşmalıdır.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Modelinizi etkin bir şekilde kullanmanın pratik örneğini yansıtan bir örnek istemi ekleyin",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Konsept içeren bir örnek istem girin",
   "@clio/playground:enterprise-select-images-title": "Bilgisayarınızdan görüntüleri seçin",

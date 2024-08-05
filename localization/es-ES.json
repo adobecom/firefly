@@ -304,7 +304,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Solo se admiten archivos JPG y PNG.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "El indicador de muestra debe contener el concepto \"{conceptId}\"",
   "@clio/playground:enterprise-sample-prompt-title": "Indicación de muestra",
-  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 50 characters.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "La indicación de muestra debe tener al menos 50 caracteres.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Añade una indicación de ejemplo como ejemplo práctico de cómo usar eficazmente tu modelo",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Introduce una indicación de ejemplo con un concepto",
   "@clio/playground:enterprise-select-images-title": "Selecciona imágenes de tu equipo",
