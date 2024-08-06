@@ -27,6 +27,7 @@ const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 const UPGRADE_API_STAGE = 'https://aps-web-stage.adobe.io';
 const UPGRADE_API_PROD = 'https://aps-web.adobe.io';
 const environment = getEnvironment();
+const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
 
 const searchParams = new URLSearchParams(window.location.search);
 
@@ -213,7 +214,6 @@ export async function overrideSignIn() {
       sentryWrapper.classList.remove('hidden');
     } else {
       const susiConfig = { 'consentProfile': 'adobe-id-sign-up' };
-      const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
       const susiAuthParams = {
         'client_id': CONFIG.imsClientId,
         'scope': CONFIG.imsScope,
@@ -291,7 +291,6 @@ export async function overrideSignIn() {
 }
 
 async function overrideUNAV() {
-  const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
   // Update a few things and reload UNAV so we can listen to messages and override sign in click.
   if (window.UniversalNav) {
     console.debug('overriding the unav');
