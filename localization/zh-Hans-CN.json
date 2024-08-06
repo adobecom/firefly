@@ -498,7 +498,7 @@
   "@clio/playground:feedback-module-report": "报告",
   "@clio/playground:feedback-module-report-tooltip": "报告​有害​或​冒犯​的​图像",
   "@clio/playground:firefly-banner-community-translate-message": "由 Microsoft Translator 提供 Firefly 提示​的​语言​翻译。",
-  "@clio/playground:flagged-image-content": "This image has a <a>generative AI opt-out preference</a> applied that indicates it can't be used.",
+  "@clio/playground:flagged-image-content": "此​图像​应用​了<a>​生成​式 AI 选择​退出​首​选项</a>，​表明​它​无法​使用。",
   "@clio/playground:flagged-image-content-link-url": "https://www.adobe.com/go/helpx-genai-usage_cn",
   "@clio/playground:flagged-image-heading": "上​传​另一​图像",
   "@clio/playground:flagged-image-upload-another-button-label": "上​传​另一​图像",

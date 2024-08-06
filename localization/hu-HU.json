@@ -498,7 +498,7 @@
   "@clio/playground:feedback-module-report": "Jelentés",
   "@clio/playground:feedback-module-report-tooltip": "Ártalmas vagy sértő jellegű képek jelentése",
   "@clio/playground:firefly-banner-community-translate-message": "Firefly utasítások nyelvi fordításai a Microsoft Translator program által.",
-  "@clio/playground:flagged-image-content": "This image has a <a>generative AI opt-out preference</a> applied that indicates it can't be used.",
+  "@clio/playground:flagged-image-content": "Ehhez a képhez be van állítva egy <a>generatív MI elutasítási beállítás </a>, amely azt jelzi, hogy nem használható.",
   "@clio/playground:flagged-image-content-link-url": "https://www.adobe.com/go/helpx-genai-usage_hu",
   "@clio/playground:flagged-image-heading": "Másik kép feltöltése",
   "@clio/playground:flagged-image-upload-another-button-label": "Másik kép feltöltése",

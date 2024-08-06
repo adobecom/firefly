@@ -498,7 +498,7 @@
   "@clio/playground:feedback-module-report": "Rapport",
   "@clio/playground:feedback-module-report-tooltip": "Rapporter sjenerende eller støtende bilder",
   "@clio/playground:firefly-banner-community-translate-message": "Språkoversettelser for Firefly-hjelpetekster leveres av Microsoft Translator.",
-  "@clio/playground:flagged-image-content": "This image has a <a>generative AI opt-out preference</a> applied that indicates it can't be used.",
+  "@clio/playground:flagged-image-content": "Det er lagt til en <a>preferanse for fravalg av generativ kunstig intelligens</a> på dette bildet, som angir at det ikke kan brukes.",
   "@clio/playground:flagged-image-content-link-url": "https://www.adobe.com/go/helpx-genai-usage_no",
   "@clio/playground:flagged-image-heading": "Last opp et nytt bilde",
   "@clio/playground:flagged-image-upload-another-button-label": "Last opp et nytt bilde",

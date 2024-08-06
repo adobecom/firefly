@@ -498,7 +498,7 @@
   "@clio/playground:feedback-module-report": "Raport",
   "@clio/playground:feedback-module-report-tooltip": "Zgłoś szkodliwe lub obraźliwe obrazy",
   "@clio/playground:firefly-banner-community-translate-message": "Tłumaczenie językowe poleceń w usłudze Firefly jest dostarczane przez Microsoft Translator.",
-  "@clio/playground:flagged-image-content": "This image has a <a>generative AI opt-out preference</a> applied that indicates it can't be used.",
+  "@clio/playground:flagged-image-content": "Ten obraz ma zastosowaną <a>preferencję wykluczenia generatywnej SI</a>, która wskazuje, że nie można jej użyć.",
   "@clio/playground:flagged-image-content-link-url": "https://www.adobe.com/go/helpx-genai-usage_pl",
   "@clio/playground:flagged-image-heading": "Prześlij kolejny obraz",
   "@clio/playground:flagged-image-upload-another-button-label": "Prześlij kolejny obraz",

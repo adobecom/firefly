@@ -498,7 +498,7 @@
   "@clio/playground:feedback-module-report": "Rapport",
   "@clio/playground:feedback-module-report-tooltip": "Schadelijke of aanstootgevende afbeeldingen rapporteren",
   "@clio/playground:firefly-banner-community-translate-message": "Vertalingen voor Firefly- opdrachten worden aangeboden via Microsoft Translator.",
-  "@clio/playground:flagged-image-content": "This image has a <a>generative AI opt-out preference</a> applied that indicates it can't be used.",
+  "@clio/playground:flagged-image-content": "Op deze afbeelding is <a>Liever geen gebruik van generatieve AI</a> toegepast, wat inhoudt dat je geen generatieve AI kunt gebruiken.",
   "@clio/playground:flagged-image-content-link-url": "https://www.adobe.com/go/helpx-genai-usage_nl",
   "@clio/playground:flagged-image-heading": "Andere afbeelding uploaden",
   "@clio/playground:flagged-image-upload-another-button-label": "Andere afbeelding uploaden",
