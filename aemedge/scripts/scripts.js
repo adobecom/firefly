@@ -291,6 +291,7 @@ export async function overrideSignIn() {
 }
 
 async function overrideUNAV() {
+  const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
   // Update a few things and reload UNAV so we can listen to messages and override sign in click.
   if (window.UniversalNav) {
     console.debug('overriding the unav');
@@ -298,6 +299,7 @@ async function overrideUNAV() {
     // const visitorGuid = window.alloy ? await window.alloy('getIdentity')
     //   .then((data) => data?.identity?.ECID).catch(() => undefined) : undefined;
     const { children } = UNAV_CONFIG.universalNav.universalNavConfig;
+    UNAV_CONFIG.universalNav.universalNavConfig.theme = darkMode ? 'dark' : 'light';
     children.forEach((child) => {
       if (child.name === 'profile') {
         child.attributes.callbacks.onSignIn = () => {
