@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "培训",
   "@clio/playground:upload-permission-cancel-button-label": "取消",
   "@clio/playground:upload-permission-confirm-button-label": "确认",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "构图​参考​可以​帮助​您​对​生成​的​图像​应用​特定​的​轮廓​和​深度。​若要​使用​该​功能，​您​必须​具有​使用​第三​方​图像​的​权限。",
   "@clio/playground:upload-permission-content-style-match-reference": "样式​参考​可以​帮助​您​对​生成​的​图像​应用​特定​的​样式。​若要​使用​该​功能，​您​必须​具有​使用​第三​方​图像​的​权限。",
   "@clio/playground:upload-permission-modal-title": "确认​您​有​权限",

@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "Képzés",
   "@clio/playground:upload-permission-cancel-button-label": "Mégse",
   "@clio/playground:upload-permission-confirm-button-label": "Tovább",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "A kompozitreferencia segítségével körvonalat és mélységet adhat a létrehozott képhez. A funkció használatához jogosultsággal kell rendelkeznie a harmadik féltől származó kép felhasználásához.",
   "@clio/playground:upload-permission-content-style-match-reference": "A stílusreferencia segítségével stílust adhat hozzá a létrehozott képhez. A funkció használatához jogosultsággal kell rendelkeznie a harmadik féltől származó kép felhasználásához.",
   "@clio/playground:upload-permission-modal-title": "A képek feltöltéséről",

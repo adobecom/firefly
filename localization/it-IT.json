@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "Training",
   "@clio/playground:upload-permission-cancel-button-label": "Annulla",
   "@clio/playground:upload-permission-confirm-button-label": "Continua",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Il riferimento di composizione consente di applicare un contorno e una profondità particolari alle immagini generate. Per utilizzare questa funzione, è necessario disporre dei diritti per utilizzare qualsiasi immagine di terze parti.",
   "@clio/playground:upload-permission-content-style-match-reference": "Il riferimento di stile consente di applicare un particolare stile alle immagini generate. Per utilizzare questa funzione, è necessario disporre dei diritti per utilizzare qualsiasi immagine di terze parti.",
   "@clio/playground:upload-permission-modal-title": "Informazioni sul caricamento delle immagini",

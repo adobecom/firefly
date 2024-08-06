@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "Обучение",
   "@clio/playground:upload-permission-cancel-button-label": "Отмена",
   "@clio/playground:upload-permission-confirm-button-label": "Продолжить",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Справочная композиция помогает создавать изображения с определенными контурами и глубиной. Чтобы использовать эту функцию, необходимо иметь права на использование сторонних изображений.",
   "@clio/playground:upload-permission-content-style-match-reference": "Справочный стиль помогает создавать изображения в определенном стиле. Чтобы использовать эту функцию, необходимо иметь права на использование сторонних изображений.",
   "@clio/playground:upload-permission-modal-title": "О добавлении изображений",

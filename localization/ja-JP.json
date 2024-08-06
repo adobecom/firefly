@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "トレーニング",
   "@clio/playground:upload-permission-cancel-button-label": "キャンセル",
   "@clio/playground:upload-permission-confirm-button-label": "続行",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "構成​参照​は、​生成​する​画像​に​特定​の​輪郭​と​深度​を​適用​する​の​に​役​立ち​ます。​この​機能​を​使用​する​に​は、​サード​パーティ​の​画像​を​使用​する​権利​を​持​って​いる​必要​が​あり​ます。",
   "@clio/playground:upload-permission-content-style-match-reference": "スタイル​参照​は、​生成​した​画像​に​特定​の​スタイル​を​適用​する​の​に​役​立ち​ます。​この​機能​を​使用​する​に​は、​サード​パーティ​の​画像​を​使用​する​権利​を​持​って​いる​必要​が​あり​ます。",
   "@clio/playground:upload-permission-modal-title": "権限​が​ある​こと​を​確認​し​て​くだ​さい",

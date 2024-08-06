@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "Training",
   "@clio/playground:upload-permission-cancel-button-label": "Annuleren",
   "@clio/playground:upload-permission-confirm-button-label": "Doorgaan",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Met Compositiereferentie kun je een bepaalde omtrek en diepte toepassen op de afbeeldingen die je genereert. Als je deze functie wilt gebruiken, moet je over de rechten beschikken om afbeeldingen van derden te gebruiken.",
   "@clio/playground:upload-permission-content-style-match-reference": "Met Stijlreferentie kun je een bepaalde stijl toepassen op de afbeeldingen die je genereert. Als je deze functie wilt gebruiken, moet je over de rechten beschikken om afbeeldingen van derden te gebruiken.",
   "@clio/playground:upload-permission-modal-title": "Afbeeldingen uploaden",

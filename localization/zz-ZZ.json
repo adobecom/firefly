@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "[SK] ćłìø_Training_žż",
   "@clio/playground:upload-permission-cancel-button-label": "[nN] ćłìø_Cancel_žż",
   "@clio/playground:upload-permission-confirm-button-label": "[nP] ćłìø_Continue_žż",
+  "@clio/playground:upload-permission-content-object-composites-reference": "[8p] ćłìø_Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images._žż",
   "@clio/playground:upload-permission-content-structure-match-reference": "[3w] ćłìø_Composition reference helps you apply a particular outline and depth to the images you generate. To use this feature, you must have the rights to use any third-party images._žż",
   "@clio/playground:upload-permission-content-style-match-reference": "[7h] ćłìø_Style reference helps you apply a particular style to the images you generate. To use this feature, you must have the rights to use any third-party images._žż",
   "@clio/playground:upload-permission-modal-title": "[nR] ćłìø_About uploading images_žż",

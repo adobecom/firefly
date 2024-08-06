@@ -1338,6 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "Koulutus",
   "@clio/playground:upload-permission-cancel-button-label": "Peruuta",
   "@clio/playground:upload-permission-confirm-button-label": "Jatka",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Object composites lets you upload an image and use a text prompt to generate a composited scene. To use this feature, you must have the rights to use any third-party images.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Sommitelmaviitteen avulla generoiduissa kuvissa voi käyttää tiettyä hahmotelmaa ja syvyyttä. Jotta voit käyttää ominaisuutta, tarvitset oikeuden käyttää kolmannen osapuolen kuvia.",
   "@clio/playground:upload-permission-content-style-match-reference": "Tyyliviitteen avulla generoiduissa kuvissa voi käyttää tiettyä tyyliä. Jotta voit käyttää ominaisuutta, tarvitset oikeuden käyttää kolmannen osapuolen kuvia.",
   "@clio/playground:upload-permission-modal-title": "Tietoja kuvien lataamisesta",
