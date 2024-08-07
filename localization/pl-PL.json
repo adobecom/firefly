@@ -1338,7 +1338,7 @@
   "@clio/playground:tyom-your-styles-training": "Materiały szkoleniowe",
   "@clio/playground:upload-permission-cancel-button-label": "Anuluj",
   "@clio/playground:upload-permission-confirm-button-label": "Kontynuuj",
-  "@clio/playground:upload-permission-content-object-composites-reference": "Kompozyty obiektów umożliwiają przekazanie obrazu i wygenerowanie sceny złożonej za pomocą monitu tekstowego. Aby korzystać z tej funkcji, musisz mieć prawa do korzystania z obrazów innych firm.",
+  "@clio/playground:upload-permission-content-object-composites-reference": "Kompozycje z obiektów umożliwiają przesłanie obrazu i użycie polecenia tekstowego w celu wygenerowania skomponowanej sceny. Aby korzystać z tej funkcji, użytkownik musi mieć prawa do wykorzystania wszelkich obrazów firm zewnętrznych.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Kompozycja referencyjna pomaga zastosować określony zarys i głębię do generowanych obrazów. Aby korzystać z tej funkcji, użytkownik musi mieć prawa do wykorzystania wszelkich obrazów firm zewnętrznych.",
   "@clio/playground:upload-permission-content-style-match-reference": "Styl referencyjny pomaga zastosować określony styl do generowanych obrazów. Aby korzystać z tej funkcji, użytkownik musi mieć prawa do wykorzystania wszelkich obrazów firm zewnętrznych.",
   "@clio/playground:upload-permission-modal-title": "Informacje na temat przesyłania obrazów",
