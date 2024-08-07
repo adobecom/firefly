@@ -1338,7 +1338,6 @@
   "@clio/playground:tyom-your-styles-training": "Training",
   "@clio/playground:upload-permission-cancel-button-label": "Abbrechen",
   "@clio/playground:upload-permission-confirm-button-label": "Weiter",
-  "@clio/playground:upload-permission-content-object-composites-reference": "Mit Objekt-Composites kannst du ein Bild hochladen und einen Text-Prompt verwenden, um eine komponierte Szene zu generieren. Um diese Funktion zu nutzen, musst du Rechte für die Verwendung von Drittbildern haben.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Die Kompositionsreferenz hilft dir, eine bestimmte Kontur und Tiefe auf die Bilder anzuwenden, die du generierst. Um diese Funktion zu nutzen, musst du Rechte für die Verwendung von Drittbildern haben.",
   "@clio/playground:upload-permission-content-style-match-reference": "Stilreferenz hilft dir, einen bestimmten Stil auf die Bilder anzuwenden, die du generierst. Um diese Funktion zu nutzen, musst du Rechte für die Verwendung von Drittbildern haben.",
   "@clio/playground:upload-permission-modal-title": "Info zum Hochladen von Bildern",

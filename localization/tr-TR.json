@@ -1338,7 +1338,6 @@
   "@clio/playground:tyom-your-styles-training": "Eğitim",
   "@clio/playground:upload-permission-cancel-button-label": "İptal",
   "@clio/playground:upload-permission-confirm-button-label": "Devam",
-  "@clio/playground:upload-permission-content-object-composites-reference": "Nesne bileşimleriyle bir görüntü yükleyebilir ve birleştirilmiş bir sahne oluşturmak için metin istemi kullanabilirsiniz. Bu özellikten yararlanmak için üçüncü taraf görüntüleri kullanma hakkına sahip olmanız gerekir.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Kompozisyon referansı, oluşturduğunuz görüntülere belirli bir ana hat ve derinlik uygulamanıza yardımcı olur. Bu özelliği kullanmak için üçüncü taraf görüntüleri kullanma yetkilerine sahip olmanız gerekir.",
   "@clio/playground:upload-permission-content-style-match-reference": "Stil referansı, oluşturduğunuz görüntülere belirli bir stil uygulamanıza yardımcı olur. Bu özelliği kullanmak için üçüncü taraf görüntüleri kullanma yetkilerine sahip olmanız gerekir.",
   "@clio/playground:upload-permission-modal-title": "Görüntü yükleme hakkında",

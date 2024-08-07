@@ -1338,7 +1338,6 @@
   "@clio/playground:tyom-your-styles-training": "훈련 중",
   "@clio/playground:upload-permission-cancel-button-label": "취소",
   "@clio/playground:upload-permission-confirm-button-label": "확인",
-  "@clio/playground:upload-permission-content-object-composites-reference": "오브젝트 합성을 사용하면 이미지를 업로드하고 텍스트 프롬프트를 사용하여 합성 장면을 생성할 수 있습니다. 이 기능을 사용하려면 타사 이미지를 사용할 권한이 있어야 합니다.",
   "@clio/playground:upload-permission-content-structure-match-reference": "컴포지션 참조는 생성한 이미지에 특정 윤곽선과 깊이를 적용하는 데 도움이 됩니다. 이 기능을 사용하려면 타사 이미지를 사용할 수 있는 권한이 있어야 합니다.",
   "@clio/playground:upload-permission-content-style-match-reference": "스타일 참조는 생성한 이미지에 특정 스타일을 적용하는 데 도움이 됩니다. 이 기능을 사용하려면 타사 이미지를 사용할 수 있는 권한이 있어야 합니다.",
   "@clio/playground:upload-permission-modal-title": "이미지 업로드 정보",

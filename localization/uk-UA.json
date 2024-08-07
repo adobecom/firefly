@@ -1338,7 +1338,6 @@
   "@clio/playground:tyom-your-styles-training": "Навчання",
   "@clio/playground:upload-permission-cancel-button-label": "Скасувати",
   "@clio/playground:upload-permission-confirm-button-label": "Продовжити",
-  "@clio/playground:upload-permission-content-object-composites-reference": "Композиції об’єктів дають змогу передавати зображення й використовувати текстовий запит для генерування складної сцени. Щоб скористатися цією функцією, ви повинні мати права на використання сторонніх зображень.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Зразок композиції допомагає застосувати певний контур і глибину до згенерованих зображень. Для використання цієї функції ви повинні мати права на використання сторонніх зображень.",
   "@clio/playground:upload-permission-content-style-match-reference": "Зразок стилю допомагає застосувати певний стиль до згенерованих зображень. Для використання цієї функції ви повинні мати права на використання сторонніх зображень.",
   "@clio/playground:upload-permission-modal-title": "Про завантаження зображень",

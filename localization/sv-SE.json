@@ -1338,7 +1338,6 @@
   "@clio/playground:tyom-your-styles-training": "Kurser",
   "@clio/playground:upload-permission-cancel-button-label": "Avbryt",
   "@clio/playground:upload-permission-confirm-button-label": "Fortsätt",
-  "@clio/playground:upload-permission-content-object-composites-reference": "Med sammansatta objekt kan du överföra en bild och använda en textbeskrivning för att generera en sammansatt scen. För att använda den här funktionen måste du ha behörighet att använda bilder från tredje part.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Sammansättningsreferens hjälper dig att tillämpa en viss kontur och ett visst djup på bilderna du genererar. För att kunna använda den här funktionen måste du ha rätt att använda bilder från tredje part.",
   "@clio/playground:upload-permission-content-style-match-reference": "Stilreferens hjälper dig att tillämpa en viss stil på de bilder du genererar. För att kunna använda den här funktionen måste du ha rätt att använda bilder från tredje part.",
   "@clio/playground:upload-permission-modal-title": "Överföring av bilder",

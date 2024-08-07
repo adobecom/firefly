@@ -1338,7 +1338,6 @@
   "@clio/playground:tyom-your-styles-training": "Undervisning",
   "@clio/playground:upload-permission-cancel-button-label": "Annuller",
   "@clio/playground:upload-permission-confirm-button-label": "Fortsæt",
-  "@clio/playground:upload-permission-content-object-composites-reference": "Med objektsammensætninger kan du overføre et billede og bruge en tekstprompt til at generere en sammensat scene. Hvis du vil bruge denne funktion, skal du have rettigheder til at bruge billeder fra tredjepart.",
   "@clio/playground:upload-permission-content-structure-match-reference": "Kompositionsreference hjælper dig med at anvende en specifik kontur og dybde på de billeder, du genererer. For at bruge denne funktion skal du have rettighederne til at bruge tredjepartsbilleder.",
   "@clio/playground:upload-permission-content-style-match-reference": "Stilreference hjælper dig med at anvende en specifik stil på de billeder, du genererer. For at bruge denne funktion skal du have rettighederne til at bruge tredjepartsbilleder.",
   "@clio/playground:upload-permission-modal-title": "Om upload af billeder",
