@@ -14,6 +14,7 @@
 import { FEATURES_API_STAGE, FEATURES_API_PROD, APS_API_PROD, APS_API_STAGE } from './constants.js';
 
 const FIREFLY_FI = 'firefly_credits';
+const CC_STORAGE = 'cc_storage';
 const AccessibleItemStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
@@ -34,6 +35,8 @@ const profile = {
   isK12: false,
   isFree: false,
   isEnterprise: false,
+  isSignedIn: false,
+  isZeroGBUser: false,
 };
 
 /**
@@ -292,6 +295,7 @@ async function getAccessProfileData() {
  * Sets the profile object based on the access profile data.
  */
 export function setProfileObject() {
+  window.profile = profile;
   getAccessProfileData().then((accessProfile) => {
     if (accessProfile.appProfile.accessibleItems?.length) {
       accessProfile.appProfile.accessibleItems.forEach((accessibleItem) => {
@@ -312,11 +316,18 @@ export function setProfileObject() {
             profile.isPremium = !!featureSets[FeatureKeys.PREMIUM]?.enabled;
           }
         }
+        const ccStorage = accessibleItem.fulfillable_items[CC_STORAGE];
+        if (ccStorage?.enabled && ccStorage.charging_model?.cap !== undefined) {
+          if (ccStorage.charging_model.cap <= 0) {
+            profile.isZeroGBUser = true;
+          }
+        }
       });
     }
     if (accessProfile.userProfile) {
       profile.isEnterprise = !!accessProfile.userProfile.accountType?.toLowerCase() !== 'type1';
     }
+    profile.isSignedIn = true;
     window.profile = profile;
   });
 }
