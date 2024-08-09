@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-cycle */
 /*
  * Copyright 2022 Adobe. All rights reserved.
@@ -10,9 +11,33 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { FEATURES_API_STAGE, FEATURES_API_PROD, APS_API_PROD, APS_API_STAGE } from './constants.js';
 
-const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
-const FEATURES_API_PROD = 'https://p13n.adobe.io';
+const FIREFLY_FI = 'firefly_credits';
+const CC_STORAGE = 'cc_storage';
+const AccessibleItemStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+};
+
+const FeatureKeys = {
+  BASIC: 'basic',
+  PREMIUM: 'premium',
+  HARD_CAPPED: 'hard_capped',
+  SOFT_CAPPED: 'soft_capped',
+  K12: 'k12',
+};
+
+const profile = {
+  isPremium: false,
+  isHardCapped: false,
+  isSoftCapped: false,
+  isK12: false,
+  isFree: false,
+  isEnterprise: false,
+  isSignedIn: false,
+  isZeroGBUser: false,
+};
 
 /**
  * The decision engine for where to get Milo's libs from.
@@ -96,19 +121,30 @@ export function createOptimizedFireflyPicture(
   return picture;
 }
 
-export async function getAccessToken() {
-  const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
-  let authToken;
-  if (!window.adobeIMS) {
-    loadIms().then(async () => {
-      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-    }).catch(() => {
-      authToken = null;
-    });
-  } else {
-    authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-  }
-  return authToken;
+export function getAccessToken() {
+  return new Promise((resolve, reject) => {
+    import(`${getLibs()}/utils/utils.js`)
+      .then(({ loadIms }) => {
+        let authToken;
+        if (!window.adobeIMS) {
+          loadIms()
+            .then(() => {
+              authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+              resolve(authToken);
+            })
+            .catch(() => {
+              authToken = null;
+              resolve(authToken);
+            });
+        } else {
+          authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+          resolve(authToken);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 /**
@@ -121,6 +157,54 @@ export function getEnvironment() {
     return 'stage';
   }
   return 'prod';
+}
+
+// Fetch locale from browser or cookie
+const FALLBACK_LOCALE = 'en-US';
+
+function normalizeLocale(locale) {
+  const lowerCaseLocale = locale.toLowerCase();
+
+  // Handle Chinese locales
+  if (lowerCaseLocale.startsWith('zh')) {
+    if (lowerCaseLocale.includes('hans')) {
+      return 'zh-Hans-CN';
+    }
+    if (lowerCaseLocale.includes('hant')) {
+      return 'zh-Hant-TW';
+    }
+  }
+
+  // Handle English locale
+  const [language, region] = lowerCaseLocale.split(/[-_]/);
+  if (language.includes('en')) {
+    return FALLBACK_LOCALE;
+  }
+
+  // Default normalization for other locales
+  if (region) {
+    return `${language}-${region.toUpperCase()}`;
+  }
+
+  return FALLBACK_LOCALE;
+}
+
+export function getLocale() {
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  if (match) {
+    return normalizeLocale(match[2]);
+  }
+
+  const browserLocale = navigator.language || navigator.userLanguage;
+  if (browserLocale) {
+    return normalizeLocale(browserLocale);
+  }
+
+  return FALLBACK_LOCALE;
+}
+
+export function convertLocaleFormat(locale) {
+  return locale.replace('-', '_');
 }
 
 /**
@@ -147,4 +231,103 @@ export async function getFeaturesArray() {
   }
   window.featuresArray = featuresArray;
   return featuresArray;
+}
+
+/**
+ * Parses the access profile response.
+ *
+ * @param {Object} accessProfileResponse - The access profile response object.
+ * @returns {Object} - The parsed access profile object.
+ */
+function parseAccessProfileResponse(accessProfileResponse) {
+  // APS v3 uses URL safe Base 64 encoding (and not the usual Base 64 encoding which atob is designed to decode)
+  // The only difference between the two encodings is that the characters _ and - are replaced by / and + respectively
+  // https://www.rfc-editor.org/rfc/rfc4648#section-5
+  const responsePayload = atob(
+    accessProfileResponse.asnp.payload.replace(/_/g, '/').replace(/-/g, '+'),
+  );
+  const accessProfile = JSON.parse(responsePayload);
+  if (accessProfileResponse.workflow?.entryUrl) {
+    accessProfile.paywallURL = accessProfileResponse.workflow.entryUrl.toString();
+  }
+  return accessProfile;
+}
+
+/**
+ * Retrieves access profile data from the server.
+ * @returns {Promise<Object>} A promise that resolves to the access profile data.
+ * @throws {Error} If there is an error fetching the access profile data or if the access token is not available.
+ */
+async function getAccessProfileData() {
+  const locale = getLocale();
+  const environment = getEnvironment();
+  const apsUrl = environment === 'stage' ? APS_API_STAGE : APS_API_PROD;
+  const url = `${apsUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
+  return new Promise((resolve, reject) => {
+    getAccessToken().then(async (accessToken) => {
+      if (accessToken) {
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'x-api-key': 'clio-playground-web',
+            Authorization: `Bearer ${window.adobeIMS.getAccessToken()?.token}`,
+            'Content-Type': 'application/json',
+          },
+          body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"${locale}"}}
+`,
+        });
+        if (resp.ok) {
+          const respJson = await resp.json();
+          resolve(parseAccessProfileResponse(respJson));
+        } else {
+          reject(new Error('Failed to fetch access profile data'));
+        }
+      } else {
+        reject(new Error('Access token not available'));
+      }
+    }).catch((error) => {
+      reject(error);
+    });
+  });
+}
+
+/**
+ * Sets the profile object based on the access profile data.
+ */
+export function setProfileObject() {
+  window.profile = profile;
+  getAccessProfileData().then((accessProfile) => {
+    if (accessProfile.appProfile.accessibleItems?.length) {
+      accessProfile.appProfile.accessibleItems.forEach((accessibleItem) => {
+        if (accessibleItem.status !== AccessibleItemStatus.ACTIVE) {
+          return;
+        }
+        if (!accessibleItem.fulfillable_items) {
+          return;
+        }
+        const fireflyFi = accessibleItem.fulfillable_items[FIREFLY_FI];
+        if (fireflyFi) {
+          const featureSets = fireflyFi.feature_sets;
+          if (featureSets) {
+            profile.isFree = !!featureSets[FeatureKeys.BASIC]?.enabled;
+            profile.isHardCapped = !!featureSets[FeatureKeys.HARD_CAPPED]?.enabled;
+            profile.isSoftCapped = !!featureSets[FeatureKeys.SOFT_CAPPED]?.enabled;
+            profile.isK12 = !!featureSets[FeatureKeys.K12]?.enabled;
+            profile.isPremium = !!featureSets[FeatureKeys.PREMIUM]?.enabled;
+          }
+        }
+        const ccStorage = accessibleItem.fulfillable_items[CC_STORAGE];
+        if (ccStorage?.enabled && ccStorage.charging_model?.cap !== undefined) {
+          if (ccStorage.charging_model.cap <= 0) {
+            profile.isZeroGBUser = true;
+          }
+        }
+      });
+    }
+    if (accessProfile.userProfile) {
+      profile.isEnterprise = !!(accessProfile.userProfile.accountType?.toLowerCase() !== 'type1');
+    }
+    profile.isSignedIn = true;
+    window.profile = profile;
+  });
 }

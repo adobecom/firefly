@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
-import { getLibs } from '../../scripts/utils.js';
-import { decorateI18n, getLocale, convertLocaleFormat } from '../../scripts/scripts.js';
+import { getLibs, getLocale, convertLocaleFormat } from '../../scripts/utils.js';
+import { decorateI18n } from '../../scripts/scripts.js';
 
 const { createTag, getMetadata, decorateSVG } = await import(`${getLibs()}/utils/utils.js`);
 const BANNER_ENDPOINT = 'https://p13n.adobe.io/psdk/v2/content';
