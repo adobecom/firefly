@@ -230,6 +230,12 @@ export async function getFeaturesArray() {
   return featuresArray;
 }
 
+/**
+ * Parses the access profile response.
+ *
+ * @param {Object} accessProfileResponse - The access profile response object.
+ * @returns {Object} - The parsed access profile object.
+ */
 function parseAccessProfileResponse(accessProfileResponse) {
   // APS v3 uses URL safe Base 64 encoding (and not the usual Base 64 encoding which atob is designed to decode)
   // The only difference between the two encodings is that the characters _ and - are replaced by / and + respectively
@@ -244,6 +250,11 @@ function parseAccessProfileResponse(accessProfileResponse) {
   return accessProfile;
 }
 
+/**
+ * Retrieves access profile data from the server.
+ * @returns {Promise<Object>} A promise that resolves to the access profile data.
+ * @throws {Error} If there is an error fetching the access profile data or if the access token is not available.
+ */
 async function getAccessProfileData() {
   const locale = getLocale();
   const environment = getEnvironment();
@@ -277,6 +288,9 @@ async function getAccessProfileData() {
   });
 }
 
+/**
+ * Sets the profile object based on the access profile data.
+ */
 export function setProfileObject() {
   getAccessProfileData().then((accessProfile) => {
     if (accessProfile.appProfile.accessibleItems?.length) {
