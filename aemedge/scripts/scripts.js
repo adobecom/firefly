@@ -17,15 +17,12 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
-import { setLibs, decorateArea, getFeaturesArray, getEnvironment } from './utils.js';
+import { setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, setProfileObject } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
+import { APS_API_STAGE, APS_API_PROD, UDS_PROD_URL, UDS_STAGE_URL } from './constants.js';
 
-const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
-const UDS_PROD_URL = 'https://uds.adobe-identity.com';
-const UPGRADE_API_STAGE = 'https://aps-web-stage.adobe.io';
-const UPGRADE_API_PROD = 'https://aps-web.adobe.io';
 const darkMode = window?.matchMedia('(prefers-color-scheme: dark)')?.matches || false;
 const environment = getEnvironment();
 
@@ -328,54 +325,6 @@ async function headerModal() {
   });
 }
 
-// Fetch locale from browser or cookie
-const FALLBACK_LOCALE = "en-US";
-
-function normalizeLocale(locale) {
-  const lowerCaseLocale = locale.toLowerCase();
-
-  // Handle Chinese locales
-  if (lowerCaseLocale.startsWith('zh')) {
-    if (lowerCaseLocale.includes("hans")) {
-      return "zh-Hans-CN";
-    }
-    if (lowerCaseLocale.includes("hant")) {
-      return "zh-Hant-TW";
-    }
-  }
-
-  // Handle English locale
-  const [language, region] = lowerCaseLocale.split(/[-_]/);
-  if (language.includes('en')) {
-    return FALLBACK_LOCALE;
-  }
-
-  // Default normalization for other locales
-  if (region) {
-    return `${language}-${region.toUpperCase()}`;
-  }
-
-  return FALLBACK_LOCALE;
-}
-
-export function getLocale() {
-  const match = document.cookie.match(/(^| )locale=([^;]+)/);
-  if (match) {
-    return normalizeLocale(match[2]);
-  }
-
-  const browserLocale = navigator.language || navigator.userLanguage;
-  if (browserLocale) {
-    return normalizeLocale(browserLocale);
-  }
-
-  return FALLBACK_LOCALE;
-}
-
-export function convertLocaleFormat(locale) {
-  return locale.replace('-', '_');
-}
-
 // Process i18n text
 const langStoreCache = {
   cache: new Map(),
@@ -556,7 +505,7 @@ export function buildAutoBlocks(main) {
 
 async function loadUpgradeModal() {
   const locale = getLocale() || 'en-US';
-  let upgradeUrl = (environment === 'prod') ? UPGRADE_API_PROD : UPGRADE_API_STAGE;
+  let upgradeUrl = (environment === 'prod') ? APS_API_PROD : APS_API_STAGE;
   upgradeUrl = `${upgradeUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
   if (!window.adobeIMS) return;
   const authToken = window.adobeIMS.getAccessToken()?.token;
@@ -772,10 +721,8 @@ async function loadFireflyHeaderComponents() {
 }
 
 async function loadPage() {
-  // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
-  // eslint-disable-next-line no-unused-vars
-  const config = setConfig({ ...CONFIG, miloLibs });
+  setConfig({ ...CONFIG, miloLibs });
   loadFonts();
   decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
@@ -785,6 +732,7 @@ async function loadPage() {
   setTimeout(async () => {
     await overrideUNAV();
     await loadFireflyHeaderComponents();
+    setProfileObject();
   }, 0);
   setTimeout(() => {
     headerModal();

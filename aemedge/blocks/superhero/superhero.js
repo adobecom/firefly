@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { getLibs, createOptimizedFireflyPicture } from '../../scripts/utils.js';
-import { getI18nValue, getLocale } from '../../scripts/scripts.js';
+import { getLibs, createOptimizedFireflyPicture, getLocale } from '../../scripts/utils.js';
+import { getI18nValue } from '../../scripts/scripts.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
 const { createTag, getConfig } = await import(`${getLibs()}/utils/utils.js`);
