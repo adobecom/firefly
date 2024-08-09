@@ -77,36 +77,63 @@ function buildNav(dir, carousel) {
 }
 
 function buildSlide(slide, index, featuresArray) {
-  [...slide.children].forEach((div) => {
-    div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
-    if (div.querySelector('picture')) {
-      const img = div.querySelector('img').src;
-      const { alt } = div.querySelector('img');
-      div.querySelector('picture').replaceWith(createOptimizedPicture(img, alt, false, [{ width: '350' }]));
-    }
-  });
-  const firstDiv = slide.querySelector('div');
-  const featureFlagEl = firstDiv.querySelector('code');
-  if (featureFlagEl) {
-    const featureFlag = featureFlagEl.innerText.trim();
-    firstDiv.removeChild(featureFlagEl.parentElement);
-    if (!featuresArray.includes(featureFlag)) {
-      return null;
-    }
+  const divs = [...slide.children];
+
+  // Handle the image container (First div)
+  const imageDiv = divs[0];
+  if (imageDiv && imageDiv.querySelector('picture')) {
+    imageDiv.className = 'cards-card-image';
+    const img = imageDiv.querySelector('img').src;
+    const { alt } = imageDiv.querySelector('img');
+    imageDiv.querySelector('picture').replaceWith(createOptimizedPicture(img, alt, false, [{ width: '350' }]));
   }
-  filteredSlides += 1;
-  const icon = slide.querySelector('.icon');
-  if (icon) {
-    icon.parentElement.replaceWith(icon);
+
+  // Handle the card body content (Second div)
+  const bodyDiv = divs[1];
+  if (bodyDiv) {
+    bodyDiv.className = 'cards-card-body';
   }
-  const video = firstDiv.querySelector('a');
+
+  // Handle feature flags (Third div)
+  const featureFlagDiv = divs[2];
+  if (featureFlagDiv) {
+    const featureFlagText = featureFlagDiv.innerText.trim().toLowerCase();
+    if (featureFlagText) {
+      const featureFlags = featureFlagText.split(',').map((flag) => flag.trim().toLowerCase());
+
+      const lowerCaseFeaturesArray = featuresArray.map((f) => f.toLowerCase());
+
+      // Check if feature flags are present in featuresArray or window.profile
+      const checkFlags = (flags) => flags.every((flag) => {
+        const inFeaturesArray = lowerCaseFeaturesArray.includes(flag);
+
+        const inProfile = window.profile && Object.keys(window.profile).some((key) => key.toLowerCase() === flag && window.profile[key] === true);
+        return inFeaturesArray || inProfile;
+      });
+
+      let isFeatureEnabled = false;
+
+      if (featureFlags.length === 1) {
+        isFeatureEnabled = checkFlags(featureFlags);
+      } else if (featureFlags.length > 1) {
+        isFeatureEnabled = checkFlags(featureFlags);
+      }
+
+      if (!isFeatureEnabled) {
+        return null;
+      }
+    }
+    featureFlagDiv.remove();
+  }
+
+  const video = imageDiv.querySelector('a');
   if (video) {
-    const image = firstDiv.querySelector('img');
-    const picture = firstDiv.querySelector('picture');
+    const image = imageDiv.querySelector('img');
+    const picture = imageDiv.querySelector('picture');
     const videoLink = video.href;
     const videoEl = document.createElement('video');
     videoEl.src = videoLink;
-    videoEl.controls = false; // Hide video controls
+    videoEl.controls = false;
     videoEl.autoplay = false;
     videoEl.muted = true;
     videoEl.loop = true;
@@ -132,38 +159,42 @@ function buildSlide(slide, index, featuresArray) {
       videoEl.classList.add('hide');
       image.classList.remove('hide');
     });
-    firstDiv.parentElement.prepend(videoEl);
-    firstDiv.parentElement.prepend(image);
-    if (icon) {
-      firstDiv.parentElement.prepend(icon);
-    }
-    firstDiv.remove();
+
+    imageDiv.parentElement.prepend(videoEl);
+    imageDiv.parentElement.prepend(image);
   }
+
   slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
   slide.setAttribute('data-slide-index', index);
   slide.classList.add('cards-carousel-slide');
   slide.setAttribute('role', 'tabpanel');
   slide.setAttribute('aria-describedby', `${SLIDE_CONTROL_ID_PREFIX}${index}`);
-  slide.setAttribute('tabindex', index === 0 ? '-1' : '-1');
+  slide.setAttribute('tabindex', '-1');
+
   const link = slide.querySelector('a');
-  const linkWrapper = document.createElement('div');
-  linkWrapper.classList.add('card-link');
-  linkWrapper.append(link.parentElement);
-  slide.append(linkWrapper);
-  const href = link?.href;
-  if (href) {
-    slide.classList.add('card-with-link');
-    slide.addEventListener('click', () => {
-      document.location.href = href;
-      const analyticsEvent = makeFinalPayload({
-        'event.subcategory': 'Landing Page',
-        'event.subtype': 'feature',
-        'event.type': 'click',
-        'event.value': slide.querySelector('.cards-card-body h3').innerText,
+  if (link) {
+    const linkWrapper = document.createElement('div');
+    linkWrapper.classList.add('card-link');
+    linkWrapper.append(link.parentElement);
+    slide.append(linkWrapper);
+
+    const { href } = link;
+    if (href) {
+      slide.classList.add('card-with-link');
+      slide.addEventListener('click', () => {
+        document.location.href = href;
+        const analyticsEvent = makeFinalPayload({
+          'event.subcategory': 'Landing Page',
+          'event.subtype': 'feature',
+          'event.type': 'click',
+          'event.value': slide.querySelector('.cards-card-body h3').innerText,
+        });
+        ingestAnalytics([analyticsEvent]);
       });
-      ingestAnalytics([analyticsEvent]);
-    });
+    }
   }
+
+  filteredSlides += 1;
   return slide;
 }
 
