@@ -13,6 +13,29 @@
  */
 import { FEATURES_API_STAGE, FEATURES_API_PROD, APS_API_PROD, APS_API_STAGE } from './constants.js';
 
+const FIREFLY_FI = 'firefly_credits';
+const AccessibleItemStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+};
+
+const FeatureKeys = {
+  BASIC: 'basic',
+  PREMIUM: 'premium',
+  HARD_CAPPED: 'hard_capped',
+  SOFT_CAPPED: 'soft_capped',
+  K12: 'k12',
+};
+
+const profile = {
+  isPremium: false,
+  isHardCapped: false,
+  isSoftCapped: false,
+  isK12: false,
+  isFree: false,
+  isEnterprise: false,
+};
+
 /**
  * The decision engine for where to get Milo's libs from.
  */
@@ -207,27 +230,79 @@ export async function getFeaturesArray() {
   return featuresArray;
 }
 
-export async function getAccessProfileData() {
+function parseAccessProfileResponse(accessProfileResponse) {
+  // APS v3 uses URL safe Base 64 encoding (and not the usual Base 64 encoding which atob is designed to decode)
+  // The only difference between the two encodings is that the characters _ and - are replaced by / and + respectively
+  // https://www.rfc-editor.org/rfc/rfc4648#section-5
+  const responsePayload = atob(
+    accessProfileResponse.asnp.payload.replace(/_/g, '/').replace(/-/g, '+'),
+  );
+  const accessProfile = JSON.parse(responsePayload);
+  if (accessProfileResponse.workflow?.entryUrl) {
+    accessProfile.paywallURL = accessProfileResponse.workflow.entryUrl.toString();
+  }
+  return accessProfile;
+}
+
+async function getAccessProfileData() {
   const locale = getLocale();
   const environment = getEnvironment();
   const apsUrl = environment === 'stage' ? APS_API_STAGE : APS_API_PROD;
   const url = `${apsUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
-  getAccessToken().then(async (accessToken) => {
-    if (accessToken) {
-      const resp = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'x-api-key': 'clio-playground-web',
-          Authorization: `Bearer ${window.adobeIMS.getAccessToken()?.token}`,
-          'Content-Type': 'application/json',
-        },
-        body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"${locale}"}}
+  return new Promise((resolve, reject) => {
+    getAccessToken().then(async (accessToken) => {
+      if (accessToken) {
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'x-api-key': 'clio-playground-web',
+            Authorization: `Bearer ${window.adobeIMS.getAccessToken()?.token}`,
+            'Content-Type': 'application/json',
+          },
+          body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"${locale}"}}
 `,
-      });
-      if (resp.ok) {
-        const respJson = await resp.json();
-        console.log('Access Profile Data:', respJson);
+        });
+        if (resp.ok) {
+          const respJson = await resp.json();
+          resolve(parseAccessProfileResponse(respJson));
+        } else {
+          reject(new Error('Failed to fetch access profile data'));
+        }
+      } else {
+        reject(new Error('Access token not available'));
       }
+    }).catch((error) => {
+      reject(error);
+    });
+  });
+}
+
+export function setProfileObject() {
+  getAccessProfileData().then((accessProfile) => {
+    if (accessProfile.appProfile.accessibleItems?.length) {
+      accessProfile.appProfile.accessibleItems.forEach((accessibleItem) => {
+        if (accessibleItem.status !== AccessibleItemStatus.ACTIVE) {
+          return;
+        }
+        if (!accessibleItem.fulfillable_items) {
+          return;
+        }
+        const fireflyFi = accessibleItem.fulfillable_items[FIREFLY_FI];
+        if (fireflyFi) {
+          const featureSets = fireflyFi.feature_sets;
+          if (featureSets) {
+            profile.isFree = !!featureSets[FeatureKeys.BASIC]?.enabled;
+            profile.isHardCapped = !!featureSets[FeatureKeys.HARD_CAPPED]?.enabled;
+            profile.isSoftCapped = !!featureSets[FeatureKeys.SOFT_CAPPED]?.enabled;
+            profile.isK12 = !!featureSets[FeatureKeys.K12]?.enabled;
+            profile.isPremium = !!featureSets[FeatureKeys.PREMIUM]?.enabled;
+          }
+        }
+      });
     }
+    if (accessProfile.userProfile) {
+      profile.isEnterprise = !!accessProfile.userProfile.accountType?.toLowerCase() !== 'type1';
+    }
+    window.profile = profile;
   });
 }

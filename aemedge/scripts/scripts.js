@@ -17,7 +17,7 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
-import { setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, getAccessProfileData } from './utils.js';
+import { setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, setProfileObject } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -721,11 +721,8 @@ async function loadFireflyHeaderComponents() {
 }
 
 async function loadPage() {
-  getAccessProfileData();
-  // eslint-disable-next-line no-unused-vars
   const { loadArea, setConfig, loadMartech } = await import(`${miloLibs}/utils/utils.js`);
-  // eslint-disable-next-line no-unused-vars
-  const config = setConfig({ ...CONFIG, miloLibs });
+  setConfig({ ...CONFIG, miloLibs });
   loadFonts();
   decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
@@ -735,6 +732,7 @@ async function loadPage() {
   setTimeout(async () => {
     await overrideUNAV();
     await loadFireflyHeaderComponents();
+    setProfileObject();
   }, 0);
   setTimeout(() => {
     headerModal();
