@@ -325,7 +325,7 @@ export function setProfileObject() {
       });
     }
     if (accessProfile.userProfile) {
-      profile.isEnterprise = !!accessProfile.userProfile.accountType?.toLowerCase() !== 'type1';
+      profile.isEnterprise = !!(accessProfile.userProfile.accountType?.toLowerCase() !== 'type1');
     }
     profile.isSignedIn = true;
     window.profile = profile;
