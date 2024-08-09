@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-cycle */
 /*
  * Copyright 2022 Adobe. All rights reserved.
@@ -10,9 +11,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-const FEATURES_API_STAGE = 'https://p13n-stage.adobe.io';
-const FEATURES_API_PROD = 'https://p13n.adobe.io';
+import { FEATURES_API_STAGE, FEATURES_API_PROD, APS_API_PROD, APS_API_STAGE } from './constants.js';
 
 /**
  * The decision engine for where to get Milo's libs from.
@@ -96,19 +95,30 @@ export function createOptimizedFireflyPicture(
   return picture;
 }
 
-export async function getAccessToken() {
-  const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
-  let authToken;
-  if (!window.adobeIMS) {
-    loadIms().then(async () => {
-      authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-    }).catch(() => {
-      authToken = null;
-    });
-  } else {
-    authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
-  }
-  return authToken;
+export function getAccessToken() {
+  return new Promise((resolve, reject) => {
+    import(`${getLibs()}/utils/utils.js`)
+      .then(({ loadIms }) => {
+        let authToken;
+        if (!window.adobeIMS) {
+          loadIms()
+            .then(() => {
+              authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+              resolve(authToken);
+            })
+            .catch(() => {
+              authToken = null;
+              resolve(authToken);
+            });
+        } else {
+          authToken = window.adobeIMS.isSignedInUser() ? window.adobeIMS.getAccessToken().token : null;
+          resolve(authToken);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 /**
@@ -121,6 +131,54 @@ export function getEnvironment() {
     return 'stage';
   }
   return 'prod';
+}
+
+// Fetch locale from browser or cookie
+const FALLBACK_LOCALE = 'en-US';
+
+function normalizeLocale(locale) {
+  const lowerCaseLocale = locale.toLowerCase();
+
+  // Handle Chinese locales
+  if (lowerCaseLocale.startsWith('zh')) {
+    if (lowerCaseLocale.includes('hans')) {
+      return 'zh-Hans-CN';
+    }
+    if (lowerCaseLocale.includes('hant')) {
+      return 'zh-Hant-TW';
+    }
+  }
+
+  // Handle English locale
+  const [language, region] = lowerCaseLocale.split(/[-_]/);
+  if (language.includes('en')) {
+    return FALLBACK_LOCALE;
+  }
+
+  // Default normalization for other locales
+  if (region) {
+    return `${language}-${region.toUpperCase()}`;
+  }
+
+  return FALLBACK_LOCALE;
+}
+
+export function getLocale() {
+  const match = document.cookie.match(/(^| )locale=([^;]+)/);
+  if (match) {
+    return normalizeLocale(match[2]);
+  }
+
+  const browserLocale = navigator.language || navigator.userLanguage;
+  if (browserLocale) {
+    return normalizeLocale(browserLocale);
+  }
+
+  return FALLBACK_LOCALE;
+}
+
+export function convertLocaleFormat(locale) {
+  return locale.replace('-', '_');
 }
 
 /**
@@ -147,4 +205,29 @@ export async function getFeaturesArray() {
   }
   window.featuresArray = featuresArray;
   return featuresArray;
+}
+
+export async function getAccessProfileData() {
+  const locale = getLocale();
+  const environment = getEnvironment();
+  const apsUrl = environment === 'stage' ? APS_API_STAGE : APS_API_PROD;
+  const url = `${apsUrl}/webapps/access_profile/v3?include_disabled_fis=true`;
+  getAccessToken().then(async (accessToken) => {
+    if (accessToken) {
+      const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'x-api-key': 'clio-playground-web',
+          Authorization: `Bearer ${window.adobeIMS.getAccessToken()?.token}`,
+          'Content-Type': 'application/json',
+        },
+        body: `{"appDetails":{"nglAppId":"Firefly1","nglAppVersion":"1.0","nglLibRuntimeMode":"NAMED_USER_ONLINE","locale":"${locale}"}}
+`,
+      });
+      if (resp.ok) {
+        const respJson = await resp.json();
+        console.log('Access Profile Data:', respJson);
+      }
+    }
+  });
 }

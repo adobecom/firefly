@@ -1,7 +1,7 @@
 /* eslint-disable quote-props */
 /* eslint-disable no-underscore-dangle */
-import { getLibs, getEnvironment } from '../../scripts/utils.js';
-import { getI18nValue, getLocale } from '../../scripts/scripts.js';
+import { getLibs, getEnvironment, getLocale } from '../../scripts/utils.js';
+import { getI18nValue } from '../../scripts/scripts.js';
 
 const { loadIms } = await import(`${getLibs()}/utils/utils.js`);
 
