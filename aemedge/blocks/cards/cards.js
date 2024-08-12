@@ -1,11 +1,26 @@
-import { createOptimizedFireflyPicture } from '../../scripts/utils.js';
+import { createOptimizedFireflyPicture, getFeaturesArray, checkFeatureFlags } from '../../scripts/utils.js';
 import { decorateI18n } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  /* change to ul, li */
+  const featuresArray = await getFeaturesArray();
+
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
+    const columns = [...row.children];
+
+    // Handle feature flags (Third column)
+    const featureFlagDiv = columns[2];
+    if (featureFlagDiv) {
+      const featureFlagText = featureFlagDiv.innerText.trim().toLowerCase();
+      const isFeatureEnabled = checkFeatureFlags(featureFlagText, featuresArray, window.profile);
+
+      if (!isFeatureEnabled) {
+        return;
+      }
+      featureFlagDiv.remove(); // Remove the feature flag div from the DOM
+    }
+
     while (row.firstElementChild) {
       const col = row.firstElementChild;
       if (col.querySelector('picture')) {

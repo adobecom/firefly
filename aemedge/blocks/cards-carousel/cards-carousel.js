@@ -2,7 +2,7 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
-import { getFeaturesArray } from '../../scripts/utils.js';
+import { getFeaturesArray, checkFeatureFlags } from '../../scripts/utils.js';
 import { decorateIcons, createOptimizedPicture } from '../../scripts/aem.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
@@ -79,7 +79,6 @@ function buildNav(dir, carousel) {
 function buildSlide(slide, index, featuresArray) {
   const divs = [...slide.children];
 
-  // Handle the image container (First div)
   const imageDiv = divs[0];
   if (imageDiv && imageDiv.querySelector('picture')) {
     imageDiv.className = 'cards-card-image';
@@ -88,7 +87,6 @@ function buildSlide(slide, index, featuresArray) {
     imageDiv.querySelector('picture').replaceWith(createOptimizedPicture(img, alt, false, [{ width: '350' }]));
   }
 
-  // Handle the card body content (Second div)
   const bodyDiv = divs[1];
   if (bodyDiv) {
     bodyDiv.className = 'cards-card-body';
@@ -98,32 +96,12 @@ function buildSlide(slide, index, featuresArray) {
   const featureFlagDiv = divs[2];
   if (featureFlagDiv) {
     const featureFlagText = featureFlagDiv.innerText.trim().toLowerCase();
-    if (featureFlagText) {
-      const featureFlags = featureFlagText.split(',').map((flag) => flag.trim().toLowerCase());
+    const isFeatureEnabled = checkFeatureFlags(featureFlagText, featuresArray, window.profile);
 
-      const lowerCaseFeaturesArray = featuresArray.map((f) => f.toLowerCase());
-
-      // Check if feature flags are present in featuresArray or window.profile
-      const checkFlags = (flags) => flags.every((flag) => {
-        const inFeaturesArray = lowerCaseFeaturesArray.includes(flag);
-
-        const inProfile = window.profile && Object.keys(window.profile).some((key) => key.toLowerCase() === flag && window.profile[key] === true);
-        return inFeaturesArray || inProfile;
-      });
-
-      let isFeatureEnabled = false;
-
-      if (featureFlags.length === 1) {
-        isFeatureEnabled = checkFlags(featureFlags);
-      } else if (featureFlags.length > 1) {
-        isFeatureEnabled = checkFlags(featureFlags);
-      }
-
-      if (!isFeatureEnabled) {
-        return null;
-      }
+    if (!isFeatureEnabled) {
+      return null;
     }
-    featureFlagDiv.remove();
+    featureFlagDiv.remove(); // Remove the feature flag div from the DOM
   }
 
   const video = imageDiv.querySelector('a');

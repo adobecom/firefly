@@ -19,7 +19,7 @@
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, setProfileObject,
+  setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, setProfileObject, checkFeatureFlags,
 } from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
@@ -692,15 +692,7 @@ async function navFeatureFlagCheck() {
   if (!topnavWrapper) return;
 
   const navItems = topnavWrapper.querySelectorAll('.feds-navItem');
-
   const featureFlagRegex = /\?\((.*?)\)/;
-
-  const lowerCaseFeaturesArray = featuresArray.map((f) => f.toLowerCase());
-  const normalizedProfile = window.profile
-    ? Object.fromEntries(
-      Object.entries(window.profile).map(([key, value]) => [key.toLowerCase(), value]),
-    )
-    : {};
 
   navItems.forEach((item) => {
     const anchor = item.querySelector('a');
@@ -709,15 +701,10 @@ async function navFeatureFlagCheck() {
       const match = originalHtml.match(featureFlagRegex);
 
       if (match) {
-        const featureFlags = match[1].split(',').map((flag) => flag.trim().toLowerCase());
+        const featureFlagText = match[1].toLowerCase();
+        const isFeatureEnabled = checkFeatureFlags(featureFlagText, featuresArray, window.profile);
 
-        const allFlagsPresent = featureFlags.every((flag) => {
-          const inFeaturesArray = lowerCaseFeaturesArray.includes(flag);
-          const inProfile = normalizedProfile[flag] === true;
-          return inFeaturesArray || inProfile;
-        });
-
-        if (allFlagsPresent) {
+        if (isFeatureEnabled) {
           const updatedHtml = originalHtml.replace(featureFlagRegex, '').trim();
           anchor.innerHTML = updatedHtml;
         } else {

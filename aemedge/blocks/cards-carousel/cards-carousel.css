@@ -74,7 +74,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 200px;
+  width: 128px;
   height: 100%;
   background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 1));
 }
@@ -84,7 +84,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 128px;
   height: 100%;
   z-index: 1;
   background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 1));
