@@ -37,6 +37,7 @@ const profile = {
   isEnterprise: false,
   isSignedIn: false,
   isZeroGBUser: false,
+  isRestricted: false,
 };
 
 /**
