@@ -2,7 +2,7 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable func-names */
 
-import { getFeaturesArray } from '../../scripts/utils.js';
+import { getFeaturesArray, checkFeatureFlags } from '../../scripts/utils.js';
 import { decorateIcons, createOptimizedPicture } from '../../scripts/aem.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
 
@@ -77,36 +77,41 @@ function buildNav(dir, carousel) {
 }
 
 function buildSlide(slide, index, featuresArray) {
-  [...slide.children].forEach((div) => {
-    div.className = div.querySelector('picture') ? 'cards-card-image' : 'cards-card-body';
-    if (div.querySelector('picture')) {
-      const img = div.querySelector('img').src;
-      const { alt } = div.querySelector('img');
-      div.querySelector('picture').replaceWith(createOptimizedPicture(img, alt, false, [{ width: '350' }]));
-    }
-  });
-  const firstDiv = slide.querySelector('div');
-  const featureFlagEl = firstDiv.querySelector('code');
-  if (featureFlagEl) {
-    const featureFlag = featureFlagEl.innerText.trim();
-    firstDiv.removeChild(featureFlagEl.parentElement);
-    if (!featuresArray.includes(featureFlag)) {
+  const divs = [...slide.children];
+
+  const imageDiv = divs[0];
+  if (imageDiv && imageDiv.querySelector('picture')) {
+    imageDiv.className = 'cards-card-image';
+    const img = imageDiv.querySelector('img').src;
+    const { alt } = imageDiv.querySelector('img');
+    imageDiv.querySelector('picture').replaceWith(createOptimizedPicture(img, alt, false, [{ width: '350' }]));
+  }
+
+  const bodyDiv = divs[1];
+  if (bodyDiv) {
+    bodyDiv.className = 'cards-card-body';
+  }
+
+  // Handle feature flags (Third div)
+  const featureFlagDiv = divs[2];
+  if (featureFlagDiv) {
+    const featureFlagText = featureFlagDiv.innerText.trim().toLowerCase();
+    const isFeatureEnabled = checkFeatureFlags(featureFlagText, featuresArray, window.profile);
+
+    if (!isFeatureEnabled) {
       return null;
     }
+    featureFlagDiv.remove(); // Remove the feature flag div from the DOM
   }
-  filteredSlides += 1;
-  const icon = slide.querySelector('.icon');
-  if (icon) {
-    icon.parentElement.replaceWith(icon);
-  }
-  const video = firstDiv.querySelector('a');
+
+  const video = imageDiv.querySelector('a');
   if (video) {
-    const image = firstDiv.querySelector('img');
-    const picture = firstDiv.querySelector('picture');
+    const image = imageDiv.querySelector('img');
+    const picture = imageDiv.querySelector('picture');
     const videoLink = video.href;
     const videoEl = document.createElement('video');
     videoEl.src = videoLink;
-    videoEl.controls = false; // Hide video controls
+    videoEl.controls = false;
     videoEl.autoplay = false;
     videoEl.muted = true;
     videoEl.loop = true;
@@ -132,38 +137,42 @@ function buildSlide(slide, index, featuresArray) {
       videoEl.classList.add('hide');
       image.classList.remove('hide');
     });
-    firstDiv.parentElement.prepend(videoEl);
-    firstDiv.parentElement.prepend(image);
-    if (icon) {
-      firstDiv.parentElement.prepend(icon);
-    }
-    firstDiv.remove();
+
+    imageDiv.parentElement.prepend(videoEl);
+    imageDiv.parentElement.prepend(image);
   }
+
   slide.setAttribute('id', `${SLIDE_ID_PREFIX}${index}`);
   slide.setAttribute('data-slide-index', index);
   slide.classList.add('cards-carousel-slide');
   slide.setAttribute('role', 'tabpanel');
   slide.setAttribute('aria-describedby', `${SLIDE_CONTROL_ID_PREFIX}${index}`);
-  slide.setAttribute('tabindex', index === 0 ? '-1' : '-1');
+  slide.setAttribute('tabindex', '-1');
+
   const link = slide.querySelector('a');
-  const linkWrapper = document.createElement('div');
-  linkWrapper.classList.add('card-link');
-  linkWrapper.append(link.parentElement);
-  slide.append(linkWrapper);
-  const href = link?.href;
-  if (href) {
-    slide.classList.add('card-with-link');
-    slide.addEventListener('click', () => {
-      document.location.href = href;
-      const analyticsEvent = makeFinalPayload({
-        'event.subcategory': 'Landing Page',
-        'event.subtype': 'feature',
-        'event.type': 'click',
-        'event.value': slide.querySelector('.cards-card-body h3').innerText,
+  if (link) {
+    const linkWrapper = document.createElement('div');
+    linkWrapper.classList.add('card-link');
+    linkWrapper.append(link.parentElement);
+    slide.append(linkWrapper);
+
+    const { href } = link;
+    if (href) {
+      slide.classList.add('card-with-link');
+      slide.addEventListener('click', () => {
+        document.location.href = href;
+        const analyticsEvent = makeFinalPayload({
+          'event.subcategory': 'Landing Page',
+          'event.subtype': 'feature',
+          'event.type': 'click',
+          'event.value': slide.querySelector('.cards-card-body h3').innerText,
+        });
+        ingestAnalytics([analyticsEvent]);
       });
-      ingestAnalytics([analyticsEvent]);
-    });
+    }
   }
+
+  filteredSlides += 1;
   return slide;
 }
 

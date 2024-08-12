@@ -1,6 +1,6 @@
 // constants.js
-
 // API constants
+
 export const UDS_STAGE_URL = 'https://uds-stg.adobe-identity.com';
 export const UDS_PROD_URL = 'https://uds.adobe-identity.com';
 export const APS_API_STAGE = 'https://aps-web-stage.adobe.io';

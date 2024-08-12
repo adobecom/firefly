@@ -212,6 +212,10 @@ export function convertLocaleFormat(locale) {
  * @returns {Promise<Array>} A promise that resolves to an array of features.
  */
 export async function getFeaturesArray() {
+  if (window.featuresArray) {
+    return window.featuresArray;
+  }
+
   const authToken = await getAccessToken();
   const environment = getEnvironment();
   const featuresUrl = environment === 'stage' ? FEATURES_API_STAGE : FEATURES_API_PROD;
@@ -329,5 +333,33 @@ export function setProfileObject() {
     }
     profile.isSignedIn = true;
     window.profile = profile;
+  });
+}
+
+/**
+ * Check Feature Flags helper function to how/hide content based on the feature flag and window.profile.
+ */
+export function checkFeatureFlags(featureFlagText, featuresArray, windowProfile) {
+  if (!featureFlagText) return true; // Default to true if no flags are specified
+
+  const featureFlags = featureFlagText.split(',').map((flag) => flag.trim().toLowerCase());
+  const lowerCaseFeaturesArray = featuresArray.map((f) => f.toLowerCase());
+
+  const normalizedProfile = windowProfile
+    ? Object.fromEntries(
+      Object.entries(windowProfile).map(([key, value]) => [key.toLowerCase(), value]),
+    )
+    : {};
+
+  return featureFlags.every((flag) => {
+    const isNegated = flag.startsWith('!');
+    const normalizedFlag = isNegated ? flag.slice(1) : flag;
+    const inFeaturesArray = lowerCaseFeaturesArray.includes(normalizedFlag);
+    const inProfile = normalizedProfile[normalizedFlag];
+
+    if (isNegated) {
+      return !inFeaturesArray && inProfile === false;
+    }
+    return inFeaturesArray || inProfile === true;
   });
 }

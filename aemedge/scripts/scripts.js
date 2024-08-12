@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable quote-props */
@@ -17,7 +18,9 @@
 
 // import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 // eslint-disable-next-line import/no-cycle
-import { setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, setProfileObject } from './utils.js';
+import {
+  setLibs, decorateArea, getFeaturesArray, getEnvironment, getLocale, setProfileObject, checkFeatureFlags,
+} from './utils.js';
 import { openModal, createModal } from '../blocks/modal/modal.js';
 import { loadScript, decorateIcons, loadCSS } from './aem.js';
 import { initAnalytics, makeFinalPayload, ingestAnalytics, recordRenderPageEvent } from './analytics.js';
@@ -683,6 +686,35 @@ function decorateFireflyLogo(gnav) {
   }
 }
 
+async function navFeatureFlagCheck() {
+  const featuresArray = await getFeaturesArray();
+  const topnavWrapper = document.querySelector('.feds-topnav-wrapper');
+  if (!topnavWrapper) return;
+
+  const navItems = topnavWrapper.querySelectorAll('.feds-navItem');
+  const featureFlagRegex = /\?\((.*?)\)/;
+
+  navItems.forEach((item) => {
+    const anchor = item.querySelector('a');
+    if (anchor) {
+      const originalHtml = anchor.innerHTML.trim();
+      const match = originalHtml.match(featureFlagRegex);
+
+      if (match) {
+        const featureFlagText = match[1].toLowerCase();
+        const isFeatureEnabled = checkFeatureFlags(featureFlagText, featuresArray, window.profile);
+
+        if (isFeatureEnabled) {
+          const updatedHtml = originalHtml.replace(featureFlagRegex, '').trim();
+          anchor.innerHTML = updatedHtml;
+        } else {
+          item.remove();
+        }
+      }
+    }
+  });
+}
+
 async function translateNavItems() {
   const navWrapper = document.querySelector('.feds-nav-wrapper');
   if (!navWrapper) return;
@@ -691,6 +723,7 @@ async function translateNavItems() {
 }
 
 async function loadFireflyHeaderComponents() {
+  await navFeatureFlagCheck();
   await translateNavItems();
   const resp = await fetch('/gnav.plain.html');
   if (resp.ok) {
@@ -727,12 +760,12 @@ async function loadPage() {
   decorateIcons(document.querySelector('main'));
   await decorateI18n(document.querySelector('main'));
   buildAutoBlocks(document.querySelector('main'));
+  setProfileObject();
   await loadArea();
   loadProfile();
   setTimeout(async () => {
     await overrideUNAV();
     await loadFireflyHeaderComponents();
-    setProfileObject();
   }, 0);
   setTimeout(() => {
     headerModal();
