@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /*
  * Fragment Block
  * Include content on a page as a fragment.
@@ -6,6 +7,7 @@
 
 // import { decorateMain } from '../../scripts/scripts.js';
 import { decorateButtons, decorateIcons, decorateSections, decorateBlocks, loadBlocks } from '../../scripts/aem.js';
+import { decorateI18n } from '../../scripts/scripts.js';
 
 /**
  * Loads a fragment.
@@ -34,6 +36,7 @@ export async function loadFragment(path) {
       resetAttributeBase('img', 'src');
       resetAttributeBase('source', 'srcset');
 
+      decorateI18n(main);
       decorateButtons(main);
       decorateIcons(main);
       // buildAutoBlocks(main);
