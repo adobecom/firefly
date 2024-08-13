@@ -682,7 +682,7 @@
   "@clio/playground:home-page-modules-aria-label-previous": "Предыдущая страница модулей",
   "@clio/playground:home-page-modules-desc": "Опробуйте новые улучшения Firefly и других технологий генеративного ИИ и поделитесь с нами своим мнением!",
   "@clio/playground:home-page-modules-header": "Создать с помощью генеративного ИИ",
-  "@clio/playground:home-page-popcorn-description": "Generate a unique video sequence using a detailed description.",
+  "@clio/playground:home-page-popcorn-description": "Создайте уникальную последовательность видео, используя подробное описание.",
   "@clio/playground:home-page-popcorn-title": "Project Popcorn",
   "@clio/playground:home-page-recolor-deep-link": "https://creativecloud.adobe.com/campaign/illustrator?locale=ru&workflow=launch&id=EEE_202306_generative-recolor_Recolor-your-artwork-in-seconds&min-version=27.9&uri=adbai%3A%2F%2Fapp%2Fv1%3Fconsumer.name%3DHelpX%26exp.campaign_id%3DEEE_202306_generative-recolor_Recolor-your-artwork-in-seconds%26source.name%3DILST%26source.version%3D27.9%26content.type%3DcmAppFeatures%26headless%3Dtrue%26action%3DLearnAndSearch%26env.com.name%3DUnified-Panel%26owner%3DE2E%2520Enablement%26sampleFile%3Dhttps%253A%252F%252Fhelpx.adobe.com%252Fcontent%252Fdam%252Fhelp%252Fen%252Fillustrator%252Fusing%252Fgenerative-recolor%252FGenAI_Recolor.ai%26order%3DcmAppFeatures%26owner%3DE2E%2520Enablement%26c_1%3D1935764588%26dc_1%3DGenerative%2520Recolor%2520Art%2520Dialog%26command_type%3Dstatic%2Cdynamic%26tf_order%3Dc_1,dc_1",
   "@clio/playground:home-page-recolor-description": "Создайте цветные варианты своей векторной иллюстрации.",
