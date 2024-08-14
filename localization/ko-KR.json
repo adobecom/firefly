@@ -880,7 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "프롬프트 입력",
   "@clio/playground:prompt-bar-excluded-from-image": "{words, plural, =0 {​단어} =1 {​단어} other {​단어}} 개 제외됨",
   "@clio/playground:prompt-bar-generate-button-title": "생성하기",
-  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "주요 주제가 없습니다. 프롬프트에 \"{conceptId}\"​를 추가하여 생성하세요.",
   "@clio/playground:prompt-bar-input-label": "프롬프트",
   "@clio/playground:prompt-bar-input-text-label": "텍스트",
   "@clio/playground:prompt-bar-internal-error-tooltip": "프롬프트 제안을 사용할 수 없습니다. 나중에 다시 시도하세요.",
