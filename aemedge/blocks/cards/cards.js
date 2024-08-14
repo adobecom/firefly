@@ -1,5 +1,6 @@
-import { createOptimizedFireflyPicture, getFeaturesArray, checkFeatureFlags } from '../../scripts/utils.js';
+import { getFeaturesArray, checkFeatureFlags } from '../../scripts/utils.js';
 import { decorateI18n } from '../../scripts/scripts.js';
+import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   const featuresArray = await getFeaturesArray();
@@ -27,7 +28,7 @@ export default async function decorate(block) {
         col.className = 'cards-card-image';
         col.querySelectorAll('picture').forEach((picture, idx) => {
           const img = picture.querySelector('img');
-          const replacedPicture = createOptimizedFireflyPicture(img.src, img.alt, false, [{ width: '750' }]);
+          const replacedPicture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
           picture.replaceWith(replacedPicture);
 
           if (idx === 0) {
