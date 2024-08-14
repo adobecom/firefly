@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Immetti un prompt",
   "@clio/playground:prompt-bar-excluded-from-image": "Escluse {words, plural, =0 {word} =1 {word} other {words}}",
   "@clio/playground:prompt-bar-generate-button-title": "Genera",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Prompt",
   "@clio/playground:prompt-bar-input-text-label": "Testo",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Suggerimenti di prompt non disponibili. Riprova più tardi.",

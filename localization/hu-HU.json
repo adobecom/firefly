@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Adjon meg egy utasítást",
   "@clio/playground:prompt-bar-excluded-from-image": "Kizárva: {words, plural, =0 {word} =1 {word} other {words}}",
   "@clio/playground:prompt-bar-generate-button-title": "Létrehozás",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Utasítás",
   "@clio/playground:prompt-bar-input-text-label": "Szöveg",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Az utasításokkal kapcsolatos javaslatok nem elérhetők. Próbálja meg később.",

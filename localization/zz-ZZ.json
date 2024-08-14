@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "[BM] ćłìø_Enter a prompt_žż",
   "@clio/playground:prompt-bar-excluded-from-image": "[mk] ćłìø_Excluded {words, plural, =0 {word} =1 {word} other {words}}_žż",
   "@clio/playground:prompt-bar-generate-button-title": "[BN] ćłìø_Generate_žż",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "[8u] ćłìø_Missing primary subject. Add \"{conceptId}\" to your prompt to generate_žż",
   "@clio/playground:prompt-bar-input-label": "[oy] ćłìø_Prompt_žż",
   "@clio/playground:prompt-bar-input-text-label": "[qb] ćłìø_Text_žż",
   "@clio/playground:prompt-bar-internal-error-tooltip": "[pK] ćłìø_Prompt suggestions are unavailable. Please try again later._žż",

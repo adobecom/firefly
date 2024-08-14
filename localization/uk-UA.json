@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Уведіть запит",
   "@clio/playground:prompt-bar-excluded-from-image": "Виключено {words, plural, =0 {слово} =1 {слово} other {слова}}",
   "@clio/playground:prompt-bar-generate-button-title": "Створити",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Запит",
   "@clio/playground:prompt-bar-input-text-label": "Текст",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Рекомендації запитів недоступні. Повторіть спробу пізніше.",

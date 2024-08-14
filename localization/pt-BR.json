@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Insira uma solicitação",
   "@clio/playground:prompt-bar-excluded-from-image": "Excluída {words, plural, =0 {palavra} =1 {palavra} other {palavras}}",
   "@clio/playground:prompt-bar-generate-button-title": "Gerar",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Solicitação",
   "@clio/playground:prompt-bar-input-text-label": "Texto",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Sugestões de solicitações não estão disponíveis. Tente novamente mais tarde.",

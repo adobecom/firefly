@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Введите запрос",
   "@clio/playground:prompt-bar-excluded-from-image": "Исключено {words, plural, =0 {слов} =1 {слово} few {слова} many {слов} other {слов}}",
   "@clio/playground:prompt-bar-generate-button-title": "Создать",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Запрос",
   "@clio/playground:prompt-bar-input-text-label": "Текст",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Варианты запросов недоступны. Повторите попытку позже.",

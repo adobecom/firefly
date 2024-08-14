@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Napište zadání",
   "@clio/playground:prompt-bar-excluded-from-image": "Vyloučeno: {words, plural, =0 {slov} =1 {slovo} few {slova} other {slov}}",
   "@clio/playground:prompt-bar-generate-button-title": "Generovat",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Zadání",
   "@clio/playground:prompt-bar-input-text-label": "Text",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Návrhy zadání jsou dočasně nedostupné. Zkuste to znovu později.",

@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Wprowadź polecenie",
   "@clio/playground:prompt-bar-excluded-from-image": "Wykluczono {words, plural, =0 {słów} =1 {słowo} other {słowa(-ów)}}",
   "@clio/playground:prompt-bar-generate-button-title": "Generuj",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Polecenie",
   "@clio/playground:prompt-bar-input-text-label": "Tekst",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Propozycje poleceń są niedostępne. Spróbuj ponownie później.",

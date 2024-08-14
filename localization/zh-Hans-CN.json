@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "输入​提示",
   "@clio/playground:prompt-bar-excluded-from-image": "已​排除 {words, plural, =0 {​单词} =1 {​单词} other {​单词}}",
   "@clio/playground:prompt-bar-generate-button-title": "生成",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "提示",
   "@clio/playground:prompt-bar-input-text-label": "文本",
   "@clio/playground:prompt-bar-internal-error-tooltip": "提示​建议​不可​用。​请​稍​后​重​试。",

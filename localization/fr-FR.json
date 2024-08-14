@@ -880,6 +880,7 @@
   "@clio/playground:prompt-bar-enter-prompt-label": "Saisir un prompt",
   "@clio/playground:prompt-bar-excluded-from-image": "{words, plural, =0 {mot exclu} =1 {Mot exclu} other {Mots exclus}}",
   "@clio/playground:prompt-bar-generate-button-title": "Générer",
+  "@clio/playground:prompt-bar-generate-button-tool-tip-concept-id-missing": "Missing primary subject. Add \"{conceptId}\" to your prompt to generate",
   "@clio/playground:prompt-bar-input-label": "Prompt",
   "@clio/playground:prompt-bar-input-text-label": "Texte",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Les suggestions de prompts ne sont pas disponibles. Veuillez réessayer ultérieurement.",
