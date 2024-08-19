@@ -313,7 +313,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "JPG、PNG ファイル​のみ​サポート​さ​れ​てい​ます。",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "サンプル​プロ​ン​プ​ト​に​は​コンセプト「{conceptId}」​を​含める​必要​が​あり​ます",
   "@clio/playground:enterprise-sample-prompt-title": "サンプル​プロ​ン​プ​ト",
-  "@clio/playground:enterprise-sample-prompt-too-short": "サンプル​の​プロンプト​に​は 50 文字​以上​を​含める​必要​が​あり​ます。",
+  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 25 characters.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "モデル​の​効果​的​な​使用​方法​の​実例​を​反映​した​プロンプト​の​サンプル​を​追加",
   "@clio/playground:enterprise-sample-prompt-with-concept": "コンセプト​を​記述​した​サンプル​プロ​ン​プ​ト​を​入力",
   "@clio/playground:enterprise-select-images-title": "コンピューター​から​画像​を​選択",

@@ -313,7 +313,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "[vJ] ćłìø_Only jpg and png files are supported._žż",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "[4e] ćłìø_Sample prompt must contain the Concept \"{conceptId}\"_žż",
   "@clio/playground:enterprise-sample-prompt-title": "[t0] ćłìø_Sample prompt_žż",
-  "@clio/playground:enterprise-sample-prompt-too-short": "[8n] ćłìø_The sample prompt must contain at least 50 characters._žż",
+  "@clio/playground:enterprise-sample-prompt-too-short": "[8n] ćłìø_The sample prompt must contain at least 25 characters._žż",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "[vL] ćłìø_Add a sample prompt that reflects a practical example of how to effectively use your model_žż",
   "@clio/playground:enterprise-sample-prompt-with-concept": "[6x] ćłìø_Enter a sample prompt with a concept_žż",
   "@clio/playground:enterprise-select-images-title": "[t1] ćłìø_Select images from your computer_žż",

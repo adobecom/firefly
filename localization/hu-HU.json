@@ -313,7 +313,7 @@
   "@clio/playground:enterprise-reference-asset-invalid": "Csak a jpg- és png-fájlok támogatottak.",
   "@clio/playground:enterprise-sample-prompt-contains-no-concept-id": "A mintautasításnak tartalmaznia kell a Koncepciót: \"{conceptId}”",
   "@clio/playground:enterprise-sample-prompt-title": "Próbautasítás",
-  "@clio/playground:enterprise-sample-prompt-too-short": "A próbautasításnak legalább 50 karakterből kell állnia.",
+  "@clio/playground:enterprise-sample-prompt-too-short": "The sample prompt must contain at least 25 characters.",
   "@clio/playground:enterprise-sample-prompt-tool-tip": "Adjon hozzá egy próbautasítást, amely gyakorlatias példán keresztül bemutatja a modell hatékony használatának módját",
   "@clio/playground:enterprise-sample-prompt-with-concept": "Adjon meg egy mintautasítást koncepcióval",
   "@clio/playground:enterprise-select-images-title": "Válasszon fájlokat számítógépéről",
