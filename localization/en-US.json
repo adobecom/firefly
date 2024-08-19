@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Your media",
   "@clio/playground:autodub-home-page-queue-description": "Files will be permanently deleted after 7 days",
   "@clio/playground:autodub-home-page-sample-video-heading": "Sample Video",
-  "@clio/playground:autodub-home-page-subheading": "Input video format: .mp4, .mov, up to 60 fps, up to 4K<br></br>Input audio format: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Drag and drop your file",
   "@clio/playground:autodub-home-page-title-mobile": "Upload video or audio to translate it into a new language",
   "@clio/playground:autodub-home-page-upload-info-label": "For best results, upload a video with minimal background noise and movement",

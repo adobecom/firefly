@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Dine medier",
   "@clio/playground:autodub-home-page-queue-description": "Filer slettes permanent etter 7 dager",
   "@clio/playground:autodub-home-page-sample-video-heading": "Eksempelvideo",
-  "@clio/playground:autodub-home-page-subheading": "Videoformat for inndata: .mp4, .mov, opptil 60 bilder/sek, opptil 4K<br></br>Lydformat for inndata: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Dra og slipp filen din",
   "@clio/playground:autodub-home-page-title-mobile": "Last opp video eller lyd for å oversette det til et nytt språk",
   "@clio/playground:autodub-home-page-upload-info-label": "For å oppnå best resultat bør du laste opp en video med minimal bakgrunnsstøy og bevegelse",

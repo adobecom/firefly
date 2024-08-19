@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Medyanız",
   "@clio/playground:autodub-home-page-queue-description": "Dosyalar 7 gün sonra kalıcı olarak silinecektir",
   "@clio/playground:autodub-home-page-sample-video-heading": "Örnek Video",
-  "@clio/playground:autodub-home-page-subheading": "Girdi video formatı: .mp4, .mov, 60 kare/saniyeye kadar, 4K'ye kadar<br></br>Girdi ses formatı: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Dosyanızı sürükleyip bırakın",
   "@clio/playground:autodub-home-page-title-mobile": "Yeni bir dile çevirmek üzere video veya ses yükleyin",
   "@clio/playground:autodub-home-page-upload-info-label": "En iyi sonuçlar için minimum arka plan gürültüsü ve hareketi içeren bir video yükleyin",

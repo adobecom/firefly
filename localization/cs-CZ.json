@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Your media",
   "@clio/playground:autodub-home-page-queue-description": "Soubory budou trvale odstraněny po 7 dnech",
   "@clio/playground:autodub-home-page-sample-video-heading": "Ukázkové video",
-  "@clio/playground:autodub-home-page-subheading": "Formát vstupního videa: .mp4, .mov, až 60 sn./s, 4K<br></br>Formát vstupního zvuku: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Přetáhněte soubor",
   "@clio/playground:autodub-home-page-title-mobile": "Nahrajte video nebo audio a převeďte je do nového jazyka.",
   "@clio/playground:autodub-home-page-upload-info-label": "Nejlepších výsledků dosáhnete, když nahrajete video s minimálním šumem a pohybem pozadí",

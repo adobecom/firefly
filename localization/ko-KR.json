@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "내 미디어",
   "@clio/playground:autodub-home-page-queue-description": "파일은 7​일 후에 영구적으로 삭제됩니다",
   "@clio/playground:autodub-home-page-sample-video-heading": "샘플 비디오",
-  "@clio/playground:autodub-home-page-subheading": "입력 비디오 형식 : .mp4, .mov, 최대 60fps, 최대 4K<br></br>​입력 오디오 형식 : .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "여기에 파일을 드래그하여 놓으세요",
   "@clio/playground:autodub-home-page-title-mobile": "새로운 언어로 번역할 비디오나 오디오를 업로드하세요",
   "@clio/playground:autodub-home-page-upload-info-label": "최상의 결과를 얻으려면 배경 소음과 움직임을 최소화한 비디오를 업로드하세요",

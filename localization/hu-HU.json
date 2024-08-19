@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Your media",
   "@clio/playground:autodub-home-page-queue-description": "A fájlok 7 nap elteltével végleg törlődnek",
   "@clio/playground:autodub-home-page-sample-video-heading": "Mintavideó",
-  "@clio/playground:autodub-home-page-subheading": "Bemeneti videó formátuma: .mp4, .mov, max. 60 fps, max. 4K<br></br>Bemeneti audió formátuma: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Húzza ide a fájlt",
   "@clio/playground:autodub-home-page-title-mobile": "Videó vagy audió feltöltése új nyelvre történő lefordításhoz",
   "@clio/playground:autodub-home-page-upload-info-label": "A legjobb eredmény érdekében minimális háttérzajt és mozgást tartalmazó videót töltsön fel.",

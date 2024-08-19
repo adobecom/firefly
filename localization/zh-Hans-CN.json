@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "您​的​媒体",
   "@clio/playground:autodub-home-page-queue-description": "文件​将​在 7 天后​永久​删除",
   "@clio/playground:autodub-home-page-sample-video-heading": "示例​视频",
-  "@clio/playground:autodub-home-page-subheading": "输入​视频​格式：.mp4、.mov，​最大 60 fps，​最大 4K<br></br>​输入​音​频​格式：.mp3、.wav、.aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "拖​放​您​的​文件",
   "@clio/playground:autodub-home-page-title-mobile": "上​传​视频​或​音​频​以​将​其​翻译​成​一种​新的​语言",
   "@clio/playground:autodub-home-page-upload-info-label": "为​获得​最佳​效果，​上​传​一段​背景​噪音​和​运动​最小​的​视频",

@@ -96,7 +96,7 @@
   "@clio/playground:autodub-home-page-queue": "Media",
   "@clio/playground:autodub-home-page-queue-description": "Tiedostot poistetaan pysyvästi 7 päivän kuluttua",
   "@clio/playground:autodub-home-page-sample-video-heading": "Näytevideo",
-  "@clio/playground:autodub-home-page-subheading": "Videon tulomuoto: .mp4, .mov, enintään 60 kuvaa/s, enintään 4K<br></br>Äänen tulomuoto: .mp3, .wav, .aac",
+  "@clio/playground:autodub-home-page-subheading": "Input format: .mp4, .mov, .mp3, .wav, .aac",
   "@clio/playground:autodub-home-page-title": "Vedä ja pudota tiedosto",
   "@clio/playground:autodub-home-page-title-mobile": "Lataa video- tai äänitiedosto ja käännä se toiselle kielelle",
   "@clio/playground:autodub-home-page-upload-info-label": "Saat parhaat tulokset lataamalla videon, jonka taustalla on mahdollisimman vähän hälyä ja liikettä",
