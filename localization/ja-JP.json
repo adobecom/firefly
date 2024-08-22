@@ -430,7 +430,7 @@
   "@clio/playground:feature-page-access-denied-toast": "申し訳​ありま​せん​が、​アクセス​が​拒否​さ​れ​ま​した。​この​特定​の​サービス​を​利用​する​ため​の​年齢​要件​を​満​た​し​てい​ま​せん。",
   "@clio/playground:feature-page-buy-now": "今​すぐ​購入",
   "@clio/playground:feature-page-learn-more": "詳細",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to the free Firefly plan due to misuse. Switch to a paid plan to resume.",
+  "@clio/playground:feature-page-restricted-due-violations": "不正​使用​により、Firefly の​無料​プラン​を​利用​でき​なく​なり​ま​した。​有料​プラン​に​切り替え​て​再開​し​て​くだ​さい。",
   "@clio/playground:feature-page-sign-in": "ログイン",
   "@clio/playground:feature-page-zero-gb-user": "Firefly に​アクセス​でき​ま​せん。",
   "@clio/playground:feature-request-access-button": "アクセス​権​を​リクエスト",

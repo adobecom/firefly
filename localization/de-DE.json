@@ -430,7 +430,7 @@
   "@clio/playground:feature-page-access-denied-toast": "Leider wurde der Zugriff verweigert. Du erfüllst nicht die Altersanforderungen für diesen speziellen Service.",
   "@clio/playground:feature-page-buy-now": "Jetzt kaufen",
   "@clio/playground:feature-page-learn-more": "Weitere Infos",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to the free Firefly plan due to misuse. Switch to a paid plan to resume.",
+  "@clio/playground:feature-page-restricted-due-violations": "Du hast keinen Zugriff mehr auf das kostenlose Firefly-Abo, weil du das Abo missbraucht hast. Wechsle zu einem bezahlten Abo, um Firefly weiter zu verwenden.",
   "@clio/playground:feature-page-sign-in": "Anmelden",
   "@clio/playground:feature-page-zero-gb-user": "Du hast keinen Zugriff auf Firefly.",
   "@clio/playground:feature-request-access-button": "Zugriff anfordern",

@@ -430,7 +430,7 @@
   "@clio/playground:feature-page-access-denied-toast": "Beklager, du har blitt nektet tilgang. Du oppfyller ikke alderskravene for denne spesifikke tjenesten.",
   "@clio/playground:feature-page-buy-now": "Kjøp nå",
   "@clio/playground:feature-page-learn-more": "Finn ut mer",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to the free Firefly plan due to misuse. Switch to a paid plan to resume.",
+  "@clio/playground:feature-page-restricted-due-violations": "Du har ikke lenger tilgang til det kostnadsfrie Firefly-abonnementet på grunn av misbruk. Bytt til et betalt abonnement for å fortsette.",
   "@clio/playground:feature-page-sign-in": "Logg på",
   "@clio/playground:feature-page-zero-gb-user": "Du har ikke tilgang til Firefly.",
   "@clio/playground:feature-request-access-button": "Be om tilgang",

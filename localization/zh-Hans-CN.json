@@ -430,7 +430,7 @@
   "@clio/playground:feature-page-access-denied-toast": "抱歉，​您​的​访问​已​被​拒绝。​您​不​符合​此​特定​服务​的​年龄​要求。",
   "@clio/playground:feature-page-buy-now": "立即​购买",
   "@clio/playground:feature-page-learn-more": "了解​详情",
-  "@clio/playground:feature-page-restricted-due-violations": "You no longer have access to the free Firefly plan due to misuse. Switch to a paid plan to resume.",
+  "@clio/playground:feature-page-restricted-due-violations": "由于​误用，​您​将​无法​再​使用​免费​的 Firefly 计划。​切换​至​付​费​计划​以​恢复​使用。",
   "@clio/playground:feature-page-sign-in": "登录",
   "@clio/playground:feature-page-zero-gb-user": "您​无权​访问 Firefly。",
   "@clio/playground:feature-request-access-button": "请求​访问​权限",
