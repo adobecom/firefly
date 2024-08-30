@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "幅",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "作成​日",
   "@clio/playground:enterprise-image-properties-title": "画像​プロパティ",
-  "@clio/playground:enterprise-invalid-images-message": "画質​の​問題​の​ため​に 1 つ​以上​の​画像​が​削除​さ​れ​ま​した",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "モデル​を​更新​中",
   "@clio/playground:enterprise-model-expiry-button-close": "閉じる",
   "@clio/playground:enterprise-model-expiry-button-continue": "複製",

@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "Bredde",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "Oprettelsesdato",
   "@clio/playground:enterprise-image-properties-title": "Billedegenskaber",
-  "@clio/playground:enterprise-invalid-images-message": "Et eller flere billeder blev fjernet pga. kvalitetsproblemer",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "Opdaterer model",
   "@clio/playground:enterprise-model-expiry-button-close": "Luk",
   "@clio/playground:enterprise-model-expiry-button-continue": "Duplikér",

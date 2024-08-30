@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "Breite",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "Erstellt am",
   "@clio/playground:enterprise-image-properties-title": "Bildeigenschaften",
-  "@clio/playground:enterprise-invalid-images-message": "Ein oder mehrere Bilder wurden wegen Qualitätsproblemen entfernt",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "Modell wird aktualisiert",
   "@clio/playground:enterprise-model-expiry-button-close": "Schließen",
   "@clio/playground:enterprise-model-expiry-button-continue": "Duplizieren",

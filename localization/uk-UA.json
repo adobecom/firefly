@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "Ширина",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "Дата створення",
   "@clio/playground:enterprise-image-properties-title": "Властивості зображення",
-  "@clio/playground:enterprise-invalid-images-message": "Одне чи більше зображень було вилучено через проблеми з якістю",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "Оновлення моделі",
   "@clio/playground:enterprise-model-expiry-button-close": "Закрити",
   "@clio/playground:enterprise-model-expiry-button-continue": "Дублювати",

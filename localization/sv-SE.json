@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "Bredd",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "Skapad",
   "@clio/playground:enterprise-image-properties-title": "Bildegenskaper",
-  "@clio/playground:enterprise-invalid-images-message": "En eller flera bilder har tagits bort på grund av kvalitetsproblem",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "Uppdaterar modell",
   "@clio/playground:enterprise-model-expiry-button-close": "Stäng",
   "@clio/playground:enterprise-model-expiry-button-continue": "Duplicera",

@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "Szélesség",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "Létrehozás dátuma",
   "@clio/playground:enterprise-image-properties-title": "Kép tulajdonságai",
-  "@clio/playground:enterprise-invalid-images-message": "Egy vagy több képet minőségi problémák miatt eltávolítottunk",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "Modell frissítése",
   "@clio/playground:enterprise-model-expiry-button-close": "Bezárás",
   "@clio/playground:enterprise-model-expiry-button-continue": "Megkettőzés",

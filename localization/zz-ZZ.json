@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "[tb] ćłìø_Width_žż",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "[tc] ćłìø_Creation date_žż",
   "@clio/playground:enterprise-image-properties-title": "[td] ćłìø_Image properties_žż",
-  "@clio/playground:enterprise-invalid-images-message": "[8r] ćłìø_One or more images were removed for quality issues_žż",
+  "@clio/playground:enterprise-invalid-images-message": "[8r] ćłìø_One or more images were removed for quality issues._žż",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "[6U] ćłìø_Updating model_žż",
   "@clio/playground:enterprise-model-expiry-button-close": "[87] ćłìø_Close_žż",
   "@clio/playground:enterprise-model-expiry-button-continue": "[80] ćłìø_Duplicate_žż",

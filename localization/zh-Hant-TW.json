@@ -279,7 +279,7 @@
   "@clio/playground:enterprise-image-properties-setting-basic-width": "寬度",
   "@clio/playground:enterprise-image-properties-setting-creation-date": "建立​日期",
   "@clio/playground:enterprise-image-properties-title": "影像​屬性",
-  "@clio/playground:enterprise-invalid-images-message": "一​或​多個​影像​已因​品質​問題​移除",
+  "@clio/playground:enterprise-invalid-images-message": "One or more images were removed for quality issues.",
   "@clio/playground:enterprise-model-editor-header-label-updating-model": "正在​更新​模型",
   "@clio/playground:enterprise-model-expiry-button-close": "關閉",
   "@clio/playground:enterprise-model-expiry-button-continue": "複製",
