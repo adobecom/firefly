@@ -2,6 +2,7 @@
 import { getLibs, createOptimizedFireflyPicture, getLocale } from '../../scripts/utils.js';
 import { getI18nValue } from '../../scripts/scripts.js';
 import { ingestAnalytics, makeFinalPayload } from '../../scripts/analytics.js';
+import { waitForLCP } from '../../scripts/aem.js';
 
 const { createTag, getConfig } = await import(`${getLibs()}/utils/utils.js`);
 const { replaceKey } = await import(`${getLibs()}/features/placeholders.js`);
@@ -118,17 +119,17 @@ function animate(block, first = false) {
 }
 
 async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
-  const imageId = assetId.textContent.trim();
-  if (!imageId || imageId === '') return null;
-  const resp = await fetch(ASSET_BASE_URL + imageId, { headers: { 'X-Api-Key': API_KEY } });
+  if (!assetId || assetId === '') return null;
+  const resp = await fetch(ASSET_BASE_URL + assetId, { headers: { 'X-Api-Key': API_KEY } });
   if (resp.ok) {
     const imageDetails = await resp.json();
     const imageHref = imageDetails._embedded.artwork._links.rendition.href;
+    const { height, width } = imageDetails._embedded.artwork;
     const imageUrl = imageHref.replace('{format}', DEFAULT_FORMAT).replace('{dimension}', DEFAULT_DIMENSION);
     const userLocale = getLocale() || window.adobeIMS?.adobeIdData?.locale.replace('_', '-') || 'en-US';
     const prompt = imageDetails.custom.input['firefly#prompts'][userLocale];
     // eslint-disable-next-line max-len
-    const picture = createOptimizedFireflyPicture(imageUrl, imageId, prompt, active, eager, fetchPriority, [
+    const picture = createOptimizedFireflyPicture(imageUrl, assetId, prompt, active, eager, fetchPriority, [
       { media: '(min-width: 2000px)', width: '3000' },
       { media: '(min-width: 1200px)', width: '2000' },
       { media: '(min-width: 900px)', width: '1200' },
@@ -136,6 +137,8 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
       { media: '(min-width: 450px)', width: '600' },
       { width: '600' },
     ]);
+    picture.querySelector('img').height = height;
+    picture.querySelector('img').width = width;
     const authorName = imageDetails._embedded.owner.display_name;
     const authorImage = (imageDetails._embedded.owner._links.images)[0].href;
     if (authorName) picture.dataset.authorName = authorName;
@@ -146,7 +149,7 @@ async function createPitcureFromAssetId(assetId, active, eager, fetchPriority) {
 }
 
 export default async function decorate(block) {
-  const assetIds = block.querySelectorAll('p');
+  const assetIds = [...block.querySelectorAll('p')].map((p) => p.textContent.trim());
   block.innerHTML = '';
   const imageContainer = createTag('div', { class: 'image-container' });
   // Get the first image in quickly and then process the rest
@@ -154,6 +157,7 @@ export default async function decorate(block) {
   const firstPicture = await createPitcureFromAssetId(firstAssetId, true, true, 'high');
   if (firstPicture !== null) imageContainer.append(firstPicture);
   block.append(imageContainer);
+
   const parent = block.parentElement;
   const heading = parent.querySelector('h1');
   const contentContainer = createTag('div', { class: 'content-container' });
@@ -178,6 +182,7 @@ export default async function decorate(block) {
     ingestAnalytics(analyticsEvent);
   });
 
+  await waitForLCP();
   setTimeout(() => {
     // Get the rest of the images
     assetIds.forEach(async (assetId, i) => {
