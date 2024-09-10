@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "Создать векторный рисунок",
   "@clio/playground:home-page-title": "Творческие эксперименты с помощью Adobe Firefly",
   "@clio/playground:home-page-try-in-express": "Попробовать в Adobe Express",
-  "@clio/playground:home-page-video-generation-description": "Создавайте видеоклипы по простым запросам и изображениям.",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "Создать видео (Beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "Попробовать",

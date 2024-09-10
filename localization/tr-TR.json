@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "Vektör oluşturma",
   "@clio/playground:home-page-title": "Adobe Firefly ile yaratıcılığınızı konuşturun",
   "@clio/playground:home-page-try-in-express": "Adobe Express'te deneyin",
-  "@clio/playground:home-page-video-generation-description": "Benzer istem ve görüntüyle video klipleri oluşturun.",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "Video oluşturma (beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "Dene",

@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "產生​向量",
   "@clio/playground:home-page-title": "使用 Adobe Firefly 發揮​創意",
   "@clio/playground:home-page-try-in-express": "在 Adobe Express 嘗試",
-  "@clio/playground:home-page-video-generation-description": "使用​類似​提示​和​影像​產生​影片​片段。",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "產生​影片 (Beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "試用",

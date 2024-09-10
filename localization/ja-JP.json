@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "ベクター​を​生成",
   "@clio/playground:home-page-title": "Adobe Firefly で​クリエイティブ​に",
   "@clio/playground:home-page-try-in-express": "Adobe Express で​試す",
-  "@clio/playground:home-page-video-generation-description": "類似​する​プロンプト​と​画像​で​動画​クリップ​を​生成​でき​ます。",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "動画​を​生成 (Beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "試す",

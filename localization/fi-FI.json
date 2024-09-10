@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "Generoi vektori",
   "@clio/playground:home-page-title": "Adobe Firefly päästää luovuutesi valloilleen",
   "@clio/playground:home-page-try-in-express": "Kokeile Adobe Expressissä",
-  "@clio/playground:home-page-video-generation-description": "Generoi videoita samantyyppisellä kehotteella ja kuvalla.",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "Generoi video (beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "Kokeile",

@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "Vektor létrehozása",
   "@clio/playground:home-page-title": "Valósítsa meg kreatív ötleteit az Adobe Firefly segítségével!",
   "@clio/playground:home-page-try-in-express": "Próbálja ki az Adobe Expressben",
-  "@clio/playground:home-page-video-generation-description": "Videóklipek létrehozása hasonló utasítással és képpel.",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "Videó létrehozása (beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "Kipróbálom",

@@ -742,7 +742,7 @@
   "@clio/playground:home-page-text-to-vector-title": "Generera en vektor",
   "@clio/playground:home-page-title": "Var kreativ med Adobe Firefly",
   "@clio/playground:home-page-try-in-express": "Testa i Adobe Express",
-  "@clio/playground:home-page-video-generation-description": "Generera videoklipp med liknande beskrivning och bild.",
+  "@clio/playground:home-page-video-generation-description": "Generate video clips with a simple prompt and image.",
   "@clio/playground:home-page-video-generation-title": "Generera video (beta)",
   "@clio/playground:home-page-video-object-removal-access-label": "Beta",
   "@clio/playground:home-page-video-object-removal-cta-label": "Testa",
