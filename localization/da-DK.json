@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "Luk",
   "@clio/playground:gallery-modal-next": "Næste",
   "@clio/playground:gallery-modal-previous": "Forrige",
-  "@clio/playground:generative-video-module-card-description": "Opret og rediger videoer med Firefly. Få mere at vide og tilmeld dig ventelisten.",
+  "@clio/playground:generative-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
   "@clio/playground:generative-video-module-card-title": "Generativ video",
   "@clio/playground:genfill-toolid-expand": "Udvid",
   "@clio/playground:genfill-toolid-inpaint": "Indsæt",

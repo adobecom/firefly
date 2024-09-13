@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "Fermer",
   "@clio/playground:gallery-modal-next": "Suivant",
   "@clio/playground:gallery-modal-previous": "Précédent",
-  "@clio/playground:generative-video-module-card-description": "Créez et modifiez des vidéos avec Firefly. Découvrez comment et inscrivez-vous sur la liste d’attente.",
+  "@clio/playground:generative-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
   "@clio/playground:generative-video-module-card-title": "Vidéo générative",
   "@clio/playground:genfill-toolid-expand": "Développer",
   "@clio/playground:genfill-toolid-inpaint": "Insérer",

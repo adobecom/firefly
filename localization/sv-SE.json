@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "Stäng",
   "@clio/playground:gallery-modal-next": "Nästa",
   "@clio/playground:gallery-modal-previous": "Föregående",
-  "@clio/playground:generative-video-module-card-description": "Skapa och redigera video med Firefly. Läs mer och gå med i väntelistan.",
+  "@clio/playground:generative-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
   "@clio/playground:generative-video-module-card-title": "Generativ video",
   "@clio/playground:genfill-toolid-expand": "Utöka",
   "@clio/playground:genfill-toolid-inpaint": "Infoga",

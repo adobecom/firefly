@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "Закрити",
   "@clio/playground:gallery-modal-next": "Далі",
   "@clio/playground:gallery-modal-previous": "Назад",
-  "@clio/playground:generative-video-module-card-description": "Створюйте й редагуйте відео у Firefly. Дізнайтеся більше та приєднайтеся до списку очікування.",
+  "@clio/playground:generative-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
   "@clio/playground:generative-video-module-card-title": "Генеративне відео",
   "@clio/playground:genfill-toolid-expand": "Розширити",
   "@clio/playground:genfill-toolid-inpaint": "Вставити",

@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "閉じる",
   "@clio/playground:gallery-modal-next": "次​へ",
   "@clio/playground:gallery-modal-previous": "前​へ",
-  "@clio/playground:generative-video-module-card-description": "Firefly で​動画​を​作成、​編集​し​ます。​詳細​を​確認​し​て​待機​リスト​に​ご​参加​くだ​さい。",
+  "@clio/playground:generative-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
   "@clio/playground:generative-video-module-card-title": "生成​動画",
   "@clio/playground:genfill-toolid-expand": "拡張",
   "@clio/playground:genfill-toolid-inpaint": "挿入",
