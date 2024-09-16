@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "关闭",
   "@clio/playground:gallery-modal-next": "下一步",
   "@clio/playground:gallery-modal-previous": "上​一​页",
-  "@clio/playground:generative-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
+  "@clio/playground:generative-video-module-card-description": "使用 Firefly 创建​和​编辑​视频。​详细​了解​并​加入​候选​名单。",
   "@clio/playground:generative-video-module-card-title": "生成​式​视频",
   "@clio/playground:genfill-toolid-expand": "扩展",
   "@clio/playground:genfill-toolid-inpaint": "插入",

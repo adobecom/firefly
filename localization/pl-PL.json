@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "Zamknij",
   "@clio/playground:gallery-modal-next": "Dalej",
   "@clio/playground:gallery-modal-previous": "Poprzedni",
-  "@clio/playground:generative-video-module-card-description": "Twórz i edytuj wideo za pomocą Firefly. Dowiedz się więcej i dołącz do listy oczekujących.",
+  "@clio/playground:generative-video-module-card-description": "Twórz i edytuj filmy z programem Firefly. Dowiedz się więcej i dołącz do listy oczekujących.",
   "@clio/playground:generative-video-module-card-title": "Film generatywny",
   "@clio/playground:genfill-toolid-expand": "Rozszerz",
   "@clio/playground:genfill-toolid-inpaint": "Wstaw",
