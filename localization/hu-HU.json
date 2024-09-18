@@ -557,7 +557,7 @@
   "@clio/playground:gallery-modal-close": "Bezárás",
   "@clio/playground:gallery-modal-next": "Tovább",
   "@clio/playground:gallery-modal-previous": "Vissza",
-  "@clio/playground:generate-video-module-card-description": "Create and edit video with Firefly. Learn more and join the waitlist.",
+  "@clio/playground:generate-video-module-card-description": "Videók létrehozása és szerkesztése a Firefly segítségével. Tudjon meg többet és iratkozzon fel a várólistára!",
   "@clio/playground:generate-video-module-card-title": "Generate video",
   "@clio/playground:genfill-toolid-expand": "Kibontás",
   "@clio/playground:genfill-toolid-inpaint": "Beillesztés",
