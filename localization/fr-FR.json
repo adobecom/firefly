@@ -162,7 +162,7 @@
   "@clio/playground:autodub-popup-downloading-progress-heading": "Téléchargement…",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-cancel": "Annuler",
   "@clio/playground:autodub-popup-not-complete-transcription--btn-continue": "Continuer",
-  "@clio/playground:autodub-popup-not-complete-transcription-description": "Patientez pour vérifier la transcription avant de générer le doublage, ou continuez l’opération sans examiner la transcription.",
+  "@clio/playground:autodub-popup-not-complete-transcription-description": "Patientez pour vérifier la transcription avant de générer le doublage, ou continuez pour générer ce dernier sans examiner la transcription.",
   "@clio/playground:autodub-popup-not-complete-transcription-heading": "Transcription non terminée",
   "@clio/playground:autodub-popup-not-complete-translations--btn-ok": "OK",
   "@clio/playground:autodub-popup-not-complete-translations-description": "Les crédits prélevés pour des traductions incomplètes ont été remboursés sur votre compte.",
