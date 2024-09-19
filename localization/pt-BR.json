@@ -558,7 +558,7 @@
   "@clio/playground:gallery-modal-next": "Próximo",
   "@clio/playground:gallery-modal-previous": "Anterior",
   "@clio/playground:generate-video-module-card-description": "Crie e edite vídeos com o Firefly. Saiba mais e participe da lista de espera.",
-  "@clio/playground:generate-video-module-card-title": "Generate video",
+  "@clio/playground:generate-video-module-card-title": "Gerar vídeo",
   "@clio/playground:genfill-toolid-expand": "Expandir",
   "@clio/playground:genfill-toolid-inpaint": "Inserir",
   "@clio/playground:genfill-toolid-pan": "Mover",

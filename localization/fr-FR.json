@@ -494,7 +494,7 @@
   "@clio/playground:feedback-form-question-include-img-label": "Inclut également vos contenus de référence et vos données de calques",
   "@clio/playground:feedback-form-question-include-video-label": "Inclure les données de la vidéo dans votre retour d’expérience",
   "@clio/playground:feedback-form-report-label": "Signaler les résultats",
-  "@clio/playground:feedback-form-report-option-1": "Stéréotypes préjudiciables ou discrimination",
+  "@clio/playground:feedback-form-report-option-1": "Stéréotypes ou biais nuisibles",
   "@clio/playground:feedback-form-report-option-2": "Violation de copyright ou de marque ",
   "@clio/playground:feedback-form-report-option-3": "Nudité ou contenu à caractère sexuel",
   "@clio/playground:feedback-form-report-option-4": "Violence ou sang",
