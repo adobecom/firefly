@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Запит",
   "@clio/playground:prompt-bar-input-text-label": "Текст",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Рекомендації запитів недоступні. Повторіть спробу пізніше.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Використовуйте <b>{superClass}</b> як основну тему вашого запиту.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Немає рекомендацій для цього запиту.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Запит в порядку. Ви можете перейти до створення.",
   "@clio/playground:prompt-bar-placeholder-text": "Опишіть зображення, яке ви хочете створити",

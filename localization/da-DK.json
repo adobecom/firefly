@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Prompt",
   "@clio/playground:prompt-bar-input-text-label": "Tekst",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Forslag til prompter er ikke tilgængelig. Prøv igen senere.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Brug <b>{superClass}</b> som det primære motiv i din prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Ingen forslag er tilgængelige for denne prompt.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Din forespørgsel er OK, så du kan forsætte og gå i gang med at generere.",
   "@clio/playground:prompt-bar-placeholder-text": "Beskriv et billede, du gerne vil generere",

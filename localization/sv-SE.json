@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Beskrivning",
   "@clio/playground:prompt-bar-input-text-label": "Text",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Beskrivningsförslag är ej tillgängliga. Försök igen senare.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Använd <b>{superClass}</b> som huvudmotiv för din beskrivning.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Inga förslag tillgängliga för den här beskrivningen.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Beskrivningen ser redo ut att genereras.",
   "@clio/playground:prompt-bar-placeholder-text": "Beskriv en bild du vill generera",

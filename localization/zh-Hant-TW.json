@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "提示",
   "@clio/playground:prompt-bar-input-text-label": "文字",
   "@clio/playground:prompt-bar-internal-error-tooltip": "提示​建議​無法​使用。​請​稍後​再試​一次。",
-  "@clio/playground:prompt-bar-label-for-custom-model": "使用 <b>{superClass}</b> 作為​您​提示​的​主要​主體。",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "針對​此​提示，​沒有​建議​可​提供。",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "您​的​提示​看來​沒有​問題，​可​繼續​進行​並​產生​影像。",
   "@clio/playground:prompt-bar-placeholder-text": "請​說明​您要​產生​的​影像",

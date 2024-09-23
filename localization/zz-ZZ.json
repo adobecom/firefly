@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "[oy] ćłìø_Prompt_žż",
   "@clio/playground:prompt-bar-input-text-label": "[qb] ćłìø_Text_žż",
   "@clio/playground:prompt-bar-internal-error-tooltip": "[pK] ćłìø_Prompt suggestions are unavailable. Please try again later._žż",
-  "@clio/playground:prompt-bar-label-for-custom-model": "[yE] ćłìø_Use <b>{superClass}</b> as the main subject of your prompt._žż",
+  "@clio/playground:prompt-bar-label-for-custom-model": "[yE] ćłìø_Use <b>\"{superClass}\"</b> as the main subject of your prompt._žż",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "[pA] ćłìø_No suggestions available for this prompt._žż",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "[o/] ćłìø_Your prompt looks good to go ahead and generate._žż",
   "@clio/playground:prompt-bar-placeholder-text": "[xg] ćłìø_Describe an image you want to generate_žż",
