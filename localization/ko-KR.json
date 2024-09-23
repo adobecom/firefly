@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "프롬프트",
   "@clio/playground:prompt-bar-input-text-label": "텍스트",
   "@clio/playground:prompt-bar-internal-error-tooltip": "프롬프트 제안을 사용할 수 없습니다. 나중에 다시 시도하세요.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "프롬프트의 주요 제목으로 <b>{superClass}</b>​를 사용하세요.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "이 프롬프트에 대한 제안이 없습니다.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "프롬프트를 생성에 사용할 수 있는 것 같습니다.",
   "@clio/playground:prompt-bar-placeholder-text": "생성하려는 이미지를 설명하세요",
