@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "プロンプト",
   "@clio/playground:prompt-bar-input-text-label": "テキスト",
   "@clio/playground:prompt-bar-internal-error-tooltip": "プロンプト​候補​を​使用​でき​ま​せん。​しばらく​し​て​から、​もう一度​お​試し​くだ​さい。",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "「<b>{superClass}</b>」​を​プロンプト​の​メイン​の​被写体​として​ご​使用​くだ​さい。",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "この​プロンプト​に​は​候補​が​ありま​せん。",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "プロンプト​は​適切​です。​続行​し​て​生成​でき​ます。",
   "@clio/playground:prompt-bar-placeholder-text": "生成​した​い​画像​の​説明​を​入力​し​て​くだ​さい",

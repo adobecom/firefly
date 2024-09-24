@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Kehote",
   "@clio/playground:prompt-bar-input-text-label": "Teksti",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Kehote-ehdotukset eivät ole saatavana. Yritä myöhemmin uudelleen.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Käytä yliluokkaa <b>\"{superClass}\"</b> kehotteen pääkohteena.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Kehotteelle ei ole saatavana ehdotuksia.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Kehote näyttää hyvältä generointiin.",
   "@clio/playground:prompt-bar-placeholder-text": "Kuvaile, millaisen kuvan haluat generoida",

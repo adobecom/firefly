@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "提示",
   "@clio/playground:prompt-bar-input-text-label": "文本",
   "@clio/playground:prompt-bar-internal-error-tooltip": "提示​建议​不可​用。​请​稍​后​重​试。",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "使用 <b>\"{superClass}\"</b> 作为​您​提示​的​主题。",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "此​提示​无​可用​促销。",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "您​的​提示​符​看起来​不错，​可以​继续​生成。",
   "@clio/playground:prompt-bar-placeholder-text": "请​描述​您要​生成​图像",

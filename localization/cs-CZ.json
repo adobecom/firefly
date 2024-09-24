@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Zadání",
   "@clio/playground:prompt-bar-input-text-label": "Text",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Návrhy zadání jsou dočasně nedostupné. Zkuste to znovu později.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Jako hlavní položku zadání použijte <b>„{superclass}“</b>.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Pro toto zadání nejsou dostupné žádné návrhy.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Vaše zadání vypadá dobře. Můžete zahájit generování.",
   "@clio/playground:prompt-bar-placeholder-text": "Popište obrázek, který chcete vytvořit",

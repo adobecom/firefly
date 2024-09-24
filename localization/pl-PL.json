@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Polecenie",
   "@clio/playground:prompt-bar-input-text-label": "Tekst",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Propozycje poleceń są niedostępne. Spróbuj ponownie później.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Użyj <b>\"{superClass}\"</b> jako głównego tematu monitu.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Użyj <b>„{superClass}”</b> jako głównego obiektu polecenia.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Brak dostępnych propozycji dla tego polecenia.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Polecenie wygląda dobrze. Można kontynuować i przejść do generowania.",
   "@clio/playground:prompt-bar-placeholder-text": "Opisz obraz, który chcesz wygenerować",

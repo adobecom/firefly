@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Prompt",
   "@clio/playground:prompt-bar-input-text-label": "Texte",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Les suggestions de prompts ne sont pas disponibles. Veuillez réessayer ultérieurement.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "Utilisez <b>« {superClass} »</b> comme sujet principal de votre prompt.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Aucune suggestion disponible pour ce prompt.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Votre prompt semble valide pour continuer et générer du contenu.",
   "@clio/playground:prompt-bar-placeholder-text": "Décrivez une image que vous souhaitez générer.",
