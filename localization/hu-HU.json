@@ -911,7 +911,7 @@
   "@clio/playground:prompt-bar-input-label": "Utasítás",
   "@clio/playground:prompt-bar-input-text-label": "Szöveg",
   "@clio/playground:prompt-bar-internal-error-tooltip": "Az utasításokkal kapcsolatos javaslatok nem elérhetők. Próbálja meg később.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "<b>{superClass}</b> használata az utasítás fő tárgyaként.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Ehhez az utasításhoz nem érhetők el javaslatok.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "Utasítása készen áll a létrehozáshoz.",
   "@clio/playground:prompt-bar-placeholder-text": "Írja le a létrehozni kívánt képet",
