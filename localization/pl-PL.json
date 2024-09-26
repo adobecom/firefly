@@ -451,6 +451,8 @@
   "@clio/playground:express-post-download-modal-your-text": "Twój tekst",
   "@clio/playground:express-progress-modal-subtitle": "może to chwilę potrwać",
   "@clio/playground:express-progress-modal-title": "Wysyłanie obrazu do programu Adobe Express",
+  "@clio/playground:fast-mode-feature-card-description": "Szybko wymyślaj, generuj i porównuj warianty. Skaluj obrazy do wyższej rozdzielczości 2K później za 1 kredyt za obraz.",
+  "@clio/playground:fast-mode-feature-card-title": "Przedstawiamy tryb szybki",
   "@clio/playground:favorites-page-cta-button": "Rozpocznij generowanie obrazów",
   "@clio/playground:favorites-page-error-text": "Jeśli polubisz obraz, będzie on wyświetlany tutaj tak długo, jak zechcesz.",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "Nie masz jeszcze ulubionych obrazów",

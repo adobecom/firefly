@@ -451,6 +451,8 @@
   "@clio/playground:express-post-download-modal-your-text": "ваш текст",
   "@clio/playground:express-progress-modal-subtitle": "це може зайняти певний час",
   "@clio/playground:express-progress-modal-title": "Надсилання фото в Adobe Express",
+  "@clio/playground:fast-mode-feature-card-description": "Ideate, generate, and compare variations quickly. Upscale to higher resolution 2K images later for 1 credit per image.",
+  "@clio/playground:fast-mode-feature-card-title": "Introducing Fast mode",
   "@clio/playground:favorites-page-cta-button": "Почати створення зображень",
   "@clio/playground:favorites-page-error-text": "Якщо ви вподобали зображення, воно знаходитиметься тут стільки, скільки ви захочете.",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "У вас ще немає улюблених зображень",

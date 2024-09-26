@@ -451,6 +451,8 @@
   "@clio/playground:express-post-download-modal-your-text": "내 텍스트",
   "@clio/playground:express-progress-modal-subtitle": "시간이 걸릴 수 있습니다",
   "@clio/playground:express-progress-modal-title": "Adobe Express​로 이미지 전송 중",
+  "@clio/playground:fast-mode-feature-card-description": "Ideate, generate, and compare variations quickly. Upscale to higher resolution 2K images later for 1 credit per image.",
+  "@clio/playground:fast-mode-feature-card-title": "Introducing Fast mode",
   "@clio/playground:favorites-page-cta-button": "이미지 생성 시작",
   "@clio/playground:favorites-page-error-text": "이미지를 즐겨찾기로 설정한 경우 여기에 표시됩니다.",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "즐겨찾기에 추가한 이미지가 없습니다.",

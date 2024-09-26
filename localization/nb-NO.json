@@ -451,6 +451,8 @@
   "@clio/playground:express-post-download-modal-your-text": "teksten din",
   "@clio/playground:express-progress-modal-subtitle": "dette kan ta noen sekunder",
   "@clio/playground:express-progress-modal-title": "Sender bildet til Adobe Express",
+  "@clio/playground:fast-mode-feature-card-description": "Ideate, generate, and compare variations quickly. Upscale to higher resolution 2K images later for 1 credit per image.",
+  "@clio/playground:fast-mode-feature-card-title": "Introducing Fast mode",
   "@clio/playground:favorites-page-cta-button": "Begynn å generere bilder",
   "@clio/playground:favorites-page-error-text": "Hvis du legger til et bilde som favoritt, vil det vises her så lenge du ønsker.",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "Du har ingen favorittbilder ennå",

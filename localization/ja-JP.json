@@ -451,6 +451,8 @@
   "@clio/playground:express-post-download-modal-your-text": "入力​テキスト",
   "@clio/playground:express-progress-modal-subtitle": "この​処理​に​は​少し​時間​が​かかる​場合​が​あり​ます",
   "@clio/playground:express-progress-modal-title": "Adobe Express に​画像​を​送信​し​てい​ます",
+  "@clio/playground:fast-mode-feature-card-description": "Ideate, generate, and compare variations quickly. Upscale to higher resolution 2K images later for 1 credit per image.",
+  "@clio/playground:fast-mode-feature-card-title": "Introducing Fast mode",
   "@clio/playground:favorites-page-cta-button": "画像​の​作成​を​開始​する",
   "@clio/playground:favorites-page-error-text": "画像​を​お気に入り​に​すると、​お気に入り​の​画像​が​すべて​ここ​に​表示​さ​れ​ます。",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "お気に入り​の​画像​は​まだ​ありま​せん",

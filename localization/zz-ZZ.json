@@ -451,6 +451,8 @@
   "@clio/playground:express-post-download-modal-your-text": "[4m] ćłìø_your text_žż",
   "@clio/playground:express-progress-modal-subtitle": "[TM] ćłìø_this may take a few moments_žż",
   "@clio/playground:express-progress-modal-title": "[TN] ćłìø_Sending image to Adobe Express_žż",
+  "@clio/playground:fast-mode-feature-card-description": "[96] ćłìø_Ideate, generate, and compare variations quickly. Upscale to higher resolution 2K images later for 1 credit per image._žż",
+  "@clio/playground:fast-mode-feature-card-title": "[97] ćłìø_Introducing Fast mode_žż",
   "@clio/playground:favorites-page-cta-button": "[EO] ćłìø_Start generating images_žż",
   "@clio/playground:favorites-page-error-text": "[EP] ćłìø_If you favorite an image, it will appear here for as long as you like._žż",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "[EQ] ćłìø_You don't have any favorite images yet_žż",
