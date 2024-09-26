@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "링크 삭제",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "비슷한 것 만들기",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "갤러리에 제출하기",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "구성 참조로 사용",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "스타일 참조로 사용",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "프롬프트 제안 켜기",

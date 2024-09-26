@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "删除​链​接",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "生成​类似​内容",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "提交​至​图​库",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "用作​构图​参考",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "用作​样式​参考",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "打开​提示​建议",

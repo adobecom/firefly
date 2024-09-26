@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "[jT] ćłìø_Delete link_žż",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "[us] ćłìø_Generate similar_žż",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "[4j] ćłìø_Submit to gallery_žż",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "[98] ćłìø_Upscale to submit to gallery_žż",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "[0b] ćłìø_Use as composition reference_žż",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "[kg] ćłìø_Use as style reference_žż",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "[qv] ćłìø_Turn on prompt suggestions_žż",

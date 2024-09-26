@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "Bağlantıyı sil",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "Benzerini oluştur",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "Galeriye gönder",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "Kompozisyon referansı olarak kullan",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "Stil referansı olarak kullan",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "İstem önerilerini etkinleştir",

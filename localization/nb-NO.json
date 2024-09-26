@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "Slett kobling",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "Generer liknende",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "Send inn til galleriet",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "Bruk som komposisjonsreferanse",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "Bruk som stilreferanse",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "Slå på hjelpetekstforslag",

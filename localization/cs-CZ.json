@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "Odstranit odkaz",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "Generovat podobné",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "Odeslat do galerie",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "Použít jako referenční kompozici",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "Použít jako referenční styl",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "Zapnout návrhy zadání",

@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "リンク​を​削除",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "類似​の​項目​を​生成",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "ギャラリー​に​送信",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "構成​参照​として​使用",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "スタイル​参照​として​使用",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "プロンプト​候補​を​オン​に​する",

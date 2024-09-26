@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "Link löschen",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "Ähnliche generieren",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "Für die Galerie einreichen",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "Als Kompositionsreferenz verwenden",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "Als Stilreferenz verwenden",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "Vorschläge für Abfragen einschalten",

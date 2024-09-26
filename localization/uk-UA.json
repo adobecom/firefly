@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "Видалити посилання",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "Згенерувати схоже",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "Надіслати до галереї",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "Використовувати як зразок композиції",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "Використовувати як зразок стилю",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "Увімкнути рекомендації запитів",

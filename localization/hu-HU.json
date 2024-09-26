@@ -1215,6 +1215,7 @@
   "@clio/playground:text-to-image-thumbnail-toolbar-delete-link": "Hivatkozás törlése",
   "@clio/playground:text-to-image-thumbnail-toolbar-generate-similar": "Hasonló létrehozása",
   "@clio/playground:text-to-image-thumbnail-toolbar-submit-to-gallery-link": "Beküldés a galériába",
+  "@clio/playground:text-to-image-thumbnail-toolbar-upscale-to-submit": "Upscale to submit to gallery",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-structure-reference": "Kompozíciós referencia felhasználása",
   "@clio/playground:text-to-image-thumbnail-toolbar-use-as-style-reference": "Használat stílusreferenciaként",
   "@clio/playground:text-to-image-turn-on-prompt-suggestion": "Utasítás használata és egyveleggé alakítása a referenciaképekkel együtt",
