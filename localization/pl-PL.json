@@ -354,7 +354,7 @@
   "@clio/playground:enterprise-train-action-preview-and-test": "Podgląd i test",
   "@clio/playground:enterprise-train-action-publish": "Publikuj",
   "@clio/playground:enterprise-train-action-unpublish": "Anuluj publikację",
-  "@clio/playground:enterprise-train-action-view": "Widok",
+  "@clio/playground:enterprise-train-action-view": "Wyświetl",
   "@clio/playground:enterprise-train-button-cancel-training": "Anuluj szkolenie",
   "@clio/playground:enterprise-train-button-preview-and-test": "Podgląd i test",
   "@clio/playground:enterprise-train-button-train": "Szkol",

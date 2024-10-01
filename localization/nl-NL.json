@@ -260,7 +260,7 @@
   "@clio/playground:enterprise-auto-caption-tool-tip": "Voer een kort bijschrift in dat de content van de afbeelding nauwkeurig weergeeft. Neem de belangrijkste elementen en acties op. Max. 1024 tekens.",
   "@clio/playground:enterprise-auto-caption-validation-message-model-properties": "Modeleigenschappen",
   "@clio/playground:enterprise-button-generate-caption": "Ontbrekende bijschriften genereren",
-  "@clio/playground:enterprise-button-share-model": "Share",
+  "@clio/playground:enterprise-button-share-model": "Delen",
   "@clio/playground:enterprise-custom-models-overlay-description": "Je kunt aangepaste modellen rechtstreeks vanuit het deelvenster bekijken en gebruiken.",
   "@clio/playground:enterprise-custom-models-overlay-title": "Je aangepaste modellen weergeven",
   "@clio/playground:enterprise-delete-dialog-cancel": "Annuleren",
