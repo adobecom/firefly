@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Відрегулюйте максимальну видиму ділянку.",
   "@clio/playground:text-to-image-field-of-view-label": "Поле зору",
   "@clio/playground:text-to-image-generate-with-new-model": "Модель зображень Firefly, яку ви намагаєтеся використати, більше не доступна. Створіть запит знову з використанням нової моделі.",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "Використовуйте історію, щоб знаходити всі зображення, згенеровані вами під час сеансу роботи в браузері.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Історія зображення",

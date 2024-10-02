@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "調整​最大​可​檢視​區域。",
   "@clio/playground:text-to-image-field-of-view-label": "視野",
   "@clio/playground:text-to-image-generate-with-new-model": "您​嘗試​使用​的 Firefly 影像​模型​已​無法​使用。​請​使用​新​模型，​再次​產生​您​的​提示。",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "使用「​歷史​記錄」​尋找​及​瀏覽​您​在此​瀏覽器​工作​階段​中​產生​的​所有​影像。",
   "@clio/playground:text-to-image-history-coachmark-ok": "確定",
   "@clio/playground:text-to-image-history-coachmark-title": "影像​歷史​記錄",

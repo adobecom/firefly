@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Regola l'area massima visualizzabile.",
   "@clio/playground:text-to-image-field-of-view-label": "Campo visivo",
   "@clio/playground:text-to-image-generate-with-new-model": "Il modello Firefly Image che stai provando a usare non è più disponibile. Genera nuovamente un prompt con il nuovo modello.",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "Utilizza la Cronologia per cercare ed esplorare tutte le immagini generate nel corso di questa sessione del browser.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Cronologia delle immagini",

@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Passe den maximal sichtbaren Bereich an.",
   "@clio/playground:text-to-image-field-of-view-label": "Sichtfeld",
   "@clio/playground:text-to-image-generate-with-new-model": "Das von dir ausgewählte Firefly Image-Modell ist nicht mehr verfügbar. Generiere deine Beschreibung erneut mit dem neuen Modell.",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "Verwende den Verlauf, um alle Bilder zu finden und anzuschauen, die du im Laufe dieser Browser-Sitzung generiert hast.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Bildverlauf",

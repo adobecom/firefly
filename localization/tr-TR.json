@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Görüntülenebilir maksimum alanı ayarlayın.",
   "@clio/playground:text-to-image-field-of-view-label": "Görünüm alanı",
   "@clio/playground:text-to-image-generate-with-new-model": "Kullanmaya çalıştığınız Firefly görüntü modeli artık mevcut değil. Yeni modelle komut isteminizi yeniden oluşturun.",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "Bu tarayıcı oturumu boyunca oluşturduğunuz tüm görüntüleri bulup incelemek için Geçmiş'i kullanın.",
   "@clio/playground:text-to-image-history-coachmark-ok": "Tamam",
   "@clio/playground:text-to-image-history-coachmark-title": "Görüntü geçmişi",

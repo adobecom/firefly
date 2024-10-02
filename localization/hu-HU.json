@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Állítsa be a maximálisan látható területet.",
   "@clio/playground:text-to-image-field-of-view-label": "Látótér",
   "@clio/playground:text-to-image-generate-with-new-model": "A használni kívánt Firefly-képmodell már nem érhető el. Hozza létre újra az utasítást az új modellel.",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "Az Előzményekkel megkeresheti a böngésző munkamenetében létrehozott képeket.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Képelőzmények",

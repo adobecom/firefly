@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Dostosuj maksymalny widoczny obszar.",
   "@clio/playground:text-to-image-field-of-view-label": "Pole widzenia",
   "@clio/playground:text-to-image-generate-with-new-model": "Model obrazu Firefly, którego próbujesz użyć, nie jest już dostępny. Wygeneruj polecenie ponownie przy użyciu nowego modelu.",
+  "@clio/playground:text-to-image-history-carousel-label": "Grupa karuzeli historii",
   "@clio/playground:text-to-image-history-coachmark-content": "W panelu Historia można znaleźć i przejrzeć wszystkie obrazy wygenerowane w trakcie tej sesji przeglądarki.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Historia obrazów",

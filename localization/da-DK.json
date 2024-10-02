@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Juster det område, der maksimalt kan ses.",
   "@clio/playground:text-to-image-field-of-view-label": "Visningsfelt",
   "@clio/playground:text-to-image-generate-with-new-model": "Firefly Image-modellen, som du prøver at bruge, er ikke længere tilgængelig. Generér din prompt igen med den nye model.",
+  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
   "@clio/playground:text-to-image-history-coachmark-content": "Brug Historik til at finde og søge i alle de billeder, du har genereret i løbet af denne browsersession.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Billedhistorik",

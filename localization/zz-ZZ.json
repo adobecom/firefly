@@ -1162,6 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "[kX] ćłìø_Adjust the maximum viewable area._žż",
   "@clio/playground:text-to-image-field-of-view-label": "[kY] ćłìø_Field of view_žż",
   "@clio/playground:text-to-image-generate-with-new-model": "[1a] ćłìø_The Firefly image model you are trying to use is no longer available. Generate your prompt again with the new model._žż",
+  "@clio/playground:text-to-image-history-carousel-label": "[+X] ćłìø_History carousel group_žż",
   "@clio/playground:text-to-image-history-coachmark-content": "[+S] ćłìø_Use History to find and browse all of the images you generated over the course of this browser session._žż",
   "@clio/playground:text-to-image-history-coachmark-ok": "[+O] ćłìø_OK_žż",
   "@clio/playground:text-to-image-history-coachmark-title": "[+P] ćłìø_Image history_žż",
