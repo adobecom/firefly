@@ -350,7 +350,7 @@
   "@clio/playground:enterprise-train-action-delete": "Usuń",
   "@clio/playground:enterprise-train-action-duplicate": "Powiel",
   "@clio/playground:enterprise-train-action-edit": "Edytuj",
-  "@clio/playground:enterprise-train-action-generate-in-firefly": "Generowanie w Firefly",
+  "@clio/playground:enterprise-train-action-generate-in-firefly": "Generuj w Firefly",
   "@clio/playground:enterprise-train-action-preview-and-test": "Podgląd i test",
   "@clio/playground:enterprise-train-action-publish": "Publikuj",
   "@clio/playground:enterprise-train-action-unpublish": "Anuluj publikację",
