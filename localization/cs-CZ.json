@@ -1162,7 +1162,7 @@
   "@clio/playground:text-to-image-field-of-view-description.": "Upravte maximální zobrazitelnou oblast.",
   "@clio/playground:text-to-image-field-of-view-label": "Zorné pole",
   "@clio/playground:text-to-image-generate-with-new-model": "Obrazový model Firefly, který se pokoušíte použít, již není k dispozici. Znovu vygenerujte zadání s novým modelem.",
-  "@clio/playground:text-to-image-history-carousel-label": "History carousel group",
+  "@clio/playground:text-to-image-history-carousel-label": "Skupina pásu historie",
   "@clio/playground:text-to-image-history-coachmark-content": "V Historii vyhledejte a procházejte všechny obrázky, které jste vygenerovali v průběhu této relace prohlížeče.",
   "@clio/playground:text-to-image-history-coachmark-ok": "OK",
   "@clio/playground:text-to-image-history-coachmark-title": "Historie obrázku",

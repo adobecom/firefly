@@ -462,7 +462,7 @@
   "@clio/playground:express-progress-modal-subtitle": "Cette opération peut prendre quelques instants",
   "@clio/playground:express-progress-modal-title": "Envoi de l’image à Adobe Express",
   "@clio/playground:fast-mode-feature-card-description": "Concevez, générez et comparez des variations rapidement, et augmentez plus tard la résolution des images à 2K, à raison d’1 crédit par image.",
-  "@clio/playground:fast-mode-feature-card-title": "Découvrez le mode rapide",
+  "@clio/playground:fast-mode-feature-card-title": "Découvrir le mode rapide",
   "@clio/playground:favorites-page-cta-button": "Commencer à générer des images",
   "@clio/playground:favorites-page-error-text": "Si vous ajoutez une image dans vos favoris, elle apparaîtra ici aussi longtemps que vous le souhaitez.",
   "@clio/playground:favorites-page-error-title-no-favorites-saved": "Vous n’avez pas encore d’images dans vos favoris",
