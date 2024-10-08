@@ -1420,7 +1420,7 @@
   "@clio/playground:user-avatar-sign-out-button-label": "Logga ut",
   "@clio/playground:user-avatar-user-profile-aria-label": "Användarprofilen {name}",
   "@clio/playground:user-avatar-view-account-link-label": "Visa konto",
-  "@clio/playground:video-gen-page-info-description-mobile-view": "Create video with Firefly on your desktop.",
+  "@clio/playground:video-gen-page-info-description-mobile-view": "Skapa videor med Firefly på din dator.",
   "@clio/playground:video-gen-page-info-mobile-view": "Generativ video",
   "@clio/playground:video-generation-header-title": "Generera video (beta)",
   "@clio/playground:video-object-removal-coachmark-description": "Stryk över det objekt du vill radera någorlunda noggrant. Du behöver inte vara exakt eller få till jämna kanter.",

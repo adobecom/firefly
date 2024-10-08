@@ -1420,7 +1420,7 @@
   "@clio/playground:user-avatar-sign-out-button-label": "Fazer logoff",
   "@clio/playground:user-avatar-user-profile-aria-label": "Perfil do usuário {name}",
   "@clio/playground:user-avatar-view-account-link-label": "Exibir conta",
-  "@clio/playground:video-gen-page-info-description-mobile-view": "Create video with Firefly on your desktop.",
+  "@clio/playground:video-gen-page-info-description-mobile-view": "Crie vídeos com o Firefly em seu desktop.",
   "@clio/playground:video-gen-page-info-mobile-view": "Gerar vídeo",
   "@clio/playground:video-generation-header-title": "Gerar vídeo (beta)",
   "@clio/playground:video-object-removal-coachmark-description": "Passe o pincel sobre o objeto que deseja apagar. Nao é necessário pintar com precisão ou se preocupar com as bordas.",

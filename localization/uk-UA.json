@@ -1420,7 +1420,7 @@
   "@clio/playground:user-avatar-sign-out-button-label": "Вийти",
   "@clio/playground:user-avatar-user-profile-aria-label": "Профіль користувача {name}",
   "@clio/playground:user-avatar-view-account-link-label": "Переглянути обліковий запис",
-  "@clio/playground:video-gen-page-info-description-mobile-view": "Create video with Firefly on your desktop.",
+  "@clio/playground:video-gen-page-info-description-mobile-view": "Створюйте відео з Firefly на ПК.",
   "@clio/playground:video-gen-page-info-mobile-view": "Згенерувати відео",
   "@clio/playground:video-generation-header-title": "Створення відео (бета)",
   "@clio/playground:video-object-removal-coachmark-description": "Поведіть пензлем по об’єкту, який ви хочете стерти. Чітко виділяти краї не обов’язково.",
