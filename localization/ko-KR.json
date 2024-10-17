@@ -1040,7 +1040,7 @@
   "@clio/playground:spl-status-wrapper-server-maximum-capacity-error-title": "Firefly​가 최대 용량에 도달했습니다.",
   "@clio/playground:spl-status-wrapper-unavailable-error-msg": "나중에 다시 시도해 주십시오.",
   "@clio/playground:spl-status-wrapper-unavailable-error-title": "애플리케이션을 사용할 수 없음",
-  "@clio/playground:structure-match-upload-image-description": "윤곽선과 깊이에 맞게 참조 이미지를 추가합니다",
+  "@clio/playground:structure-match-upload-image-description": "윤곽선과 깊이에 맞게 참조 이미지를 추가하기",
   "@clio/playground:structure-reference-tag-label": "구성 참조",
   "@clio/playground:structure-selection-popular": "인기 항목",
   "@clio/playground:style-clear-all-button": "모두 지우기",
