@@ -584,7 +584,7 @@
   "@clio/playground:gallery-modal-previous": "前​へ",
   "@clio/playground:generate-video-module-card-cta": "Join the waitlist",
   "@clio/playground:generate-video-module-card-description": "Create videos with Firefly. Learn more and join the waitlist.",
-  "@clio/playground:generate-video-module-card-title": "Generate video (beta)",
+  "@clio/playground:generate-video-module-card-title": "動画​を​生成 (Beta)",
   "@clio/playground:genfill-toolid-expand": "拡張",
   "@clio/playground:genfill-toolid-inpaint": "挿入",
   "@clio/playground:genfill-toolid-pan": "移動",
