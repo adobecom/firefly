@@ -577,7 +577,7 @@
   "@clio/playground:gallery-modal-previous": "Anterior",
   "@clio/playground:generate-video-module-card-cta": "Alăturare pe lista de așteptare",
   "@clio/playground:generate-video-module-card-description": "Creați videoclipuri cu Firefly. Aflați mai multe și alăturați-vă listei de așteptare.",
-  "@clio/playground:generate-video-module-card-title": "Generare video (beta)",
+  "@clio/playground:generate-video-module-card-title": "Generați videoclipuri (beta)",
   "@clio/playground:genfill-toolid-expand": "Extinde",
   "@clio/playground:genfill-toolid-inpaint": "Inserare",
   "@clio/playground:genfill-toolid-pan": "Panoramare",

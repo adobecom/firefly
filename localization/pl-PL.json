@@ -577,7 +577,7 @@
   "@clio/playground:gallery-modal-previous": "Poprzedni",
   "@clio/playground:generate-video-module-card-cta": "Dołącz do listy oczekujących",
   "@clio/playground:generate-video-module-card-description": "Twórz filmy z programem Firefly. Dowiedz się więcej i dołącz do listy oczekujących.",
-  "@clio/playground:generate-video-module-card-title": "Wygeneruj film (Beta)",
+  "@clio/playground:generate-video-module-card-title": "Generuj film (Beta)",
   "@clio/playground:genfill-toolid-expand": "Rozszerz",
   "@clio/playground:genfill-toolid-inpaint": "Wstaw",
   "@clio/playground:genfill-toolid-pan": "Panorama",

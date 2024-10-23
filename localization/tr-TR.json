@@ -931,7 +931,7 @@
   "@clio/playground:prompt-bar-input-label": "İstem",
   "@clio/playground:prompt-bar-input-text-label": "Metin",
   "@clio/playground:prompt-bar-internal-error-tooltip": "İstem önerileri mevcut değil. Lütfen daha sonra tekrar deneyin.",
-  "@clio/playground:prompt-bar-label-for-custom-model": "Use <b>\"{superClass}\"</b> as the main subject of your prompt.",
+  "@clio/playground:prompt-bar-label-for-custom-model": "İsteminizin ana öznesi olarak <b>\"{superClass}\"</b> öğesini kullanın.",
   "@clio/playground:prompt-bar-no-suggestion-for-short-prompt-tooltip": "Bu istem için öneri yok.",
   "@clio/playground:prompt-bar-no-suggestion-tooltip": "İsteminiz iyi görünüyor, devam edip oluşturabilirsiniz.",
   "@clio/playground:prompt-bar-placeholder-text": "Oluşturmak istediğiniz görüntüyü betimleyin",

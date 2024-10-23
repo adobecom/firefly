@@ -914,7 +914,7 @@
   "@clio/playground:onboarding-welcome-subtitle": "เรารู้สึกตื่นเต้นที่คุณจะได้ลองใช้ Adobe Firefly!",
   "@clio/playground:onboarding-welcome-title": "ยินดีต้อนรับสู่ Adobe Firefly",
   "@clio/playground:outpainting-card-description": "ขยายภาพและใช้แปรงเพื่อลบวัตถุ หรือวาดเพิ่มใหม่",
-  "@clio/playground:outpainting-card-title": "ขยายโดย AI",
+  "@clio/playground:outpainting-card-title": "ขยายภาพโดย AI",
   "@clio/playground:pick-your-fav-img": "ให้คะแนนภาพโดยเลือกภาพที่คุณชื่นชอบ",
   "@clio/playground:preferences-button-label": "การตั้งค่า",
   "@clio/playground:preferences-dark-theme-label": "มืด",

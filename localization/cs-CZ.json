@@ -575,7 +575,7 @@
   "@clio/playground:gallery-modal-close": "Zavřít",
   "@clio/playground:gallery-modal-next": "Další",
   "@clio/playground:gallery-modal-previous": "Předchozí",
-  "@clio/playground:generate-video-module-card-cta": "Zapište se do pořadníku",
+  "@clio/playground:generate-video-module-card-cta": "Zapsat se do pořadníku",
   "@clio/playground:generate-video-module-card-description": "Vytvářejte video s Firefly. Zjistěte více a zapište se do pořadníku.",
   "@clio/playground:generate-video-module-card-title": "Generovat video (beta)",
   "@clio/playground:genfill-toolid-expand": "Rozbalit",
